@@ -118,7 +118,7 @@ class Circuit_Model extends ORM {
 		elseif ( ($this->status == 2) and ($this->finished == 0) and $simulate) 
 		{
 			$this->db->query('START TRANSACTION;');
-		  	$this->db->query("SELECT finished FROM cr_circuits WHERE id='".$this->id."' FOR UPDATE;");
+		  	$this->db->query("SELECT finished FROM circuits WHERE id='".$this->id."' FOR UPDATE;");
 		  	$this->db->update(
 		   		'circuits', 
 		   		array('finished' => 1),
