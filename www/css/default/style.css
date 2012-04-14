@@ -1,0 +1,45 @@
+/* -------------------------------------------------------------------]
+[ 					      ? DESIGN by Menencia                        ]
+[ 					      CODENAME: default                           ]
+[------------------------------------------------------------------- */
+
+@import url("../common.css");
+
+body {
+	background: url("images/motif.png");
+}
+
+div#global2 {
+	width: 1024px;
+}
+
+div#before {
+	height: 150px;
+	background: url("images/banner_beta.png") no-repeat;
+}
+
+div#hmenu2 {
+	background-color: #D6C499;
+}
+	
+div#vmenu {
+	width: 198px;
+	border: 1px solid #D2D280;
+	background-color: #FFFF9A;
+}
+					
+div#footer2 {
+	border-top: 1px solid #a4a4a4;
+	padding: 5px 0 30px 0;
+}
+
+div#after2 {
+	width: 1050px;
+	height: 30px;
+	margin: auto;
+	background-color: #e5e5e5;
+	border: 1px solid #b5b5b5;
+	border-bottom: none;
+	color: #131313;
+}
+

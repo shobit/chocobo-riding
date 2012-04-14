@@ -1,0 +1,730 @@
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								GENERAL                               ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+body {
+	font-family: "Lucida grande", Verdana, Arial, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	font-size: 0.8em;
+}
+
+div#global2 {
+	margin: auto;
+	background-color: #fff;
+}
+
+/* Important */
+div.clearBoth {clear: both;}
+
+div#site2 {
+	width: 972px;
+	min-width: 750px;
+	height: auto;
+	margin: auto;
+}
+
+div#hmenu2 {
+	height: auto;
+	color: #c6ad6e;
+	margin: 2px 0 2px 0;
+	text-align: center;
+	padding: 8px;
+}
+	
+	div#first_lign {
+		font-weight: bold;
+	}
+	
+	div#first_lign img {
+		margin: 0 0 -2px 0;
+	}
+
+div#main2 {
+	height: auto; /*auto*/
+	background-color: #fff;
+}
+
+/*Niveau 1*/
+		
+	div#content {
+		width: 735px;
+		height: auto; /*auto*/
+		float: right;
+		padding: 0 10px 0 10px;
+		margin-right: 2px;
+		border-left: 1px dotted #cdcdcd;
+		border-right: 1px dotted #dedede;
+		background-position: 10px 3px;
+	}
+	
+	div#vmenu {
+		width: 200px;
+		height: auto;
+		float: right;
+		margin-right: 9px;
+		text-align:center;
+	}
+		
+		div.menu_chocobo {
+			padding: 10px 0 10px 10px;
+		}
+		
+		div.menu_image {
+			float:left;
+		}
+		
+		div.menu_texte1 {
+			width: 110px;
+			height: 60px;
+			text-align: left;
+			margin-left: 63px;
+			background: url("images/menu_gold.gif") no-repeat bottom right;
+		}
+		
+		div.menu_texte2 {
+			width: 110px;
+			height: 60px;
+			text-align: left;
+			color: #777;
+			margin-left: 63px;
+			background: url("images/menu_silver.gif") no-repeat bottom right;
+		}
+
+div#footer {
+	font-size: 75%;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	color: #a4a4a4;
+}
+
+div#footer2 {
+	width: 874px;
+	margin: auto;
+}
+
+div#after {
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	position: fixed;
+}
+
+	div#after2 {
+		width: 1050px;
+		height: 30px;
+		margin: auto;
+		background-color: #e5e5e5;
+		border: 1px solid #b5b5b5;
+		border-bottom: none;
+		color: #131313;
+	}
+	
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								LINKS                                 ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+a, a:visited {text-decoration: none; color: #4E3D59;}
+a:hover {text-decoration: underline; color: #2C193A;}
+div#hmenu a, div#hmenu a:visited {text-decoration: none; color: #8b7551;}
+div#hmenu a:hover {text-decoration: none; color: #634d3a;}
+div#footer a, div#footer a:visited {text-decoration: none; color: #6e6e6e;}
+div#footer a:hover {text-decoration: underline; color: #525252;}
+div#after2 a, div#after2 a:visited {text-decoration: none; color: #4f4f4f;}
+div#after2 a:hover {text-decoration: underline; color: #131313;}
+div.jGrowl a, div.jGrowl a:visited {text-decoration: none; color: #fff;}
+div.jGrowl a:hover {text-decoration: underline;}
+
+.button, .button:visited {
+	display: inline;
+	background: #000 url("../images/theme/glass.png") repeat-x 0 50%;
+	padding:5px;
+	margin:4px;
+	cursor:pointer;
+	font: 85% "Droid Sans", arial;
+	background-color: #fff;
+	border: none;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	-o-border-radius:4px;
+	border-radius:4px;
+	-moz-box-shadow:0 0 2px #333;
+	-webkit-box-shadow:0 0 2px #333;
+	-o-box-shadow:0 0 2px #333;
+	box-shadow:0 0 2px #333;
+}
+
+.button:hover {text-decoration: none; background-color: #eee;}
+.blue, .blue:visited, .blue:hover {background-color: #3B5998; color: #fff;}
+.grey, .grey:visited, .grey:hover {background-color: #999; color: #fff;}
+.red, .red:visited {background-color: #fcc;}
+.red:hover{background-color: #f99;}
+
+.menu{
+	background-color: #fff; 
+	position:absolute; 
+	top:17px; left:3px; 
+	padding: 2px 5px 2px 5px;
+	z-index: 7;
+	display:none;
+	min-width: 94px;
+	-moz-box-shadow:0 0 2px #333;
+	-webkit-box-shadow:0 0 2px #333;
+	-o-box-shadow:0 0 2px #333;
+	box-shadow:0 0 2px #333;}
+.action-category:hover{cursor:pointer; background-color: #bbb;}
+.action-space{border-top: 1px dotted #bbb; height: 4px; margin-top:4px;}
+
+a.menuSelected, a.menuSelected:visited {color: #2C193A; text-decoration: none;}
+a.menuSelected:hover {color: #000;}
+a.menuNotSelected, a.menuNotSelected:visited {color: #aaa; text-decoration: none;}
+a.menuNotSelected:hover {color: #2C193A;}
+
+#strategy a.red, #strategy a.red:visited {color:#900; text-decoration: none;}
+#strategy a.red:hover {text-decoration: underline;}
+#strategy a.green, #strategy a.blue:visited {color:#090; text-decoration: none;}
+#strategy a.green:hover {text-decoration: underline;}
+#strategy a.blue, #strategy a.blue:visited {color:#009; text-decoration: none;}
+#strategy a.blue:hover {text-decoration: underline;}
+#strategy a.grey, #strategy a.grey:visited {color:#999; text-decoration: none;}
+#strategy a.grey:hover {text-decoration: underline;}
+
+a.shop, a.shop:visited {
+	color:#fff; background-color: #888; text-decoration: none; 
+	font-variant: small-caps; padding: 2px; }
+a.shop:hover {background-color: #333;}
+
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								IMAGES                                ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+img.imageRight {
+	padding: 3px;
+	float: right;
+	margin: 10px;
+}
+
+a img {border: 0px;}
+
+img.img1 {
+	border: 1px solid #222;
+}
+
+img.location, img.mini_avatar, img.img2 {
+    border: 1px solid #222;
+    padding: 1px;
+}
+
+div.divRight {float: right;	margin: 5px;}
+div.divRight img {border: 1px solid #32475D; padding: 3px;}
+
+div.divRight2 {float: right;}
+
+div.divLeft {float: left; margin: 5px;}
+div.divLeft img {border: 1px solid #32475D; padding: 3px;}
+
+img.floatLeft {
+	float: left;
+	margin: 5px;
+	border: 1px solid #222;
+}
+
+img.floatLeft2 {
+	float: left;
+	margin: 5px;
+}
+
+img.floatLeft3 {
+	float: left;
+	border: 1px solid #222;
+}
+
+img.floatLeft4 {
+	float: left;
+	margin: 5px;
+	margin-top: 3px;
+}
+
+img.success_jgrowl{
+	float: left;
+	margin-right: 5px;
+	width: 45px;
+	height: 45px;
+	border: 1px solid #000;
+}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								PARTS                                 ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+div.leftPart {
+	width: 205px;
+	float: left;
+	margin: 0 20px 0 20px;
+}
+
+div.leftPart2 {
+	width: 470px;
+	float: left;
+	margin: 0 10px 0 10px;
+}
+
+div.leftPart3 {
+	width: 300px;
+	float: left;
+	margin: 6px;
+	padding-left: 30px;	
+}
+
+	div.line_tab {
+		margin-bottom: 20px;
+	}
+	
+	div.line {
+		font-size: 1.0em;
+		padding: 6px 0 0 6px;
+	}
+	
+	div.line1 {
+		font-size: 1.1em;
+		letter-spacing: 1px;
+		font-weight: bold;
+	}
+	
+	div.line_rouge, span.line_rouge {color: #800000;}
+	div.line_vert, span.line_vert {color: #184500;}
+	div.line_bleu, span.line_bleu {color: #191970;}
+	div.line_gris, span.line_gris {color: #555;}
+	div.line_noir, span.line_noir {color: #000;}
+	
+	div.bord_rouge {border-bottom: 1px dotted #800000;}
+	div.bord_vert {border-bottom: 1px dotted #184500;}
+	div.bord_bleu {border-bottom: 1px dotted #191970;}
+	div.bord_gris {border-bottom: 1px dotted #555;}
+	div.bord_noir {border-bottom: 1px dotted #000;}
+	
+	div.label {width: 70%; float: left;}
+	div.value {margin-left: 70%; height: 30px;}
+	span.attributes {font-weight: normal; font-size: 10px;}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								TABLES                                ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+table.shop {width: 100%; border-collapse: collapse;}
+table.shop tr {border: 1px solid #bbb;}
+table.shop td {height: 30px;}
+table.shop td.icon {width: 20px; text-align: center;}
+table.shop td.name {width: 150px;}
+table.shop td.price {width: 100px; text-align: center;}
+table.shop td.form {width: 50px; text-align: center;}
+input#gils {border: 0px solid #fff; text-align: center; font-weight: bold;}
+.no_display {display: none;}
+
+div.circuit {
+	border-top: 2px solid #cecece;
+	border-bottom: 2px solid #cecece;
+	background-color: #efefef;
+	margin: 15px 0 15px 0;
+}
+
+div.column4 div.title {
+	font-size: 11px;
+	font-weight: bold;
+	font-variant: small-caps;
+	margin-bottom: 10px;
+	letter-spacing: 2px;
+	border-bottom: 1px solid #000;
+}
+
+div.column4 {
+	float: left;
+	width: 80%;
+	padding: 3px;
+}
+
+div.column3 div.title {
+	font-size: 11px;
+	font-weight: bold;
+	font-variant: small-caps;
+	margin-bottom: 10px;
+	letter-spacing: 2px;
+	border-bottom: 1px solid #000;
+}
+
+div.column3 {
+	float: left;
+	width: 50%;
+	padding: 3px;
+}
+
+div.column2 div.title {
+	font-size: 11px;
+	font-weight: bold;
+	font-variant: small-caps;
+	margin-bottom: 10px;
+	letter-spacing: 2px;
+}
+
+div.column2 {
+	float: left;
+	width: 175px;
+	padding: 3px;
+}
+
+table.participants {
+	width: 90%;
+	margin: auto;
+	border-collapse: collapse;
+}
+
+table.participants tr.top {
+	border-top: 2px solid #cecece;
+	border-bottom: 2px solid #cecece;
+	background-color: #efefef;
+}
+
+table.participants td {
+	padding: 6px;
+	vertical-align: middle;
+}
+
+table.circuitInside {
+	font-size: 10px;
+	vertical-align: middle;
+}
+
+table.circuitInside th {
+	font-size: 11px;
+	font-weight: bold;
+	font-variant: small-caps;
+	padding-bottom: 3px;
+	letter-spacing: 2px;
+}
+
+table.circuitInside td.icon {
+	width: 18px;
+	height: 18px;
+	text-align: center;
+}
+
+table.informations {
+    width: 100%;
+    margin: auto;
+	font-variant: small-caps;
+	color: #724211;
+	border: 1px solid #724211;
+	background-color: #f5eae1;
+    border-collapse: collapse;
+    text-align: center;
+}
+	
+table.informations td.label {
+	letter-spacing: 1px;
+	padding: 10px;
+	font-weight: bold;
+}
+
+.forum {width: 100%; margin: auto; border: 1px solid #cecece; border-collapse: collapse;}
+.forum tr {background-color: #eee; border: 1px solid #D5D5D5;}
+.forum tr:hover {background-color: #ddd;}
+.forum td.username:hover{cursor: pointer;}
+.forum td.title:hover{cursor: pointer;}
+.forum td.type:hover{cursor: pointer;}
+.forum td.date:hover{cursor: pointer;}
+.forum tr.notified:hover {background-color: #ddd; cursor: pointer;}
+/*table.forum tr.top {background-color: #cdcdcd; font-weight: normal; border: 1px solid #bbb;}
+table.forum tr.top:hover {background-color: #cdcdcd;}
+table.forum tr.dark {background-color: #efefef;}
+table.forum tr.sticky {background-color: #c4cfdc;}*/
+.forum td {padding: 8px 0 7px; color: #202020; vertical-align: top;}
+.forum td.icon {width: 25px; text-align: center;}
+.forum td.username {width: 80px; font-size: 90%;}
+.forum td.arrow {width: 15px; text-align: center;}
+.forum td.title {width: 531px; padding-right: 5px;}
+.forum .overflow {overflow: hidden; height: 15px;}
+.forum .content {color: #6D6D6D; font-size: 85%;}
+.forum td.type {width: 30px; text-align: center;}
+.forum td.date {width: 50px; text-align: right; font-size: 85%; padding-right: 2px;}
+.paginator {text-align: right;}
+.paginator img {margin-bottom: -2px;}
+.pagination {display: inline;}
+.form-button, .form-button:visited {color:#fff; background-color: #888; text-decoration: none; font-variant: small-caps; padding: 2px; }
+.form-button:hover {background-color: #333;}
+.forum tr.notified {background-color: #fff;}
+.forum tr.notified td.username {font-weight: bold;}
+.forum tr.notified td.title span.title {font-weight: bold;}
+.forum tr.notified td.date {font-weight: bold;}
+.forum a, .forum a:visited {text-decoration: none;}
+.forum a:hover {text-decoration: none;}
+
+table.forum2 {
+    width: 100%;
+    margin: auto;
+}
+
+table.forum2 td.dark {background-color: #FAFAFA;} /*efefef*/
+table.forum2 td.modo {background-color: #F4FAFF;} /*f5e6ff*/
+table.forum2 td.admin {background-color: #FAF4FF;}
+table.forum2 td.left {width: 90px; padding: 10px; vertical-align: top; text-align: center;}
+table.forum2 td.right {vertical-align: top; padding: 10px 10px 15px 10px;}
+table.forum2 div.signature {font-variant: small-caps; font-size: 11px; 
+    border-top: 1px dotted #cccccc; margin-bottom: 20px; padding-top: 5px;}
+    
+div.interests span.somme {font-size: 1.1em; font-weight: bold;}
+div.interests span.red {color: #900}
+div.interests span.green {color: #090}
+div.interests span.green a, div.interests span.green a:visited 
+	{text-decoration: none; color: #090; font-weight: bold;}
+div.interests span.green a:hover {text-decoration: none;}
+div.interests span.red a, div.interests span.red a:visited 
+	{text-decoration: none; color: #900; font-weight: bold;}
+div.interests span.red a:hover {text-decoration: none;}
+div.interests span.grey a, div.interests span.grey a:visited 
+	{text-decoration: none; color: #999;}
+div.interests span.grey a:hover {text-decoration: none;}
+div.interests span.none {display: none;}
+
+table.barre {
+    width: 100%;
+    margin: 0;
+    font-variant: small-caps;
+}
+table.barre td#after-right {text-align: right;}
+table.barre td.icons {width: 35px; text-align: right;}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								FORMS                                 ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+form.frm_connexion input {
+	height: 20px;
+	border: 1px solid #fff99a;
+	background-color: #ffeb81;
+	text-align: center;
+}
+
+div.hr {margin-top: 20px; padding-bottom: 20px; border-top: 1px solid #ddd;}
+
+form.frm_edits textarea {
+	border: 1px #ddd solid;
+    width: 95%;
+    height: 200px;
+}
+
+form.frm_edits input[type=text], form.frm_edits input[type=password] {
+	padding: 2px;
+	font-size: 14px;
+	font-family: Arial;
+	color: #3d4067;
+	width: 150px;
+	border: 1px solid #BDC7D8;
+	outline: 0;
+}
+
+select{border: 1px solid #BDC7D8; outline: 0;}
+
+form.frm_edits div.reply {
+    background-color: #efefef;
+    padding: 5px;
+}
+
+form.frm_edits table {width: 100%;}
+form.frm_edits table td.label {padding: 10px;}
+
+textarea#textile {width: 95%; height: 100px; border: 1px solid #aaa; padding: 5px;}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								FIELDSETS                             ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+fieldset.listChocobos {
+	border: 1px solid #cdcdcd;	
+}
+
+fieldset.listChocobos legend {
+	font-weight: bold;
+	font-variant: small-caps;
+	color: #c1c1c1;
+}
+
+fieldset#about {
+	size: 90%;
+	border: 1px dotted #898998;
+	background-color: #fefeef;
+}
+
+fieldset#about legend {
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 					           DIV#title                              ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+h1 {
+	color: #777;
+	border-bottom: 1px solid #777;
+	margin: 10px 0;
+	font-variant: small-caps;
+}
+
+h2 {
+	color: #666;
+	border-bottom: 1px solid #ddd;
+	font-variant: small-caps;
+}
+
+div#prelude {
+	letter-spacing: 1px;
+	color: #888;
+	text-align: justify;
+    margin: 10px 0 20px 0;
+}
+
+div.race {
+    font-weight: bold;
+    margin: 0 13px 5px 0;
+}
+
+div.space {
+    margin-top: 20px;
+}
+
+span.darkText {color: #000; font-weight: bold;}
+span.online {color: #090; font-size: 10px;}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								MESSAGES                              ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+div.msgAttention {
+	border: 1px solid #C3A7A6;
+	background: url("../images/theme/attention.gif") top left no-repeat #F3DDDC;
+	background-position: 0 2px;
+	color: #895956;
+	padding: 4px 4px 4px 18px;
+    margin: 5px;
+}
+
+div.msgInfo {
+	border: 1px solid #F5D08F;
+	background: url("../images/theme/info.png") top left no-repeat #FCECCE;
+	background-color: #FCECCE;
+	background-position: 0 2px;
+	color: #E9AE48;
+	padding: 4px 4px 4px 19px;
+    margin: 5px;
+}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								EVENTS                                ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+/*border: 3px solid #900;*/
+div.event {margin: 0 0 30px; padding: 10px;}
+div.e_red {background-color: #feefef;}
+div.e_green {background-color: #effeef;}
+div.e_blue {background-color: #efeffe;}
+div.e_header {border-bottom: 1px solid #888; margin-bottom: 10px;}
+div.e_first div.e_header {border-bottom: 1px solid #900;}
+div.e_comments {float: right; font-size: 11px;}
+div.e_title {font-weight: bold; font-variant: small-caps; font-size: 16px;}
+div.e_first div.e_title {font-size: 18px; color: #900;}
+div.e_created {font-size: 11px; font-style: italic; color: #aaa;}
+div.e_content {}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								WAVE                                  ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+div#wave div.title {
+	font-size: 11px;
+	font-weight: bold;
+	font-variant: small-caps;
+	letter-spacing: 2px;
+	border-bottom: 1px solid #a9a;
+}
+
+div#wave div.corpse {
+	border: 1px solid #bab;
+	padding: 5px;
+	padding-top: 10px;
+	background-color: #feeffe;
+}
+
+div#wave input#content {
+	width: 85%;
+	padding: 4px;
+	color: #666;
+	font-weight: bold;
+	border: 1px solid #888;
+}
+
+div#wave div.wave_content {
+	height: 200px;
+	overflow: auto;
+}
+
+#wave_table {margin-top: 15px;}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								BILLET                                ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+div.billet {
+	width: 145px;
+	float: left;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+div.closeBillet {
+	clear: left;
+}
+
+/* -------------------------------------------------------------------]
+[                                                                     ]
+[ 								TUTORIAL                              ]
+[                                                                     ] 
+[------------------------------------------------------------------- */
+
+div.help {
+	border: 1px solid #bcb;
+	background-color: #fefeef;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+/*-------------------------------------------------------------------*/
+
+
+
