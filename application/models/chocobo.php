@@ -235,15 +235,15 @@ class Chocobo_Model extends ORM {
 	public function evolve($gain) 
 	{
 		$res 	 = array(
-			'level' 		=> 0, 
-			'nb_levels' 	=> 0, 
+			'level' 		=> 0,
 			'classe' 		=> 0, 
+			'nb_levels' 	=> 0, 
 			'nb_classes' 	=> 0,
+			'nb_points'		=> 0,
 			'speed'			=> 0, 
 			'endur'			=> 0, 
 			'intel'			=> 0);
-		$xp  	 = $this->xp;
-		$xp 	+= $gain;
+		$xp  	 = $this->xp + $gain;
 		
 		while ($xp >= 100) #montée d'un niveau
 		{
@@ -251,6 +251,7 @@ class Chocobo_Model extends ORM {
 			$this->level ++;
 			$res['nb_levels'] ++;
 			$this->points ++;
+			$res['nb_points'] ++;
 			$this->listen_success(array( # SUCCES
 				"level_10",
 				"level_20",
@@ -297,12 +298,21 @@ class Chocobo_Model extends ORM {
 				$speed = $colours[$this->colour][0]/5;
 				$endur = $colours[$this->colour][1]/5;
 				$intel = $colours[$this->colour][2]/5;
-				$this->speed += $speed;
-				$this->intel += $endur;
-				$this->endur += $intel;
-				if ($speed >0) $res['speed'] += $speed;
-				if ($endur >0) $res['endur'] += $endur;
-				if ($intel >0) $res['intel'] += $intel;
+				if ($speed > 0) 
+				{
+					$this->speed += $speed;
+					$res['speed'] += $speed;
+				}	
+				if ($intel > 0)
+				{ 
+					$this->intel += $endur;
+					$res['intel'] += $intel;
+				}
+				if ($endur > 0)
+				{ 
+					$this->endur += $intel;
+					$res['endur'] += $endur;
+				}
 			}
 		}
 		
