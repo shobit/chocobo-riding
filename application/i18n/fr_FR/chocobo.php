@@ -25,10 +25,10 @@ $lang = array (
 	'breath' 		=> "Souffle",
 	
 	'endur' 		=> 'Endurance',
-	'energy' 		=> "Energie",
+	'hp' 		=> "HP",
 	
 	'intel' 		=> 'Intelligence',
-	'spirit' 		=> "Esprit",
+	'mp' 		=> "MP",
 	
 	'moral' => 'Moral',
 	

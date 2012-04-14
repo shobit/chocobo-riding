@@ -28,12 +28,12 @@ if ($user->id >0) {
 				<?php
 				if (strcmp($chocobo->id, $chocobo_used->id) == 0) { ?>
 					<span class="line_rouge"><?= floor($chocobo->breath) ?></span>/
-					<span class="line_vert"><?= floor($chocobo->energy) ?></span>/
-					<span class="line_bleu"><?= floor($chocobo->spirit) ?></span>/
+					<span class="line_vert"><?= floor($chocobo->hp) ?></span>/
+					<span class="line_bleu"><?= floor($chocobo->mp) ?></span>/
 					<span class="line_gris"><?= $chocobo->rage ?></span><?php
 				} else {
-					echo floor($chocobo->breath).'/ '.floor($chocobo->energy).'/ '.
-						floor($chocobo->spirit).'/ '.$chocobo->rage;
+					echo floor($chocobo->breath).'/ '.floor($chocobo->hp).'/ '.
+						floor($chocobo->mp).'/ '.$chocobo->rage;
 				}
 				?>
 				</small>

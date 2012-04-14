@@ -20,8 +20,8 @@ class Equipment_Model extends ORM {
     {
     	// Effects lists
     	$speeds = array("speed"=>5, "breath_limit"=>100, "breath_up"=>0.1, "breath_recup"=>5);
-    	$endurs = array("endur"=>5, "energy_limit"=>50, "energy_up"=>0.1, "energy_recup"=>5);
-    	$intels = array("intel"=>5, "spirit_limit"=>25, "spirit_up"=>0.1, "spirit_recup"=>5);
+    	$endurs = array("endur"=>5, "hp_limit"=>50, "hp_up"=>0.1, "hp_recup"=>5);
+    	$intels = array("intel"=>5, "mp_limit"=>25, "mp_up"=>0.1, "mp_recup"=>5);
     	$alls   = array("bonus_gils"=>100, "bonus_xp"=>100, "windfall"=>100);
     	
     	// Type | 0 ~ 2

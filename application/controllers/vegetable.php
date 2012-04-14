@@ -33,17 +33,17 @@ class Vegetable_Controller extends Template_Controller
 		
 			// Légume Krakka - Energie
 			case 2:
-				$energy = $chocobo->energy * ($vegetable->value /100 +1);
-				$energy_limit = $chocobo->attr('energy_limit');
-				$chocobo->energy = min($energy, $energy_limit);
+				$hp = $chocobo->hp * ($vegetable->value /100 +1);
+				$hp_limit = $chocobo->attr('hp_limit');
+				$chocobo->hp = min($hp, $hp_limit);
 				$use = true;
 			break;
 				
 			// Légume Pashana - Esprit
 			case 3:
-				$spirit = $chocobo->spirit * ($vegetable->value /100 +1);
-				$spirit_limit = $chocobo->attr('spirit_limit');
-				$chocobo->spirit = min($spirit, $spirit_limit);
+				$mp = $chocobo->mp * ($vegetable->value /100 +1);
+				$mp_limit = $chocobo->attr('mp_limit');
+				$chocobo->mp = min($mp, $mp_limit);
 				$use = true;
 			break;
 			

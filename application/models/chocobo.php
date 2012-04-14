@@ -125,14 +125,14 @@ class Chocobo_Model extends ORM {
 			case 'breath_recup': 	$base = 30; 						break;
 				
 			// ENDUR
-			case 'energy_limit': 	$base = $this->attr('endur') *3; 	break;	
-			case 'energy_up': 		$base = 0.2; 						break;	
-			case 'energy_recup': 	$base = 30; 						break;
+			case 'hp_limit': 	$base = $this->attr('endur') *3; 	break;	
+			case 'hp_up': 		$base = 0.2; 						break;	
+			case 'hp_recup': 	$base = 30; 						break;
 			
 			// INTEL
-			case 'spirit_limit': 	$base = $this->attr('intel') *2; 	break;	
-			case 'spirit_up': 		$base = 0.2; 						break;	
-			case 'spirit_recup': 	$base = 30; 						break;
+			case 'mp_limit': 	$base = $this->attr('intel') *2; 	break;	
+			case 'mp_up': 		$base = 0.2; 						break;	
+			case 'mp_recup': 	$base = 30; 						break;
 			
 			// ALL
 			case 'bonus_gils': 	$base = 0; break;
@@ -189,7 +189,7 @@ class Chocobo_Model extends ORM {
 	}
 	
 	/**
-	 * Regain des caractéristiques breath / energy / moral
+	 * Regain des caractéristiques breath / hp / moral
 	 * 
 	 * @access public
 	 * @return void
@@ -197,7 +197,7 @@ class Chocobo_Model extends ORM {
 	public function regain() 
 	{
 		//$res = "";
-		$apts = array("breath", "energy", "spirit");
+		$apts = array("breath", "hp", "mp");
 		$minutes = floor( (time() -$this->moved) /60 );
 		if ($minutes >= 1) 
 		{
@@ -380,8 +380,8 @@ class Chocobo_Model extends ORM {
         	$chocobo->endur 	= 20+$nut->endur;
         	
         	$chocobo->breath 	= 4*$chocobo->speed;
-        	$chocobo->energy 	= 3*$chocobo->intel;
-        	$chocobo->spirit 	= 2*$chocobo->endur;
+        	$chocobo->hp 		= 3*$chocobo->intel;
+        	$chocobo->mp 		= 2*$chocobo->endur;
         	
         	$chocobo->moral		= 50;
         	

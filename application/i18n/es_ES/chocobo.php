@@ -36,8 +36,8 @@ $lang = array (
 	
 	'competences_endur' => "Cap. de resistencia",
 	'endur' => 'Resistencia',
-	'energy' => 'Energía',
-	'energy_up' => 'Recupera energía',
+	'hp' => 'Energía',
+	'hp_up' => 'Recupera energía',
 	'resistance' => 'Resistencia',
 	'resistance_info' => 'Resistencia a un ataque enemigo',
 	'ressource' => 'Recursos',

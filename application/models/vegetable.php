@@ -55,7 +55,7 @@ class Vegetable_Model extends ORM
 			<b>'.$this->display_name().'</b>
 			     <small>';
 		
-		$apts = array('breath', 'energy', 'spirit', 'moral', 'guerison', 'xp', 'rage', 'pc');
+		$apts = array('breath', 'hp', 'mp', 'moral', 'guerison', 'xp', 'rage', 'pc');
 		$apt = $apts[$this->name - 1];
 		$res .= "<br />".Kohana::lang('chocobo.'.$apt).' +'.$this->value.'%';
 		

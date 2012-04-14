@@ -132,7 +132,7 @@
 	<!-- VIT END INT -->
 	<?php 
 	$apts = array('speed', 'endur', 'intel');
-	$caracs = array('breath', 'energy', 'spirit');
+	$caracs = array('breath', 'hp', 'mp');
 	$colours = array('rouge', 'vert', 'bleu');
 	
 	for ($i=0; $i<=2; $i++) 

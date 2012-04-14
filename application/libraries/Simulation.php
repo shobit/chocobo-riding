@@ -216,8 +216,8 @@ class Simulation {
             	$chocobo->user->save();
             }
             
-			// [ALL] Penality breath & Regains & RESULT{breath,energy,spirit}
-        	$apts = array('breath', 'energy', 'spirit');
+			// [ALL] Penality breath & Regains & RESULT{breath,hp,mp}
+        	$apts = array('breath', 'hp', 'mp');
             foreach($apts as $apt)
             {
             	${$apt.'_limit'} = $chocobo->attr($apt.'_limit');
