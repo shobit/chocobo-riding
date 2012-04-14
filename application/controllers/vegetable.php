@@ -41,7 +41,7 @@ class Vegetable_Controller extends Template_Controller
 				
 			// Légume Pashana - Esprit
 			case 3:
-				$spirit = $chocobo->spirit + ($vegetable->value /100 +1);
+				$spirit = $chocobo->spirit * ($vegetable->value /100 +1);
 				$spirit_limit = $chocobo->attr('spirit_limit');
 				$chocobo->spirit = min($spirit, $spirit_limit);
 				$use = true;
@@ -49,7 +49,7 @@ class Vegetable_Controller extends Template_Controller
 			
 			// Légume Pashana - Moral
 			case 4:
-				$moral = $chocobo->moral + ($vegetable->value /100 +1);
+				$moral = $chocobo->moral * ($vegetable->value /100 +1);
 				$moral_limit = $chocobo->attr('moral_limit');
 				$chocobo->moral = min($moral, $moral_limit);
 				$use = true;
