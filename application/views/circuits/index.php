@@ -32,7 +32,7 @@
 					</td>
 					<td>
 						<?php 
-						echo html::anchor('circuit/view/'.$circuit->id, $circuit->location->display_name());
+						echo html::anchor('circuits/'.$circuit->id, $circuit->location->display_name());
 						$nbr_chocobos = count($circuit->chocobos);
 						if ($nbr_chocobos > 0) $nbr_chocobos = "<b>$nbr_chocobos</b>";
 						?>
