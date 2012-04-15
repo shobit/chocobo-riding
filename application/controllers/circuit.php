@@ -2,51 +2,74 @@
 
 class Circuit_Controller extends Template_Controller {
 
-	// FUNC: liste de toutes les courses de classe du chocobo utilisé
-	public function index() 
+	/*
+	 * (void) liste toutes les courses de la classe du chocobo en session
+	 *
+	 */
+	public function index ( ) 
 	{
 		$this->authorize('logged_in');
 		
+		$this->template->content = View::factory("circuits/index")
+			->bind('classe', $classe)
+			->bind('circuits', $circuits)
+			->bind('results', $results);
+		
+		// Détection de le classe du chocobo en session
 		$chocobo = $this->session->get('chocobo');
+		$classe = $chocobo->classe;
 		
-		if ($chocobo->classe <= 6)
-		{
-			for ($i=0; $i<=2; $i++) 
-			{
-				$list = Circuit_Model::get_list($i, $chocobo->classe);
-				foreach ($list as $circuit) $circuit->revise(false);
-			}
-			
-			Circuit_Model::create($chocobo->classe);
-		}
+		// Heure courante
+		$date = time();
 		
-        $index = new View('circuits/index');
-		$index->chocobo = $chocobo;
-		for ($i=0; $i<=2; $i++) 
-		{
-			$index->{'circuits_'.$i} = ORM::factory('circuit')
-				->where('race', $i)
-				->where('classe', $chocobo->classe)
-				->where('status <=', 1)
-				->where('finished', 0)
-				->find_all();
-		}
-		
-		$index->last_circuits = ORM::factory('circuit')
-			->where('status', 2)
-			->where('finished', 0)
+		// Recherche des courses officielles
+		$official_circuits = ORM::factory('circuit')
+			->where('classe', $classe)
+			->where('owner', 0)
 			->find_all();
+			
+		// Suppression des courses officielles "vides"
+		$nb = 0;
+		foreach ($official_circuits as $circuit)
+		{
+			// Si le départ est passé et qu'il n'y a aucun chocobos sur le départ
+			if ($circuit->start <= $date) 
+			{
+				if (empty($circuit->script) and count($circuit->chocobos) == 0)
+				{
+					$circuit->delete();
+				}
+			}
+			else 
+			{
+				$nb++;
+			}
+		}
 		
-		$index->last_results = ORM::factory('result')
+		// On complète le nbre de couses officielles à 4
+		for ($i = $nb; $i < 4; $i++)
+		{
+			ORM::factory('circuit')->add($i, $classe);
+		}
+		
+		// On liste toutes les courses à venir		
+		$circuits = ORM::factory('circuit')
+			->where('classe', $classe)
+			->where('start >', $date)
+			->find_all();
+			
+		$results = ORM::factory('result')
 			->where('chocobo_id', $chocobo->id)
+			->where('deleted', FALSE)
 			->orderby('id', 'desc')
 			->find_all();
-		
-		$this->template->content = $index;
 	}
 	
-	// FUNC: Vue d'un circuit
-	// var $id INT
+	/*
+	 * (void) affiche le profil d'un circuit
+	 * 
+	 * (int) $id
+	 */
 	public function view($id) 
 	{
 		$this->authorize('logged_in');

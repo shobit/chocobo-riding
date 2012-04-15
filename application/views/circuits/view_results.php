@@ -13,12 +13,8 @@
 		{
 			if ($result->chocobo_id == $chocobo->id) {$result->seen = true; $result->save();}
 			$ch = $result->chocobo;
-			$medal = "normal";
-			if ($circuit->race == 1) 
-			{
-				$medals = array("normal", "normal", "normal", "bronze", "argent", "or");
-				$medal = $medals[0];
-			}
+			$medals = array("normal", "normal", "normal", "bronze", "argent", "or");
+			$medal = $medals[0];
 			?>
 			<tr>
 				<td><?= html::image('images/icons/'.$medal.'.jpg') ?></td>
@@ -27,7 +23,7 @@
 				</td>
 				<td><?php echo $ch->vignette(); ?></td>
 				<td><?php //if ($result->is_enraged > 0) echo html::image('images/icons/rage.png'); ?></td>
-				<td><b><?php if ($circuit->race != 2) echo $result->avg_speed.' km/h'; ?></b></td>
+				<td><b><?php echo $result->avg_speed.' km/h'; ?></b></td>
 			</tr>
 			<?php
 		}

@@ -149,7 +149,7 @@ class Controller extends Controller_Core
 			}
 			
 			// Révision du circuit actuel du chocobo (id>0)
-			if ($chocobo->circuit_id > 0) $chocobo->circuit->revise();
+			//if ($chocobo->circuit_id > 0) $chocobo->circuit->revise();
         }
         
         ///////////////////////

@@ -8,11 +8,11 @@
 	</div>
 		
 	<div class="column2">
-		<div class="title"><?= $circuit->display_race('zone') ?></div>
+		<div class="title"><?php //echo $circuit->display_race('zone'); ?></div>
 		<table class="circuitInside">
 			<tr>
 				<td class="icon">
-					<?= html::image("images/icons/cup".$circuit->status.".png") ?>
+					<?= html::image("images/icons/cup0.png") ?>
 				</td>
 				<td>
 					<?= $circuit->location->display_name() ?>
@@ -82,7 +82,7 @@
 		<div class="title"><?= Kohana::lang('circuit.description.gains') ?></div>
 		<table class="circuitInside">
 			<?php
-			switch ($circuit->race) {
+			/*switch ($circuit->race) {
 				case 0:
 					?>
 					<tr>
@@ -127,7 +127,7 @@
 					</tr>
 					<?php
 					break;
-			}
+			}*/
 			?>
 		</table>
 	</div>
