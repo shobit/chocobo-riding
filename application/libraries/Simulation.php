@@ -1,22 +1,91 @@
 <?php 
- 
+// script de la course (array javascript)
+/*
+
+SCRIPT
+	{
+		chocobos: 
+			[
+				{
+					name: string,
+					colour: string
+				},
+				{
+				
+				}
+			],
+		tours:
+			[
+				{ TOUR 1
+					distances: 
+						{
+							chocobo: string,
+							allure: string,
+							distance: string,
+							course: string 
+						}
+					events:
+						[
+							{
+								title: string
+								allure: string
+								content: string
+							},
+							{}
+						]
+				},
+				{ TOUR 2
+					
+				} 
+			]
+	}
+
+
+*/
 class Simulation {
 	
-	/**
-	 * Simulate a race.
-	 * 
-	 * @access public
-	 * @param mixed $circuit
-	 * @return void
-	 */
-	public function run($circuit) 
+	// Informations sur la course (object php)
+	protected $circuit;
+	
+	public function run ( $circuit ) 
 	{ 
 		// ------
 		//
-		// STEP 1 : initialization
+		// ETAPE 1 : Initialisation des variables de classe
 		//
 		// ------
-		foreach ($circuit->chocobos as $chocobo) 
+		$this->circuit = $circuit;
+		
+		$nbr_chocobos = 0;
+		$chocobos = array();
+		foreach ($circuit->chocobos as $chocobo)
+		{
+			$infos = $chocobo->as_array();
+			$infos['initiative'] = 100; 							#TODO
+			$infos['box'] = $nbr_chocobos + 1; 						#TODO: mettre les box depuis l'inscription
+			$infos['time'] = 0;										#
+			$infos['distance_last'] = 0;							#
+			$infos['distance_cumul'] = 0;							#
+			$infos['allure'] = 'normal';							#allure de course
+			$infos['course_last'] = 0;								#
+			$infos['course_cumul'] = 0;								#
+			$infos['course_min'] = 1;								#vitesse de départ (FIXE)
+			$infos['course_avg'] = (1 + $infos['speed'] / 2) / 2;	#vitesse moyenne de course
+			$infos['course_max'] = $infos['speed'] / 2;				#vitesse maximale que peut atteindre un chocobo
+			$infos['arrived'] = FALSE; 								#token pour signaler l'arrivée du chocobo
+				
+			#ajouter le record course
+			
+			$chocobos[] = $infos;
+			
+			$script_chocobo[] = "{name:'" . $infos['name'] . "',colour:'" . $infos['colour'] . "'}";
+			
+			$nbr_chocobos++;
+		}
+		
+		$script_chocobos = '[' . implode(',', $script_chocobo) . ']';
+		
+		/*foreach ($circuit->chocobos as $chocobo) 
 		{
 			// creating result
 			$result = ORM::factory('result');
@@ -50,56 +119,126 @@ class Simulation {
 		}
 		
 		$this->order($circuit);
-		$circuit->reload();
+		$circuit->reload();*/
 		
 		// ------
 		//
-		// STEP 2 : High Job Competences
+		// ETAPE 2 : Simulation
 		//
 		// ------
-		/*foreach ($this->liste as $cr) {
-			$this->cr = $cr;
-			$job = launchJob($cr->getJob());
-			$job->highJC();
-		}*/
 		
-		// ------
-		//
-		// STEP 3 : Normal Job Competences
-		//
-		// ------
-		/*foreach ($this->results as $tmp) {
-			//$job = launchJob($cr->getJob());
-			//$job->normalJC();
-			//$this->wound();
-		}
-		$this->order();*/
+		$tour = 0;
 		
-		// ------
-		//
-		// STEP 4 : Low Job Competences
-		//
-		// ------
-		/*$results = $this->get('results', false);
-		$max = count($results);
-		foreach ($results as $tmp) {
-			$result = new Result();
-			$result->find($tmp);
-            
-            // Circuit length on Breath
+		$nbr_chocobos_arrived = 0;
+		
+		while ($nbr_chocobos_arrived < $nbr_chocobos) #tant que tous les chocobos ne sont pas arrivés
+		{
+			// nouveau tour	
+			$tour++;
 			
+			// initialistion des scripts
+			$script_point = array();
+			$script_event = array();
 			
-            //$this->cr = $cr;
-			//$job = launchJob($cr->getJob());
-			//$job->lowJC();
+			// utilisation des compétences & avancement du chocobo
+			arr::order($chocobos, 'initiative', 'desc');
+			foreach ($chocobos as &$chocobo)
+			{
+				if ($chocobo['arrived']) { continue; }
+				
+				// le chocobo utilise ou pas une de ses compétences
+				//$chocobo->use_competence();
+				
+				// le chocobo met à jour son score d'initiative
+				//$chocobo->update_initiative();
+			
+				// le chocobo avance
+				if ($chocobo['allure'] == 'normal') 
+				{
+					if ($chocobo['course_last'] <= $chocobo['course_avg']) // Adjustable
+					{
+						$course_alea = rand(3 * $chocobo['speed'], 5 * $chocobo['speed']) /100;
+						$course_current = $chocobo['course_last'] + $course_alea; // Adjustable
+					}
+					else
+					{
+						$course_alea = rand(3 * $chocobo['speed'], 5 * $chocobo['speed']) /100;
+						$course_current = $chocobo['course_last'] - $course_alea; // Adjustable
+					}
+				}
+				
+				$distance_current = min($course_current, $circuit->length - $chocobo['distance_cumul']);
+				
+				$chocobo['distance_last'] = $distance_current;
+				$chocobo['distance_cumul'] += $distance_current;
+				$chocobo['course_last'] = $course_current;
+				$chocobo['course_cumul'] += $course_current;
+				$chocobo['time'] += $chocobo['distance_last'] / $chocobo['course_last'] * 1; // m/s
+			}
+			
+			// on vérifie si le chocobo est à l'arrivée
+			arr::order($chocobos, 'time', 'desc'); # l'ordre sert seulement si un des chocobos au moins est à l'arrivée
+			foreach ($chocobos as &$chocobo)
+			{
+				if ($chocobo['arrived']) { continue; }
+				
+				$script_point[] = "{
+					chocobo:'" . $chocobo['name'] . "',
+					distance:'" . number_format($chocobo['distance_cumul'], 2, '.', '') . "',
+					course:'" . number_format($chocobo['course_last'], 2, '.', '') . "',
+					allure:'" . $chocobo['allure'] . "'
+				}";
+				
+				if ($chocobo['distance_cumul'] >= $circuit->length)
+				{
+					$nbr_chocobos_arrived ++;
+					$position = Kohana::lang("circuit.pos$nbr_chocobos_arrived");
+					$script_event[] = "{chocobo:'" . $chocobo['name'] . "',title:'$position',allure:'happy'}";
+					$chocobo['position'] = $nbr_chocobos_arrived;
+					$chocobo['arrived'] = TRUE;
+				}
+			}
+						
+			$script_points = '[' . implode(',', $script_point) . ']';
+			$script_events = '[' . implode(',', $script_event) . ']';
+			$script_tour[] = '{points:' . $script_points . ',events:' . $script_events . '}';
 		}
-		$this->order();*/
+		
+		$script_tours = '[' . implode(',', $script_tour) . ']';
 		
 		// ------
 		//
-		// STEP 5 : Finalization
+		// ETAPE 3 : Enregistrement du script
 		//
 		// ------
+		
+		foreach ($chocobos as &$chocobo)
+		{
+			$result = ORM::factory('result');
+			$result->circuit_id = $circuit->id;
+			$result->chocobo_id = $chocobo['id'];
+			$result->name = $chocobo['name'];									#mémorisation du nom du chocobo au cas où s'il n'existe plus après
+			$result->box = $chocobo['box'];
+			$result->position = $chocobo['position'];
+			$result->time = $chocobo['time'];
+			$result->course_avg = $chocobo['course_cumul'] / $chocobo['time'];
+			$result->save();
+			
+			$c = ORM::factory('chocobo', $chocobo['id']);
+			$c->circuit_id = 0;
+			$c->set_exp($nbr_chocobos - $chocobo['position'] + 1);
+			$c->hp = $chocobo['hp'];											#TODO: vérifier que c'est valide
+			$c->mp = $chocobo['mp'];
+			$c->nb_races ++;
+			//$c->set_rage($chocobo['rage']);									#TODO
+			//$c->set_fame($nbr_chocobos);										#TODO
+			$c->save();
+		}
+		
+		$circuit->script = '{chocobos:' . $script_chocobos . ',tours:' . $script_tours  . '}';
+		$circuit->save();
+		
+		/*
 		$nbr_results = count($circuit->results);
 		$lucky_items = 100;
 		$results = ORM::factory('result')
@@ -167,7 +306,7 @@ class Simulation {
 				$result->xp += $gain_xp;
 				// MIN ? MAX ? 
 				$result->add_fact("xp_total", $gain_xp);
-				$stats = $chocobo->evolve($result->xp);
+				$stats = $chocobo->set_xp($result->xp);
 				if ($stats['nb_levels'] >0) 
 				{
 					$result->add_fact('level', $stats['nb_levels'].'/'.$stats['level']);
@@ -275,7 +414,7 @@ class Simulation {
 			{
 				$last_circuit->revise();
 			}
-		}
+		}*/
 		//$this->calcul_paris();
 	}
 	
@@ -286,7 +425,7 @@ class Simulation {
 	 * @param mixed $circuit
 	 * @return void
 	 */
-	public function order($circuit)
+	/*public function order($circuit)
 	{
 		$position = 1;
 		$results = ORM::factory('result')
@@ -299,6 +438,6 @@ class Simulation {
 			$result->save();
 			$position++;
 		}
-	}
+	}*/
 
 }

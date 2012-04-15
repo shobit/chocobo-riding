@@ -63,7 +63,7 @@ class Vegetable_Controller extends Template_Controller
 			// Légume Guysal - experience
 			case 6:
 				$use = true;
-				$chocobo->evolve($vegetable->value);
+				$chocobo->set_xp($vegetable->value);
 			break;
 				
 			// Légume Reagan - rage

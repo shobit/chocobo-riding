@@ -232,7 +232,7 @@ class Chocobo_Model extends ORM {
 	}
 	
 	// TODO FUNC: Evolution du chocobo
-	public function evolve($gain) 
+	public function set_xp ( $gain ) 
 	{
 		$res 	 = array(
 			'level' 		=> 0,
