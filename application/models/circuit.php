@@ -67,8 +67,7 @@ class Circuit_Model extends ORM {
 						->limit(1)->find();
 					   
 				$length = ($i<2) ? rand( ($class+$i+1)*9, ($class+$i+1)*10 ) : 0;
-				$surface = rand(0, 6);
-                
+				
                 $tps = array(15*60, 30*60, 60*60);
                 $base = floor(time()/$tps[$i]);
 				$last = ($base*$tps[$i]);
@@ -76,7 +75,6 @@ class Circuit_Model extends ORM {
 				
 				$circuit = ORM::factory('circuit');
 				$circuit->race 			= $i; # 0 -> 2
-				$circuit->surface 		= $surface; # 0 -> 7
 				$circuit->location_id 	= $location->id;
 				$circuit->classe 		= $class; # 0 -> 5
 				$circuit->length 		= $length;

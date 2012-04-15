@@ -50,15 +50,6 @@
 	<div class="column2">
 		<div class="title"><?= Kohana::lang('circuit.description.strategy') ?></div>
 		<table class="circuitInside">
-			<tr>
-				<td class="icon">
-					<?= html::image('images/chocobos/'.
-						gen::colour($circuit->surface).'/generic.gif') ?>
-				</td>
-				<td>
-					<?= gen::colour($circuit->surface, 'display') ?>
-				</td>
-			</tr>
 			<?php
 			if ($circuit->location->speed > 0) {
 				?>
