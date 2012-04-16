@@ -22,7 +22,7 @@ $lang = array (
 	'menu_jobs' 		=> "Classes",
 	
 	'speed' 		=> 'Vitesse',
-	'pl' 		=> "Souffle",
+	'pl' 		=> "PL",
 	
 	'endur' 		=> 'Endurance',
 	'hp' 		=> "HP",

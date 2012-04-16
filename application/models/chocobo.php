@@ -120,7 +120,7 @@ class Chocobo_Model extends ORM {
 			case 'intel': $base = floor($this->intel); break;
 			
 			// SPEED
-			case 'pl_limit': 	$base = $this->attr('speed') *4; 	break;	
+			case 'pl_limit': 	$base = 60 + $this->classe *20; 	break;	
 			case 'pl_up': 		$base = 0.2; 						break;	
 			case 'pl_recup': 	$base = 30; 						break;
 				
@@ -392,7 +392,7 @@ class Chocobo_Model extends ORM {
         	$chocobo->intel 	= 20+$nut->intel;
         	$chocobo->endur 	= 20+$nut->endur;
         	
-        	$chocobo->pl	 	= 4*$chocobo->speed;
+        	$chocobo->pl	 	= 60;
         	$chocobo->hp 		= 3*$chocobo->intel;
         	$chocobo->mp 		= 2*$chocobo->endur;
         	
