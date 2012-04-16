@@ -306,7 +306,7 @@ class Simulation {
 				$result->xp += $gain_xp;
 				// MIN ? MAX ? 
 				$result->add_fact("xp_total", $gain_xp);
-				$stats = $chocobo->set_xp($result->xp);
+				$stats = $chocobo->set_exp($result->xp);
 				if ($stats['nb_levels'] >0) 
 				{
 					$result->add_fact('level', $stats['nb_levels'].'/'.$stats['level']);
