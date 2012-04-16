@@ -9,7 +9,7 @@
 			$chocobo = $this->session->get('chocobo');
 			
 			echo html::image('images/menu/hall.gif');
-            echo html::anchor('circuit', Kohana::lang('menu.races')).' | ';
+            echo html::anchor('circuits', Kohana::lang('menu.races')).' | ';
 
 			echo html::image('images/menu/profil.gif');
 			echo html::anchor('chocobo/view/'.$chocobo->name, Kohana::lang('menu.profile')).' | ';
