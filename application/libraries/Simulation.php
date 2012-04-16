@@ -217,7 +217,7 @@ class Simulation {
 			$result = ORM::factory('result');
 			$result->circuit_id = $circuit->id;
 			$result->chocobo_id = $chocobo['id'];
-			$result->name = $chocobo['name'];									#mémorisation du nom du chocobo au cas où s'il n'existe plus après
+			$result->name = $chocobo['name']; #mémorisation du nom du chocobo au cas où s'il n'existe plus après
 			$result->box = $chocobo['box'];
 			$result->position = $chocobo['position'];
 			$result->time = $chocobo['time'];
@@ -225,11 +225,23 @@ class Simulation {
 			$result->save();
 			
 			$c = ORM::factory('chocobo', $chocobo['id']);
+			
 			$c->circuit_id = 0;
-			$c->set_exp( ceil(($nbr_results - $result->position + 1) * 100/$nbr_results) );
+			
+			if ($c->level < $c->lvl_limit)
+			{
+				$c->set_exp( ceil(($nbr_results - $result->position + 1) * 100/$nbr_results) );
+			}
+			
 			$c->nb_races ++;
+			
 			//$c->set_rage($chocobo['rage']);
-			$c->fame += ($chocobo['position'] <= floor($nbr_results /2)) ? -0.01 : 0.01;
+			
+			if ($nbr_results > 1)
+			{
+				$c->set_fame( ($chocobo['position'] <= floor($nbr_results /2)) ? -0.01 : 0.01 );
+			}
+			
 			$c->save();
 		}
 		
@@ -279,35 +291,8 @@ class Simulation {
         	$rage = max($rage, -$chocobo->rage);
         	$result->rage = $rage;
         	$chocobo->rage += $rage;
-        	
-        	// [ALL] moral & RESULT{moral}
-        	$gain_moral = $nbr_results - $result->position - floor($nbr_results /2);
-        	// TODO add_fact recompense moral
-        	$result->moral += $gain_moral;
-        	$moral = min($result->moral, 100 - $chocobo->moral);
-        	$moral = max($moral, -$chocobo->moral);
-        	$result->moral = $moral;
-        	$chocobo->moral += $moral;
             
-            // [COMPETITION - !ALONE] fame & RESULT{fame}
-            if ($circuit->race == 1 and $nbr_results >1) 
-            {
-				$gain_fame 		 = ($result->position <= floor($nbr_results /2)) ? -0.01 : 0.01;
-				// TODO add_fact recompense fame
-				$result->fame 	+= $gain_fame;
-				$fame 			 = min($result->fame, 1 - $chocobo->fame);
-				$fame 			 = max($fame, 0.01 - $chocobo->fame);
-				$result->fame	 = $fame;
-				$chocobo->fame 	+= $fame;
-				$chocobo->listen_success(array( # SUCCES
-					"fame_075",
-					"fame_050",
-	    			"fame_025",
-	    			"fame_001"
-	    		));
-			}
-			
-			// [COMPETITION] gils & RESULT{gils}
+           	// [COMPETITION] gils & RESULT{gils}
 			if ($circuit->race == 1)
 			{
             	$gain_gils = $result->gils +$circuit->classe *5 +($nbr_results - $result->position +1);

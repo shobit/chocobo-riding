@@ -322,6 +322,19 @@ class Chocobo_Model extends ORM {
 		return $res;
 	}
 	
+	public function set_fame ( $fame )
+	{
+		$fame = min($fame, 1);
+		$fame = max($fame, 0.01);
+		$this->fame += $fame;
+		$this->listen_success(array( # SUCCES
+			"fame_075",
+			"fame_050",
+			"fame_025",
+			"fame_001"
+		));
+	}
+	
 	// TODO FUNC: Informations du chocobo en popup (HTML)
 	public function vignette() 
 	{
