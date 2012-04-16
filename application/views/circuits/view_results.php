@@ -271,7 +271,6 @@
 			var points = s.tours[s.tour].points;
 			for (var j in points) {
 				var left = s.left_min + Math.floor(points[j].distance * s.left_max / s.length);
-				console.log(baseUrl);
 				$('#' + points[j].chocobo + ' .allure').attr('src', baseUrl + 'images/race/' + points[j].allure + '.png');
 				$('#' + points[j].chocobo + ' .allure').css('left', left);
 				$('.event').hide();

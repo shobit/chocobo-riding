@@ -297,5 +297,62 @@ class Circuit_Controller extends Template_Controller {
 			'success' => empty($msg)
 		);
 	}
+	
+	/**
+	 * Supprime la course de l'historique du chocobo en session
+	 * et supprime la course si tous les autres participants
+	 * l'ont fait.
+	 *
+	 * (void) Redirige ou retourne du texte si c'est en ajax
+	 */
+	public function delete ()
+	{
+		$chocobo = $this->session->get('chocobo');
+		
+		$errors = array();
+		
+		$id = $this->input->post('id', 0);
+		
+		$result = ORM::factory('result')
+			->where('chocobo_id', $chocobo->id)
+			->where('circuit_id', $id)
+			->find();
+			
+		if ($result->loaded)
+		{
+			$nbr_results = ORM::factory('result')
+				->where('circuit_id', $id)
+				->count_all();
+			
+			$result->deleted = TRUE;
+			$result->save();
+			
+			$nbr_results --;
+			
+			if ($nbr_results == 0)
+			{
+				ORM::factory('circuit', $id)->delete();
+			}
+		} 
+		else
+		{
+			$errors[] = 'result_not_found';
+		}
+		
+		if ( ! request::is_ajax()) 
+		{
+			url::redirect('circuit/index');
+		}
+		else
+		{
+			$res['success'] = empty($errors);
+			$res['errors'] = $errors;
+			echo json_encode($res);
+			
+			$this->profiler->disable();
+            $this->auto_render = false;
+            header('content-type: application/json');
+		}
+	}
 
 }

@@ -227,8 +227,6 @@ class Simulation {
 			$c = ORM::factory('chocobo', $chocobo['id']);
 			$c->circuit_id = 0;
 			$c->set_exp($nbr_chocobos - $chocobo['position'] + 1);
-			$c->hp = $chocobo['hp'];											#TODO: vérifier que c'est valide
-			$c->mp = $chocobo['mp'];
 			$c->nb_races ++;
 			//$c->set_rage($chocobo['rage']);									#TODO
 			//$c->set_fame($nbr_chocobos);										#TODO

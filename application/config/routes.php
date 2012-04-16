@@ -14,5 +14,4 @@ $config['register'] = "user/register";
 $config['circuits/([0-9]+)'] = "circuit/view/$1";
 $config['circuits/([0-9]+)/register'] = "circuit/register/$1";
 $config['circuits/([0-9]+)/unregister'] = "circuit/unregister/$1";
-
-
+$config['circuits/delete'] = "circuit/delete";
