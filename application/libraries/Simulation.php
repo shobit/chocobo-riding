@@ -226,11 +226,10 @@ class Simulation {
 			
 			$c = ORM::factory('chocobo', $chocobo['id']);
 			$c->circuit_id = 0;
-			$c->set_exp($nbr_chocobos - $chocobo['position'] + 1);
 			$c->set_exp( ceil(($nbr_results - $result->position + 1) * 100/$nbr_results) );
 			$c->nb_races ++;
-			//$c->set_rage($chocobo['rage']);									#TODO
-			//$c->set_fame($nbr_chocobos);										#TODO
+			//$c->set_rage($chocobo['rage']);
+			$c->fame += ($chocobo['position'] <= floor($nbr_results /2)) ? -0.01 : 0.01;
 			$c->save();
 		}
 		
@@ -267,10 +266,6 @@ class Simulation {
 				}
 			}
 			
-			// [ALL] count races
-			$races = array('trainings', 'compets', 'rides');
-			$chocobo->{'nb_'.$races[$circuit->race]} ++;
-            
             // [ALL] rage & RESULT{rage}
             $rage_limit	= max($chocobo->level, 10);
         	$gain_rage = ($circuit->race <2) ? $result->position : -$circuit->classe;
@@ -292,29 +287,7 @@ class Simulation {
         	$moral = min($result->moral, 100 - $chocobo->moral);
         	$moral = max($moral, -$chocobo->moral);
         	$result->moral = $moral;
-        	$chocobo->moral += $moral; 
-			
-			// [TRAINING] xp & RESULT{xp}
-			if ($circuit->race == 0 and $chocobo->level < $chocobo->lvl_limit) 
-			{
-				$gain_xp 	 = ceil( ($nbr_results - $result->position + 1) * 100/6);
-				// TODO add_fact recompense xp
-				$bonus_xp 	 = $chocobo->attr('bonus_xp');
-				// TODO add_fact bonus_xp
-				$gain_xp 	 = ceil($gain_xp *($bonus_xp /100 +1));
-				$result->xp += $gain_xp;
-				// MIN ? MAX ? 
-				$result->add_fact("xp_total", $gain_xp);
-				$stats = $chocobo->set_exp($result->xp);
-				if ($stats['nb_levels'] >0) 
-				{
-					$result->add_fact('level', $stats['nb_levels'].'/'.$stats['level']);
-				}
-				if ($stats['nb_classes'] >0) 
-				{
-					$result->add_fact('classe', $stats['nb_classes'].'/'.$stats['classe']);
-				}
-			}
+        	$chocobo->moral += $moral;
             
             // [COMPETITION - !ALONE] fame & RESULT{fame}
             if ($circuit->race == 1 and $nbr_results >1) 
