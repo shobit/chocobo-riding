@@ -148,8 +148,8 @@ class Controller extends Controller_Core
 				$this->session->set('chocobo', $chocobo);
 			}
 			
-			// Révision du circuit actuel du chocobo (id>0)
-			//if ($chocobo->circuit_id > 0) $chocobo->circuit->revise();
+			// Si le chocobo en session est inscrit à une course, on la met à jour
+			$chocobo->update_circuit();
         }
         
         ///////////////////////

@@ -440,6 +440,40 @@ class Chocobo_Model extends ORM {
 	    }
     }
     
+    /**
+	 * Met à jour la course actuelle du chocobo (+notification)
+	 *
+	 */
+	public function update_circuit ()
+	{
+		// repère si le chocobo du joueur est inscrit à une course qui a déjà commencé
+		$circuit = ORM::factory('circuit', $this->circuit_id);
+		if ($circuit->loaded and $circuit->start < time())
+		{
+			// SIMULATION
+			$s = new Simulation();
+			$s->run($circuit);
+		}
+		
+		// repère si le chocobo possède un historique de course non vu et non notifié
+		// Note : ne peut pas en avoir plusieurs
+		$result = ORM::factory('result')
+			->where('chocobo_id', $this->id)
+			->where('seen', FALSE)
+			->where('notified', FALSE)
+			->find();
+		
+		if ($result->loaded) 
+		{	
+			$result->notified = TRUE;
+			$result->save();
+			/*if (Router::$current_uri != 'circuits/' . $result->race_id) 
+			{
+				jgrowl::add(html::anchor('circuits/' . $result->race_id, 'Course terminée !', array('class' => 'jgrowl')));
+			}*/
+		}
+	}
+    
     public function delete()
     {
     	$this->db->update(
