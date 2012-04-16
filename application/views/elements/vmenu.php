@@ -27,12 +27,12 @@ if ($user->id >0) {
 					else echo $chocobo->display_job('zone'); ?><br />
 				<?php
 				if (strcmp($chocobo->id, $chocobo_used->id) == 0) { ?>
-					<span class="line_rouge"><?= floor($chocobo->breath) ?></span>/
+					<span class="line_rouge"><?= floor($chocobo->pl) ?></span>/
 					<span class="line_vert"><?= floor($chocobo->hp) ?></span>/
 					<span class="line_bleu"><?= floor($chocobo->mp) ?></span>/
 					<span class="line_gris"><?= $chocobo->rage ?></span><?php
 				} else {
-					echo floor($chocobo->breath).'/ '.floor($chocobo->hp).'/ '.
+					echo floor($chocobo->pl).'/ '.floor($chocobo->hp).'/ '.
 						floor($chocobo->mp).'/ '.$chocobo->rage;
 				}
 				?>

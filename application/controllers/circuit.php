@@ -257,7 +257,10 @@ class Circuit_Controller extends Template_Controller {
 			$msg = 'chocobo_not_free';
 		}
 		
-		#TODO breath > length
+		if ($chocobo->pl < $circuit->pl)
+		{
+			$msg = 'chocobo_tired';
+		}
 		
 		return array(
 			'msg' => $msg,

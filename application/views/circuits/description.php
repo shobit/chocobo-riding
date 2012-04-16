@@ -114,7 +114,7 @@
 				case 2:
 					?>
 					<tr>
-						<td class="icons"><?= html::image('images/icons/breath.png') ?></td>
+						<td class="icons"><?= html::image('images/icons/pl.png') ?></td>
 						<td>Souffle</td>
 					</tr>
 					<tr>

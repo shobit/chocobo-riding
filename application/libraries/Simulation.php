@@ -228,6 +228,8 @@ class Simulation {
 			
 			$c->circuit_id = 0;
 			
+			$c->pl -= $circuit->pl;
+			
 			if ($c->level < $c->lvl_limit)
 			{
 				$c->set_exp( ceil(($nbr_results - $result->position + 1) * 100/$nbr_results) );
@@ -312,8 +314,8 @@ class Simulation {
             	$chocobo->user->save();
             }
             
-			// [ALL] Penality breath & Regains & RESULT{breath,hp,mp}
-        	$apts = array('breath', 'hp', 'mp');
+			// [ALL] Penality PL & Regains & RESULT{pl,hp,mp}
+        	$apts = array('pl', 'hp', 'mp');
             foreach($apts as $apt)
             {
             	${$apt.'_limit'} = $chocobo->attr($apt.'_limit');
@@ -325,10 +327,10 @@ class Simulation {
             		${'gain_'.$apt} = $coeff /100 *${$apt.'_limit'};
             		// TODO add_fact regains
             	}
-            	elseif ($apt == "breath") 
+            	elseif ($apt == "pl") 
             	{
             		${'gain_'.$apt} = 0 -$circuit->length;
-            		// TODO add_act penality breath
+            		// TODO add_act penality pl
             	}
             	else ${'gain_'.$apt} = 0;
             	$result->$apt  += ${'gain_'.$apt};
@@ -356,45 +358,7 @@ class Simulation {
                 $result->add_fact("reward".$result->position, $type."/".$item->id);
             }
             
-            // [ALL] finalizing
-            // status free except if injured
-			$chocobo->status = ($chocobo->status != 2) ? 0 : 2;
-			// last circuit revision
-            $last_circuit = ORM::factory('circuit', $chocobo->circuit_last);
-			$chocobo->circuit_last = $circuit->id;
-			$chocobo->circuit_id = null;
-			$result->save();
-			$chocobo->save();
-			
-			// updating last circuit
-			if ($last_circuit->id > 0) 
-			{
-				$last_circuit->revise();
-			}
 		}*/
-		//$this->calcul_paris();
 	}
-	
-	/**
-	 * Reorder chocobo positions.
-	 * 
-	 * @access public
-	 * @param mixed $circuit
-	 * @return void
-	 */
-	/*public function order($circuit)
-	{
-		$position = 1;
-		$results = ORM::factory('result')
-			->where('circuit_id', $circuit->id)
-			->orderby('avg_speed', 'desc')
-			->find_all();
-		foreach ($results as $result) 
-		{
-			$result->position = $position;
-			$result->save();
-			$position++;
-		}
-	}*/
 
 }

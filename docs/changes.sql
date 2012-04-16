@@ -39,3 +39,5 @@ ADD  `box` INT UNSIGNED NOT NULL AFTER  `name`
 ALTER TABLE  `circuits` DROP  `status` ,
 DROP  `finished` ;
 
+ALTER TABLE  `chocobos` CHANGE  `breath`  `pl` INT UNSIGNED NOT NULL DEFAULT  '0'
+

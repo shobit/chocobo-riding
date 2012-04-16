@@ -25,9 +25,9 @@ class Vegetable_Controller extends Template_Controller
 		{
 			// Légume Mimmet - Souffle
 			case 1:
-				$breath = $chocobo->breath * ($vegetable->value /100 +1);
-				$breath_limit = $chocobo->attr('breath_limit');
-				$chocobo->breath = min($breath, $breath_limit);
+				$pl = $chocobo->pl * ($vegetable->value /100 +1);
+				$pl_limit = $chocobo->attr('pl_limit');
+				$chocobo->pl = min($pl, $pl_limit);
 				$use = true;
 			break;
 		

@@ -23,8 +23,8 @@ $lang = array (
 	
 	'competences_speed' => "Cap. de velocidad",
 	'speed' => 'Velocidad',
-	'breath' => 'Aliento',
-	'breath_up' => 'Recupera aliento',
+	'pl' => 'Aliento',
+	'pl_up' => 'Recupera aliento',
 	'agility' => 'Agilidad',
 	'agility_info' => "Probabilidad del *value*% al evitar los ataques enemigos y las trampas de un circuito",
 	'acceleration' => 'Aceleración',

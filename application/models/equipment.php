@@ -19,7 +19,7 @@ class Equipment_Model extends ORM {
     public function generate($chance, $colour, $level, $user)
     {
     	// Effects lists
-    	$speeds = array("speed"=>5, "breath_limit"=>100, "breath_up"=>0.1, "breath_recup"=>5);
+    	$speeds = array("speed"=>5, "pl_limit"=>100, "pl_up"=>0.1, "pl_recup"=>5);
     	$endurs = array("endur"=>5, "hp_limit"=>50, "hp_up"=>0.1, "hp_recup"=>5);
     	$intels = array("intel"=>5, "mp_limit"=>25, "mp_up"=>0.1, "mp_recup"=>5);
     	$alls   = array("bonus_gils"=>100, "bonus_xp"=>100, "windfall"=>100);
