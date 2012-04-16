@@ -49,7 +49,7 @@
 </div>
 
 <div style="float:right;">
-	<?= html::anchor('circuit', Kohana::lang('circuit.refresh'), array('class'=>"button")) ?>
+	<?= html::anchor('circuits', Kohana::lang('circuit.refresh'), array('class'=>"button")) ?>
 </div>
 
 <div class="clearBoth"></div>

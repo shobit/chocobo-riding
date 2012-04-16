@@ -245,7 +245,7 @@ class Chocobo_Model extends ORM {
 			'intel'			=> 0);
 		$xp  	 = $this->xp + $gain;
 		
-		while ($xp >= 100) #montée d'un niveau
+		while ($xp >= 100 and $this->level < $this->lvl_limit) #montée d'un niveau
 		{
 			$xp -= 100;
 			$this->level ++;
