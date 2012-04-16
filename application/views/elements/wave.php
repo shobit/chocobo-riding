@@ -32,7 +32,6 @@ $(document).ready(function()
 });
 </script>
 
-<br /><br />
 <div id="wave">
 
 	<div class="title">Discussion</div>

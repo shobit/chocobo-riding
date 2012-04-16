@@ -58,7 +58,7 @@
 	
 	<script type="text/javascript">
 	
-		var baseUrl = "<?php echo (IN_PRODUCTION ? "http://chocobo-riding.menencia.com/" : "http://localhost/apps/chocobo-riding/www/"); ?>";
+		var baseUrl = "<?php echo (IN_PRODUCTION ? "http://chocobo-riding.menencia.com/" : "http://localhost/chocobo-riding/www/"); ?>";
 		
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-5385370-6']);
