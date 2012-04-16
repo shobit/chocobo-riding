@@ -38,6 +38,7 @@ class Circuit_Model extends ORM {
 		
 		$this->location_id 	= $location->id;
 		$this->classe		= $classe;
+		$this->pl			= 10;
 		$this->length		= 600;
 		$this->start 		= $start;
 		$this->owner 		= $user_id;

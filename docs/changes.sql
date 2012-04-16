@@ -41,3 +41,7 @@ DROP  `finished` ;
 
 ALTER TABLE  `chocobos` CHANGE  `breath`  `pl` INT UNSIGNED NOT NULL DEFAULT  '0'
 
+ALTER TABLE  `circuits` ADD  `pl` INT UNSIGNED NOT NULL AFTER  `classe`
+
+
+
