@@ -2,7 +2,7 @@
  
 class Chocobo_Model extends ORM { 
     
-    protected $belongs_to = array('user', 'circuit');
+    protected $belongs_to = array('user', 'race');
     protected $has_many = array('results', 'equipment');
     
     public function display_image($format) {
@@ -57,7 +57,7 @@ class Chocobo_Model extends ORM {
     			$res = "Bébé";
     			break;
     		case 3:
-    			$res = html::anchor('circuit/view/'.$this->circuit_id, "En course");
+    			$res = html::anchor('races/'.$this->race_id, "En course");
     			break;
     	}
     	return $res;
@@ -457,15 +457,15 @@ class Chocobo_Model extends ORM {
 	 * Met à jour la course actuelle du chocobo (+notification)
 	 *
 	 */
-	public function update_circuit ()
+	public function update_race ()
 	{
 		// repère si le chocobo du joueur est inscrit à une course qui a déjà commencé
-		$circuit = ORM::factory('circuit', $this->circuit_id);
-		if ($circuit->loaded and $circuit->start < time())
+		$race = ORM::factory('race', $this->race_id);
+		if ($race->loaded and $race->start < time())
 		{
 			// SIMULATION
 			$s = new Simulation();
-			$s->run($circuit);
+			$s->run($race);
 		}
 		
 		// repère si le chocobo possède un historique de course non vu et non notifié
@@ -480,9 +480,9 @@ class Chocobo_Model extends ORM {
 		{	
 			$result->notified = TRUE;
 			$result->save();
-			/*if (Router::$current_uri != 'circuits/' . $result->race_id) 
+			/*if (Router::$current_uri != 'races/' . $result->race_id) 
 			{
-				jgrowl::add(html::anchor('circuits/' . $result->race_id, 'Course terminée !', array('class' => 'jgrowl')));
+				jgrowl::add(html::anchor('races/' . $result->race_id, 'Course terminée !', array('class' => 'jgrowl')));
 			}*/
 		}
 	}

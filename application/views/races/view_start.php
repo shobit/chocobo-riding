@@ -3,17 +3,17 @@
 	
 </style>
 
-<h1><?php echo Kohana::lang('circuit.view_start.title') . ' ' . html::image('images/classes/' . $circuit->classe . '.gif'); ?></h1>
-<div id="prelude"><?php echo Kohana::lang('location.' . $circuit->location->code . '.prelude'); ?></div>
+<h1><?php echo Kohana::lang('race.view_start.title') . ' ' . html::image('images/classes/' . $race->circuit->classe . '.gif'); ?></h1>
+<div id="prelude"><?php echo Kohana::lang('location.' . $race->circuit->code . '.prelude'); ?></div>
 
-<?php echo new View("circuits/description", array('circuit' => $circuit)); ?>
+<?php echo new View("races/description", array('race' => $race)); ?>
 	
 <div style="float:right;">
 	<?php 
 	$display_on = ' style="display:inline;"';
 	$display_off = ' style="display:none;"';
 	
-	$registered = ($chocobo->circuit_id === $circuit->id);
+	$registered = ($chocobo->race_id === $race->id);
 	
 	$register = ( ! $registered and $can_register['success']) ? $display_on: $display_off;
 	$unregister = ($registered and $can_unregister['success']) ? $display_on: $display_off;
@@ -31,31 +31,31 @@
 	?>
 	
 	<span id="register"<?php echo $register; ?>>
-		+ <?php echo html::anchor('circuits/' . $circuit->id . '/register', kohana::lang('circuit.register'), array('id' => 'a-subscribe')); ?> 
+		+ <?php echo html::anchor('races/' . $race->id . '/register', Kohana::lang('race.register'), array('id' => 'a-subscribe')); ?> 
 		<span class="loading">en cours</span>
 	</span>
 	
 	<span id="unregister"<?php echo $unregister; ?>>
-		- <?php echo html::anchor('circuits/' . $circuit->id . '/unregister', kohana::lang('circuit.unregister'), array('id' => 'a-unsubscribe')); ?> 
+		- <?php echo html::anchor('races/' . $race->id . '/unregister', Kohana::lang('race.unregister'), array('id' => 'a-unsubscribe')); ?> 
 		<span class="loading">en cours</span>
 	</span>
 	
 	<?php
-	echo html::anchor('circuits/' . $circuit->id, kohana::lang('circuit.refresh'), array('class' => 'button'));
+	echo html::anchor('races/' . $race->id, Kohana::lang('race.refresh'), array('class' => 'button'));
 	
-	echo html::anchor('circuit', kohana::lang('circuit.back'), array('class' => 'button'));
+	echo html::anchor('races', Kohana::lang('race.back'), array('class' => 'button'));
 	?>
 </div>
 	
 <div class="column3">
 	<?php
-	$nbr_chocobos = count($circuit->chocobos);
+	$nbr_chocobos = count($race->chocobos);
 	if ($nbr_chocobos > 0) 
 	{
 	?>
 		<div class="title">Départ</div>
 		<table class="circuitInside">
-			<?php foreach ($circuit->chocobos as $chocobo): ?>
+			<?php foreach ($race->chocobos as $chocobo): ?>
 				<tr>
 					<td><?= html::image('images/icons/normal_sepia.jpg') ?></td>
 					<td class="icons"><?= $chocobo->display_image('mini'); ?></td>

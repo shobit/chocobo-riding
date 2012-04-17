@@ -4,18 +4,18 @@
 
 <div class="circuit">
 	<div class="column2">
-		<?= $circuit->location->display_image('thumbmail') ?>
+		<?= $race->circuit->display_image('thumbmail') ?>
 	</div>
 		
 	<div class="column2">
-		<div class="title"><?php //echo $circuit->display_race('zone'); ?></div>
+		<div class="title"><?php //echo $race->display_race('zone'); ?></div>
 		<table class="circuitInside">
 			<tr>
 				<td class="icon">
 					<?= html::image("images/icons/cup0.png") ?>
 				</td>
 				<td>
-					<?= $circuit->location->display_name() ?>
+					<?= $race->circuit->name() ?>
 				</td>
 			</tr>
 			<tr>
@@ -23,7 +23,7 @@
 					<?= html::image("images/icons/distance.png") ?>
 				</td>
 				<td>
-					<?= $circuit->length.' kms' ?>
+					<?= $race->circuit->length.' kms' ?>
 				</td>
 			</tr>
 			<tr>
@@ -31,16 +31,16 @@
 					<?= html::image("images/icons/hour.png") ?>
 				</td>
 				<td>
-					<b><span style="display: inline;" id="<?= $circuit->id ?>">--:--</span></b>
+					<b><span style="display: inline;" id="<?= $race->id ?>">--:--</span></b>
 				</td>
 			</tr>
 		</table>
 		<script language=JavaScript>
 			$(document).ready(function() {
 				decompte(
-					'<?= $circuit->id ?>', 
-					'<?= ($circuit->start - time()) ?>', 
-					'<?= Kohana::lang('circuit.index.finished') ?>',
+					'<?= $race->id ?>', 
+					'<?= ($race->start - time()) ?>', 
+					'<?= Kohana::lang('race.index.finished') ?>',
 					true
 				);
 			});
@@ -48,38 +48,11 @@
 	</div>
 			
 	<div class="column2">
-		<div class="title"><?= Kohana::lang('circuit.description.strategy') ?></div>
-		<table class="circuitInside">
-			<?php
-			if ($circuit->location->speed > 0) {
-				?>
-				<tr>
-					<td class="icons"><?= html::image('images/icons/speed.png') ?></td>
-					<td>Vitesse <small><b>x<?= $circuit->location->speed ?></b></small></td>
-				</tr>
-				<?php
-			}
-			if ($circuit->location->intel > 0) {
-				?>
-				<tr>
-					<td class="icons"><?= html::image('images/icons/intel.png') ?></td>
-					<td>Intelligence <small><b>x<?= $circuit->location->intel ?></b></small></td>
-				</tr>
-				<?php 
-			}
-			if ($circuit->location->endur > 0) {
-				?>
-				<tr>
-					<td class="icons"><?= html::image('images/icons/endur.png') ?></td>
-					<td>Endurance <small><b>x<?= $circuit->location->endur ?></b></small></td>
-				</tr>
-				<?php
-			} ?>
-		</table>
+		<div class="title"><?= Kohana::lang('race.description.strategy') ?></div>
 	</div>
 		
 	<div class="column2">
-		<div class="title"><?= Kohana::lang('circuit.description.gains') ?></div>
+		<div class="title"><?= Kohana::lang('race.description.gains') ?></div>
 		<table class="circuitInside">
 			<?php
 			/*switch ($circuit->race) {
@@ -87,11 +60,11 @@
 					?>
 					<tr>
 						<td class="icons"><?= html::image('images/icons/exp.png') ?></td>
-						<td><?= Kohana::lang('circuit.description.exp') ?></td>
+						<td><?= Kohana::lang('race.description.exp') ?></td>
 					</tr>
 					<tr>
 						<td class="icons"><?= html::image('images/icons/skills.png') ?></td>
-						<td><?= Kohana::lang('circuit.description.apt') ?></td>
+						<td><?= Kohana::lang('race.description.apt') ?></td>
 					</tr>
 					<?php 
 					break;

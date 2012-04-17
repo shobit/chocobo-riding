@@ -8,6 +8,6 @@
 class Wave_Model extends ORM 
 {
     // Relations entre modèles
-    protected $belongs_to = array('circuit', 'user');
+    protected $belongs_to = array('race', 'user');
      
 }

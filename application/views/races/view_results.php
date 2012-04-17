@@ -58,30 +58,27 @@
 	.clear {clear: both;}
 </style>
 
-<h1><?php echo Kohana::lang('circuit.view_results.title') . ' ' . html::image("images/classes/" . $circuit->classe . ".gif"); ?></h1>
-<div id="prelude"><?php echo Kohana::lang('location.' . $circuit->location->code . '.prelude'); ?></div>
+<h1><?php echo Kohana::lang('race.view_results.title') . ' ' . html::image("images/classes/" . $race->circuit->classe . ".gif"); ?></h1>
+<div id="prelude"><?php echo Kohana::lang('location.' . $race->circuit->code . '.prelude'); ?></div>
 
-<?php echo new View("circuits/description", array('circuit' => $circuit)); ?>
+<?php echo new View("races/description", array('race' => $race)); ?>
 
 <div style="width: 600px; margin: auto;">
 	<div class="race">
 		<div class="classe">
-			<?php echo $circuit->classe ?>
+			<?php echo $race->circuit->classe ?>
 		</div>
 		<div class="name">
-			<?php echo $circuit->location->name ?>
-		</div>
-		<div class="private">
-			<?php echo (($circuit->owner !== 0) ? 'Course privée': 'Course officielle') ?>
+			<?php echo $race->circuit->name() ?>
 		</div>
 		<div class="length">
-			<?php echo $circuit->length ?>m
+			<?php echo $race->circuit->length ?>m
 		</div>
 		<div class="round">
-			Round <?php //echo $circuit->round; ?>
+			Round <?php //echo $race->round; ?>
 		</div>
 		<div class="scheduled">
-			<?php echo date::display($circuit->start) ?>
+			<?php echo date::display($race->start) ?>
 		</div>
 		<div class="clearBoth"></div>
 	</div>
@@ -346,8 +343,8 @@
 		
 	};
 	
-	var script = <?php echo $circuit->script ?>;
-	var length = <?php echo $circuit->length ?>;
+	var script = <?php echo $race->script ?>;
+	var length = <?php echo $race->circuit->length ?>;
 	var s = new Simulation(script, length);
 	s.start();
 

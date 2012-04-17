@@ -43,5 +43,32 @@ ALTER TABLE  `chocobos` CHANGE  `breath`  `pl` INT UNSIGNED NOT NULL DEFAULT  '0
 
 ALTER TABLE  `circuits` ADD  `pl` INT UNSIGNED NOT NULL AFTER  `classe`
 
+ALTER TABLE  `locations` DROP  `speed` ,
+DROP  `intel` ,
+DROP  `endur` ;
+
+ALTER TABLE  `circuits` DROP  `classe` ,
+DROP  `pl` ,
+DROP  `length` ,
+DROP  `owner` ;
+
+ALTER TABLE  `locations` ADD  `pl` INT UNSIGNED NOT NULL ,
+ADD  `length` INT UNSIGNED NOT NULL
+
+circuits >> races
+locations >> circuits
+
+ALTER TABLE  `chocobos` DROP  `circuit_last`
+
+ALTER TABLE  `chocobos` CHANGE  `circuit_id`  `race_id` INT( 11 ) NULL DEFAULT NULL
+
+(changes races >> circuit_id)
+
+ALTER TABLE  `results` CHANGE  `circuit_id`  `race_id` INT( 11 ) NULL DEFAULT NULL
+
+ALTER TABLE  `waves` CHANGE  `circuit_id`  `race_id` INT( 11 ) NULL DEFAULT NULL
+
+
+
 
 

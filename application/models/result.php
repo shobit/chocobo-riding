@@ -3,7 +3,7 @@
 class Result_Model extends ORM {
 
 	protected $has_one = array('chocobo');
-	protected $belongs_to = array('circuit');
+	protected $belongs_to = array('race');
 	protected $has_many = array('facts');
 	
 	public function display_gain_apt()

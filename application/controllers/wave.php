@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 /**
- * Wave Controller - Discussion autour d'un circuit
+ * Wave Controller - Discussion autour d'une course
  *
  * @author     Menencia
  * @copyright  (c) 2010
@@ -16,12 +16,12 @@ class Wave_Controller extends Template_Controller
 		// Traitement Ajax ou pas
 		if (!request::is_ajax()) 
 		{
-			url::redirect("circuit/view/".$id); // TODO
+			url::redirect("races/" . $id);
 		}
 		else
 		{
 			$waves = ORM::factory('wave')
-				->where('circuit_id', $id)
+				->where('race_id', $id)
 				->orderby('created', 'desc')
 				->find_all();
 			
@@ -61,12 +61,12 @@ class Wave_Controller extends Template_Controller
     	$post->pre_filter('trim', TRUE);
 		$post->add_rules('content', 'required');
 		
-		$circuit 	= ORM::factory('circuit')->find($id);
+		$race 	= ORM::factory('race', $id);
 		$wave 		= ORM::factory('wave');
 			
-		if ($circuit and $post->validate())
+		if ($race and $post->validate())
 		{
-			$wave->circuit_id 	= $id;
+			$wave->race_id 	= $id;
 			$wave->user_id 	= $user->id;
 			$wave->content 		= $post->content;
 			$wave->save();
@@ -75,7 +75,7 @@ class Wave_Controller extends Template_Controller
 		// Traitement Ajax ou pas
 		if (!request::is_ajax()) 
 		{
-			url::redirect("circuit/view/".$id); // TODO
+			url::redirect("races/" . $id); // TODO
 		}
 		else
 		{

@@ -11,8 +11,8 @@ $config['locale/([a-zA-Z_]+)'] = "page/locale/$1";
 $config['design/([a-zA-Z_]+)'] = "page/design/$1";
 $config['register'] = "user/register";
 
-$config['circuits'] = "circuit/index";
-$config['circuits/([0-9]+)'] = "circuit/view/$1";
-$config['circuits/([0-9]+)/register'] = "circuit/register/$1";
-$config['circuits/([0-9]+)/unregister'] = "circuit/unregister/$1";
-$config['circuits/delete'] = "circuit/delete";
+$config['races'] = "race/index";
+$config['races/([0-9]+)'] = "race/view/$1";
+$config['races/([0-9]+)/register'] = "race/register/$1";
+$config['races/([0-9]+)/unregister'] = "race/unregister/$1";
+$config['races/delete'] = "race/delete";

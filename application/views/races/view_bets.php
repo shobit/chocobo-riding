@@ -1,4 +1,4 @@
-<h1><?= Kohana::lang('circuit.view_bets.title').' '.
+<h1><?= Kohana::lang('race.view_bets.title').' '.
 	html::image("images/classes/".$circuit->classe.".gif") ?></h1>
 <div id="prelude"><?= Kohana::lang('location.'.$circuit->location->code.'.prelude') ?></div>
 

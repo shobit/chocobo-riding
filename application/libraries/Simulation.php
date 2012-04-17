@@ -45,20 +45,20 @@ SCRIPT
 class Simulation {
 	
 	// Informations sur la course (object php)
-	protected $circuit;
+	protected $race;
 	
-	public function run ( $circuit ) 
+	public function run ( $race ) 
 	{ 
 		// ------
 		//
 		// ETAPE 1 : Initialisation des variables de classe
 		//
 		// ------
-		$this->circuit = $circuit;
+		$this->race = $race;
 		
 		$nbr_chocobos = 0;
 		$chocobos = array();
-		foreach ($circuit->chocobos as $chocobo)
+		foreach ($race->chocobos as $chocobo)
 		{
 			$infos = $chocobo->as_array();
 			$infos['initiative'] = 100; 							#TODO
@@ -167,7 +167,7 @@ class Simulation {
 					}
 				}
 				
-				$distance_current = min($course_current, $circuit->length - $chocobo['distance_cumul']);
+				$distance_current = min($course_current, $race->circuit->length - $chocobo['distance_cumul']);
 				
 				$chocobo['distance_last'] = $distance_current;
 				$chocobo['distance_cumul'] += $distance_current;
@@ -189,10 +189,10 @@ class Simulation {
 					allure:'" . $chocobo['allure'] . "'
 				}";
 				
-				if ($chocobo['distance_cumul'] >= $circuit->length)
+				if ($chocobo['distance_cumul'] >= $race->circuit->length)
 				{
 					$nbr_chocobos_arrived ++;
-					$position = Kohana::lang("circuit.pos$nbr_chocobos_arrived");
+					$position = Kohana::lang("race.pos$nbr_chocobos_arrived");
 					$script_event[] = "{chocobo:'" . $chocobo['name'] . "',title:'$position',allure:'happy'}";
 					$chocobo['position'] = $nbr_chocobos_arrived;
 					$chocobo['arrived'] = TRUE;
@@ -215,7 +215,7 @@ class Simulation {
 		foreach ($chocobos as &$chocobo)
 		{
 			$result = ORM::factory('result');
-			$result->circuit_id = $circuit->id;
+			$result->race_id = $race->id;
 			$result->chocobo_id = $chocobo['id'];
 			$result->name = $chocobo['name']; #mémorisation du nom du chocobo au cas où s'il n'existe plus après
 			$result->box = $chocobo['box'];
@@ -226,29 +226,29 @@ class Simulation {
 			
 			$c = ORM::factory('chocobo', $chocobo['id']);
 			
-			$c->circuit_id = 0;
+			$c->race_id = 0;
 			
-			$c->pl -= $circuit->pl;
+			$c->pl -= $race->circuit->pl;
 			
 			if ($c->level < $c->lvl_limit)
 			{
-				$c->set_exp( ceil(($nbr_results - $result->position + 1) * 100/$nbr_results) );
+				$c->set_exp( ceil(($nbr_chocobos - $result->position + 1) * 100/$nbr_chocobos) );
 			}
 			
 			$c->nb_races ++;
 			
 			//$c->set_rage($chocobo['rage']);
 			
-			if ($nbr_results > 1)
+			if ($nbr_chocobos > 1)
 			{
-				$c->set_fame( ($chocobo['position'] <= floor($nbr_results /2)) ? -0.01 : 0.01 );
+				$c->set_fame( ($chocobo['position'] <= floor($nbr_chocobos /2)) ? -0.01 : 0.01 );
 			}
 			
 			$c->save();
 		}
 		
-		$circuit->script = '{chocobos:' . $script_chocobos . ',tours:' . $script_tours  . '}';
-		$circuit->save();
+		$race->script = '{chocobos:' . $script_chocobos . ',tours:' . $script_tours  . '}';
+		$race->save();
 		
 		/*
 		$nbr_results = count($circuit->results);

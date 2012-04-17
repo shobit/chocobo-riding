@@ -149,7 +149,7 @@ class Controller extends Controller_Core
 			}
 			
 			// Si le chocobo en session est inscrit à une course, on la met à jour
-			$chocobo->update_circuit();
+			$chocobo->update_race();
         }
         
         ///////////////////////
