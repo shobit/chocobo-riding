@@ -50,9 +50,9 @@ class Vegetable_Model extends ORM
 	{
 		$res  = " ";
 		//$res .= html::image('images/items/vegetables/vegetable'.$this->name.'.gif');
-		$res .= html::anchor('void(0);', $this->display_name(), array('id'=>'vegetable'.$this->id.'_a'));
+		$res .= html::anchor('void(0);', $this->name(), array('id'=>'vegetable'.$this->id.'_a'));
 		$res .= '<div id="vegetable'.$this->id.'_t" style="display:none;">
-			<b>'.$this->display_name().'</b>
+			<b>'.$this->name().'</b>
 			     <small>';
 		
 		$apts = array('pl', 'hp', 'mp', 'moral', 'guerison', 'xp', 'rage', 'pc');
@@ -70,7 +70,7 @@ class Vegetable_Model extends ORM
 		return $res;
 	}
 	
-	public function display_name()
+	public function name()
 	{
 		switch ($this->name)
 		{

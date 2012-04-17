@@ -72,7 +72,7 @@
 			<div>
 				<?php 
 				echo $result->race->id . '. ';
-				echo html::anchor('races/' . $result->race->id, $result->race->circuit->display_name()); 
+				echo html::anchor('races/' . $result->race->id, $result->race->circuit->name()); 
 				$tl = gen::time_left($result->race->start);
 				echo ' <b>' . $tl['short'] . '</b>';
 				?>

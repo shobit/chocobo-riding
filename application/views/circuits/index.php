@@ -16,7 +16,7 @@ foreach($locations as $location)
 	?>
 	<tr>
 		<td><?= $location->display_image('mini') ?></td>
-		<td><?= $location->display_name() ?> 
+		<td><?= $location->name() ?> 
 			<?php 
 				$nbr_circuits = count($location->circuits);
 				if ($nbr_circuits > 0) echo '<small>('.$nbr_circuits.' en cours)</small>'; 

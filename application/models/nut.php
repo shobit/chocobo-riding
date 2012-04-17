@@ -68,9 +68,9 @@ class Nut_Model extends ORM
 	{
 		$res  = " ";
 		//$res .= html::image('images/items/nuts/nut'.$this->name.'.gif');
-		$res .= html::anchor('void(0);', $this->display_name(), array('id'=>'nut'.$this->id.'_a'));
+		$res .= html::anchor('void(0);', $this->name(), array('id'=>'nut'.$this->id.'_a'));
 		$res .= '<div id="nut'.$this->id.'_t" style="display:none;">
-			<b>'.$this->display_name().'</b>
+			<b>'.$this->name().'</b>
 				 ';
 		if ($this->level > 0) $res .= "<br />Niveau +".$this->level;
 		if ($this->speed > 0) $res .= "<br />Vitesse +".$this->speed;
@@ -93,7 +93,7 @@ class Nut_Model extends ORM
 	 * @access public
 	 * @return void
 	 */
-	public function display_name()
+	public function name()
 	{
 		switch ($this->name)
 		{

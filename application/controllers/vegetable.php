@@ -82,7 +82,7 @@ class Vegetable_Controller extends Template_Controller
 		
 		if ($use) 
 		{
-			gen::add_jgrowl($vegetable->display_name()." utilisé!");
+			gen::add_jgrowl($vegetable->name()." utilisé!");
 			$chocobo->save();
 			$vegetable->delete();
 		}

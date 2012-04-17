@@ -80,9 +80,9 @@ class Equipment_Model extends ORM {
     public function vignette() 
 	{
 		$res  = " ";
-		$res .= html::anchor('void(0);', $this->display_name(), array('id'=>'equipment'.$this->id.'_a'));
+		$res .= html::anchor('void(0);', $this->name(), array('id'=>'equipment'.$this->id.'_a'));
 		$res .= '<div id="equipment'.$this->id.'_t" style="display:none;">
-			<b>'.$this->display_name().'</b>
+			<b>'.$this->name().'</b>
 			     <br />Armure : '.$this->resistance;
 		foreach($this->effects as $effect)
 		{
@@ -99,7 +99,7 @@ class Equipment_Model extends ORM {
 		return $res;
 	}
 	
-	public function display_name()
+	public function name()
 	{
 		return Kohana::lang('equipment.'.$this->name);
 	}
