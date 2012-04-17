@@ -22,34 +22,19 @@ class Circuit_Controller extends Template_Controller {
 		// Heure courante
 		$date = time();
 		
-		// Recherche des courses officielles
-		$official_circuits = ORM::factory('circuit')
+		// Suppression des courses passées "vides" (s'il n'y a aucun chocobos sur le départ)
+		$last_circuits = ORM::factory('circuit')
 			->where('classe', $classe)
-			->where('owner', 0)
+			->where('start <=', $date)
 			->find_all();
 			
-		// Suppression des courses officielles "vides"
 		$nb = 0;
-		foreach ($official_circuits as $circuit)
+		foreach ($last_circuits as $circuit)
 		{
-			// Si le départ est passé et qu'il n'y a aucun chocobos sur le départ
-			if ($circuit->start <= $date) 
+			if (empty($circuit->script) and count($circuit->chocobos) == 0)
 			{
-				if (empty($circuit->script) and count($circuit->chocobos) == 0)
-				{
-					$circuit->delete();
-				}
+				$circuit->delete();
 			}
-			else 
-			{
-				$nb++;
-			}
-		}
-		
-		// On complète le nbre de couses officielles à 4
-		for ($i = $nb; $i < 4; $i++)
-		{
-			ORM::factory('circuit')->add($i, $classe);
 		}
 		
 		// On liste toutes les courses à venir		
@@ -58,6 +43,20 @@ class Circuit_Controller extends Template_Controller {
 			->where('start >', $date)
 			->find_all();
 			
+		if (count($circuits) == 0)
+		{
+			// On génère de nouvelles courses
+			for ($i = 0; $i < 6; $i++)
+			{
+				ORM::factory('circuit')->add($classe);				
+			}
+			
+			$circuits = ORM::factory('circuit')
+				->where('classe', $classe)
+				->where('start >', $date)
+				->find_all();
+		}
+		
 		$results = ORM::factory('result')
 			->where('chocobo_id', $chocobo->id)
 			->where('deleted', FALSE)

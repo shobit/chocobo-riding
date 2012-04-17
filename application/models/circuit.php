@@ -18,30 +18,29 @@ class Circuit_Model extends ORM {
     /*
      * (void) ajoute une nouvelle course
 	 *
-	 * (int) $nieme 	
 	 * (int) $classe
-	 * (int) $user_id
 	 */
-	public function add ( $nieme, $classe, $user_id = 0 )
+	public function add ( $classe )
 	{
 		// TODO Choix d'un lieu au hasard
 		$location = ORM::factory('location')
 			->where('classe <=', $classe)
 			->orderby(NULL, 'RAND()')
-			->find(1);
+			->limit(1)
+			->find();
 		
-		// Détermination de l'heure de départ
+		// Détermination de l'heure de départ (chaque quart d'heure)
 		$tps = 15*60;
         $base = floor( time() / $tps );
 		$last = $base * $tps;
-		$start = $last + $tps * ($nieme + 1);
+		$start = $last + $tps;
 		
 		$this->location_id 	= $location->id;
 		$this->classe		= $classe;
 		$this->pl			= 10;
 		$this->length		= 600;
 		$this->start 		= $start;
-		$this->owner 		= $user_id;
+		$this->owner 		= 0;
 		
 		$this->save();
 	}
