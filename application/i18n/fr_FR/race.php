@@ -2,8 +2,8 @@
  
 $lang = array (
 	'index' => array(
-		'title' => "Hall des circuits",
-		'prelude' => "Les courses de Chocobo Riding sont ici! Vous pouvez voir plusieurs type de courses, chacune ayant leurs spécificités et leurs règles, ainsi que leur propre départ. En règle générale, soyez toujours bien préparé avant d'inscrire votre chocobo à une course.",
+		'title' => "Hall des courses",
+		'prelude' => "Les courses de Chocobo Riding sont ici! Choississez celle qui vous convient, en fonction de sa longueur, de ses PL requis et de sa récompense surtout. En règle générale, soyez toujours bien préparé avant d'inscrire votre chocobo à une course.",
 		'trainings' => "entraînements",
 		'competitions' => "compétitions",
 		'rides' => "promenades",
