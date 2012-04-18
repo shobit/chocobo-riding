@@ -1,24 +1,18 @@
 <?php
-class Admin_Controller extends Template_Controller {
 
-	/**
-	 * Admin index.
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function index() 
+class Admin_Controller extends Template_Controller 
+{
+
+	public function __construct()
 	{
-		// access
-		$this->authorize('admin');
-		$user_session = $this->session->get('chocobo');
+		parent::__construct();
 		
-		// view
-		$this->template->content = new View('admin/index');
-
+		$this->authorize('admin');
 	}
+
+}
 	
-	public function api()
+	/*public function api()
 	{
 		$this->authorize('admin');
 		$post = new Validation($_POST);
@@ -57,6 +51,4 @@ class Admin_Controller extends Template_Controller {
 		}
 		
 		url::redirect('admin/index');
-	}
-
-}
+	}*/

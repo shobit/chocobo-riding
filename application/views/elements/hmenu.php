@@ -20,17 +20,17 @@
 			echo html::image('images/menu/sac.gif');
 			echo html::anchor('inventory', Kohana::lang('menu.bag')).' | ';
 
-			echo html::image('images/menu/hammer.gif');
-			echo html::anchor('error', Kohana::lang('menu.forge')).' | ';
+			//echo html::image('images/menu/hammer.gif');
+			//echo html::anchor('error', Kohana::lang('menu.forge')).' | ';
 
 			echo html::image('images/menu/fusion.gif');
 			echo html::anchor('fusion', Kohana::lang('menu.fusion')).' | ';
 
-			echo html::image('images/menu/histoire.gif');
-			echo html::anchor('error', Kohana::lang('menu.story')).' | ';
+			//echo html::image('images/menu/histoire.gif');
+			//echo html::anchor('error', Kohana::lang('menu.story')).' | ';
 
-			echo html::image('images/menu/connectes.gif');
-			echo html::anchor('error', Kohana::lang('menu.clan')).' | ';
+			//echo html::image('images/menu/connectes.gif');
+			//echo html::anchor('error', Kohana::lang('menu.clan')).' | ';
 			
 			echo html::image('images/icons/cel.png');
 			echo html::anchor('success/view/'.$user->username, Kohana::lang('menu.successes')).' | ';
@@ -44,17 +44,17 @@
 	<?php
 		if ($user->id >0) {
 			echo html::anchor('events', Kohana::lang('menu.events')).' | ';
-			echo html::anchor('location', Kohana::lang('menu.mappemonde')).' | ';
+			//echo html::anchor('circuits', Kohana::lang('menu.mappemonde')).' | ';
 			echo html::anchor('rankings', Kohana::lang('menu.rankings')).' | ';
-			echo html::anchor('error', Kohana::lang('menu.stats')).' | ';
+			//echo html::anchor('error', Kohana::lang('menu.stats')).' | ';
 			echo html::anchor('tutorial', Kohana::lang('menu.tutorial')).' | ';
 
 			echo html::anchor('shoutbox', Kohana::lang('menu.shoutbox'), 
 				array('onClick'=>'javascript:openShoutbox(); return false;')).' | ';
 
 			echo html::anchor('forum', Kohana::lang('menu.forum')).' | ';
-			echo html::anchor('error', Kohana::lang('menu.donations')).' | ';
-			echo html::anchor('error', Kohana::lang('menu.credits'));
+			//echo html::anchor('error', Kohana::lang('menu.donations')).' | ';
+			//echo html::anchor('error', Kohana::lang('menu.credits'));
 		} else {
 			echo html::image('images/menu/profil.gif');
             echo html::anchor('home', Kohana::lang('menu.presentation')).' | ';

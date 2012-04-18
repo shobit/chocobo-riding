@@ -1,41 +1,34 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-class Circuit_Controller extends Template_Controller {
+class Circuit_Controller extends Admin_Controller {
 
-	// FUNC: liste de toutes les courses de classe du chocobo utilisé
-	public function index() 
+	/**
+	 * (void) liste les circuits du jeu
+	 *
+	 */
+	public function index ( ) 
 	{
-		$user = $this->session->get('user');
-		$this->authorize('logged_in');
+		$this->template->content = View::factory('admin/circuits/index')
+			->bind('circuits', $circuits);
 		
-		$circuits = ORM::factory('circuit')
-			->find_all();
-		
-		$view = new View('circuits/index');
-		$view->circuits = $circuits;
-		$this->template->content = $view;
+		$circuits = ORM::factory('circuit')->find_all();
 	}
 	
-	public function edit($id=0) 
+	/**
+	 * (void) édite les données d'un circuit
+	 *
+	 * (int) $id 
+	 */
+	public function edit ( $id = 0 ) 
 	{
-		// User en session
 		$user = $this->session->get('user');
 		
-		// Construction de circuit
 		$circuit = ORM::factory('circuit', $id);
-		
-		// Droit d'accès
-		$this->authorize('logged_in');
-		if ($user->id==0 or !$user->has_role(array('admin', 'modo'))) 
-			url::redirect('circuit');
 		
 		// Initialisation des champs du formulaire
 		$form = array(
 			'code' 		=> '',
 			'image' 	=> '',
-			'speed'		=> '',
-			'intel' 	=> '',
-			'endur' 	=> '',
 			'classe' 	=> ''
 		);
 		
@@ -107,11 +100,10 @@ class Circuit_Controller extends Template_Controller {
 		}
 		
 		// Construction de la vue
-		$view 						= new View('circuits/edit');
-		$view->circuit 				= $circuit;
-		$view->form 				= $form;
-		$view->errors 				= $errors;
-		$this->template->content 	= $view;
+		$this->template->content = View::factory('admin/circuits/edit')
+			->bind('circuit', $circuit)
+			->bind('form', $form)
+			->bind('errors', $errors);
 	}
 
 }

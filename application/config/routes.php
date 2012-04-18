@@ -16,3 +16,9 @@ $config['races/([0-9]+)'] = "race/view/$1";
 $config['races/([0-9]+)/register'] = "race/register/$1";
 $config['races/([0-9]+)/unregister'] = "race/unregister/$1";
 $config['races/delete'] = "race/delete";
+
+// ADMIN
+$config['admin/circuits'] = "admin/circuit";
+$config['admin/circuits/add'] = "admin/circuit/edit/0";
+$config['admin/circuits/([0-9]+)/edit'] = "admin/circuit/edit/$1";
+
