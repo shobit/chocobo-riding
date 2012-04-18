@@ -61,18 +61,18 @@ class Simulation {
 		foreach ($race->chocobos as $chocobo)
 		{
 			$infos = $chocobo->as_array();
-			$infos['initiative'] = 100; 							#TODO
-			$infos['box'] = $nbr_chocobos + 1; 						#TODO: mettre les box depuis l'inscription
-			$infos['time'] = 0;										#
-			$infos['distance_last'] = 0;							#
-			$infos['distance_cumul'] = 0;							#
-			$infos['allure'] = 'normal';							#allure de course
-			$infos['course_last'] = 0;								#
-			$infos['course_cumul'] = 0;								#
-			$infos['course_min'] = 1;								#vitesse de départ (FIXE)
-			$infos['course_avg'] = (1 + $infos['speed'] / 2) / 2;	#vitesse moyenne de course
-			$infos['course_max'] = $infos['speed'] / 2;				#vitesse maximale que peut atteindre un chocobo
-			$infos['arrived'] = FALSE; 								#token pour signaler l'arrivée du chocobo
+			$infos['initiative'] = 100; #TODO
+			$infos['box'] = $nbr_chocobos + 1; #TODO: mettre les box depuis l'inscription
+			$infos['time'] = 0;
+			$infos['distance_last'] = 0;
+			$infos['distance_cumul'] = 0;
+			$infos['allure'] = 'normal';
+			$infos['course_last'] = 0;
+			$infos['course_cumul'] = 0;
+			$infos['course_min'] = 1; #vitesse de départ (FIXE)
+			$infos['course_avg'] = (1 + $infos['speed'] / 2) / ($race->circuit->length / 600 + 1);	#vitesse moyenne de course
+			$infos['course_max'] = 0;	#vitesse maximale que peut atteindre un chocobo
+			$infos['arrived'] = FALSE; #token pour signaler l'arrivée du chocobo
 				
 			#ajouter le record course
 			
@@ -84,42 +84,6 @@ class Simulation {
 		}
 		
 		$script_chocobos = '[' . implode(',', $script_chocobo) . ']';
-		
-		/*foreach ($circuit->chocobos as $chocobo) 
-		{
-			// creating result
-			$result = ORM::factory('result');
-			$result->circuit_id = $circuit->id;
-			$result->chocobo_id = $chocobo->id;
-			$result->save();
-			
-            // [ALL] average speed race
-			$speed = $chocobo->attr('speed'); 
-			$endur = $chocobo->attr('endur'); 
-			$intel = $chocobo->attr('intel');
-			$ls = $circuit->location->speed;
-			$le = $circuit->location->endur;
-			$li = $circuit->location->intel;
-			$vit_th = ($ls*$speed +$le*$endur +$li*$intel) /($ls+$le+$li);
-			$vit_mor = $vit_th + ($chocobo->moral - 50) /10;
-			$avg_speed = rand($vit_th*100, $vit_mor*100) /100;
-			
-			// [!PROMENADE] rage 
-			$rage_limit	= $chocobo->attr('rage_limit');
-			if ($circuit->race <2 and $chocobo->rage >= $rage_limit)
-			{
-				$bonus = 2 + floor($rage_limit /20);
-				$avg_speed += $bonus;
-				$result->add_fact("rage", $bonus);
-			}
-			
-			$result->avg_speed = $avg_speed;
-            $result->save();
-            
-		}
-		
-		$this->order($circuit);
-		$circuit->reload();*/
 		
 		// ------
 		//
@@ -172,6 +136,7 @@ class Simulation {
 				$chocobo['distance_last'] = $distance_current;
 				$chocobo['distance_cumul'] += $distance_current;
 				$chocobo['course_last'] = $course_current;
+				if ($course_current > $chocobo['course_max']) { $chocobo['course_max'] = $course_current; }
 				$chocobo['course_cumul'] += $course_current;
 				$chocobo['time'] += $chocobo['distance_last'] / $chocobo['course_last'] * 1; // m/s
 			}
@@ -236,6 +201,11 @@ class Simulation {
 			}
 			
 			$c->nb_races ++;
+			
+			if ($chocobo['course_max'] > $c->max_speed)
+			{
+				$c->max_speed = $chocobo['course_max'];
+			}
 			
 			//$c->set_rage($chocobo['rage']);
 			
