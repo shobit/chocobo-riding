@@ -232,7 +232,7 @@ class Simulation {
 			
 			if ($c->level < $c->lvl_limit)
 			{
-				$c->set_exp( ceil(($nbr_chocobos - $result->position + 1) * 100/$nbr_chocobos) );
+				$c->set_exp( ceil(($nbr_chocobos - $result->position + 1) * 100/6) );
 			}
 			
 			$c->nb_races ++;
