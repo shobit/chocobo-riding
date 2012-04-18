@@ -71,7 +71,7 @@
 			</a>
 		</td>
 		<td class="type"><?php echo html::image('images/forum/types/'.$topic->type.'.png'); ?></td>
-		<td class="date"><?php echo date::short($last_comment->created); ?></td>
+		<td class="date"><?php echo date::display($last_comment->created); ?></td>
 	</tr>
 	<?php
     }
