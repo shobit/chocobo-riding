@@ -13,7 +13,8 @@
 	.race .name {width: 250px;}
 	.race .length {width: 50px;}
 	.race .pl {width: 50px;}
-	.race .bonus {width: 100px;}
+	.race .xp {width: 50px;}
+	.race .gils {width: 50px;}
 	.race .nbr_chocobos {width: 50px;}
 	
 	.results {width: 735px; border: 1px solid #CECECE; border-collapse: collapse;}
@@ -57,16 +58,18 @@
 			<th>Nom</th>
 			<th>Distance</th>
 			<th>PL</th>
-			<th>Bonus</th>
+			<th>XP</th>
+			<th>Gils</th>
 			<th>Départ</th>
 		</tr>
 		<?php foreach ($races as $race): ?>
 		<tr class="race">
-			<td class="name"><?php echo html::anchor('races/' . $race->id, $race->circuit->name()); ?></td>
-			<td class="length"><?php echo $race->circuit->length; ?></td>
-			<td class="pl"><?php echo $race->circuit->pl; ?></td>
-			<td class="bonus"></td>
-			<td class="nbr_chocobos"><?php echo count($race->chocobos); ?></td>
+			<td class="name"><?php echo html::anchor('races/' . $race->id, $race->circuit->name()) ?></td>
+			<td class="length"><?php echo $race->circuit->length ?></td>
+			<td class="pl"><?php echo $race->circuit->pl ?></td>
+			<td class="xp"><?php echo $race->circuit->xp ?></td>
+			<td class="gils"><?php echo $race->circuit->gils ?></td>
+			<td class="nbr_chocobos"><?php echo count($race->chocobos) ?></td>
 		</tr>
 		<?php endforeach; ?>
 	</table>
@@ -86,7 +89,8 @@
 		<th>Nom</th>
 		<th>Distance</th>
 		<th>PL</th>
-		<th>Bonus</th>
+		<th>XP</th>
+		<th>Gils</th>
 		<th>Arrivée</th>
 		<th>Date</th>
 		<th>Options</th>
@@ -95,11 +99,12 @@
 		$not_seen = ( ! $result->seen) ? ' not_seen': '';
 		?>
 		<tr class="result<?php echo $not_seen ?>" id="result<?php echo $result->race->id ?>">
-			<td class="name"><?php echo html::anchor('races/' . $result->race->id, $result->race->circuit->name()); ?></td>
-			<td class="length"><?php echo $result->race->circuit->length; ?></td>
-			<td class="pl"><?php echo $result->race->circuit->pl; ?></td>
-			<td class="bonus"></td>
-			<td class="nbr_chocobos"><?php echo count($result->race->results); ?></td>
+			<td class="name"><?php echo html::anchor('races/' . $result->race->id, $result->race->circuit->name()) ?></td>
+			<td class="length"><?php echo $result->race->circuit->length ?></td>
+			<td class="pl"><?php echo $result->race->circuit->pl ?></td>
+			<td class="xp"><?php echo $result->race->circuit->xp ?></td>
+			<td class="gils"><?php echo $result->race->circuit->gils ?></td>
+			<td class="nbr_chocobos"><?php echo count($result->race->results) ?></td>
 			<td class="date">
 				<?php 
 				$tl = gen::time_left($result->race->start);
