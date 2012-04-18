@@ -108,9 +108,10 @@
 			</td>
 			<td class="options">
 				<?php
-					echo html::anchor('#', 
-					html::image('images/icons/delete.png', array('class' => 'icon', 'title' => 'Supprimer', 'rel' => 'tipsy')), 
-						array('class' => 'delete_result', 'id'=>'race' . $result->race->id));
+					if ($result->seen)
+					{
+						echo html::anchor('#', html::image('images/icons/delete.png', array('class' => 'icon', 'title' => 'Supprimer', 'rel' => 'tipsy')), array('class' => 'delete_result', 'id'=>'race' . $result->race->id));
+					}
 				?>
 			</td>
 		</tr>

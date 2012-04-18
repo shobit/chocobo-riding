@@ -320,7 +320,19 @@ class Race_Controller extends Template_Controller {
 			->where('race_id', $id)
 			->find();
 			
-		if ($result->loaded)
+		$msg = '';
+		
+		if ( ! $result->loaded)
+		{
+			$msg = 'result_not_found';
+		}
+		
+		if ( ! $result->seen)
+		{
+			$msg = 'result_not_seen';
+		}
+		
+		if (empty($msg))
 		{
 			$nbr_results = ORM::factory('result')
 				->where('race_id', $id)
@@ -335,10 +347,6 @@ class Race_Controller extends Template_Controller {
 			{
 				ORM::factory('race', $id)->delete();
 			}
-		} 
-		else
-		{
-			$errors[] = 'result_not_found';
 		}
 		
 		if ( ! request::is_ajax()) 
@@ -347,8 +355,8 @@ class Race_Controller extends Template_Controller {
 		}
 		else
 		{
-			$res['success'] = empty($errors);
-			$res['errors'] = $errors;
+			$res['success'] = empty($msg);
+			$res['msg'] = $msg;
 			echo json_encode($res);
 			
 			$this->profiler->disable();
