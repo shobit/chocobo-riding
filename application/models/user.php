@@ -14,6 +14,22 @@ class User_Model extends ORM {
     public $ITEMS_LIMIT = 20;
     
     /**
+     * (void) modifie le montant de Gils du joueur
+     *
+     * (int) $gils
+     */
+    public function set_gils ( $gils )
+    {
+    	$this->gils += $gils;
+    	$this->listen_success(array( # SUCCES
+			"gils_500",
+			"gils_1000",
+			"gils_5000",
+			"gils_10000"
+		));
+    }
+    
+    /**
      * ALLOW
      * if ($user->has_role('admin')) {}
      */

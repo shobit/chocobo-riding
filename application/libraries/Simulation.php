@@ -202,15 +202,6 @@ class Simulation {
 			
 			$c->race_id = 0;
 			
-			// PL
-			$c->pl -= $race->circuit->pl;
-			
-			// expérience
-			if ($c->level < $c->lvl_limit)
-			{
-				$c->set_exp( ceil(($nbr_chocobos - $result->position + 1) * 100/6) );
-			}
-			
 			// nb de courses
 			$c->nb_races ++;
 			
@@ -227,6 +218,19 @@ class Simulation {
 				$c->set_rage($chocobo['position']);
 			}
 			
+			// PL
+			$c->pl -= $race->circuit->pl;
+			
+			// expérience
+			if ($c->level < $c->lvl_limit)
+			{
+				$c->set_exp( ceil(($nbr_chocobos - $result->position + 1) * $race->circuit->xp/6) );
+			}
+			
+			// gils
+			$c->user->set_gils( ceil(($nbr_chocobos - $result->position + 1) * $race->circuit->gils/6) );
+			$c->user->save();
+			
 			// côte
 			if ($nbr_chocobos > 1)
 			{
@@ -238,83 +242,6 @@ class Simulation {
 		
 		$race->script = '{chocobos:' . $script_chocobos . ',tours:' . $script_tours  . '}';
 		$race->save();
-		
-		/*
-		$nbr_results = count($circuit->results);
-		$lucky_items = 100;
-		$results = ORM::factory('result')
-			->where('circuit_id', $circuit->id)
-			->orderby('position', 'asc')
-			->find_all();
-		foreach ($results as $result) 
-		{
-			$chocobo = $result->chocobo;
-			
-			// [COMPETITION] gils & RESULT{gils}
-			if ($circuit->race == 1)
-			{
-            	$gain_gils = $result->gils +$circuit->classe *5 +($nbr_results - $result->position +1);
-            	// TODO add_fact recompense gils
-            	$bonus_gils = $chocobo->attr('bonus_gils');
-            	$gils = ceil($gain_gils *($bonus_gils /100 +1));
-            	// TODO add_fact bonus_gils
-            	$result->gils += $gils;
-            	$result->add_fact("gils_total", $gils);
-            	$chocobo->user->gils += $result->gils;
-            	$chocobo->user->listen_success(array( # SUCCES
-					"gils_500",
-					"gils_1000",
-					"gils_5000",
-					"gils_10000"
-				));
-            	$chocobo->user->save();
-            }
-            
-			// [ALL] Penality PL & Regains & RESULT{pl,hp,mp}
-        	$apts = array('pl', 'hp', 'mp');
-            foreach($apts as $apt)
-            {
-            	${$apt.'_limit'} = $chocobo->attr($apt.'_limit');
-            	if ($circuit->race == 2)
-            	{
-            		${$apt.'_recup'} = $chocobo->attr($apt.'_recup');
-            		$coeff = ${$apt.'_recup'};
-            		// TODO add_fact *_recup
-            		${'gain_'.$apt} = $coeff /100 *${$apt.'_limit'};
-            		// TODO add_fact regains
-            	}
-            	elseif ($apt == "pl") 
-            	{
-            		${'gain_'.$apt} = 0 -$circuit->length;
-            		// TODO add_act penality pl
-            	}
-            	else ${'gain_'.$apt} = 0;
-            	$result->$apt  += ${'gain_'.$apt};
-            	${'gain_'.$apt} = min($result->$apt, ${$apt.'_limit'} - $chocobo->$apt);
-            	${'gain_'.$apt} = max(0 -$chocobo->$apt, $result->$apt);
-            	$result->$apt   = ${'gain_'.$apt};
-            	$chocobo->$apt += ${'gain_'.$apt}; 
-            }
-            
-            // [COMPETITION] rewards
-            if ($circuit->race == 1 and $result->position <= floor($nbr_results /2)) 
-            {
-           		$classe = $circuit->classe; // 0 - 5
-            	$windfall = $chocobo->attr('windfall');
-                $chance = $classe *8 + $windfall;
-                $chance = min($chance, $lucky_items);
-                
-                $items = array('vegetable', 'nut', 'equipment');
-                $type = $items[rand(0, 2)];
-                $type = "vegetable";
-                $item = ORM::factory($type);
-                $item->generate($chance, $chocobo->user);
-                $lucky_items = $item->price;
-                
-                $result->add_fact("reward".$result->position, $type."/".$item->id);
-            }
-            
-		}*/
 	}
 
 }

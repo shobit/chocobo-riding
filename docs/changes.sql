@@ -68,6 +68,9 @@ ALTER TABLE  `results` CHANGE  `circuit_id`  `race_id` INT( 11 ) NULL DEFAULT NU
 
 ALTER TABLE  `waves` CHANGE  `circuit_id`  `race_id` INT( 11 ) NULL DEFAULT NULL
 
+ALTER TABLE  `circuits` ADD  `gils` INT UNSIGNED NOT NULL DEFAULT  '0',
+ADD  `xp` INT UNSIGNED NOT NULL DEFAULT  '0'
+
 
 
 
