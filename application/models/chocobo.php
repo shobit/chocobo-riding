@@ -344,9 +344,10 @@ class Chocobo_Model extends ORM {
 	 */
 	public function set_fame ( $fame )
 	{
+		$fame = $this->fame + $fame;
 		$fame = min($fame, 1);
 		$fame = max($fame, 0.01);
-		$this->fame += $fame;
+		$this->fame = $fame;
 		$this->listen_success(array( # SUCCES
 			"fame_075",
 			"fame_050",
