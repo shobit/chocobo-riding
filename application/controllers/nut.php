@@ -16,13 +16,7 @@ class Nut_Controller extends Template_Controller
 		
 		if ($nut->id >0 and $user->id == $nut->user_id) {
 			$sale = $nut->price;
-			$user->gils += $sale;
-			$user->listen_success(array( # SUCCES
-				"gils_500",
-				"gils_1000",
-				"gils_5000",
-				"gils_10000"
-			));
+			$user->set_gils($sale);
 			$user->save();
 			
 			$nut->delete();

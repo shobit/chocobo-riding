@@ -98,13 +98,7 @@ class Vegetable_Controller extends Template_Controller
 		
 		if ($vegetable->id >0 and $user->id == $vegetable->user_id) {
 			$sale = $vegetable->price;
-			$user->gils += $sale;
-			$user->listen_success(array( # SUCCES
-				"gils_500",
-				"gils_1000",
-				"gils_5000",
-				"gils_10000"
-			));
+			$user->set_gils($sale);
 			$user->save();
 			
 			$vegetable->delete();

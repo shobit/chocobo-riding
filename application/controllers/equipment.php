@@ -62,13 +62,7 @@ class Equipment_Controller extends Template_Controller
 		if ($equipment->id >0 and $user->id == $equipment->user_id) 
 		{
 			$sale = $equipment->price;
-			$user->gils += $sale;
-			$user->listen_success(array( # SUCCES
-				"gils_500",
-				"gils_1000",
-				"gils_5000",
-				"gils_10000"
-			));
+			$user->set_gils($sale);
 			$user->save();
 			
 			$equipment->delete();

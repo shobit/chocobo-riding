@@ -128,18 +128,11 @@ class Chocobo_Controller extends Template_Controller {
 		// verifying
 		if ($chocobo->id >0 and $chocobo->user->id == $user->id and count($user->chocobos) > 1) {
 			$price = $chocobo->get_price();
-			$user->gils += $price;
+			$user->set_gils($price);
 			
 			// jgrowl			
 			gen::add_jgrowl('Vente - Chocobo '.$chocobo->name.' vendu ! ('.$price.' Gils)');
 			
-			// updating user 
-			$user->listen_success(array( # SUCCES
-				"gils_500",
-				"gils_1000",
-				"gils_5000",
-				"gils_10000"
-			));
 			$user->nbr_chocobos_saled += 1;
 			$user->save();
 			
