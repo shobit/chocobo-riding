@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
  
-class date_Core {
+class date extends date_Core {
  
  	/**
  	 * Retourne le temps relatif ou absolu restant joliment écrit

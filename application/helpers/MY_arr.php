@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
  
-class arr_Core {
+class arr extends arr_Core {
  
 	public static function order ( & $array, $key, $arg = 'asc' )
 	{
