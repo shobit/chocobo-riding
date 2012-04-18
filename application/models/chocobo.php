@@ -120,7 +120,7 @@ class Chocobo_Model extends ORM {
 			case 'intel': $base = floor($this->intel); break;
 			
 			// SPEED
-			case 'pl_limit': 	$base = 60 + $this->classe *20; 	break;	
+			case 'pl_limit': 	$base = $this->attr('endur') *2; 	break;	
 			case 'pl_up': 		$base = 0.2; 						break;	
 			case 'pl_recup': 	$base = 30; 						break;
 				
@@ -130,21 +130,18 @@ class Chocobo_Model extends ORM {
 			case 'hp_recup': 	$base = 30; 						break;
 			
 			// INTEL
-			case 'mp_limit': 	$base = $this->attr('intel') *2; 	break;	
+			case 'mp_limit': 	$base = $this->attr('intel') *1; 	break;	
 			case 'mp_up': 		$base = 0.2; 						break;	
 			case 'mp_recup': 	$base = 30; 						break;
 			
 			// ALL
 			case 'bonus_gils': 	$base = 0; break;
 			case 'bonus_xp': 	$base = 0; break;
-			case 'windfall': 	$base = 0; break;
 			
 			// returned values
 			case 'rage_limit': 		return max($this->level, 10);
 			case 'moral_limit': 	return 100;
-			case 'guerison_limit': 	return 0;
-			case 'xp_limit': 		return 100;
-			case 'pc_limit': 		return 0; 
+			case 'pc_limit': 		return ceil($this->attr('intel') /2); 
 			
 			// Master_* & resistance	
 		}
