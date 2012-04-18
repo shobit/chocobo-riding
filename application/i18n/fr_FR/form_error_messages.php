@@ -3,9 +3,9 @@
 $lang = array (
     'username' => array (
         'required' => 'Le nom de votre user est obligatoire.',
-        'length' => 'Le nom de votre user doit faire entre 4 et 12 caractères!',
+        'length' => 'Le nom de votre user doit faire entre 4 et 20 caractères!',
         'username_exists' => 'Ce nom de user est déjà utilisé par un autre joueur.',
-        'default' => 'Le nom de chocobo doit comporter entre 4 et 12 caractères et peut être composé de lettres, chiffres et des caractères _ et -.',
+        'default' => 'Le nom de chocobo doit comporter entre 4 et 20 caractères et peut être composé de lettres, chiffres et des caractères _ et -.',
         ),
     'password' => array (
         'required' => 'Votre mot de passe doit comporter au minimum 1 caractère!',
