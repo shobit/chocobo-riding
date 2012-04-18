@@ -326,7 +326,7 @@ class Chocobo_Model extends ORM {
 	/**
 	 * (void) modifie la rage du chocobo
 	 *
-	 * (int) $fame
+	 * (int) $rage
 	 */
 	public function set_rage ( $rage )
 	{
@@ -340,7 +340,7 @@ class Chocobo_Model extends ORM {
 	/**
 	 * (void) modifie la côte du chocobo
 	 *
-	 * (int) $fame
+	 * (float) $fame
 	 */
 	public function set_fame ( $fame )
 	{
@@ -354,6 +354,26 @@ class Chocobo_Model extends ORM {
 			"fame_025",
 			"fame_001"
 		));
+	}
+	
+	/**
+	 * (void) modifie la vitesse record du chocobo
+	 *
+	 * (float) $max_speed
+	 */
+	public function set_max_speed ( $max_speed )
+	{
+		if ($max_speed > $this->max_speed)
+		{
+			$this->max_speed = $chocobo['course_max'];
+			$chocobo->listen_success(array( # SUCCES
+				"vitmax_25",
+				"vitmax_50",
+				"vitmax_100",
+				"vitmax_150",
+				"vitmax_175"
+			));
+		}
 	}
 	
 	// TODO FUNC: Informations du chocobo en popup (HTML)

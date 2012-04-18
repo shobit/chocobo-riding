@@ -215,10 +215,7 @@ class Simulation {
 			$c->nb_races ++;
 			
 			// vitesse record
-			if ($chocobo['course_max'] > $c->max_speed)
-			{
-				$c->max_speed = $chocobo['course_max'];
-			}
+			$c->set_max_speed($chocobo['course_max']);
 			
 			// rage
 			if ($chocobo['has_rage'])
@@ -253,26 +250,7 @@ class Simulation {
 		{
 			$chocobo = $result->chocobo;
 			
-			// [!PROMENADE] speed record
-			if ($circuit->race <2)
-			{ 
-				$avg_speed = $result->avg_speed;
-				$max_speed = $chocobo->max_speed;
-				if ($avg_speed > $max_speed) 
-				{
-					$result->add_fact("max_speed", $avg_speed, false);
-					$chocobo->max_speed = $avg_speed;
-					$chocobo->listen_success(array( # SUCCES
-						"vitmax_25",
-						"vitmax_50",
-						"vitmax_100",
-						"vitmax_150",
-						"vitmax_175"
-					));
-				}
-			}
-			
-           	// [COMPETITION] gils & RESULT{gils}
+			// [COMPETITION] gils & RESULT{gils}
 			if ($circuit->race == 1)
 			{
             	$gain_gils = $result->gils +$circuit->classe *5 +($nbr_results - $result->position +1);
