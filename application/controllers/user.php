@@ -156,7 +156,7 @@ class User_Controller extends Template_Controller {
 	   
     	    $post = new Validation($_POST);
     	    $post->pre_filter('trim', TRUE);
-    	    $post->add_rules('username', 'required', 'length[4,12]', 'alpha_dash');
+    	    $post->add_rules('username', 'required', 'length[4,20]', 'alpha_dash');
             $post->add_rules('password', 'required');
             $post->add_rules('password_again', 'matches[password]'); 
     	    $post->add_rules('email', 'required', 'email');
