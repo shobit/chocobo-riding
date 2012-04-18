@@ -64,7 +64,7 @@ class Simulation {
 			
 			// déclenchement de la rage
 			$infos['has_rage'] = FALSE;
-			if ($chocobo['rage'] == $chocobo->attr('rage_limit'))
+			if ($infos['rage'] == $chocobo->attr('rage_limit'))
 			{
 				$infos['has_rage'] = TRUE;
 				$infos['speed'] += 5;
