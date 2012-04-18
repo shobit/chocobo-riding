@@ -61,6 +61,17 @@ class Simulation {
 		foreach ($race->chocobos as $chocobo)
 		{
 			$infos = $chocobo->as_array();
+			
+			// déclenchement de la rage
+			$infos['has_rage'] = FALSE;
+			if ($chocobo['rage'] == $chocobo->attr('rage_limit'))
+			{
+				$infos['has_rage'] = TRUE;
+				$infos['speed'] += 5;
+				$infos['intel'] += 5;
+				$infos['endur'] += 5;
+			}
+			
 			$infos['initiative'] = 100; #TODO
 			$infos['box'] = $nbr_chocobos + 1; #TODO: mettre les box depuis l'inscription
 			$infos['time'] = 0;
@@ -73,8 +84,6 @@ class Simulation {
 			$infos['course_avg'] = (1 + $infos['speed'] / 2) / ($race->circuit->length / 600 + 1);	#vitesse moyenne de course
 			$infos['course_max'] = 0;	#vitesse maximale que peut atteindre un chocobo
 			$infos['arrived'] = FALSE; #token pour signaler l'arrivée du chocobo
-				
-			#ajouter le record course
 			
 			$chocobos[] = $infos;
 			
@@ -193,22 +202,35 @@ class Simulation {
 			
 			$c->race_id = 0;
 			
+			// PL
 			$c->pl -= $race->circuit->pl;
 			
+			// expérience
 			if ($c->level < $c->lvl_limit)
 			{
 				$c->set_exp( ceil(($nbr_chocobos - $result->position + 1) * 100/6) );
 			}
 			
+			// nb de courses
 			$c->nb_races ++;
 			
+			// vitesse record
 			if ($chocobo['course_max'] > $c->max_speed)
 			{
 				$c->max_speed = $chocobo['course_max'];
 			}
 			
-			//$c->set_rage($chocobo['rage']);
+			// rage
+			if ($chocobo['has_rage'])
+			{
+				$c->rage = 0;
+			}
+			else
+			{
+				$c->set_rage($chocobo['position']);
+			}
 			
+			// côte
 			if ($nbr_chocobos > 1)
 			{
 				$c->set_fame( ($chocobo['position'] <= floor($nbr_chocobos /2)) ? -0.01 : 0.01 );
@@ -250,20 +272,6 @@ class Simulation {
 				}
 			}
 			
-            // [ALL] rage & RESULT{rage}
-            $rage_limit	= max($chocobo->level, 10);
-        	$gain_rage = ($circuit->race <2) ? $result->position : -$circuit->classe;
-        	// TODO add_fact recompense rage
-        	$result->rage += $gain_rage;
-        	if ($circuit->race <2 and $chocobo->rage >= $rage_limit) 
-        	{
-        		$chocobo->rage = 0;
-        	}
-        	$rage = min($result->rage, $rage_limit - $chocobo->rage);
-        	$rage = max($rage, -$chocobo->rage);
-        	$result->rage = $rage;
-        	$chocobo->rage += $rage;
-            
            	// [COMPETITION] gils & RESULT{gils}
 			if ($circuit->race == 1)
 			{

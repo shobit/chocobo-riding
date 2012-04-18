@@ -228,7 +228,11 @@ class Chocobo_Model extends ORM {
 		return $jgrowl;
 	}
 	
-	// TODO FUNC: Evolution du chocobo
+	/**
+	 * (void) modifie l'expérience du chocobo
+	 *
+	 * (int) $gain
+	 */
 	public function set_exp ( $gain ) 
 	{
 		$res 	 = array(
@@ -319,6 +323,25 @@ class Chocobo_Model extends ORM {
 		return $res;
 	}
 	
+	/**
+	 * (void) modifie la rage du chocobo
+	 *
+	 * (int) $fame
+	 */
+	public function set_rage ( $rage )
+	{
+		$rage_limit	= $this->attr('rage_limit');
+		$rage = $this->rage + $rage;
+		$rage = min($rage, $rage_limit);
+		$rage = max($rage, 0);
+		$this->rage = $rage;
+	}
+	
+	/**
+	 * (void) modifie la côte du chocobo
+	 *
+	 * (int) $fame
+	 */
 	public function set_fame ( $fame )
 	{
 		$fame = min($fame, 1);
