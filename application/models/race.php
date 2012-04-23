@@ -15,6 +15,41 @@ class Race_Model extends ORM {
 			   ->count_all();
 		return ($nbr_same_chocobos == 0);
 	}
+	
+	/*
+     * (void) ajoute de nouvelles courses
+	 *
+	 * (int) $classe
+	 */
+	public function genere ( $classe )
+    {
+    	$circuits = ORM::factory('circuit')
+			->where('classe', $classe)
+			->find_all();
+		
+		$somme = 0;
+		foreach ($circuits as $circuit)
+		{
+			$somme += $circuit->rarity;
+			$tab[] = array(
+				'id' 			=> $circuit->id,
+				'rarity_sum' 	=> $somme
+			);
+		}
+		
+		while (count($res) < 6)
+		{
+			$rarity_alea = rand(0, $somme);
+			$n = 0;
+			while ($rarity_alea < $tab[$n]['rarity_sum']) // A revoir
+			{
+				$n ++;
+			}
+			//$res[] = $tab[$n - 1]['id'];
+			ORM::factory('race')->add( $tab[$n - 1]['id'] );
+		}
+		//return $res;
+    }
     
     /*
      * (void) ajoute une nouvelle course
