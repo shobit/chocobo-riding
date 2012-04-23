@@ -21,7 +21,7 @@
 		<?= html::image('images/theme/mog.jpg') ?><br /><br />
 	
 		<?= html::anchor(
-			'http://docs.google.com/Doc?docid=0AerTqD9hKNHPZGRxeHRtc2dfNWQyM3ptYzJi&hl=en', 
+			'https://docs.google.com/document/d/1q6nPXJDjWkikMpvIuOGqGLJBfwkLVbOivMW0iYtPvts/edit', 
 			Kohana::lang('tutorial.link')) ?>
 	
 	</center>
