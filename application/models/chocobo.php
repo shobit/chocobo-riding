@@ -251,8 +251,8 @@ class Chocobo_Model extends ORM {
 			$xp -= 100;
 			$this->level ++;
 			$res['nb_levels'] ++;
-			$this->points ++;
-			$res['nb_points'] ++;
+			$this->points += 2;
+			$res['nb_points'] += 2;
 			$this->listen_success(array( # SUCCES
 				"level_10",
 				"level_20",
