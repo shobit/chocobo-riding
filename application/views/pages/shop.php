@@ -16,7 +16,7 @@
 		$nbr_chocobos 	= count($user->chocobos);
 		?>
 	
-		<tr class="item">
+		<!--tr class="item">
 			<?php $achat = 50; ?>
 			<td class="icon"><?= html::image('images/items/vegetables/vegetable1.gif') ?></td>
 			<td class="name"><?= gen::vignette(
@@ -44,7 +44,7 @@
 					if ($gils >= $achat) echo html::anchor("shop/buy/vegetable2", Kohana::lang('shop.buy'), array("class"=>"button"));
 				?>
 			</td>
-		</tr>
+		</tr-->
 		
 		<tr class="item">
 			<?php $achat = 300; ?>
