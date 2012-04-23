@@ -60,7 +60,7 @@ class Race_Model extends ORM {
 	{
 		// TODO Choix d'un lieu au hasard
 		$circuit = ORM::factory('circuit')
-			->where('classe', $classe)
+			->where('classe <=', $classe) #temporaire
 			->orderby(NULL, 'RAND()')
 			->limit(1)
 			->find();
