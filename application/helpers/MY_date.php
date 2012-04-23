@@ -8,11 +8,9 @@ class date extends date_Core {
  	 * @param	int			Nombre de secondes restants
  	 * @return	string		Texte qui indique le temps relatif ou absolu restant
  	 */
-	public static function display ( $d )
+	public static function display ( $date )
 	{
 		setlocale(LC_TIME, "fr_FR");
-		
-		$date = strtotime($d);
 		
 		$tps = max(1, time() - $date);
 		
