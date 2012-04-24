@@ -365,7 +365,7 @@ class Chocobo_Model extends ORM {
 	{
 		if ($max_speed > $this->max_speed)
 		{
-			$this->max_speed = $chocobo['course_max'];
+			$this->max_speed = $max_speed;
 			$chocobo->listen_success(array( # SUCCES
 				"vitmax_25",
 				"vitmax_50",
