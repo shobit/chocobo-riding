@@ -286,37 +286,6 @@ div.leftPart3 {
 	padding-left: 30px;	
 }
 
-	div.line_tab {
-		margin-bottom: 20px;
-	}
-	
-	div.line {
-		font-size: 1.0em;
-		padding: 6px 0 0 6px;
-	}
-	
-	div.line1 {
-		font-size: 1.1em;
-		letter-spacing: 1px;
-		font-weight: bold;
-	}
-	
-	div.line_rouge, span.line_rouge {color: #800000;}
-	div.line_vert, span.line_vert {color: #184500;}
-	div.line_bleu, span.line_bleu {color: #191970;}
-	div.line_gris, span.line_gris {color: #555;}
-	div.line_noir, span.line_noir {color: #000;}
-	
-	div.bord_rouge {border-bottom: 1px dotted #800000;}
-	div.bord_vert {border-bottom: 1px dotted #184500;}
-	div.bord_bleu {border-bottom: 1px dotted #191970;}
-	div.bord_gris {border-bottom: 1px dotted #555;}
-	div.bord_noir {border-bottom: 1px dotted #000;}
-	
-	div.label {width: 70%; float: left;}
-	div.value {margin-left: 70%; height: 30px;}
-	span.attributes {font-weight: normal; font-size: 10px;}
-
 /* -------------------------------------------------------------------]
 [                                                                     ]
 [ 								TABLES                                ]
