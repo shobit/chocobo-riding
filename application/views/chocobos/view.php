@@ -41,12 +41,16 @@
 	}
 	.p-wrapper {border-top: 1px solid #bbb; margin-bottom: 10px;}
 	.p-wrapper2 {border-top: 1px solid #bbb; margin-bottom: 13px;}
+	.p-wrapper3 {border-top: 1px solid #bbb; margin-bottom: 40px;}
 	.progress {height: 3px;}
 	.p-green {background-color: #090;}
 	.p-yellow {background-color: #900;}
 	.p-red {background-color: #900;}
+	.info {display:none;}
 	
 	span.attributes {font-weight: normal; font-size: 10px;}
+	
+	.raise {margin-left: 3px; margin-bottom: -4px;}
 	
 </style>
 
@@ -71,24 +75,36 @@
 		<div class="label">nom</div>
 		<div class="value"><?php echo $chocobo->name ?></div>
 		<div class="p-wrapper2"></div>
+		<div class="info">Nom du chocobo.</div>
 	</div>
 	
 	<div class="line">
 		<div class="label">couleur</div>
 		<div class="value"><?php echo $chocobo->display_colour('zone') ?></div>
 		<div class="p-wrapper2"></div>
+		<div class="info">
+			La couleur du chocobo privilégie l'évolutions de 
+			certaines caractéristiques sur d'autres.
+		</div>
 	</div>
 	
 	<div class="line">
 		<div class="label">job</div>
 		<div class="value">chocobo</div>
 		<div class="p-wrapper2"></div>
+		<div class="info">
+			Le job procure des compétences de courses à votre chocobo.
+		</div>
 	</div>
 	
 	<div class="line">
 		<div class="label">classe</div>
 		<div class="value"><?php echo $chocobo->display_classe() ?></div>
 		<div class="p-wrapper2"></div>
+		<div class="info">
+			Votre chocobo monte de classe à certains niveaux. 
+			Il ne peut courir qu'à des courses de même classe.
+		</div>
 	</div>
 	
 	<div class="line">
@@ -97,13 +113,21 @@
 		<div class="p-wrapper">
 			<?php echo progress::display($chocobo->level, $chocobo->lvl_limit, 199) ?>
 		</div>
+		<div class="info">
+			Le niveau du chocobo est le résultat de l'expérience acquise dans les courses.<br />
+			Niveau maximal : <b><?php echo $chocobo->lvl_limit ?></b>
+		</div>
 	</div>
 
 	<div class="line">
-		<div class="label">xp</div>
+		<div class="label">exp</div>
 		<div class="value"><?php echo $chocobo->xp ?></div>
 		<div class="p-wrapper">
 			<?php echo progress::display($chocobo->xp, 100, 199) ?>
+		</div>
+		<div class="info">
+			Votre chocobo gagne de l'expérience en fin 
+			de course et peut ainsi monter de niveau.
 		</div>
 	</div>
 	
@@ -113,6 +137,9 @@
 		<div class="p-wrapper">
 			<?php echo progress::display(1 - $chocobo->fame + 0.01, 1, 199) ?>
 		</div>
+		<div class="info">
+			Plus la côte du chocobo est faible, plus le chocobo est cher à la revente.
+		</div>
 	</div>
 	
 	<div class="line">
@@ -120,6 +147,9 @@
 		<div class="value"><?php echo $chocobo->max_speed ?> km/h</div>
 		<div class="p-wrapper">
 			<?php echo progress::display($chocobo->max_speed, 175, 199) ?>
+		</div>
+		<div class="info">
+			La vitesse maximale que votre chocobo a atteint dans les courses.
 		</div>
 	</div>
 	
@@ -129,12 +159,18 @@
 		<div class="p-wrapper">
 			<?php echo progress::display(0, 1, 199) ?>
 		</div>
+		<div class="info">
+			Le prix auquel vous pouvez négocier votre chocobo si vous le mettez en vente.
+		</div>
 	</div>
 	
 	<div class="line">
 		<div class="label">naissance</div>
 		<div class="value"><?php echo date::display($chocobo->birthday); ?></div>
 		<div class="p-wrapper2"></div>
+		<div class="info">
+			Le jour de naissance de votre chocobo.
+		</div>
 	</div>
 	
 </div>
@@ -143,7 +179,18 @@
 
 	<div class="line">
 		<div class="label">vitesse</div>
-		<div class="value"><?php echo $chocobo->speed ?></div>
+		<div class="value">
+			<?php
+			echo $chocobo->speed;
+			if ($mine and $chocobo->points > 0)
+			{
+				echo html::anchor(
+					'chocobo/aptitude_up/speed', 
+					html::image('images/theme/plus.jpg', array('class' => 'raise'))
+				);
+			}
+			?>
+		</div>
 		<div class="p-wrapper">
 			<?php echo progress::display($chocobo->speed, 175, 199) ?>
 		</div>
@@ -151,7 +198,18 @@
 	
 	<div class="line">
 		<div class="label">endurance</div>
-		<div class="value"><?php echo $chocobo->endur ?></div>
+		<div class="value">
+			<?php
+			echo $chocobo->endur;
+			if ($mine and $chocobo->points > 0)
+			{
+				echo html::anchor(
+					'chocobo/aptitude_up/endur', 
+					html::image('images/theme/plus.jpg', array('class' => 'raise'))
+				);
+			}
+			?>
+		</div>
 		<div class="p-wrapper">
 			<?php echo progress::display($chocobo->endur, 175, 199) ?>
 		</div>
@@ -159,10 +217,27 @@
 	
 	<div class="line">
 		<div class="label">intelligence</div>
-		<div class="value"><?php echo $chocobo->endur ?></div>
+		<div class="value">
+			<?php
+			echo $chocobo->intel; 
+			if ($mine and $chocobo->points > 0)
+			{
+				echo html::anchor(
+					'chocobo/aptitude_up/intel', 
+					html::image('images/theme/plus.jpg', array('class' => 'raise'))
+				);
+			}
+			?>
+		</div>
 		<div class="p-wrapper">
 			<?php echo progress::display($chocobo->intel, 175, 199) ?>
 		</div>
+	</div>
+	
+	<div class="line">
+		<div class="label">pa</div>
+		<div class="value"><?php echo $chocobo->points ?></div>
+		<div class="p-wrapper3"></div>
 	</div>
 	
 	<div class="line">
@@ -211,12 +286,6 @@
 		</div>
 	</div>
 	
-	<div class="line">
-		<div class="label">pa</div>
-		<div class="value"><?php echo $chocobo->points ?></div>
-		<div class="p-wrapper"></div>
-	</div>
-	
 </div>
 	
 <?php
@@ -247,7 +316,25 @@
 		}	
 		?>	
 	</center>
+	
+	<div id="i-wrapper"></div>
 
 </div>
 
 <div class="clearBoth"></div>
+
+<script>
+$(function(){
+
+	$('.line').hover(
+		function(){
+			var text = $(this).find('.info').html();
+			$('#i-wrapper').html(text).show();
+		}, 
+		function(){
+			$('#i-wrapper').hide();
+		}
+	);
+
+});
+</script>
