@@ -8,6 +8,7 @@ class progress_Core {
 		$color = 'p-green'; 
 		if ($stat < 80) { $color = 'p-yellow'; }
 		if ($stat < 20) { $color = 'p-red'; }
+		$color = 'p-grey';
 		$width_curr = floor($stat / 100 * $width_max);
 		$html = '<div class="progress ' . $color . '" style="width:' . $width_curr . 'px;"></div>';
 		return $html;
