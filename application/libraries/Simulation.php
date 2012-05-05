@@ -195,7 +195,7 @@ class Simulation {
 			$result->box = $chocobo['box'];
 			$result->position = $chocobo['position'];
 			$result->time = $chocobo['time'];
-			$result->course_avg = $chocobo['course_cumul'] / $chocobo['time'];
+			$result->course_avg = $chocobo['distance_cumul'] / $chocobo['time'];
 			$result->save();
 			
 			$c = ORM::factory('chocobo', $chocobo['id']);
