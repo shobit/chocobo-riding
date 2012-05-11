@@ -70,7 +70,7 @@
 			//	array('onClick'=>'javascript:openShoutbox();')).' | ');
 
             echo html::image('images/menu/connectes.gif');
-			echo html::anchor('forum', ucfirst(Kohana::lang('menu.forum'))).' | ';
+			echo html::anchor('topics', ucfirst(Kohana::lang('menu.forum'))).' | ';
 
             echo html::image('images/menu/hall.gif');
 			echo html::anchor('error', ucfirst(Kohana::lang('menu.credits')));

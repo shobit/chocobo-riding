@@ -1,12 +1,8 @@
-<h1><?=Kohana::lang('forum.title') ?></h1>
+<h1><?php echo Kohana::lang('forum.title') ?></h1>
 <div id="prelude"><?php echo Kohana::lang('forum.prelude') ?></div>
 
 <div class="pannel">
-	<?php 
-	echo View::factory(
-		'topics/panel', 
-		array('user'=>$user, 'category'=>$category, 'nbr_topics'=>$nbr_topics, 'pagination'=>$pagination)
-	); ?>
+	<?php echo View::factory('common/panel', array('user' => $user, 'type' => $type, 'nbr_topics' => $nbr_topics, 'pagination' => $pagination)) ?>
 </div>
 
 <p>
@@ -40,7 +36,7 @@
         	if ($nbr_comments>1) echo ' <small class="number">('.($nbr_comments-1).')</small>';
         	?>
     	</td>
-    	<td class="arrow"><?php if ($topic->shared) echo "» "; else echo "› "; ?></td>
+    	<td class="arrow">› </td>
 		<td class="title">
 			<a href="<?php echo $url ?>">
 			<div class="overflow" style="width:510px;">
@@ -81,11 +77,7 @@
 </p>
 
 <div class="pannel">
-	<?php 
-	echo View::factory(
-		'topics/panel', 
-		array('user'=>$user, 'category'=>$category, 'nbr_topics'=>$nbr_topics, 'pagination'=>$pagination)
-	); ?>
+	<?php echo View::factory('common/panel', array('user' => $user, 'type' => $type, 'nbr_topics' => $nbr_topics, 'pagination' => $pagination)) ?>
 </div>
 
 <script>

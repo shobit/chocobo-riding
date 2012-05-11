@@ -9,79 +9,42 @@ class Topic_Controller extends Template_Controller
 {
 
 	/**
-	 * Index all categories & specific category
-	 * 
-	 * @access public
-	 * @param string $type. (default: 'all')
-	 * @param mixed $page. (default: null)
-	 * @param int $num. (default: 1)
-	 * @return void
+	 * liste tous les sujets du forum
 	 */
-	public function index($category='all', $page=null, $num=1) 
+	public function index( $type = 'all', $page = NULL, $num = 1) 
 	{
+		$this->template->content = View::factory('topics/index')
+			->bind('user', $user)
+			->bind('topics', $topics)
+			->bind('type', $type)
+			->bind('nbr_topics', $nbr_topics)
+			->bind('pagination', $pagination);
+		
 		$user = $this->session->get('user');
 		
-		// pagination --------------- <<
-		$page_name = Kohana::config('forum.page_name');
 		$topics_per_page = Kohana::config('forum.topics_per_page');
-		$pagination_format = Kohana::config('forum.pagination_format');
 		
-		$this->db->select('t.id');
-		$this->db->from('topics AS t');
-		if ($category != 'shared')
+		$this->db->select('to.id');
+		$this->db->from('topics AS to');
+		$this->db->where('to.archived', FALSE);
+		
+		if ($type != 'all')
 		{
-			$this->db->open_paren();
-			if ( ! in_array($category, array('all','locked','archived'))) 
-				$this->db->where('t.type', $category);
-			$this->db->where('t.shared', 0);
-			if ($category == 'locked') $this->db->where('t.locked', 1);
-			$this->db->where('t.archived', ($category=='archived'));
-			$this->db->close_paren();	
+			$this->db->where('to.type', $type);
 		}
-		if ($user->loaded)
-		{
-			// private topics
-			if ($category=='all' or $category=='shared')
-			{
-				$this->db->join('flows AS f', 
-					array(
-						't.id' => 'f.topic_id'
-					), null, 'LEFT');
-				$this->db->open_paren();
-				$this->db->orwhere('f.user_id', $user->id);
-				$this->db->where('f.deleted!=', 1);
-				$this->db->close_paren();
-			}
-						
-			// favorites
-			$this->db->join('favorites AS fav', 
-				array(
-					't.id' => 'fav.topic_id'
-				), null, 'LEFT');
-			$this->db->orderby('fav.position', 'DESC');
-		}
-		$this->db->orderby('t.updated', 'DESC');
-		$this->db->limit($topics_per_page, ($num-1)*$topics_per_page);
+		
+		$this->db->orderby('to.updated', 'DESC');
+		$this->db->limit($topics_per_page, ($num - 1) * $topics_per_page);
 		$topics = $this->db->get();
 		$nbr_topics = $this->db->count_last_query();
 		
 		$pagination = new Pagination(array(
-	  		'uri_segment' 		=> $page_name, 
+	  		'uri_segment' 		=> 'page', 
 	    	'total_items' 		=> $nbr_topics, 
 	    	'items_per_page' 	=> $topics_per_page, 
-	    	'style' 			=> $pagination_format
+	    	'style' 			=> 'punbb'
 		));
-		// >>
-    	
-    	// view
-		$view = new View('topics/index');
-		$view->user = $user;
-		$view->topics = $topics;
-		$view->category = $category;
-		$view->nbr_topics = $nbr_topics;
-		$view->pagination = $pagination;
-		$this->template->content = $view;
-	}
+    }
 	
 	/**
 	 * View a topic

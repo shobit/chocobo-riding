@@ -13,7 +13,7 @@
 	}
 	?>
 	<div class="button-category button">
-		<?php echo $options[$category]; ?> (<?php echo $nbr_topics; ?>) &#9660;
+		<?php echo $options[$type]; ?> (<?php echo $nbr_topics; ?>) &#9660;
 	</div>
 	<div class="menu-category menu">
 		<?php
@@ -31,7 +31,7 @@
 	if ($user->loaded)
 		echo html::anchor('forum/discussion/add', 'Créer un nouveau sujet', array('class'=>"button")); 
 	
-	if ($category=='update'):
+	if ($type=='update'):
 		$img = html::image('images/theme/rss.png', array('style'=>'margin-bottom: -3px;'));
 		echo html::anchor('http://feeds.feedburner.com/ChocoboRiding-MisesAJour', 
 			"$img Flux RSS", array('class'=>'button', 'target'=>'_blank'));
