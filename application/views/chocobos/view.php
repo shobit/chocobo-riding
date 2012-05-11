@@ -78,6 +78,8 @@
 		color: #999;
 	}
 	
+	.actions {text-align: center;}
+	
 </style>
 
 <?php
@@ -458,9 +460,7 @@
 		if ($chocobo->user->id == $user->id and count($chocobo->user->chocobos) > 1)
 		{
 			$texte = "Are you sure ?";
-			echo '<div class="action">';
-			echo html::anchor('chocobo/sale/' . $chocobo->name, 'Vendre', array('onclick' => "return confirm('$texte');"));
-			echo '</div>';
+			echo html::anchor('chocobo/sale/' . $chocobo->name, 'Vendre', array('class' => 'button', 'onclick' => "return confirm('$texte');"));
 		}
 		?>
 	</div>
