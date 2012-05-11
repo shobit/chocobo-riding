@@ -168,7 +168,7 @@ $(document).ready(function()
  * Shoutbox
  */
 function openShoutbox() {
-	window.open('http://chocobo-riding.menencia.com/shoutbox', '_blank', 'toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width=400, height=600');
+	window.open('http://chocobo-riding.com/shoutbox', '_blank', 'toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width=400, height=600');
 }
 
 /*

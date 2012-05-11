@@ -502,7 +502,7 @@ class Topic_Controller extends Template_Controller
 	{
 		$info = array(
 			'title' 		=> 'Chocobo Riding - Mises à jour',
-			'link'			=> 'http://chocobo-riding.menencia.com',
+			'link'			=> 'http://chocobo-riding.com',
 			'description' 	=> "Fil RSS des mises à jour de Chocobo Riding.");
 		$items = array();
 		
@@ -519,8 +519,8 @@ class Topic_Controller extends Template_Controller
 		   	
 		   	$items[] = array(
 		   		'title'			=> $topic->title,
-		    	'link' 			=> 'http://chocobo-riding.menencia.com/forum/topic/'.$topic->id,
-		    	'guid' 			=> 'http://chocobo-riding.menencia.com/forum/topic/'.$topic->id,
+		    	'link' 			=> 'http://chocobo-riding.com/forum/topic/'.$topic->id,
+		    	'guid' 			=> 'http://chocobo-riding.com/forum/topic/'.$topic->id,
 		    	'description' 	=> $content,
 		    	//'author' 		=> $post->user->username,
 		    	'pubDate' 	=> date('D\, j M Y H\:i\:s ', $topic->created)."+0400"

@@ -455,13 +455,13 @@
 	
 	<div class="actions">
 		<?php
-		/*if ($chocobo->user->id == $user->id and count($chocobo->user->chocobos) > 1)
+		if ($chocobo->user->id == $user->id and count($chocobo->user->chocobos) > 1)
 		{
 			$texte = "Are you sure ?";
-			echo '<br />' . html::anchor('chocobo/sale/'.$chocobo->name, 'Vendre', 
-				array('onclick'=>'return confirm(\''.$texte.'\');')
-			);
-		}*/
+			echo '<div class="action">';
+			echo html::anchor('chocobo/sale/' . $chocobo->name, 'Vendre', array('onclick' => "return confirm('$texte');"));
+			echo '</div>';
+		}
 		?>
 	</div>
 	

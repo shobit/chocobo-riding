@@ -22,7 +22,7 @@ $lang = array (
 	),
 	'mail' => array(
 		'title' => "Chocobo Riding - Informations",
-		'content' => "Bonjour, ce mail provient du jeu <b>Chocobo Riding</b>!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.menencia.com"
+		'content' => "Bonjour, ce mail provient du jeu <b>Chocobo Riding</b>!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.com"
 	), 
 	'view' => array(
 		'title' => "Profil de jockey",
@@ -33,13 +33,13 @@ $lang = array (
 		'title' => 'Préférences de jockey',
 		'prelude' => "Vous pouvez changer ici toutes les informations personnelles de votre compte. Vous pouvez ainsi changer votre pseudo, de mot de passe, et renseigner votre sexe, votre date de naissance ou langage préféré. Vous avez également la possibilité d'uploader un avatar.",
 		'mail_title' => "Chocobo Riding - Informations",
-		'mail_content' => "Bonjour et bienvenue sur Chocobo Riding!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.menencia.com"
+		'mail_content' => "Bonjour et bienvenue sur Chocobo Riding!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.com"
 	),
 	'register' => array(
 		'title' => 'Inscription',
 		'prelude' => "Ah, bonne nouvelle ça \o/ Vous vous êtes donc décidé à vous inscrire. Parfait, parfait, attendez que je vous donne tous les papiers à remplir. Hey, ne partez pas, il n'y en a pas beaucoup ^^ Remplissez-les bien, vous ne pourrez plus changer votre nom de user et votre adresse mail ensuite!",
 		'mail_title' => "Chocobo Riding - Inscription",
-		'mail_content' => "Bonjour et bienvenue sur Chocobo Riding!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.menencia.com"
+		'mail_content' => "Bonjour et bienvenue sur Chocobo Riding!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.com"
 	),
 	'lost' => array(
 		'title1' => "Mot de passe perdu?",
@@ -47,6 +47,6 @@ $lang = array (
 		'title2' => "Lien d'activation perdu?",
 		'prelude2' => "Laissez moi devinez! Hmm.. votre compte n'est pas activé, c'est bien ça? Normalement, le lien d'activation vous a été envoyé par mail! Vérifiez, vous n'avez rien, Kupo? Mais sachez que des fois ça prend du temps de les recevoir ces mails.. Si encore, on s'en occupait! Enfin, toujours rien? Eh bien, il ne vous reste plus qu'à compléter ce formulaire pour en avoir un nouveau.",
 		'mail_title' => "Chocobo Riding - Changement",
-		'mail_content' => "Bonjour et bienvenue sur Chocobo Riding!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.menencia.com"
+		'mail_content' => "Bonjour et bienvenue sur Chocobo Riding!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.com"
 	)
 );
