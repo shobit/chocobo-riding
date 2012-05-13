@@ -1,6 +1,9 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
  
 $lang = array (
+	'stable' => 'Ecurie',
+	'title' => 'Menu',
+	
     'races' => "Courses",
     'profile' => "Profil",
     'shop' => "Boutique",
@@ -12,7 +15,6 @@ $lang = array (
     'successes' => "Succès",
     'account' => "Compte",
     
-    'events' => "évènements",
     'mappemonde' => "mappemonde",
     'rankings' => "classements",
     'stats' => "statistiques",
@@ -25,7 +27,9 @@ $lang = array (
     'credits' => "crédits",
     
     'presentation' => "Présentation",
-    'registration' => "Inscription",
+    'connection' => "Connexion",
+    'register' => "Inscription",
+    'deconnection' => "Déconnexion",
     
     // Vmenu
     'pseudo' => ":: Pseudo ::",

@@ -69,91 +69,36 @@
 </head>
 
 <body>
+	<div id="jgrowl_content"><?php echo View::factory("elements/jgrowl") ?></div>
 
-<div id="jgrowl_content"><?= new View("elements/jgrowl") ?></div>
-
-<div id="global">
-	<div id="global1"></div>
-	<div id="global2">
-
-		<div id="before">
-			<div id="before1"></div>
-			<div id="before2"></div>
-			<div id="before3"></div>
-			<div class="clearBoth"></div>
-		</div>
+	<div class="container">
+	
+		<div class="before"></div>
 		
-		<div id="site">
-			<div id="site1"></div>
-			<div id="site2">
-		
-				<div id="header">
-					<div id="header1"></div>
-					<div id="header2"></div>
-					<div id="header3"></div>
-					<div class="clearBoth"></div>
-				</div>
-				
-				<div id="hmenu">
-					<div id="hmenu1"></div>
-					<div id="hmenu2"><?php echo new View('elements/hmenu'); ?></div>
-					<div id="hmenu3"></div>
-					<div class="clearBoth"></div>
-				</div>
-				
-				<div id="main">
-					<div id="main1"></div>
-					<div id="main2">
-					
-						<div id="content">
-							<div id="content1"></div>
-							<div id="content2"><?= $content ?></div>
-							<div id="content3"></div>
-							<div class="clearBoth"></div>
-						</div>
+		<div class="site">
 						
-						<div id="vmenu">
-							<div id="vmenu1"></div>
-							<div id="vmenu2"><?= new View('elements/vmenu') ?></div>
-							<div id="vmenu3"></div>
-							<div class="clearBoth"></div>
-						</div>
+			<div class="header"></div>
 				
-						<div class="clearBoth"></div>
+			<div class="hmenu"></div>
 				
-					</div>
-					<div id="main3"></div>
-				
-				</div>
-			
+			<div class="vmenu">
+				<?php echo View::factory('elements/menu') ?>
 			</div>
-			<div id="site3"></div>
+			
+			<div class="content">
+				<?php echo $content ?>
+			</div>
+			
+			<div class="clearleft"></div>
+			
+			<div id="footer"></div>
 			
 		</div>
-				
-		<div id="footer">
-			<div id="footer1"></div>
-			<div id="footer2"><?php echo new View('elements/footer'); ?></div>
-			<div id="footer3"></div>
-			<div class="clearBoth"></div>
-		</div>
 		
-		<?php 
-		$user = $this->session->get('user');
-    	if ($user->id >0) { ?>
-		<div id="after">
-			<div id="after1"></div>
-			<div id="after2"><?php echo new View('elements/after'); ?></div>
-			<div id="after3"></div>
-			<div class="clearBoth"></div>
-		</div>
-		<?php } ?>
-		
+		<div class="after"></div>
+	
 	</div>
-	<div id="global3"></div>
-
-</div>
-
+	
 </body>
 
 </html>

@@ -2,40 +2,49 @@
 
 class User_Controller extends Template_Controller {
 
-	// FUNC: connexion d'un user
-	public function login() 
+	// connexion d'un joueur
+	public function login () 
 	{
-        $this->authorize('logged_out');
-        $post = new Validation($_POST);
-        $user = ORM::factory('user')
-        			 ->where('username', $post->username)
-        			 ->find();
-        if ($user->loaded and $user->password == sha1($post->password)) 
-        {
-            if ($user->activated) 
+     	$this->template->content = View::factory('users/login')
+     		->bind('errors', $errors);
+	
+		$this->authorize('logged_out');
+     	$errors = array();
+        
+        if ($_POST)
+        {        
+	        $post = new Validation($_POST);
+	        $user = ORM::factory('user')
+	        	->where('username', $post->username)
+	        	->find();
+	        if ( ! $user->loaded or $user->password != sha1($post->password)) 
+	        {
+	        	$errors[] = "lost_password";	
+	        }
+	        else if ( ! $user->activated)
+	        {
+	        	$errors[] = "lost_activation";
+	        }
+	        else if ($user->banned)
+	        {
+	        	$errors[] = "banned_account";
+	        }
+	        /*else if ($user->deleted)
+	        {
+	        	$errors[] = "deleted_account";
+	        }*/
+	        else 
             {
             	$this->session->set('user', $user);
-        		gen::add_jgrowl(Kohana::lang('jgrowl.login_success'));
         		if (isset($post->remember)) 
         		{
         			cookie::set('username', $user->username, 7*24*3600);
         			cookie::set('password', $user->password, 7*24*3600);
         		}
-        		$page = ($user->connected > 0) ? "topics/search/tags/announce" : "tutorial";
-        		url::redirect($page);
-            } 
-            else 
-            {
-            	gen::add_jgrowl(Kohana::lang('jgrowl.not_activated'));
-            	url::redirect('user/lost/activation');
-            }
-        } 
-        else 
-        {
-        	gen::add_jgrowl(Kohana::lang('jgrowl.login_failed'));
-            url::redirect('user/lost/password');
+        		url::redirect('topics');
+        	}
         }
-	}
+    }
 	
 	// FUNC: déconnexion du user en session
 	public function logout() 
