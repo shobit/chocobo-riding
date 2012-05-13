@@ -1,205 +1,217 @@
-<?php
-
-$nbr_comments = count($topic->comments);
-
-echo '<h1>'.Kohana::lang('forum.title').'</h1>';
-echo '<div id="prelude">'.Kohana::lang('forum.prelude').'</div>';
-
-if ($topic->shared) 
-{
-	echo '<p><b>'.Kohana::lang('letter.participants').'</b>';
-	$res = array();
-	foreach ($topic->flows as $flow) $res[] = $flow->user->username;
-	echo implode(', ', $res).'.</p>';
-}
-
-?>
-<div>
-	<div style="width: 500px; float:left">
-		<?php echo html::anchor('forum', 'Forum') ?> »
-		<?php echo html::image('images/forum/types/'.$topic->type.'.png') ?>
-		<?php 
-			$icon = "";
-			if ($topic->locked) $icon .= ' '.html::image('images/theme/cadenas.gif');
-			echo $icon;
-		?>
-    	<b><?php echo $topic->title ?></b> 
-    	<small>(<?php echo $nbr_comments.' '.Kohana::lang('forum.comments'); ?>)</small>
-    	 - <?php echo html::anchor('#content', 'Répondre', array('class'=>"button")); ?>
-	</div>	
+<style>
+	.infos {margin: 20px 0 0 0;}
+	.infos .pages {color: #999; font-weight: bold; float: right; font-size: 16px;}
+	.infos .nbr_topics {font-size: 16px;}
+	.infos .nbr_topics .nbr {color: #999;}
 	
-	<div class="paginator">
-		<?php
-		echo html::image('images/forum/pages.png');
-		echo $pagination->render();
+	.comments {width: 100%; margin: 0 0 20px 0; color: #333; border-bottom: 1px solid #e9e9e9;}
+	.solidborder {border-top: 1px solid #e9e9e9;}
+	.dottedborder {border-top: 1px dotted #f5f5f5;}
+	.comment.not_seen {background-color: #fee;}
+	.comment {position: relative;}
+	.comment .avatar {width: 30px; float: left; margin: 14px 0 0 18px;}
+	.comment .right {width: 600px; float: left; margin: 14px 0 14px 14px;}
+	.comment .author {margin: 1px 0 1px 0; font-weight: bold;}
+	.comment .title {font-weight: bold; line-height: 1.28; margin: 5px 0 5px 0;}
+	.comment .text {line-height: 1.28; margin: 5px 0 5px 0;}
+	.comment .form {display: none; margin: 5px 0 5px 0;}
+	.comment .footer {color: #999; line-height: 17px;}
+	.comment .icon {margin-bottom: -3px; cursor: pointer;}
+	.comment .icon2 {margin: 0 3px -2px 0;}
+	
+	.reply {width: 100%; margin: 20px 0 20px 0;}
+	.reply .avatar {width: 30px; float: left; margin: 14px 0 0 18px;}
+	.reply .textarea {float: left; width: 450px; margin-left: 14px;}
+	.reply textarea {width: 450px; height: 150px; outline: none; resize: none; padding: 3px; border-color: #899BC1; color: #333;}
+	.reply .submit {float: left; margin-top: 19px;}
+	
+	.reply2 {width: 100%; margin: 5px 0 5px 0;}
+	.reply2 .textarea {float: left; width: 450px;}
+	.reply2 textarea {width: 450px; height: 150px; outline: none; resize: none; padding: 3px; border-color: #899BC1;}
+	.reply2 .submit {float: left; margin-top: 11px;}
+	
+	.comment .favon {font-weight: bold; font-style: italic; color: #333;}
+	.comment .hidden {display: none;}
+</style>
+
+<?php
+echo html::stylesheet('js/lib/markitup/skins/markitup/style.css', 'screen', false);
+echo html::stylesheet('js/lib/markitup/sets/markdown/style.css', 'screen', false);
+echo html::script('js/lib/markitup/jquery.markitup.js');
+echo html::script('js/lib/markitup/sets/markdown/set.js');
+require_once Kohana::find_file('libraries', 'markdown');
+?>	
+
+<h1>Forum</h1>
+
+<div class="clearright"></div>
+
+<div class="comments">
+	<?php
+	$last_user_id = 0;
+	$dark = "";
+	echo View::factory('topics/comment')
+		->bind('user', $user)
+		->bind('topic', $topic)
+		->bind('comment', $topic->comments[0])
+		->bind('last_user_id', $last_user_id)
+		->bind('dark', $dark);
+	?>
+</div>
+
+<div class="infos">
+		
+	<div class="pages">
+		<b><?php echo $pagination->render() ?></b>
+	</div>
+	
+	<div class="nbr_topics">
+		<?php 
+		echo ' <span class="nbr">' . $nbr_comments . '</span> ';
+		echo Kohana::lang('topic.' . inflector::plural('comment', $nbr_comments));
 		?>
 	</div>
+	
 </div>
+	
+<div class="comments">
 <?php
+$tr = 0;
+$last_user_id = 0;
+$first_comment_id = $topic->comments[0]->id;
+$last_dark = " error";
+foreach ($comments as $comment) 
+{
+	
+	$inc = true;
+	$dark = ($tr % 2 == 0) ? ' dark' : "";
+	if ($comment->user->has_role('modo')) {$dark = ' modo'; $inc = false;}
+	if ($comment->user->has_role('admin')) {$dark = ' admin'; $inc = false;}
+	if ($last_user_id == $comment->user_id) {$dark = $last_dark; $inc = false;}
+	if ($inc) {
+		$tr ++;
+	}
 
-if (count($nbr_comments) == 0) {
-	?><div class="msgInfo"><?php echo Kohana::lang('forum.post.no_posts') ?></div><?php
-} else {
-	?>
-	<p>
-	<table class="forum2">
-    <?php
-    $tr = 0;
-    $last_user_id = 0;
-    $first_comment_id = $topic->comments[0]->id;
-    $last_dark = " error";
-    foreach ($comments as $comment) {
-        $inc = true;
-        $dark = ($tr % 2 == 0) ? ' dark' : "";
-        if ($comment->user->has_role('modo')) {$dark = ' modo'; $inc = false;}
-        if ($comment->user->has_role('admin')) {$dark = ' admin'; $inc = false;}
-        if ($last_user_id == $comment->user_id) {$dark = $last_dark; $inc = false;}
-        if ($inc) $tr += 1;
-        ?>
-        <tr>
-        	<td class="left">
-        		<?php
-	            if ($last_user_id != $comment->user_id) {
-	                echo $comment->user->display_image('thumbmail');?><br />
-	                <b><?php echo html::anchor('user/view/'.$comment->user->username, $comment->user->username) ?></b>
-	            	<?php if ($comment->user->is_connected()) echo " ".html::image('images/icons/online.png'); ?><br />
-	                <?php echo $comment->user->role();
-	            }
-            	?>
-        	</td>
-        	<td class="right<?php echo $dark ?>" id="comment<?php echo $comment->id ?>">
-        		<div class="signature">
-        		
-        			<div style="float:right;" class="interests">
-	        				<?php
-		        			if ($user->has_role(array('admin', 'modo')) and $topic->shared) 
-		        			{
-		        				$interest = ORM::factory('interest')
-			        				->where('user_id', $user->id)
-			        				->where('comment_id', $comment->id)
-			        				->find();
-			        			
-			        			echo "Intérêt: ";
-			        			$bold = ($interest->value == -1) ? " red" : "";
-			        			echo '<span class="minus '.$bold.'">';
-			  		      		echo html::anchor('comment/interest/'.$comment->id.'/-1', "-");
-			  		      		echo '</span> ';
-			  		      		
-			  		      		$bold = ($interest->value == 1) ? " green" : "";
-			  		      		echo '<span class="plus '.$bold.'">';
-			  		      		echo html::anchor('comment/interest/'.$comment->id.'/1', "+");
-			  		      		echo '</span> ';
-			  		      		
-			  		      		$somme = 0;
-			        			foreach ($comment->interests as $interest)
-			        				$somme += $interest->value;
-			        			$class = "";
-			        			if ($somme < 0) $class = " red";
-			        			if ($somme > 0) $class = " green";
-			        			echo '<span class="somme'.$class.'">';
-			        			if ($somme > 0) echo "+";
-			        			echo $somme;
-			        			echo "</span> ";
-			        			
-			        			$class = ($interest->value) ? " grey" : " none";
-			  		      		echo '<span class="delete '.$class.'">';
-			        			echo html::anchor('comment/interest/'.$comment->id.'/0', "x");
-			  		      		echo '</span>';
-		  		      		
-		  		      		}
-		  		      		else
-		  		      		{
-		  		      			$somme = 0;
-			        			foreach ($comment->interests as $interest)
-			        				$somme += $interest->value;
-			        			if ($somme != 0)
-			        			{
-				        			echo "Intérêt: ";
-				        			$class = "";
-				        			if ($somme < 0) $class = " red";
-				        			if ($somme > 0) $class = " green";
-				        			echo '<span class="somme'.$class.'">';
-				        			if ($somme > 0) echo "+";
-				        			echo $somme;
-				        			echo "</span>";
-		  		      			}
-		  		      		}
-		        			?>
-	        		</div>
-        		
-            		<?php 
-	            	echo html::anchor(
-	            		'topic/view/'.$topic->id.'#comment'.$comment->id, 
-	            		'#', 
-	                	array('name'=>'comment'.$comment->id)
-	                ).' ';
-	                
-	                ?>Posté: <?php $tl = gen::time_left($comment->created); echo $tl['short'];
-	                
-	            	if ( $comment->topic->allow($user, 'w') ) 
-	            	{
-	                	if ($comment->is_first())
-	                	{
-	                		echo ' ['.html::anchor('forum/topic/edit/'.$comment->topic->id, 'Editer').']'; 
-	            		}
-	            		else
-	            		{
-	            			echo ' ['.html::anchor('forum/comment/edit/'.$comment->id, 'Editer').']'; 
-	            		}
-	            	}
-			            	
-	            	if (!empty($comment->updated))
-	            	{
-	            		?><br />&nbsp;&nbsp; Modifié: 
-	            		<?php $tl = gen::time_left($comment->updated); echo $tl['short'];
-	            	}
-	            	?>
-            	</div>
-        		<?php
-        		$textile = new Textile;
-				$content = $textile->TextileThis($comment->content);
-        		echo $content;
-            	?>
-            </td>
-        </tr>
-        <?php
-        $last_user_id = $comment->user_id;
-        $last_dark = $dark;
-    }
-    ?>
-	</table>
-	</p><br />
-<?php
+echo View::factory('topics/comment')
+	->bind('user', $user)
+	->bind('topic', $topic)
+	->bind('comment', $comment)
+	->bind('last_user_id', $last_user_id)
+	->bind('dark', $dark);
+
+	$last_user_id = $comment->user_id;
+	$last_dark = $dark;
 }
-
-if ( ($user->loaded and ($user->has_role('modo') or ! $topic->locked)) ) 
-{ ?>
-
-<h2>Répondre</h2>
-
-<?php echo form::open("forum/topic/".$topic->id) ?>
-
-<div class="reply" name="reply">
-    <p>
-        <?php echo form::textarea(array(
-        	'id'=>'textile', 
-        	'name'=>'content', 
-        	'value'=>$form['content'],
-        	'cols'=>'100',
-        	'rows'=>'12'
-        )) ?>
-    </p>
-
-    <?php echo form::submit(array(
-    	'name'=>'submit', 
-    	'id'=>'submit', 
-    	'value'=>'Envoyer', 
-    	'style'=>'float:right; margin-right:25px;', 
-    	'class'=>'button'
-    )); ?>
-    <div class="clearBoth"></div>
+?>
 </div>
 
-<?php 
-form::close();
-} ?>
+<?php if ( ($user->loaded and ($user->has_role('modo') or ! $topic->locked)) ) : ?>
+
+	<?php echo form::open('comments/new', array(), array('topic_id' => $topic->id)) ?>
+	<div class="reply">
+		<div class="avatar">
+		
+		</div>
+		<div class="textarea">
+			<?php echo form::textarea(array(
+	        	'class' => 'markdown', 
+	        	'name' => 'content', 
+	        	'placeholder' => 'Un commentaire ?',
+	        	'value' => ''
+	        )) ?>
+	    </div>
+		<div class="submit">
+			<?php echo form::submit(array(
+		    	'name' => 'submit', 
+		    	'id' => 'submit', 
+		    	'class' => 'button blue',
+		    	'value' => 'Poster'
+		    )) ?>
+		</div>
+	</div>
+	<?php echo form::close() ?>	
+	<div class="clearleft"></div>
+	
+<?php endif; ?>
+
+<script>
+
+$(function(){
+
+	$('.markdown').markItUp(mySettings);
+
+	$('*[rel=tipsy]').tipsy({gravity: 's'});
+	
+	// Afficher les +1/-1
+	$('.comment').hover(function(){
+		$(this).find('.nbfavsw').show();
+		$(this).find('.favw').show();
+		$(this).find('.options').fadeIn();
+	}, function(){
+		var nbfavsw = $(this).find('.nbfavs');
+		if (nbfavsw.text() == '+0') {
+			$(this).find('.nbfavsw').hide();
+		}
+		$(this).find('.favw').hide();
+		$(this).find('.options').hide();
+	});
+	
+	// mettre en favori un topic
+	$('.fav').click(function(){
+		var id = $(this).attr('id').substring(3);
+		$('#fav' + id).attr('src', baseUrl + 'images/forum/loading.gif');
+		$.ajax({
+			type: 'POST',
+			url: baseUrl + 'comments/' + id + '/favorite',
+			dataType: 'json',
+			success: function(data) {
+				var nbfavs = parseInt($('#nbfavs' + id).text());
+				nbfavs = (data.icon == 'new') ? nbfavs + 1: nbfavs - 1;
+				$('#nbfavs' + id).text('+' + nbfavs);
+				
+				$('#fav' + id).attr('src', baseUrl + 'images/forum/star-' + data.icon + '.png');
+			}
+		});
+		return false;
+	});
+	
+	$('.edit').click(function(){
+		var comment_id = $(this).attr('id').substring(4);
+		$('#comment' + comment_id).find('.text').toggle();
+		$('#comment' + comment_id).find('.form').toggle();
+		return false;
+	});
+	
+	$('.submit').click(function(){
+		var id = $(this).attr('id').substring(1);
+		var content = $('#c' + id + ' textarea[name=content-edit]').val();
+		$.post(baseUrl + 'comments/' + id + '/edit', {'content': content}, function(data){
+			$('#c' + id + ' .form').hide();
+			$('#c' + id + ' .text').show().html(data.text);
+			$('#c' + id + ' .footer').show();
+			$('#c' + id + ' .footer .date').html(data.date + ' (modification)');
+		});
+		return false;
+	});
+	
+	$('.cancel').click(function(){
+		var id = $(this).attr('id');
+		$('#' + id + ' .form').hide();
+		$('#' + id + ' .text').show();
+		$('#' + id + ' .footer').show();
+		return false;
+	});
+	
+	$('.delete_topic').click(function(){
+		var topic_id = $(this).attr('id').substring(5);
+		$.post(baseUrl + 'topics/delete', {'id': topic_id}, function(data){
+			if (data.success) {
+				location.href = baseUrl + 'topics';
+			}
+		});
+		return false;
+	});
+	
+});
+
+</script>

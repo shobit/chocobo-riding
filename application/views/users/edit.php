@@ -123,7 +123,7 @@
 
 	<!-- IMAGE -->
 	<center>
-		<p><?= $user->display_image('thumbmail') ?></p>
+		<p><?= $user->image('thumbmail') ?></p>
 	</center>
 
 </div>

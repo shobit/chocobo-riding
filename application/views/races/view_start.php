@@ -58,7 +58,7 @@
 			<?php foreach ($race->chocobos as $chocobo): ?>
 				<tr>
 					<td><?= html::image('images/icons/normal_sepia.jpg') ?></td>
-					<td class="icons"><?= $chocobo->display_image('mini'); ?></td>
+					<td class="icons"><?= $chocobo->image('mini'); ?></td>
 					<td>
 						<?php echo $chocobo->vignette(); ?>
 					</td>

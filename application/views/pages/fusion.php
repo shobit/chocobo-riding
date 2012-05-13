@@ -18,7 +18,7 @@ echo form::hidden('chocobo', $chocobo->id);
 echo form::hidden('boxes', $boxes);
 $genders = array('', 'female', 'male');
 
-echo '<p>'.$chocobo->display_image('mini').' <b>'.$chocobo->name.', nv'.$chocobo->level;
+echo '<p>'.$chocobo->image('mini').' <b>'.$chocobo->name.', nv'.$chocobo->level;
 echo '<small>/'.$chocobo->lvl_limit.'</small> ('.$chocobo->display_status().')</b></p>';
 
 ?><h2>Partenaires <?= html::image('images/icons/'.$genders[$gender].'.png'); ?></h2><?php
@@ -26,7 +26,7 @@ echo '<small>/'.$chocobo->lvl_limit.'</small> ('.$chocobo->display_status().')</
 if (count($partners) >0) {
 	foreach ($partners as $partner) {
 		echo '<p>'.form::radio("partner", $partner->id);
-		echo $partner->display_image('mini').' '.$partner->name.', ';
+		echo $partner->image('mini').' '.$partner->name.', ';
 		echo 'nv'.$partner->level.'<small>/'.$partner->lvl_limit.'</small> ';
 		echo '('.$partner->display_status();
 		if ($partner->mated >time()) echo ' - '.ceil(($partner->mated - time())/3600).'h'; 

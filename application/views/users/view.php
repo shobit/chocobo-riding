@@ -133,7 +133,7 @@ if (adminRights()) {
 		<!-- IMAGE -->
 		<center>
 			<?php $image = $user->image; ?>
-			<p><?= $user->display_image('thumbmail'); ?></p>
+			<p><?= $user->image('thumbmail'); ?></p>
 			<p><?php echo html::anchor('/user/edit', 'préférences', array('class'=>'button')); ?></p>
 		</center>
 	

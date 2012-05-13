@@ -9,7 +9,7 @@ class Circuit_Model extends ORM {
 		return Kohana::lang('circuit.' . $this->code . '.name');
 	}
     
-    public function display_image($type) 
+    public function image($type) 
     {
 		$image = ($this->image == "") ? "default.gif" : $this->image;
 		return html::image('upload/locations/'.$type.'/'.$image, array('class'=>'location'));

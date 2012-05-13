@@ -8,7 +8,7 @@ class User_Model extends ORM {
     	
     protected $has_one = array('design');
     
-    protected $has_and_belongs_to_many = array('roles');
+    protected $has_and_belongs_to_many = array('roles', 'comments_favorites' => 'c_favorites', 'comments_notifications' => 'c_notifications', 'messages_notifications' => 'm_notifications');
     
     public $BOXES_LIMIT = 7;
     public $ITEMS_LIMIT = 20;
@@ -61,12 +61,27 @@ class User_Model extends ORM {
     	return (time() - $this->connected <= 5*60);
     }
     
-    public function display_image($type, $options=null, $url=false) 
+    /**
+     * affiche l'image de l'utilisateur
+     *
+     * @param $type 		thumbnail ou mini
+     * @param $options 		attributs de l'images
+     * @param $url 			renvoie une image si FALSE, le lien sinon
+     */
+    public function image( $type, $options = NULL, $url = FALSE) 
     {
 		$image = ($this->image == "") ? "default.gif" : $this->image;
-		if ($url) return ('upload/users/'.$type.'/'.$image);
-		else return html::image('upload/users/'.$type.'/'.$image, $options);
+		if ($url) return ('upload/users/' . $type . '/' . $image);
+		else return html::image('upload/users/' . $type . '/' . $image, $options);
     }
+    
+    /*
+     * génère le lien pour accéder au profil du joueur
+ 	 */
+ 	public function link ()
+ 	{
+ 		return html::anchor('users/' . $this->id . '/' . $this->username, $this->username);
+ 	}
     
 	public function display_gender()
 	{

@@ -5,7 +5,7 @@ class Chocobo_Model extends ORM {
     protected $belongs_to = array('user', 'race');
     protected $has_many = array('results', 'equipment');
     
-    public function display_image($format) {
+    public function image($format) {
     	if ($format == "mini") 
     		$url = "images/chocobos/".gen::colour($this->colour)."/generic.gif";
     	elseif ($format == "menu") 

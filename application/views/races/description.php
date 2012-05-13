@@ -4,7 +4,7 @@
 
 <div class="circuit">
 	<div class="column2">
-		<?= $race->circuit->display_image('thumbmail') ?>
+		<?= $race->circuit->image('thumbmail') ?>
 	</div>
 		
 	<div class="column2">

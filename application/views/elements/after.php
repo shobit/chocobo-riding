@@ -15,7 +15,7 @@ if ($user->id >0) {
 					<tr>
 		
 		<td class="icons">
-			<?= $user->display_image("mini", array('width'=>20)) ?>
+			<?= $user->image("mini", array('width'=>20)) ?>
 		</td>
 		<td>
 			<?= html::anchor('/user/view/'.$user->username, $user->username); ?>

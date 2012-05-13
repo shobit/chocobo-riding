@@ -19,18 +19,6 @@ $('textarea#textile').autoResize({
 });*/
 
 /*
- * MarkItUp
- */
-$(document).ready(function() {
-	// set witdh and height of current editor
-	var oldWidth = $('#textile').width();
-	var oldHeight = $('#textile').height();
-	$('#textile').css({width: oldWidth + 'px', height: oldHeight + 'px'});
-    
-    $('#textile').markItUp(myTextileSettings);
-});
-
-/*
  * Chocobo's view
  */
 $(document).ready(function() 
@@ -99,70 +87,6 @@ function decompte(id,tps,termine,showtitle)
 		if (showtitle && !$.browser.msie) $('title').html(termine+' ::| Chocobo Riding {BETA} |::');
 	}
 }
-
-/*
- * Interests
- */
-$(document).ready(function() 
-{		
-	$('.interests a').click(function() 
-	{
-		var url =  $(this).attr("href").split('/'); // Attention quand on changera
-		var max = url.length;
-		var id = url[max-2];
-		var value = url[max-1];
-		$('#post'+id+' .interests .somme').html('<img src="../../images/theme/loading.gif" />'); 
-	    $.ajax(
-		{
-	       url: "../../post/interest/"+id+"/"+value, 
-           type:"GET", 
-	       dataType: "json", 
-	       success: function(result) 
-		   {
-				$('#post'+id+' .interests .somme').text(result);
-				if (result > 0) $('#post'+id+' .interests .somme').prepend("+");
-				if (value == "-1")
-				{
-					$('#post'+id+' .interests .minus').addClass("red");
-					$('#post'+id+' .interests .plus').removeClass("green");
-					$('#post'+id+' .interests .delete').removeClass("none");
-					$('#post'+id+' .interests .delete').addClass("grey");
-				}
-				else if (value == "1")
-				{
-					$('#post'+id+' .interests .plus').addClass("green");
-					$('#post'+id+' .interests .minus').removeClass("red");
-					$('#post'+id+' .interests .delete').removeClass("none");
-					$('#post'+id+' .interests .delete').addClass("grey");
-				}
-				else if (value == "0") 
-				{
-					$('#post'+id+' .interests .minus').removeClass("red");
-					$('#post'+id+' .interests .plus').removeClass("green");
-					$('#post'+id+' .interests .delete').removeClass("grey");
-					$('#post'+id+' .interests .delete').addClass("none");
-				}
-				result = parseInt(result);
-				if (result < 0) 
-				{
-					$('#post'+id+' .interests .somme').removeClass("green");
-					$('#post'+id+' .interests .somme').addClass("red");
-				}
-				else if (result > 0)
-				{
-					$('#post'+id+' .interests .somme').removeClass("red");
-					$('#post'+id+' .interests .somme').addClass("green");
-				}
-				else
-				{
-					$('#post'+id+' .interests .somme').removeClass("red");
-					$('#post'+id+' .interests .somme').removeClass("green");
-				}
-		   }
-	    });
-	    return false
-	}); 
-});
 
 /*
  * Shoutbox

@@ -12,7 +12,7 @@ foreach ($users as $user)
 {
 	?><div class="billet">
 		<?php 
-			echo $user->display_image('thumbmail');
+			echo $user->image('thumbmail');
 		?>
 		<div class="text">
 			<small>#<?= ($debut+1) ?></small>

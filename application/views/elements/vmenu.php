@@ -9,7 +9,7 @@ if ($user->id >0) {
 		?><div class="menu_chocobo">
 		
 			<div class="menu_image">
-				<?= $chocobo->display_image("menu") ?>
+				<?= $chocobo->image("menu") ?>
 			</div>
 			
 			<?php

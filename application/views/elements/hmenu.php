@@ -52,7 +52,7 @@
 			echo html::anchor('shoutbox', Kohana::lang('menu.shoutbox'), 
 				array('onClick'=>'javascript:openShoutbox(); return false;')).' | ';
 
-			echo html::anchor('forum', Kohana::lang('menu.forum')).' | ';
+			echo html::anchor('topics', Kohana::lang('menu.forum')).' | ';
 			//echo html::anchor('error', Kohana::lang('menu.donations')).' | ';
 			//echo html::anchor('error', Kohana::lang('menu.credits'));
 		} else {

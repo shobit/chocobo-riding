@@ -28,7 +28,6 @@ class Page_Controller extends Template_Controller {
 		
 		$topics = ORM::factory('topic')
         	->where('archived', 0)
-        	->where('shared', 0)
         	->where('type', 'update')
         	->orwhere('type', 'announce')
         	->orderby('id', 'desc')

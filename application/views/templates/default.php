@@ -32,12 +32,6 @@
     	echo html::stylesheet('js/lib/FCBKcomplete/style.css', 'screen', false);
     	echo html::script('js/lib/FCBKcomplete/jquery.fcbkcomplete.js');
     	
-    	// MARKITUP
-    	echo html::stylesheet('js/lib/markitup/skins/simple/style.css', 'screen', false);
-    	echo html::stylesheet('js/lib/markitup/sets/textile/style.css', 'screen', false);
-    	echo html::script('js/lib/markitup/jquery.markitup.js');
-    	echo html::script('js/lib/markitup/sets/textile/set.js');
-    	
     	// JGROWL
     	echo html::script('js/lib/jGrowl/jquery.jgrowl.min.js');
 		echo html::stylesheet('js/lib/jGrowl/jquery.jgrowl', 'screen', false);

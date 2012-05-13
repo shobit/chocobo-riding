@@ -12,7 +12,7 @@ foreach ($chocobos as $chocobo)
 {
 	?><div class="billet">
 		<?php 
-			echo $chocobo->display_image('menu');
+			echo $chocobo->image('menu');
 		?>
 		<div class="text">
 			<small>#<?= ($debut+1) ?></small>

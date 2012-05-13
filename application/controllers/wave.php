@@ -33,7 +33,7 @@ class Wave_Controller extends Template_Controller
 					$online = ($wave->user->is_connected()) ? html::image('images/theme/online.png') : "";
 					echo "<tr>
 						<td>".$online."</td>
-						<td>".$wave->user->display_image('mini')."</td>
+						<td>".$wave->user->image('mini')."</td>
 						<td><small>(".gen::display_date($wave->created).")</small></td>
 						<td><b>".$wave->user->username."</b>: </td>
 						<td>".$wave->content."</td>

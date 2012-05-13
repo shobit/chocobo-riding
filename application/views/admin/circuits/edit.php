@@ -51,7 +51,7 @@ if (!empty($res)) {
 
 	<center>
 	
-	<p><?php echo $circuit->display_image('thumbmail') ?></p>
+	<p><?php echo $circuit->image('thumbmail') ?></p>
 	
 	<p><?php echo form::submit('submit', 'Valider') ?></p> 
 
