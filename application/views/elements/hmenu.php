@@ -43,7 +43,6 @@
 <div id="second_lign">
 	<?php
 		if ($user->id >0) {
-			echo html::anchor('events', Kohana::lang('menu.events')).' | ';
 			//echo html::anchor('circuits', Kohana::lang('menu.mappemonde')).' | ';
 			echo html::anchor('rankings', Kohana::lang('menu.rankings')).' | ';
 			//echo html::anchor('error', Kohana::lang('menu.stats')).' | ';
@@ -53,7 +52,7 @@
 				array('onClick'=>'javascript:openShoutbox(); return false;')).' | ';
 
 			echo html::anchor('topics', Kohana::lang('menu.forum')).' | ';
-			echo html::anchor('discussions', Kohana::lang('menu.messages')).' | ';
+			echo html::anchor('discussions', Kohana::lang('menu.messages'));
 			//echo html::anchor('error', Kohana::lang('menu.donations')).' | ';
 			//echo html::anchor('error', Kohana::lang('menu.credits'));
 		} else {

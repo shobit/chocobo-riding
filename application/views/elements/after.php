@@ -28,7 +28,7 @@ if ($user->id >0) {
 		</td>
             
 		<?php 
-		$nbr_topics = count($user->notifs);
+		$nbr_topics = 0;
 		if ($nbr_topics > 0) {
 			$icon = "post";
 			if ($nbr_topics > 0) $icon .= "_new";

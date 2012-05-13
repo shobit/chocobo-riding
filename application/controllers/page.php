@@ -22,24 +22,6 @@ class Page_Controller extends Template_Controller {
 		$this->template->content = new View('pages/home');
 	}
 	
-	public function events()
-	{
-		$this->authorize('logged_in');
-		
-		/*$topics = ORM::factory('topic')
-        	->where('archived', 0)
-        	->where('type', 'update')
-        	->orwhere('type', 'announce')
-        	->orderby('id', 'desc')
-        	->find_all(3);*/
-        	
-        $topics = array();
-        
-		$view 						= new View('pages/events');
-        $view->topics 				= $topics;
-        $this->template->content 	= $view;
-	}
-	
 	public function shoutbox()
 	{
 		$this->authorize('logged_in');

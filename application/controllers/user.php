@@ -21,8 +21,8 @@ class User_Controller extends Template_Controller {
         			cookie::set('username', $user->username, 7*24*3600);
         			cookie::set('password', $user->password, 7*24*3600);
         		}
-        		$page = ($user->connected > 0) ? "events" : "tutorial";
-        		url::redirect('events');
+        		$page = ($user->connected > 0) ? "topics/search/tags/announce" : "tutorial";
+        		url::redirect($page);
             } 
             else 
             {
