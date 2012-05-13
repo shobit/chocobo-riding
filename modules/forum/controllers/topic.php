@@ -34,6 +34,7 @@ class Topic_Controller extends Template_Controller
 					'ta.id' => 'tt.tag_id'
 				), null, 'LEFT');
 			$this->db->where('ta.ref', $tags);
+			$this->db->where('ta.id !=', 14);
 		}
 		
 		$this->db->orderby('to.updated', 'DESC');
