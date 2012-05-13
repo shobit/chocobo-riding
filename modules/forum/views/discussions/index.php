@@ -7,8 +7,8 @@
 	.discussions {width: 100%; margin: 0 0 20px 0;}
 	.discussion {border-bottom: 1px solid #ddd;}
 	.discussion:hover {background-color: #f5f5f5;}
-	.discussion .left {width: 64px; float: left; margin: 14px 0 0 18px;}
-	.discussion .right {width: 650px; float: left; margin: 14px 0 14px 14px;}
+	.discussion .left {width: 30px; float: left; margin: 14px 0 0 18px;}
+	.discussion .right {width: 600px; float: left; margin: 14px 0 14px 14px;}
 	.discussion .author {margin: 1px 0 1px 0;}
 	.discussion .title {line-height: 1.28; margin: 5px 0 5px 0;}
 	.discussion .footer {color: #999; line-height: 17px;}

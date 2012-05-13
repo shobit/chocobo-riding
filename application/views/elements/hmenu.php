@@ -53,6 +53,7 @@
 				array('onClick'=>'javascript:openShoutbox(); return false;')).' | ';
 
 			echo html::anchor('topics', Kohana::lang('menu.forum')).' | ';
+			echo html::anchor('discussions', Kohana::lang('menu.messages')).' | ';
 			//echo html::anchor('error', Kohana::lang('menu.donations')).' | ';
 			//echo html::anchor('error', Kohana::lang('menu.credits'));
 		} else {

@@ -20,11 +20,11 @@ class Comment_Controller extends Template_Controller
 				$comment->topic_id = $post->topic_id;
 				$comment->user_id = $user->id;
 				$comment->content = $post->content;
-				$comment->created = date('Y-m-d H:i:s');
-				$comment->updated = date('Y-m-d H:i:s');
+				$comment->created = time();
+				$comment->updated = time();
 				$comment->save();
 				
-				$comment->topic->updated = date('Y-m-d H:i:s');
+				$comment->topic->updated = time();
 				$comment->topic->save();
 				
 				// envoie les notifications
@@ -60,7 +60,7 @@ class Comment_Controller extends Template_Controller
         	if ($post->validate()) 
         	{
 				$comment->content = $post->content;
-				$comment->updated = date('Y-m-d H:i:s');
+				$comment->updated = time();
 				$comment->save();
 			}
 		}

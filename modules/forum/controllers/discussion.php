@@ -104,7 +104,7 @@ class Discussion_Controller extends Template_Controller
             if ($post->validate()) 
         	{
         		// Recherche d'un flux déjà existant                
-                $receiver_id = ORM::factory('user', array('name' => $post->receiver))->id;
+                $receiver_id = ORM::factory('user', array('username' => $post->receiver))->id;
                 $flow = $this->db
                 	->select('f1.discussion_id')
                 	->from('flows AS f1')
@@ -122,15 +122,15 @@ class Discussion_Controller extends Template_Controller
                 }
                 
                 // DISCUSSION
-                if ( ! $flow_existed) { $discussion->created = date('Y-m-d H:i:s'); }
-                $discussion->updated = date('Y-m-d H:i:s');
+                if ( ! $flow_existed) { $discussion->created = time(); }
+                $discussion->updated = time();
                 $discussion->save();
 				
 				// COMMENT
 				$message->discussion_id = $discussion->id;
 				$message->user_id = $user->id;
 				$message->content = $post->content;
-				$message->created = date('Y-m-d H:i:s');
+				$message->created = time();
 				$message->save();
 				
 				// Destinataire
@@ -168,8 +168,8 @@ class Discussion_Controller extends Template_Controller
 	{
         $user = $this->session->get('user');
         $u = ORM::factory('user')
-        	->where('name', $array[$field])
-        	->where('name !=', $user->name)
+        	->where('username', $array[$field])
+        	->where('username !=', $user->username)
         	->find();
         
         if ( ! $u->loaded) 

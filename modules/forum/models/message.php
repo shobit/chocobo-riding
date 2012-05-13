@@ -9,10 +9,10 @@ class Message_Model extends ORM {
 		$this->discussion_id = $discussion_id;
 		$this->user_id = $user_id;
 		$this->content = $content;
-		$this->created = date('Y-m-d H:i:s');
+		$this->created = time();
 		$this->save();
 		
-		$this->discussion->updated = date('Y-m-d H:i:s');
+		$this->discussion->updated = time();
 		$this->discussion->save();
 		
 		return $this;

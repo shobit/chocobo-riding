@@ -19,6 +19,7 @@ $lang = array (
     'tutorial' => "tutoriel",
     'shoutbox' => "shoutbox",
     'forum' => "forum",
+    'messages' => "messages",
     'mail' => "messagerie",
     'donations' => "dons",
     'credits' => "crédits",

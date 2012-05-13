@@ -130,10 +130,10 @@ class Topic_Controller extends Template_Controller
                 
                 if ( ! $topic->loaded) 
                 {
-                	$topic->created = date('Y-m-d H:i:s');
+                	$topic->created = time();
                 }
                 
-                $topic->updated = date('Y-m-d H:i:s');
+                $topic->updated = time();
                 
                 // gestion des tags
                 $tags = explode(',', $post->tags);
@@ -157,13 +157,13 @@ class Topic_Controller extends Template_Controller
 				
 				// COMMENT
 				$comment->content = $post->content;
-				$comment->updated = date('Y-m-d H:i:s');
+				$comment->updated = time();
 				
 				if ( ! $comment->loaded) 
 				{
 					$comment->topic_id = $topic->id;
 					$comment->user_id = $user->id;
-					$comment->created = date('Y-m-d H:i:s');
+					$comment->created = time();
 				}
 				
 				$comment->save();

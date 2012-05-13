@@ -6,8 +6,8 @@
 	
 	.messages {width: 100%; margin: 0 0 20px 0; color: #333;}
 	.message {border-bottom: 1px solid #e9e9e9;}
-	.message .avatar {width: 64px; float: left; margin: 14px 0 0 18px;}
-	.message .right {width: 650px; float: left; margin: 14px 0 14px 14px;}
+	.message .avatar {width: 30px; float: left; margin: 14px 0 0 18px;}
+	.message .right {width: 600px; float: left; margin: 14px 0 14px 14px;}
 	.message .author {margin: 1px 0 1px 0; font-weight: bold;}
 	.message .notifications {line-height: 1.28; margin: 5px 0 5px 0; color: #900;}
 	.message .text {line-height: 1.28; margin: 5px 0 5px 0;}
@@ -16,7 +16,7 @@
 	.message .icon2 {margin: 0 3px -2px 0;}
 	
 	.reply {width: 100%; margin: 20px 0 20px 0;}
-	.reply .avatar {width: 64px; float: left; margin: 14px 0 0 18px;}
+	.reply .avatar {width: 30px; float: left; margin: 14px 0 0 18px;}
 	.reply .textarea {float: left; width: 450px; margin-left: 14px;}
 	.reply textarea {width: 450px; height: 150px; outline: none; resize: none; padding: 3px; border-color: #899BC1;}
 	.reply .submit {float: left;}
@@ -35,7 +35,7 @@
 	
 	<div class="nbr_discussions">
 		<?php 
-		echo 'Conversation avec ' . $receiver->name . ' ~ ';
+		echo 'Conversation avec ' . $receiver->username . ' ~ ';
 		echo ' <span class="nbr">' . count($messages) . '</span> ';
 		echo Kohana::lang('discussion.' . inflector::plural('message', count($messages)));
 		?>

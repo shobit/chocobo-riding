@@ -7,7 +7,7 @@
 	.hidden {display: none;}
 
 	.comment {width: 100%; margin: 20px 0 20px 0;}
-	.comment .avatar {width: 64px; float: left; margin: 14px 0 0 18px;}
+	.comment .avatar {width: 30px; float: left; margin: 14px 0 0 18px;}
 	.comment .textarea {float: left; width: 450px; margin-left: 14px; position: relative;}
 	.comment textarea {width: 450px; height: 150px; font-size: 11px; outline: none; resize: none; padding: 3px; border: 1px solid #899BC1; color: #333;}
 	.comment .submit {float: left; margin-top: 19px;}

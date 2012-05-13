@@ -6,7 +6,7 @@
 	.discussion input[type=text] {width: 450px; font-size: 11px; outline: none; padding: 3px; border: 1px solid #899BC1;}
 
 	.message {width: 100%; margin: 20px 0 20px 0;}
-	.message .avatar {width: 64px; float: left; margin: 14px 0 0 18px;}
+	.message .avatar {width: 30px; float: left; margin: 14px 0 0 18px;}
 	.message .textarea {float: left; width: 450px; margin-left: 14px; position: relative;}
 	.message textarea {width: 450px; height: 150px; font-size: 11px; outline: none; resize: none; padding: 3px; border: 1px solid #899BC1; color: #333;}
 	.message .submit {float: left;}
