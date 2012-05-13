@@ -26,12 +26,14 @@ class Page_Controller extends Template_Controller {
 	{
 		$this->authorize('logged_in');
 		
-		$topics = ORM::factory('topic')
+		/*$topics = ORM::factory('topic')
         	->where('archived', 0)
         	->where('type', 'update')
         	->orwhere('type', 'announce')
         	->orderby('id', 'desc')
-        	->find_all(3);
+        	->find_all(3);*/
+        	
+        $topics = array();
         
 		$view 						= new View('pages/events');
         $view->topics 				= $topics;
