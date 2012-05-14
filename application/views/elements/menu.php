@@ -46,7 +46,7 @@ if ( ! $user->loaded):
 
 <div style="float:left; margin-left:10px;">
 	<?php 
-	echo '<span style="font-weigth:bold;">' . $user->link() . '</span><br />';
+	echo '<span style="font-weight: bold;">' . $user->link() . '</span><br />';
 	echo $user->gils . ' Gils';
 	?>
 </div>
