@@ -64,7 +64,14 @@ if ( ! $user->loaded):
 		$selected = ($c->id !== $chocobo->id) ? '' : ' class="selected"';
 		?>
 		<li<?php echo $selected ?>>
-			<?php echo html::anchor('chocobo/change/' . $chocobo->name, $chocobo->name) ?>
+			<a href="<?php echo url::base() ?>chocobo/change/<?php echo $chocobo->name ?>">
+				<?php echo $chocobo->name ?>
+				<div class="rfloat notif">
+					<?php 
+					echo $chocobo->pl;
+					?>
+				</div>
+			</a>
 		</li>
 		<?php
 	}
