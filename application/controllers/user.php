@@ -57,19 +57,23 @@ class User_Controller extends Template_Controller {
 		url::redirect('home');
 	}
 	
-	// FUNC: vue de la fiche d'un user
-	// var $username STRING
-	public function view($username="") {
-		$this->authorize('logged_in');
-		if (!empty($username)) {
-	        $view = new View('users/view');
-	        $user = $this->session->get('user');
-	        $view->user = ($username == $user->username) 
-	        			  ? $user 
-	        			  : ORM::factory('user')->where('username', $username)->find();
-	        $this->template->content = $view;
-		} else {
-			url::redirect('user/index');
+	/*
+	 * vue de la fiche d'un user
+	 * var $username STRING
+	 */
+	public function view ( $id ) 
+	{
+		$this->template->content = View::factory('users/view')
+			->bind('user', $user)
+			->bind('u', $u);
+	
+		$u = $this->session->get('user');
+		
+		$user = ORM::factory('user', $id);
+		
+		if ( ! $user->loaded)
+		{
+	    	url::redirect('users');
 		}
 	}
 	
