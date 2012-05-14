@@ -3,6 +3,14 @@
 $user = $this->session->get('user');
 
 ////////////
+///// JOUEURS
+////////////
+$tps = time()-5*60;
+$nbr_users = ORM::factory('user')->where('activated', 1)->count_all();
+$users_connected = ORM::factory('user')->where('connected>', $tps)->count_all();
+echo "Joueurs connectés : <b>$users_connected</b>/$nbr_users<br /><br />";
+
+////////////
 ///// LOCALE
 ////////////
 $locale_current = ($user->id >0) ? $user->locale : cookie::get('locale');
