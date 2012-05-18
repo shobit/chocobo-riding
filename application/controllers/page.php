@@ -10,6 +10,12 @@ class Page_Controller extends Template_Controller {
         $this->template->title = "Présentation";
         $this->template->content = new View('pages/home');
     }
+    
+    public function events()
+	{
+		$this->template->title = "Evénements";
+        $this->template->content = new View('pages/events');
+    }
 	
 	public function tutorial()
 	{
