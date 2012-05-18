@@ -211,6 +211,7 @@ class Topic_Controller extends Template_Controller
 		
 		if (empty($errors))
 		{
+			ORM::factory('comment_notification')->where('topic_id', $id)->delete();
 			$topic->archived = TRUE;
 			$topic->save();
 		}
