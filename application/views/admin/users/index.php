@@ -2,19 +2,36 @@
 
 echo '<h1>Gestion des joueurs</h1>';
 
+echo '<table>';
 foreach ($users as $user)
 {	
-	echo $user->id .'. '. $user->username;
+	echo '<tr>';
+	
+	echo '<td>' . $user->id . '</td>';
+	echo '<td>' . $user->username . '</td>';
+	
+	echo '<td>'. date::display($user->registered) . '</td>';
+	echo '<td>';
+	if ($user->connected > 0)
+	{
+		echo date::display($user->connected);
+	}
+	else
+	{
+		echo '-';
+	}
+	echo '</td>';
 
 	if ($user->id != $admin->id) {
-		echo ' (' . html::anchor(
+		echo '<td>' . html::anchor(
 			'admin/user/delete/'.$user->id,
-			Kohana::lang('administration.delete'),
+			html::image('images/icons/delete.png'),
 			array(
-				'onclick' => 'return confirm('+Kohana::lang('administration.confirm')+')'
+				'onclick' => "return confirm('" . Kohana::lang('administration.confirm') . "')"
 			)
-		) . ')';
+		) . '</td>';
 	}
 
-	echo '<br />';
+	echo '</tr>';
 }
+echo '</table>';
