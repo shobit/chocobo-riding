@@ -38,7 +38,13 @@ class Shop_Controller extends Template_Controller {
 		$user = $this->session->get('user');
 		$gils = $user->gils;
 		$boxes = $user->boxes;
-		$items = $user->items;
+		
+		$nbr_equipment = ORM::factory('equipment', array('user_id' => $user->id))->count_all();
+		$nbr_nuts = ORM::factory('nut', array('user_id' => $user->id))->count_all();
+		$nbr_vegetables = ORM::factory('vegetable', array('user_id' => $user->id))->count_all();
+		$nbr_items = $nbr_equipment + $nbr_nuts + $nbr_vegetables;
+		
+		$max_items = $user->items;
 		$nbr_chocobos = count($user->chocobos);
 		$restants = $boxes - $nbr_chocobos;
 		
@@ -47,7 +53,7 @@ class Shop_Controller extends Template_Controller {
 			// Légume Mimmet
 			case "vegetable1":
 				$price = $this->PRICE_VEGETABLE_1;
-				if ($gils >= $price and $items < $user->ITEMS_LIMIT) 
+				if ($gils >= $price and $nbr_items < $max_items) 
 				{
 					$gils -= $price;
 					
@@ -65,7 +71,7 @@ class Shop_Controller extends Template_Controller {
 			// Légume Krakka
 			case "vegetable2":
 				$price = $this->PRICE_VEGETABLE_2;
-				if ($gils >= $price and $items < $user->ITEMS_LIMIT) 
+				if ($gils >= $price and $nbr_items < $max_items) 
 				{
 					$gils -= $price;
 					
@@ -83,7 +89,7 @@ class Shop_Controller extends Template_Controller {
 			// Noix de Peipo
 			case "nut":
 				$price = $this->PRICE_NUT;
-				if ($gils >= $price and $items < $user->ITEMS_LIMIT) 
+				if ($gils >= $price and $nbr_items < $max_items) 
 				{
 					$gils -= $price;
 					
@@ -102,7 +108,7 @@ class Shop_Controller extends Template_Controller {
 			// Jambières de vitesse
 			case "equipment1":
 				$price = $this->PRICE_EQUIPMENT_1;
-				if ($gils >= $price and $items < $user->ITEMS_LIMIT) 
+				if ($gils >= $price and $nbr_items < $max_items) 
 				{
 					$gils -= $price;
 					
@@ -127,7 +133,7 @@ class Shop_Controller extends Template_Controller {
 			// Harnais d'endurance
 			case "equipment2":
 				$price = $this->PRICE_EQUIPMENT_2;
-				if ($gils >= $price and $items < $user->ITEMS_LIMIT) 
+				if ($gils >= $price and $nbr_items < $max_items) 
 				{
 					$gils -= $price;
 					
@@ -152,7 +158,7 @@ class Shop_Controller extends Template_Controller {
 			// Casque d'intelligence
 			case "equipment3":
 				$price = $this->PRICE_EQUIPMENT_3;
-				if ($gils >= $price and $items < $user->ITEMS_LIMIT) 
+				if ($gils >= $price and $nbr_items < $max_items) 
 				{
 					$gils -= $price;
 					
@@ -224,12 +230,12 @@ class Shop_Controller extends Template_Controller {
 			
 			// Grand sac
 			case "big_bag":
-				$price = $this->PRICE_LICENCE + ($items-10)*200;
-				if ($gils >= $price and $items < $user->ITEMS_LIMIT) 
+				$price = $this->PRICE_LICENCE + ($max_items - 10) * 200;
+				if ($gils >= $price) 
 				{
 					$gils -= $price;
 					
-					$user->items = $items+2;
+					$user->items = $max_items + 2;
 					$user->listen_success("items_12"); #SUCCES
 					$user->listen_success("items_15");
 					$user->listen_success("items_20");
