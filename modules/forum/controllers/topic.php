@@ -132,7 +132,6 @@ class Topic_Controller extends Template_Controller
                 {
                 	$topic->created = time();
                 }
-                
                 if ($id == 0 or $comment->user_id == $user->id) $topic->updated = time();
                 
                 // gestion des tags
@@ -157,7 +156,7 @@ class Topic_Controller extends Template_Controller
 				
 				// COMMENT
 				$comment->content = $post->content;
-				$comment->updated = time();
+				if ($comment->user_id == $user->id) $comment->updated = time();
 				
 				if ( ! $comment->loaded) 
 				{
