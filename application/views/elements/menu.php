@@ -138,7 +138,7 @@ if ( ! $user->loaded):
 	$selected = (strrpos($url, 'fusion') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('fusion', 'Enclos'); ?>
+		<?php echo html::anchor('fusion', 'Fusion'); ?>
 	</li>
 	
 	<?php
