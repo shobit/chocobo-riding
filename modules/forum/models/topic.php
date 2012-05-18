@@ -23,7 +23,7 @@ class Topic_Model extends ORM {
  			else if ($user->loaded and $this->loaded) // ou il existe
  			{
  				$comment = $this->comments[0];
- 				return ( $comment->loaded and $comment->user_id == $user->id );
+ 				return ( $comment->loaded and ($comment->user_id == $user->id or $user->has_role('admin')));
  			}
  			else
  			{
