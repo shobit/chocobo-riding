@@ -4,6 +4,8 @@ class Message_Model extends ORM {
 
 	protected $belongs_to = array('discussion', 'user');
 	
+	protected $has_many = array('message_notification');
+	
 	public function add ( $discussion_id, $user_id, $content)
 	{
 		$this->discussion_id = $discussion_id;
@@ -31,10 +33,14 @@ class Message_Model extends ORM {
 			$user = $flow->user;
 			if ($flow->user_id == $this->user_id) { continue; }
 			
-			if ( ! $user->has(ORM::factory('m_notification', $this->id)))
+			$message_notification = $this->get_notification($user->id);
+			if ( ! $message_notification->loaded)
 			{
-				$user->add(ORM::factory('m_notification', $this->id));
-				$user->save();
+				$message_notification->discussion_id = $this->discussion->id;
+				$message_notification->message_id = $this->id;
+				$message_notification->user_id = $user->id;
+				$message_notification->created = time();
+				$message_notification->save();
 			}
 			
 			if ($flow->deleted === TRUE)
@@ -43,6 +49,16 @@ class Message_Model extends ORM {
 				$flow->save();
 			}
 		}
+	}
+	
+	// récupère la notification
+    //
+	public function get_notification ( $user_id )
+	{
+		return ORM::factory('message_notification')
+			->where('message_id', $this->id)
+			->where('user_id', $user_id)
+			->find();
 	}
 	
 	// retourne le lien du dernier des messages non lus
@@ -72,7 +88,7 @@ class Message_Model extends ORM {
 	// supprime un message
 	public function delete()
 	{
-		$this->db->delete('messages_notifications', array('message_id' => $this->id));
+		$this->db->delete('message_notifications', array('message_id' => $this->id));
 		
 		parent::delete();
 	}

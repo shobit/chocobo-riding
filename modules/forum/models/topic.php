@@ -37,14 +37,10 @@ class Topic_Model extends ORM {
     //
 	public function get_notifications ( $user_id )
 	{
-		return $this->db
-			->select('DISTINCT(cn.comment_id)')
-			->from('comments_notifications AS cn, comments AS c, topics AS t')
-			->where('cn.user_id', $user_id)
-			->where('cn.comment_id = c.id')
-			->where('c.topic_id', $this->id)
-			->orderby('c.updated', 'asc')
-			->get();
+		return ORM::factory('comment_notification')
+			->where('topic_id', $this->id)
+			->where('user_id', $user_id)
+			->find_all();
 	}
 	
 	// gestion des tags (formulaire)

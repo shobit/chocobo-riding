@@ -5,10 +5,10 @@ $border = ($different_user) ? ' solidborder': ' dottedborder';
 
 // Notification
 $not_seen = '';
-if ($user->has(ORM::factory('c_notification', $comment->id))) 
+$comment_notification = $comment->get_notification($user->id);
+if ($comment_notification->loaded) 
 {
-	$user->remove(ORM::factory('c_notification', $comment->id));
-	$user->save();
+	$comment_notification->delete();
 	$not_seen = ' not_seen';
 }			
 

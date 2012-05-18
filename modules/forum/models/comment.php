@@ -4,6 +4,8 @@ class Comment_Model extends ORM {
 
 	protected $belongs_to = array('topic', 'user');
 	
+	protected $has_many = array('comment_notification');
+	
 	// notifie les joueurs du commentaire
 	public function notify () 
 	{
@@ -12,12 +14,26 @@ class Comment_Model extends ORM {
 			->find_all();
 		foreach ($users as $user) 
 		{
-			if ( ! $user->has(ORM::factory('c_notification', $this->id)))
+			$comment_notification = $this->get_notification($user->id);
+			if ( ! $comment_notification->loaded)
 			{
-				$user->add(ORM::factory('c_notification', $this->id));
-				$user->save();
+				$comment_notification->topic_id = $this->topic->id;
+				$comment_notification->comment_id = $this->id;
+				$comment_notification->user_id = $user->id;
+				$comment_notification->created = time();
+				$comment_notification->save();
 			}
 		}
+	}
+	
+	// récupère la notification
+    //
+	public function get_notification ( $user_id )
+	{
+		return ORM::factory('comment_notification')
+			->where('comment_id', $this->id)
+			->where('user_id', $user_id)
+			->find();
 	}
 	
 	// retourne le lien du commentaire
@@ -48,7 +64,7 @@ class Comment_Model extends ORM {
 	public function delete()
 	{
 		$this->db->delete('comments_favorites', array('comment_id' => $this->id));
-		$this->db->delete('comments_notifications', array('comment_id' => $this->id));
+		$this->db->delete('comment_notifications', array('comment_id' => $this->id));
 		
 		parent::delete();
 	}

@@ -56,14 +56,10 @@ class Discussion_Model extends ORM {
     // récupère les notifications
 	public function get_notifications ( $user_id )
 	{
-		return $this->db
-			->select('DISTINCT(mn.message_id)')
-			->from('messages_notifications AS mn, messages AS m')
-			->where('mn.user_id', $user_id)
-			->where('mn.message_id = m.id')
-			->where('m.discussion_id', $this->id)
-			->orderby('m.created', 'asc')
-			->get();
+		return ORM::factory('message_notification')
+			->where('discussion_id', $this->id)
+			->where('user_id', $user_id)
+			->find_all();
 	}
 	
 	// supprime une discussion

@@ -79,10 +79,10 @@ foreach ($messages as $message)
 		
 		<div class="notifications">
 			<?php
-			if ($user->has(ORM::factory('m_notification', $message->id))) 
+			$message_notification = $message->get_notification($user->id);
+			if ($message_notification->loaded) 
 			{
-				$user->remove(ORM::factory('m_notification', $message->id));
-				$user->save();
+				$message_notification->delete();
 				echo html::image('images/forum/post.png', array('class' => 'icon2'));
 				echo 'Message non lu';
 			}

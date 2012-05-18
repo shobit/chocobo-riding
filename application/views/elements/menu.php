@@ -176,19 +176,10 @@ if ( ! $user->loaded):
 		<a href="<?php echo url::base() ?>topics">
 			Forum
 			<?php
-			$nbr_comments = $this->db
-				->from('comments_notifications AS cn')
-				->where('cn.user_id', $user->id)
-				->join('comments AS c', 
-					array(
-						'c.id' => 'cn.comment_id'
-					), null, 'LEFT')
-				->join('topics AS t', 
-					array(
-						't.id' => 'c.topic_id'
-					), null, 'LEFT')
-				->where('t.archived', FALSE)
-				->count_records();
+			$nbr_comments = ORM::factory('comment_notification')
+				->where('user_id', $user->id)
+				->count_all();
+			
 			if ($nbr_comments > 0):
 			?>
 			<div class="rfloat notif not_seen">
@@ -205,9 +196,10 @@ if ( ! $user->loaded):
 		<a href="<?php echo url::base() ?>discussions">
 			Messages
 			<?php
-			$nbr_messages = $this->db->from('messages_notifications')
+			$nbr_messages = ORM::factory('message_notification')
 				->where('user_id', $user->id)
-				->count_records();
+				->count_all();
+			
 			if ($nbr_messages > 0):
 			?>
 			<div class="rfloat notif not_seen">

@@ -4,11 +4,12 @@ class User_Model extends ORM {
     
     protected $has_many = array(
     	'chocobos', 'posts', 'notifs', 'flows', 
-    	'vegetables', 'nuts', 'equipment', 'successes');
+    	'vegetables', 'nuts', 'equipment', 'successes',
+    	'comment_notification', 'message_notification');
     	
     protected $has_one = array('design');
     
-    protected $has_and_belongs_to_many = array('roles', 'comments_favorites' => 'c_favorites', 'comments_notifications' => 'c_notifications', 'messages_notifications' => 'm_notifications');
+    protected $has_and_belongs_to_many = array('roles', 'comments_favorites' => 'c_favorites');
     
     public $BOXES_LIMIT = 7;
     public $ITEMS_LIMIT = 20;
