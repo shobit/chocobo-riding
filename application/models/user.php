@@ -182,24 +182,47 @@ class User_Model extends ORM {
     
     public function delete()
     {
-    	foreach ($this->equipment as $equipment) $equipment->delete();
-    	foreach ($this->vegetables as $vegetable) $vegetable->delete();
-    	foreach ($this->nuts as $nut) $nut->delete();
     	foreach ($this->chocobos as $chocobo) $chocobo->delete();
-    	foreach ($this->notifs as $notif) $notif->delete();
+    	
+    	$this->db->delete('comments_favorites', array('user_id' => $this->id));
+    	
+    	$this->db->delete('comment_notifications', array('user_id' => $this->id));
+    	
+	  	$this->design->user_id = NULL;
+    	
+    	foreach ($this->equipment as $equipment) $equipment->delete();
+    	
     	foreach ($this->flows as $flow) $flow->delete();
-    	foreach ($this->successes as $success) $success->delete();
+    	
+    	$this->db->delete('message_notifications', array('user_id' => $this->id));
+    	
+    	foreach ($this->nuts as $nut) $nut->delete();
+    	
+    	foreach ($this->results as $result) 
+    	{
+    		$result->race->delete();
+    	}
+    	
+    	$this->remove(ORM::factory('role', 'admin'));
+		$this->remove(ORM::factory('role', 'mod'));
+		$this->save();
+		
+		foreach ($this->successes as $success) $success->delete();
+    	
+		foreach ($this->vegetables as $vegetable) $vegetable->delete();
+    	
     	$this->db->update(
-	   		'posts', 
-	   		array('user_id' => null),
-	  		array('user_id' => $this->id)
-	  	);
-	  	$this->db->update(
 	   		'waves', 
 	   		array('user_id' => null),
 	  		array('user_id' => $this->id)
 	  	);
-	  	$this->design->user_id = null;
+	  	
+	  	$delete_user = ORM::factory('deleted_user');
+		$delete_user->old_id = $this->id;
+		$delete_user->name = $this->username;
+		$delete_user->created = time();
+		$delete_user->save();
+    	
     	parent::delete();
     }
  
