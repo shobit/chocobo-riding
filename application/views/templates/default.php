@@ -77,7 +77,7 @@
 		
 		<div class="site">
 						
-			<div class="header"></div>
+			<div id="header"></div>
 				
 			<div class="hmenu"></div>
 				

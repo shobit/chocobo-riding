@@ -17,24 +17,10 @@ body {
 	background-color: #fff;
 }
 
-.header {
+#header {
 	background-image: url("../images/theme/banner_beta.png");
 	height: 146px;
 }
-
-	.header1 {
-		padding: 15px 5px 0 5px;
-		float: left;
-		width: 600px;
-		letter-spacing: 10px;
-		font-weight: bold;
-		font-size: 18px;
-	}
-	
-	.header2 {
-		float: left;
-		width: 300px;
-	}
 	
 .vmenu {
 	float: left;
