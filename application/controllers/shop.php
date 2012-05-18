@@ -39,9 +39,9 @@ class Shop_Controller extends Template_Controller {
 		$gils = $user->gils;
 		$boxes = $user->boxes;
 		
-		$nbr_equipment = ORM::factory('equipment', array('user_id' => $user->id))->count_all();
-		$nbr_nuts = ORM::factory('nut', array('user_id' => $user->id))->count_all();
-		$nbr_vegetables = ORM::factory('vegetable', array('user_id' => $user->id))->count_all();
+		$nbr_equipment = ORM::factory('equipment')->where('user_id', $user->id)->count_all();
+		$nbr_nuts = ORM::factory('nut')->where('user_id', $user->id)->count_all();
+		$nbr_vegetables = ORM::factory('vegetable')->where('user_id', $user->id)->count_all();
 		$nbr_items = $nbr_equipment + $nbr_nuts + $nbr_vegetables;
 		
 		$max_items = $user->items;
