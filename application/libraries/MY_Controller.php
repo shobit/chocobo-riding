@@ -68,7 +68,9 @@ class Controller extends Controller_Core
         	$user = ORM::factory('user')
         		->where('username', $cookie_username)
         		->where('password', $cookie_password)
-        		->where('activated', 1)
+        		->where('activated >', 0)
+        		->where('banned', 0)
+        		->where('deleted', 0)
         		->find();
         	$this->session->set('user', $user);
         	gen::add_jgrowl(Kohana::lang('jgrowl.login_success'), true);

@@ -528,28 +528,14 @@ class Chocobo_Model extends ORM {
 		}
 	}
     
-    public function delete()
+    /**
+     * supprime le chocobo
+     *
+     */
+    public function delete ()
     {
-    	$this->db->update(
-	   		'results', 
-	   		array('chocobo_id' => null),
-	  		array('chocobo_id' => $this->id)
-	  	);
-    	$this->db->update(
-	   		'equipment', 
-	   		array('chocobo_id' => null),
-	  		array('chocobo_id' => $this->id)
-	  	);
-	  	$this->db->update(
-	   		'chocobos', 
-	   		array('father' => null),
-	  		array('father' => $this->id)
-	  	);
-	  	$this->db->update(
-	   		'chocobos', 
-	   		array('mother' => null),
-	  		array('mother' => $this->id)
-	  	);
+    	foreach ($this->results as $result) $result->to_delete();
+    	
     	parent::delete();
     }
  

@@ -10,7 +10,7 @@ foreach ($users as $user)
 	echo '<td>' . $user->id . '</td>';
 	echo '<td>' . $user->username . '</td>';
 	
-	echo '<td>'. date::display($user->registered) . '</td>';
+	echo '<td>'. date::display($user->created) . '</td>';
 	echo '<td>';
 	if ($user->connected > 0)
 	{

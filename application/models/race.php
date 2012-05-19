@@ -77,10 +77,16 @@ class Race_Model extends ORM {
 		$this->save();
 	}
 	
-	public function delete()
+	/**
+	 * supprime la course
+	 *
+	 */
+	public function delete ()
 	{
 		foreach ($this->results as $result) $result->delete();
+		
 		foreach ($this->waves as $wave) $wave->delete();
+		
 		parent::delete();
 	}
 

@@ -3,9 +3,9 @@
 class User_Model extends ORM {
     
     protected $has_many = array(
-    	'chocobos', 'posts', 'notifs', 'flows', 
-    	'vegetables', 'nuts', 'equipment', 'successes',
-    	'comment_notification', 'message_notification');
+    	'chocobos', 'flows', 'vegetables', 'nuts', 'equipment', 'successes',
+    	'comment_notification', 'message_notification'
+    );
     	
     protected $has_one = array('design');
     
@@ -180,50 +180,54 @@ class User_Model extends ORM {
   		$success->save();
     }
     
+    /**
+     * marque comme supprimé le joueur
+     * supprime les historiques de course des chocobos, les sujets favoris, 
+     * les notifications commentaires et messages, les rôles, les discussions
+     *
+     */
+	public function to_delete()
+	{
+		foreach ($this->chocobos as $chocobo) 
+		{
+			foreach ($chocobo->results as $result)
+			{
+				$result->to_delete();
+			}
+		}
+		
+		$this->db->delete('comments_favorites', array('user_id' => $this->id));
+    	
+    	$this->db->delete('comment_notifications', array('user_id' => $this->id));
+    	
+    	foreach ($this->flows as $flow) $flow->discussion->to_delete();
+    	
+    	$this->db->delete('message_notifications', array('user_id' => $this->id));
+    	
+    	$this->db->delete('roles_users', array('user_id' => $this->id));
+    	
+    	$this->deleted = time();
+		$this->save();
+	}
+    
+    /**
+     * supprime le joueur
+     * supprime les chocobos, les équipements, les noix, les légumes, les succès
+     *
+     */
     public function delete()
     {
     	foreach ($this->chocobos as $chocobo) $chocobo->delete();
     	
-    	$this->db->delete('comments_favorites', array('user_id' => $this->id));
-    	
-    	$this->db->delete('comment_notifications', array('user_id' => $this->id));
-    	
-	  	$this->design->user_id = NULL;
-    	
-    	foreach ($this->equipment as $equipment) $equipment->delete();
-    	
-    	foreach ($this->flows as $flow) $flow->delete();
-    	
-    	$this->db->delete('message_notifications', array('user_id' => $this->id));
+	  	foreach ($this->equipment as $equipment) $equipment->delete();
     	
     	foreach ($this->nuts as $nut) $nut->delete();
     	
-    	foreach ($this->results as $result) 
-    	{
-    		$result->race->delete();
-    	}
-    	
-    	$this->remove(ORM::factory('role', 'admin'));
-		$this->remove(ORM::factory('role', 'mod'));
-		$this->save();
-		
 		foreach ($this->successes as $success) $success->delete();
     	
 		foreach ($this->vegetables as $vegetable) $vegetable->delete();
     	
-    	$this->db->update(
-	   		'waves', 
-	   		array('user_id' => null),
-	  		array('user_id' => $this->id)
-	  	);
-	  	
-	  	$delete_user = ORM::factory('deleted_user');
-		$delete_user->old_id = $this->id;
-		$delete_user->name = $this->username;
-		$delete_user->created = time();
-		$delete_user->save();
-    	
-    	parent::delete();
+	  	parent::delete();
     }
  
 }

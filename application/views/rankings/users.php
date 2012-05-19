@@ -31,8 +31,8 @@ foreach ($users as $user)
 					case 'gils':
 						echo html::image('images/theme/gil.gif').$user->gils.' Gils';
 						break;
-					case 'registered':
-						$tl = gen::time_left($user->registered);
+					case 'created':
+						$tl = gen::time_left($user->created);
 						echo $tl['short'];
 						break;
 					case 'connected':

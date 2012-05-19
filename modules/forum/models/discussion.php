@@ -65,8 +65,9 @@ class Discussion_Model extends ORM {
 	// supprime une discussion
 	public function delete()
 	{
-		foreach($this->messages as $message) { $message->delete(); }
-		foreach($this->flows as $flow) { $flow->delete(); }
+		foreach ($this->flows as $flow) $flow->delete();
+		
+		foreach ($this->messages as $message) $message->delete();
 		
 		parent::delete();
 	}

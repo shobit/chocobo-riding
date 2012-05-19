@@ -107,6 +107,7 @@ class Equipment_Model extends ORM {
 	public function delete()
 	{
 		foreach ($this->effects as $effect) $effect->delete();
+		
 		parent::delete();
 	}
     

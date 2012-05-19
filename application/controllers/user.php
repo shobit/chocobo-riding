@@ -21,18 +21,18 @@ class User_Controller extends Template_Controller {
 	        {
 	        	$errors[] = "lost_password";	
 	        }
-	        else if ( ! $user->activated)
+	        else if ($user->activated == 0)
 	        {
 	        	$errors[] = "lost_activation";
 	        }
-	        else if ($user->banned)
+	        else if ($user->banned > 0)
 	        {
 	        	$errors[] = "banned_account";
 	        }
-	        /*else if ($user->deleted)
+	        else if ($user->deleted > 0)
 	        {
 	        	$errors[] = "deleted_account";
-	        }*/
+	        }
 	        else 
             {
             	$this->session->set('user', $user);
@@ -41,7 +41,7 @@ class User_Controller extends Template_Controller {
         			cookie::set('username', $user->username, 7*24*3600);
         			cookie::set('password', $user->password, 7*24*3600);
         		}
-        		url::redirect('topics');
+        		url::redirect('page/events');
         	}
         }
     }
@@ -110,7 +110,7 @@ class User_Controller extends Template_Controller {
         		
         		if (!empty($post->password_new)) {
 	        		$user->password = sha1($post->password_new);
-	                $user->changed  = time();
+	                $user->updated  = time();
 				}		
                 	
                 $user->gender = $post->gender;
@@ -197,8 +197,8 @@ class User_Controller extends Template_Controller {
 	                $user->locale 	= cookie::get('locale');
 	                $user->design_id	= 1;
 	                $user->version 	= true;
-	                $user->registered = time();
-	                $user->changed 	= time();
+	                $user->created = time();
+	                $user->updated 	= time();
 	                $user->save();
 	                
 	                gen::add_jgrowl(Kohana::lang('jgrowl.register_success'));
@@ -244,7 +244,7 @@ class User_Controller extends Template_Controller {
                 			 ->where('email', $post->email)
                 			 ->find();
                 
-                if ( $user->id >0 and (time() - $user->changed > 3600*7) ) {
+                if ( $user->id >0 and (time() - $user->updated > 3600*7) ) {
 	                $password 			= text::random();
 					$password_sha1 		= sha1($password);
 					$link 				= url::site('user/activate/'.$password_sha1);
@@ -260,7 +260,7 @@ class User_Controller extends Template_Controller {
 					);
 	                if (email::send($to, $from, $subject, $message, TRUE)) {
 	                	$user->password 	= $password_sha1;
-	                	$user->changed 	= time();
+	                	$user->updated 	= time();
 						$user->save();
 						gen::add_jgrowl(Kohana::lang('jgrowl.lost_success'));
 					} else {
@@ -291,11 +291,11 @@ class User_Controller extends Template_Controller {
 	{
 		$this->authorize('logged_out');
 		$user = ORM::factory('user')
-			->where(array('password' => $sha1, 'activated' => 0))
+			->where(array('password' => $sha1, 'activated' => 0, 'deleted' => 0))
 			->find();
 		
 		if ($user->id >0) {
-			$user->activated = 1;
+			$user->activated = time();
 			$user->save();
 			
 			$nut = ORM::factory('nut');

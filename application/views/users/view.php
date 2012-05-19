@@ -90,7 +90,7 @@ if (adminRights()) {
 				<td class="label">Inscrit</td>
 				<td class="value">
 				<?php
-					$tl = gen::time_left($user->registered);
+					$tl = gen::time_left($user->created);
 					echo $tl['short'];
 				?>
 				</td>
@@ -99,7 +99,7 @@ if (adminRights()) {
 				<td class="label">Connecté</td>
 				<td class="value">
 				<?php
-					$tl = gen::time_left($user->connected);
+					$tl = gen::time_left($user->updated);
 					echo $tl['short'];
 				?>
 				</td>

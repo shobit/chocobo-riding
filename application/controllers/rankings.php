@@ -65,14 +65,14 @@ class Rankings_Controller extends Template_Controller
 			
 			case 'users':
 				${'nbr_'.$types} = ORM::factory('user')
-					->where('activated', 1)
+					->where('activated >', 0)
 					->count_all();
 				
 				// Récupération du nombre de users par page
 				$items_per_page = 20;
 			
 				${$type} = ORM::factory('user')
-					->where('activated', 1)
+					->where('activated >', 0)
 					->orderby($orderby, 'desc')
 					->find_all($items_per_page, ($num-1)*$items_per_page);
 				break;
@@ -112,7 +112,7 @@ class Rankings_Controller extends Template_Controller
 	{
 		return array(
 			'chocobos' 	=> array("level","fame","max_speed","birthday"),
-			'users' 	=> array("fame","gils","registered","connected"),
+			'users' 	=> array("fame","gils","created","connected"),
 			'clans' 	=> array()
 		);
 	}

@@ -135,16 +135,6 @@ class Race_Controller extends Template_Controller {
 				->bind('can_register', $can_register)
 				->bind('can_unregister', $can_unregister);				
 		}
-		
-		/*
-		$results = ORM::factory('result')
-			->where('circuit_id', $circuit->id)
-			->orderby('position', 'asc')
-			->find_all();
-		$query =  ORM::factory('fact');
-		foreach($results as $result) $query->orwhere("result_id", $result->id);
-		$facts = $query->orderby('action', 'asc')->find_all();
-		*/					
 	}
 	
 	/*
@@ -334,19 +324,7 @@ class Race_Controller extends Template_Controller {
 		
 		if (empty($msg))
 		{
-			$nbr_results = ORM::factory('result')
-				->where('race_id', $id)
-				->count_all();
-			
-			$result->deleted = TRUE;
-			$result->save();
-			
-			$nbr_results --;
-			
-			if ($nbr_results == 0)
-			{
-				ORM::factory('race', $id)->delete();
-			}
+			$result->to_delete();
 		}
 		
 		if ( ! request::is_ajax()) 
