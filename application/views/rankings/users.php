@@ -17,7 +17,7 @@ foreach ($users as $user)
 		<div class="text">
 			<small>#<?= ($debut+1) ?></small>
 			<?php 
-				echo html::anchor('user/view/'.$user->username, $user->username);
+				echo html::anchor('users/' . $user->id . '/' . $user->username, $user->username);
 				if ($user->is_connected()) echo " ".html::image('images/icons/online.png');
 				echo "<br />";
 				echo $user->role(); 
@@ -32,12 +32,10 @@ foreach ($users as $user)
 						echo html::image('images/theme/gil.gif').$user->gils.' Gils';
 						break;
 					case 'created':
-						$tl = gen::time_left($user->created);
-						echo $tl['short'];
+						echo date::display($user->created);
 						break;
 					case 'connected':
-						$tl = gen::time_left($user->connected);
-						echo $tl['short'];
+						echo date::display($user->connected);
 						break;
 				} 
 			?>
