@@ -240,8 +240,8 @@ class User_Model extends ORM {
 		
 		if ($this->image != '') 
     	{
-			unlink('upload/users/mini/' . $this->image);
-			unlink('upload/users/thumbmail/' . $this->image);
+			if (is_link('upload/users/mini/' . $this->image)) unlink('upload/users/mini/' . $this->image);
+			if (is_link('upload/users/thumbmail/' . $this->image)) unlink('upload/users/thumbmail/' . $this->image);
 		}
 		
 		$delete_user = ORM::factory('deleted_user');
