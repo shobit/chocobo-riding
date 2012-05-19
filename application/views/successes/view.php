@@ -10,7 +10,7 @@
 $successes = $user->successes;
 $titles = ORM::factory('title')->find_all();
 $nbr_titles = ORM::factory('title')->count_all();
-$nb_users = ORM::factory('user')->where('activated >', 0)->count_all();
+$nb_users = User_Model::get_nbr_players();
 
 if ($user->id != $user_session->id)
 	echo "<p>User : <b>".$user->username."</b></p>";

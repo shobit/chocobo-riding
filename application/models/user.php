@@ -181,6 +181,19 @@ class User_Model extends ORM {
     }
     
     /**
+     * retourne le nombre de joueurs actifs : actifs, non bannis et non supprimés
+     *
+     */
+    public static function get_nbr_players ()
+    {
+    	return ORM::factory('user')
+    		->where('activated >', 0)
+    		->where('banned', 0)
+    		->where('deleted', 0)
+    		->count_all();
+    }
+    
+    /**
      * marque comme supprimé le joueur
      * supprime toutes les données associées (sauf les infos du joueur - table users)
      *
@@ -199,7 +212,7 @@ class User_Model extends ORM {
     	
     	$this->db->delete('comment_notifications', array('user_id' => $this->id));
     	
-    	foreach ($this->flows as $flow) $flow->discussion->to_delete();
+    	foreach ($this->flows as $flow) $flow->to_delete();
     	
     	$this->db->delete('message_notifications', array('user_id' => $this->id));
     	

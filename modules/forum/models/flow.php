@@ -4,12 +4,6 @@ class Flow_Model extends ORM {
     
     protected $belongs_to = array('user', 'discussion');
     
-    public function to_delete()
-    {
-    	$this->deleted = TRUE;
-    	$this->save();
-    }
-    
     /**
 	 * marque comme supprimé la discussion
 	 * et supprime la discussion si tous les autres flux sont supprimés

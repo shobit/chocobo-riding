@@ -170,6 +170,9 @@ class Discussion_Controller extends Template_Controller
         $u = ORM::factory('user')
         	->where('username', $array[$field])
         	->where('username !=', $user->username)
+        	->where('activated >', 0)
+        	->where('banned', 0)
+        	->where('deleted', 0)
         	->find();
         
         if ( ! $u->loaded) 

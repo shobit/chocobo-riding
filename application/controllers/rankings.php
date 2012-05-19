@@ -66,6 +66,8 @@ class Rankings_Controller extends Template_Controller
 			case 'users':
 				${'nbr_'.$types} = ORM::factory('user')
 					->where('activated >', 0)
+					->where('banned', 0)
+					->where('deleted', 0)
 					->count_all();
 				
 				// Récupération du nombre de users par page
@@ -73,6 +75,8 @@ class Rankings_Controller extends Template_Controller
 			
 				${$type} = ORM::factory('user')
 					->where('activated >', 0)
+					->where('banned', 0)
+					->where('deleted', 0)
 					->orderby($orderby, 'desc')
 					->find_all($items_per_page, ($num-1)*$items_per_page);
 				break;

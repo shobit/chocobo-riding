@@ -6,7 +6,7 @@ $user = $this->session->get('user');
 ///// JOUEURS
 ////////////
 $tps = time()-5*60;
-$nbr_users = ORM::factory('user')->where('activated >', 0)->count_all();
+$nbr_users = User_Model::get_nbr_players();
 $users_connected = ORM::factory('user')->where('connected >', $tps)->count_all();
 echo "Joueurs connectés : " . html::anchor('rankings/users/connected', "<b>$users_connected</b>/$nbr_users") . "<br /><br />";
 

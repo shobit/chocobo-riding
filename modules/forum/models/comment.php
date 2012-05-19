@@ -11,6 +11,9 @@ class Comment_Model extends ORM {
 	{
 		$users = ORM::factory('user')
 			->where('id !=', $this->user_id)
+			->where('activated >', 0)
+			->where('banned', 0)
+			->where('deleted', 0)
 			->find_all();
 		foreach ($users as $user) 
 		{

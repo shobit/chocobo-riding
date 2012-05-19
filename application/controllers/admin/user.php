@@ -15,11 +15,22 @@ class User_Controller extends Admin_Controller
 		$admin = $this->session->get('user');
 	}
 	
-    // supprime un joueur
+    /*
+     * supprime un joueur
+     *
+     */
     public function delete ( $id )
     {
 		$user = ORM::factory('user', $id);
-		$user->delete();
+		
+		if ($user->deleted == 0)
+		{
+			$user->to_delete();
+		}
+		else
+		{
+			$user->delete();
+		}
 		
 		url::redirect('admin/users');
 	}

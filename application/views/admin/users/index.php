@@ -22,15 +22,25 @@ foreach ($users as $user)
 	}
 	echo '</td>';
 
-	if ($user->id != $admin->id) {
+	echo '<td>';
+	if ($user->id != $admin->id) 
+	{
 		echo '<td>' . html::anchor(
 			'admin/user/delete/'.$user->id,
 			html::image('images/icons/delete.png'),
 			array(
 				'onclick' => "return confirm('" . Kohana::lang('administration.confirm') . "')"
 			)
-		) . '</td>';
+		);
 	}
+	echo '</td>';
+	
+	echo '<td>';
+	if ($user->deleted > 0)
+	{
+		echo '<small>à supprimer</small>';
+	}
+	echo '</td>';
 
 	echo '</tr>';
 }

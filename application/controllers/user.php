@@ -242,7 +242,9 @@ class User_Controller extends Template_Controller {
                 $user = ORM::factory('user')
                 			 ->where('username', $post->username)
                 			 ->where('email', $post->email)
-                			 ->find();
+                			 ->where('banned', 0)
+							 ->where('deleted', 0)
+							 ->find();
                 
                 if ( $user->id >0 and (time() - $user->updated > 3600*7) ) {
 	                $password 			= text::random();
@@ -291,7 +293,7 @@ class User_Controller extends Template_Controller {
 	{
 		$this->authorize('logged_out');
 		$user = ORM::factory('user')
-			->where(array('password' => $sha1, 'activated' => 0, 'deleted' => 0))
+			->where(array('password' => $sha1, 'activated' => 0, 'banned' => 0, 'deleted' => 0))
 			->find();
 		
 		if ($user->id >0) {
