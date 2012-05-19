@@ -218,7 +218,17 @@ class User_Model extends ORM {
     	
     	$this->db->delete('roles_users', array('user_id' => $this->id));
     	
-    	foreach ($this->chocobos as $chocobo) $chocobo->delete();
+    	$this->deleted = time();
+		$this->save();
+	}
+	
+	/**
+	 * supprime le joueur
+	 *
+	 */
+	public function delete ()
+	{
+		foreach ($this->chocobos as $chocobo) $chocobo->delete();
     	
 	  	foreach ($this->equipment as $equipment) $equipment->delete();
     	
@@ -227,9 +237,21 @@ class User_Model extends ORM {
 		foreach ($this->successes as $success) $success->delete();
     	
 		foreach ($this->vegetables as $vegetable) $vegetable->delete();
-    	
-    	$this->deleted = time();
-		$this->save();
+		
+		if ($this->image != '') 
+    	{
+			unlink('upload/users/mini/' . $this->image);
+			unlink('upload/users/thumbmail/' . $this->image);
+		}
+		
+		$delete_user = ORM::factory('deleted_user');
+ 		$delete_user->old_id = $this->id;
+ 		$delete_user->name = $this->username;
+ 		$delete_user->email = $this->email;
+ 		$delete_user->created = time();
+ 		$delete_user->save();
+ 		
+		parent::delete();
 	}
  
 }
