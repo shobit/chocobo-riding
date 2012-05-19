@@ -182,8 +182,7 @@ class User_Model extends ORM {
     
     /**
      * marque comme supprimé le joueur
-     * supprime les historiques de course des chocobos, les sujets favoris, 
-     * les notifications commentaires et messages, les rôles, les discussions
+     * supprime toutes les données associées (sauf les infos du joueur - table users)
      *
      */
 	public function to_delete()
@@ -206,17 +205,6 @@ class User_Model extends ORM {
     	
     	$this->db->delete('roles_users', array('user_id' => $this->id));
     	
-    	$this->deleted = time();
-		$this->save();
-	}
-    
-    /**
-     * supprime le joueur
-     * supprime les chocobos, les équipements, les noix, les légumes, les succès
-     *
-     */
-    public function delete()
-    {
     	foreach ($this->chocobos as $chocobo) $chocobo->delete();
     	
 	  	foreach ($this->equipment as $equipment) $equipment->delete();
@@ -227,7 +215,8 @@ class User_Model extends ORM {
     	
 		foreach ($this->vegetables as $vegetable) $vegetable->delete();
     	
-	  	parent::delete();
-    }
+    	$this->deleted = time();
+		$this->save();
+	}
  
 }
