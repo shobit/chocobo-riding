@@ -195,7 +195,8 @@ class User_Model extends ORM {
     
     /**
      * marque comme supprimé le joueur
-     * supprime toutes les données associées (sauf les infos du joueur - table users)
+     * supprime les sujets favoris, les notifications commentaires & messages,
+     * les rôles, les historiques de course, l'avatar
      *
      */
 	public function to_delete()
@@ -218,12 +219,19 @@ class User_Model extends ORM {
     	
     	$this->db->delete('roles_users', array('user_id' => $this->id));
     	
+    	if ($this->image != '') 
+    	{
+			if (is_link('upload/users/mini/' . $this->image)) unlink('upload/users/mini/' . $this->image);
+			if (is_link('upload/users/thumbmail/' . $this->image)) unlink('upload/users/thumbmail/' . $this->image);
+		}
+		
     	$this->deleted = time();
 		$this->save();
 	}
 	
 	/**
 	 * supprime le joueur
+	 * supprime le reste des infos du joueur
 	 *
 	 */
 	public function delete ()
@@ -237,12 +245,6 @@ class User_Model extends ORM {
 		foreach ($this->successes as $success) $success->delete();
     	
 		foreach ($this->vegetables as $vegetable) $vegetable->delete();
-		
-		if ($this->image != '') 
-    	{
-			if (is_link('upload/users/mini/' . $this->image)) unlink('upload/users/mini/' . $this->image);
-			if (is_link('upload/users/thumbmail/' . $this->image)) unlink('upload/users/thumbmail/' . $this->image);
-		}
 		
 		$delete_user = ORM::factory('deleted_user');
  		$delete_user->old_id = $this->id;
