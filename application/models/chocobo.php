@@ -429,19 +429,17 @@ class Chocobo_Model extends ORM {
         	$chocobo->job 		= $nut->choose_job($chocobo->lvl_limit);
         	// Ajouter succès jobs ici
         
-        	$chocobo->speed 	= 20+$nut->speed;
-        	$chocobo->intel 	= 20+$nut->intel;
-        	$chocobo->endur 	= 20+$nut->endur;
+        	$chocobo->speed 	= 20 + $nut->speed;
+        	$chocobo->intel 	= 20 + $nut->intel;
+        	$chocobo->endur 	= 20 + $nut->endur;
         	
-        	$chocobo->pl	 	= 60;
-        	$chocobo->hp 		= 3*$chocobo->intel;
-        	$chocobo->mp 		= 2*$chocobo->endur;
-        	
-        	$chocobo->moral		= 50;
+        	$chocobo->pl	 	= $chocobo->endur *2;
+        	$chocobo->hp 		= $chocobo->endur *3;
+        	$chocobo->mp 		= $chocobo->intel *1;
         	
         	$chocobo->birthday 	= time();
-        	$chocobo->moved 	= time()+3600; #durée de 1h pour le mode bébé
         	$chocobo->save();
+        	
         	return $chocobo;
         }
 	}
