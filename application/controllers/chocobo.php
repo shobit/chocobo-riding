@@ -110,44 +110,53 @@ class Chocobo_Controller extends Template_Controller {
 	}
 
 	/**
-	 * sale function.
+	 * vend un chocobo qui appartient au joueur en session
 	 * 
-	 * @access public
-	 * @param mixed $name
-	 * @return void
 	 */
-	public function sale($name) {
-		// access
+	public function sale ( $name ) 
+	{
 		$this->authorize('logged_in');
+		
 		$chocobo_session = $this->session->get('chocobo');
 		
-		// var
 		$user = $this->session->get('user');
+		
 		$chocobo = ORM::factory('chocobo')->where('name', $name)->find();
 		
-		// verifying
-		if ($chocobo->id >0 and $chocobo->user->id == $user->id and count($user->chocobos) > 1) {
-			$price = $chocobo->get_price();
-			$user->set_gils($price);
-			
-			// jgrowl			
-			gen::add_jgrowl('Vente - Chocobo '.$chocobo->name.' vendu ! ('.$price.' Gils)');
-			
-			$user->nbr_chocobos_saled += 1;
-			$user->save();
-			
-			// deleting chocobo
-			$chocobo->delete();
-			
-			// selecting first chocobo
-			if ($chocobo_session->id == $chocobo->id) {
-				$this->session->set('chocobo', $user->chocobos[0]);
-			}
+		$msg = '';
+		
+		if ( ! $chocobo->loaded) 
+		{
+			$msg = 'chocobo_not_found';
 		}
 		
-		// redirecting
-		url::redirect('chocobo/view/'.$chocobo_session->name);
-
+		if ($chocobo->user_id != $user->id)
+		{
+			$msg = 'chocobo_not_owned';
+		}
+		
+		if (count($user->chocobos) == 1)
+		{
+			$msg = 'chocobo_alone';
+		}
+		
+		if (empty($msg)) 
+		{
+			$price = $chocobo->get_price();
+			$user->set_gils($price);
+			$user->nbr_chocobos_saled++;
+			$user->save();
+			
+			gen::add_jgrowl('Vente - Chocobo ' . $chocobo->name . ' vendu ! (' . $price . ' Gils)');
+			
+			$chocobo->delete();
+			
+			$ch = $user->chocobos[0];
+			
+			$this->session->set('chocobo', $ch);
+		}
+		
+		url::redirect('chocobo/view/' . $ch->name);
 	}
 
 }
