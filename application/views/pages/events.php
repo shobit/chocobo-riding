@@ -17,6 +17,7 @@ foreach ($posts as $i => $post)
 	$tmp = explode('-', $date[1]);
 	$date2 = explode(':', $tmp[0]);
 	$time = mktime($date2[0], $date2[1], $date2[2], $date1[1], $date1[2], $date1[0]);
+	$time += 7*3600;
 	$new = $date[0];
 	if ($i != 0 and $new !== $last) echo '<br /><br />';
 	if ($new !== $last) echo '<b>' . date::display($time) . '</b><br />';
