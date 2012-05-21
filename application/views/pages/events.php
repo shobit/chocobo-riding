@@ -21,7 +21,7 @@ foreach ($posts as $i => $post)
 	$new = $date[0];
 	if ($i != 0 and $new !== $last) echo '<br /><br />';
 	if ($new !== $last) echo '<b>' . date::display($time) . '</b><br />';
-	echo '<br />' . $post['title'] . ' <span class="hour">' . date('H:i', $time) . '</span>';
+	echo '<br />' . $post['title'] . ' <span class="hour">' . date('H:i', $time + 2*3600) . '</span>';
 	$last = $new;
 }
 
