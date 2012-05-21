@@ -3,7 +3,7 @@
 </style>
 
 <h1>Evénements</h1>
-<div id="prelude">Voici les 15 dernières nouveautés du site. Vous pouvez trouver plus d'informations sur le code (qui est open source) en allant sur la page Github. Restez au fait des nouveautés du site ! Si vous avez des questions ou autres, n'hésitez pas à les poser sur le forum ou la Shoutbox :)</div>
+<div id="prelude">Voici les 15 derniers commits effectués sur le site. Vous pouvez trouver plus d'informations sur le code (qui est open source) en allant sur la page Github. Restez au fait des nouveautés du site ! Si vous avez des questions ou autres, n'hésitez pas à les poser sur le forum ou la Shoutbox :)</div>
 
 <?php
 
@@ -21,7 +21,7 @@ foreach ($posts as $i => $post)
 	$new = $date[0];
 	if ($i != 0 and $new !== $last) echo '<br /><br />';
 	if ($new !== $last) echo '<b>' . date::display($time) . '</b><br />';
-	echo '<br />' . $post['title'] . ' <span class="hour">' . $date2[0] . ':' . $date2[1] . '</span>';
+	echo '<br />' . $post['title'] . ' <span class="hour">' . date('H:i', $time) . '</span>';
 	$last = $new;
 }
 
