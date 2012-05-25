@@ -130,7 +130,7 @@ class Chocobo_Model extends ORM {
 			case 'hp_recup': 	$base = 30; 						break;
 			
 			// INTEL
-			case 'mp_limit': 	$base = $this->attr('intel') *1; 	break;	
+			case 'mp_limit': 	$base = ceil($this->attr('intel') /3); 	break;	
 			case 'mp_up': 		$base = 0.2; 						break;	
 			case 'mp_recup': 	$base = 30; 						break;
 			
