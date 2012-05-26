@@ -44,10 +44,14 @@
 		echo html::stylesheet('js/lib/tipsy/tipsy.css', 'screen', false);
 
 		// DATATABLE
-		echo html::script('js/lib/datatables/media/jquery.dataTables.min.js'); 
-		echo html::stylesheet('js/lib/datatables/css/table.css', 'screen', false);
-		echo html::stylesheet('js/lib/datatables/css/table_jui.css', 'screen', false);
+		echo html::script('js/lib/datatables/media/js/jquery.dataTables.min.js'); 
+		echo html::stylesheet('js/lib/datatables/media/css/jquery.dataTables.css', 'screen', false);
+		echo html::stylesheet('js/lib/datatables/media/css/table_jui.css', 'screen', false);
 
+		// JTIP
+		echo html::script('js/lib/jtip/jtip.js'); 
+		echo html::stylesheet('js/lib/jtip/jtip.css', 'screen', false);
+		
 		// MYSCRIPT
     	echo html::script('js/script.js');
     ?>

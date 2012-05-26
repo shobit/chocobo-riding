@@ -23,6 +23,8 @@ $('textarea#textile').autoResize({
  */
 $(document).ready(function() 
 {
+	$('a.jtiprel').jTipOn('rel');
+
 	$('.points a').click(function() {
 		var url =  $(this).attr("href").split('/'); // Attention quand on changera
 		var max = url.length;

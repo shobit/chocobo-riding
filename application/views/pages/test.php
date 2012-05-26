@@ -2,9 +2,9 @@
 
 <?php
 
-$e = ORM::factory('vegetable');
-$e->generate(0, 100, 3);
+ $e = ORM::factory('vegetable');
+ $e->generate(0, 100, 3);
 
-echo $e->vignette();
+ echo $e->vignette();
 
 ?>

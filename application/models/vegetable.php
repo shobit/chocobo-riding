@@ -71,11 +71,11 @@ class Vegetable_Model extends ORM
 		$res  = '';
 		//$res .= html::image('images/items/vegetables/vegetable'.$this->name.'.gif');
 		$res .= html::anchor(
-			'void(0);', 
+			'', 
 			'<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>', 
-			array('id' => 'vegetable' . $this->id . '_a')
+			array('class' => 'jtiprel', 'rel' => '#vegetable' . $this->id)
 		);
-		$res .= '<div id="vegetable' . $this->id . '_t" style="display:none;">
+		$res .= '<div id="vegetable' . $this->id . '" style="display:none;">
 			<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>
 			     <small>';
 		
@@ -85,13 +85,7 @@ class Vegetable_Model extends ORM
 		}
 		
 		$res .=	'</small>
-		</div>
-		<script type="text/javascript">
-			$(\'#vegetable' . $this->id . '_a\').bubbletip($(\'#vegetable' . $this->id . '_t\'), {
-				deltaDirection: \'right\',
-				offsetLeft: 20
-			});
-		</script>';
+		</div>';
 		return $res;
 	}
 
