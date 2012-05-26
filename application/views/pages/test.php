@@ -2,10 +2,8 @@
 
 <?php
 
-$user = $this->session->get('user');
-
-$e = ORM::factory('equipment');
-$e->generate(10, $user);
+$e = ORM::factory('vegetable');
+$e->generate(0, 100, 3);
 
 echo $e->vignette();
 

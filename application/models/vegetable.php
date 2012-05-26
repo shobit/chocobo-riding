@@ -1,89 +1,140 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php 
 /**
- * Nut Model
- *
- * @author     Menencia
- * @copyright  (c) 2010
+ * Modèle légume
  */
 class Vegetable_Model extends ORM 
 {
     
     protected $belongs_to = array('user');
+    protected $has_many = array('vegetable_effect');
     
     /**
-     * Generate a random vegetable.
-     * 
-     * @access public
-     * @param mixed $chance
-     * @param mixed $user
-     * @return void
-     */
-    public function generate($chance, $user)
-    {
-    	// setting name
-    	$name = rand(1, 8);
-    	
-    	// setting interval value
-    	$min_value = max(1, $chance - 20);
-    	$max_value = 100;
-    	
-    	// calculating base value
-    	$value = rand($min_value, min($chance, $max_value));
-    	
-    	// setting price
-    	$price  = $value;
-    	
-    	// setting rarity | 0 ~ 4
-    	$rarity = floor($chance /23);
-    	
-    	// creating vegetable
-    	$this->user_id 	= $user->id;
-    	$this->name 		= $name;
-    	$this->rarity		= $rarity;
-    	$this->value 		= $value;
-    	$this->price 		= $price; 
-    	$this->save();
-    }
+	 * Génère un légume aléatoirement
+	 * 
+	 * @param int $user_id ID du joueur auquel sera associé le légume
+	 * @param int $level Niveau du légume
+	 * @param int $rarity_max Rareté maximum du légume généré
+	 */
+	public function generate($user_id, $level, $rarity_max=3)
+	{
+		// Détermination du nom (8 possibles)
+		$name = ceil($level /12.85);
+		
+		// Rareté
+		$rarity = rand(0, $rarity_max);
+		
+		// Création du légume
+		$this->user_id 		= $user_id;
+		$this->name 		= $name;
+		$this->rarity 		= $rarity;
+		$this->level 		= $level;
+		$this->price 		= $level * ($rarity +1);
+		$this->save();
+
+		// Détermination des effets
+		$nbr_effects = $rarity +1; 
+		$coeff_max = $nbr_effects * $level;
+		$coeffs = num::split_sum($coeff_max, $nbr_effects);
+		$t_effects = $this->get_effects();
+		$effects_tmp = array_rand($t_effects, $nbr_effects);
+		$effects = is_string($effects_tmp) ? array($effects_tmp) : $effects_tmp;
+
+		for($i = 0; $i < $nbr_effects; $i++)
+		{
+			$value = $t_effects[$effects[$i]][0] + ceil(($t_effects[$effects[$i]][1] - $t_effects[$effects[$i]][0]) *$coeffs[$i] /100 );
+			ORM::factory('vegetable_effect')->add($this->id, $effects[$i], $value);
+		}
+	}
+
+	/**
+	 * Retourne le tableau des caractéristiques d'effets de légume
+	 *
+	 * @return Tableau associatif
+	 */
+	public function get_effects()
+	{
+		return array(
+			'xp' => array(5, 200), 
+			'pl' => array(5, 100), 
+			'hp' => array(10, 2000), 
+			'mp' => array(3, 200),
+		);
+	}
     
-    // FUNC: Informations du légume en popup (HTML)
+    /**
+     * Affiche le nom de l'objet et au survol un pop-up d'information
+     *
+     * @return Code HTML
+     */
 	public function vignette() 
 	{
-		$res  = " ";
+		$res  = '';
 		//$res .= html::image('images/items/vegetables/vegetable'.$this->name.'.gif');
-		$res .= html::anchor('void(0);', $this->name(), array('id'=>'vegetable'.$this->id.'_a'));
-		$res .= '<div id="vegetable'.$this->id.'_t" style="display:none;">
-			<b>'.$this->name().'</b>
+		$res .= html::anchor(
+			'void(0);', 
+			'<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>', 
+			array('id' => 'vegetable' . $this->id . '_a')
+		);
+		$res .= '<div id="vegetable' . $this->id . '_t" style="display:none;">
+			<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>
 			     <small>';
 		
-		$apts = array('pl', 'hp', 'mp', 'moral', 'guerison', 'xp', 'rage', 'pc');
-		$apt = $apts[$this->name - 1];
-		$res .= "<br />".Kohana::lang('chocobo.'.$apt).' +'.$this->value.'%';
+		foreach ($this->vegetable_effect as $effect)
+		{
+			$res .= "<br />" . Kohana::lang('chocobo.' . $effect->name) . ' +' . $effect->value;
+		}
 		
 		$res .=	'</small>
 		</div>
 		<script type="text/javascript">
-			$(\'#vegetable'.$this->id.'_a\').bubbletip($(\'#vegetable'.$this->id.'_t\'), {
+			$(\'#vegetable' . $this->id . '_a\').bubbletip($(\'#vegetable' . $this->id . '_t\'), {
 				deltaDirection: \'right\',
 				offsetLeft: 20
 			});
 		</script>';
 		return $res;
 	}
+
+	/**
+	 * Retourne la couleur en héxadécimal du nom de l'objet (selon sa rareté)
+	 *
+	 * @return String
+	 */
+	public function color()
+	{
+		$colors = array('#000', '#009', '#609', '#f60');
+		return $colors[$this->rarity];
+	}
 	
+	/**
+	 * Retourne le nom de l'objet
+	 *
+	 * @return String
+	 */
 	public function name()
 	{
 		switch ($this->name)
 		{
-			case 1 : $name = "Légume Mimmet"; 	break;
+			case 1 : $name = "Légume Gyshal"; 	break;
 			case 2 : $name = "Légume Krakka";	break;
-			case 3 : $name = "Légume Pashana";	break;
-			case 4 : $name = "Légume Curiel";	break;
-			case 5 : $name = "Légume Guysal";	break;
-			case 6 : $name = "Légume Reagan";	break;
-			case 7 : $name = "Légume Tantal";	break;
+			case 3 : $name = "Légume Tantal";	break;
+			case 4 : $name = "Légume Pahsana";	break;
+			case 5 : $name = "Légume Curiel";	break;
+			case 6 : $name = "Légume Mimett";	break;
+			case 7 : $name = "Légume Reagan";	break;
 			case 8 : $name = "Légume Sylkis";	break;
 		}
 		return $name;
+	}
+
+	/**
+	 * Supprime un légume
+	 */
+	public function delete()
+	{
+		foreach($this->vegetable_effect as $effect) $effect->delete();
+
+		parent::delete();
 	}
 	    
 }

@@ -44,7 +44,7 @@
 					if ($gils >= $achat) echo html::anchor("shop/buy/vegetable2", Kohana::lang('shop.buy'), array("class"=>"button"));
 				?>
 			</td>
-		</tr-->
+		</tr>
 		
 		<tr class="item">
 			<?php $achat = 300; ?>
@@ -104,7 +104,7 @@
 					if ($gils >= $achat) echo html::anchor("shop/buy/equipment3", Kohana::lang('shop.buy'), array("class"=>"button"));
 				?>
 			</td>
-		</tr>
+		</tr-->
 	
 		<tr class="item">
 			<?php $price = $PRICE_CHOCOBO_M + ($nbr_chocobos-1)*100; ?>

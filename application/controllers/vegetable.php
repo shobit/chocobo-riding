@@ -1,108 +1,68 @@
-<?php defined('SYSPATH') OR die('No direct access allowed.');
+<?php
 /**
- * Vegetable Controller - Utilisation & vente de légumes
- *
- * @author     Menencia
- * @copyright  (c) 2010
+ * Contrôleur légume
  */
 class Vegetable_Controller extends Template_Controller 
 {
 
 	/**
-	 * Use a vegetable.
+	 * consomme un légume pour le chocobo en session
 	 * 
-	 * @access public
-	 * @param mixed $id
-	 * @return void
+	 * @param int $id ID du légume à consommer
 	 */
 	public function apply($id)
 	{
 		$chocobo = $this->session->get('chocobo');
-		$vegetable = ORM::factory('vegetable')->find($id);
-		
-		$use = false;
-		switch ($vegetable->name)
+
+		$vegetable = ORM::factory('vegetable', $id);
+
+		foreach($vegetable->vegetable_effect as $effect)
 		{
-			// Légume Mimmet - Souffle
-			case 1:
-				$pl = $chocobo->pl * ($vegetable->value /100 +1);
-				$pl_limit = $chocobo->attr('pl_limit');
-				$chocobo->pl = min($pl, $pl_limit);
-				$use = true;
-			break;
-		
-			// Légume Krakka - Energie
-			case 2:
-				$hp = $chocobo->hp * ($vegetable->value /100 +1);
-				$hp_limit = $chocobo->attr('hp_limit');
-				$chocobo->hp = min($hp, $hp_limit);
-				$use = true;
-			break;
-				
-			// Légume Pashana - Esprit
-			case 3:
-				$mp = $chocobo->mp * ($vegetable->value /100 +1);
-				$mp_limit = $chocobo->attr('mp_limit');
-				$chocobo->mp = min($mp, $mp_limit);
-				$use = true;
-			break;
-			
-			// Légume Pashana - Moral
-			case 4:
-				$moral = $chocobo->moral * ($vegetable->value /100 +1);
-				$moral_limit = $chocobo->attr('moral_limit');
-				$chocobo->moral = min($moral, $moral_limit);
-				$use = true;
-			break;
-			
-			// Légume Curiel - guérit
-			case 5:
-				$use = true;
-			break;
-			
-			// Légume Guysal - experience
-			case 6:
-				$use = true;
-				$chocobo->set_exp($vegetable->value);
-			break;
-				
-			// Légume Reagan - rage
-			case 7:
-				$rage = $chocobo->rage * ($vegetable->value/100 +1);
-				$rage_limit = $chocobo->attr('rage_limit');
-				$chocobo->rage = min($rage, $rage_limit);
-				$use = true;
-			break;
-				
-			// Légume Tantal - temps de fusion
-			case 8:
-				$use = true;
-			break;
+			switch ($effect->name)
+			{
+				case 'xp':
+					$chocobo->set_exp($effect->value);
+					break;
+				case 'pl':
+					$chocobo->pl += $effect->value;
+					break;
+				case 'hp':
+					$chocobo->hp += $effect->value;
+					break;
+				case 'mp':
+					$chocobo->mp += $effect->value;
+					break;
+			}
 		}
 		
-		if ($use) 
-		{
-			gen::add_jgrowl($vegetable->name()." utilisé!");
-			$chocobo->save();
-			$vegetable->delete();
-		}
+		$chocobo->save();
+		$vegetable->delete();
+		gen::add_jgrowl("Légume utilisé!");
 		
 		url::redirect('inventory');
 	}
 	
+	/**
+	 * Vend un légume pour le joueur en session
+	 *
+	 * @param int $id ID du légume à vendre
+	 */
 	public function sale($id)
 	{
 		$this->authorize('logged_in');
-		$user = $this->session->get('user');
-		$vegetable = ORM::factory('vegetable')->find($id);
 		
-		if ($vegetable->id >0 and $user->id == $vegetable->user_id) {
+		$user = $this->session->get('user');
+		
+		$vegetable = ORM::factory('vegetable', $id);
+		
+		if ($vegetable->loaded and $user->id == $vegetable->user_id) 
+		{
 			$sale = $vegetable->price;
 			$user->set_gils($sale);
 			$user->save();
 			
 			$vegetable->delete();
-			gen::add_jgrowl("Vente - Légume vendu ! (".$sale." Gils)");
+			gen::add_jgrowl("Vente - Légume vendu ! (" . $sale . " Gils)");
 		}
 		
 		url::redirect("inventory");
