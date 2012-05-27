@@ -46,8 +46,7 @@
 		// DATATABLE
 		echo html::script('js/lib/datatables/media/js/jquery.dataTables.min.js'); 
 		echo html::stylesheet('js/lib/datatables/media/css/jquery.dataTables.css', 'screen', false);
-		echo html::stylesheet('js/lib/datatables/media/css/table_jui.css', 'screen', false);
-
+		
 		// JTIP
 		echo html::script('js/lib/jtip/jtip.js'); 
 		echo html::stylesheet('js/lib/jtip/jtip.css', 'screen', false);
