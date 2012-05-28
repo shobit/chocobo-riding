@@ -111,14 +111,24 @@ class Vegetable_Controller extends Template_Controller
 		
 		$vegetable = ORM::factory('vegetable', $id);
 		
-		if ($vegetable->loaded and $user->id == $vegetable->user_id) 
+		if ( ! $vegetable->loaded)
+		{
+			$msg = 'vegetable_not_found';
+		}
+
+		if ($vegetable->user_id != $user->id)
+		{
+			$msg = 'vegetable_not_owned';
+		}
+
+		if ( ! isset($msg)) 
 		{
 			$sale = $vegetable->price;
 			$user->set_gils($sale);
 			$user->save();
 			
 			$vegetable->delete();
-			gen::add_jgrowl("Vente - Légume vendu ! (" . $sale . " Gils)");
+			gen::add_jgrowl('Légume vendu!');
 		}
 		
 		url::redirect("inventory");
