@@ -143,7 +143,7 @@ class Chocobo_Controller extends Template_Controller {
 		if (empty($msg)) 
 		{
 			$price = $chocobo->get_price();
-			$user->set_gils($price);
+			$user->set_gils($user->gils + $price);
 			$user->nbr_chocobos_saled++;
 			$user->save();
 			

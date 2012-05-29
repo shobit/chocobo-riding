@@ -77,12 +77,12 @@ class Vegetable_Controller extends Template_Controller
 			$msg = 'vegetable_not_found';
 		}
 
-		if ($vegetable->user_id == 0)
+		if ($vegetable->user_id != 0)
 		{
 			$msg = 'vegetable_not_purchasable';
 		}
 
-		if ($user->gils >= $vegetable->price)
+		if ($user->gils < $vegetable->price)
 		{
 			$msg = 'not_enough_gils';
 		}
@@ -90,11 +90,13 @@ class Vegetable_Controller extends Template_Controller
 		if ( ! isset($msg))
 		{
 			$vegetable->user_id = $user->id;
-			$user->set_gils($vegetable->price);
+			$vegetable->save();
+			$user->set_gils($user->gils - $vegetable->price);
 			$user->save();
-			gen::add_jgrowl('Légume acheté!');
+			$msg = 'Légume acheté!';
 		}
 		
+		gen::add_jgrowl($msg);
 		url::redirect('shop');
 	}
 
@@ -124,7 +126,7 @@ class Vegetable_Controller extends Template_Controller
 		if ( ! isset($msg)) 
 		{
 			$sale = $vegetable->price;
-			$user->set_gils($sale);
+			$user->set_gils($user->gils + $sale);
 			$user->save();
 			
 			$vegetable->delete();

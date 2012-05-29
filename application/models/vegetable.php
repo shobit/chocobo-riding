@@ -28,7 +28,7 @@ class Vegetable_Model extends ORM
 		$this->name 		= $name;
 		$this->rarity 		= $rarity;
 		$this->level 		= $level;
-		$this->price 		= $level * ($rarity +1);
+		$this->price 		= $level * ($rarity +1) +60;
 		$this->save();
 
 		// Détermination des effets

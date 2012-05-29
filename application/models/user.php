@@ -21,7 +21,7 @@ class User_Model extends ORM {
      */
     public function set_gils ( $gils )
     {
-    	$this->gils += $gils;
+    	$this->gils = $gils;
     	$this->listen_success(array( # SUCCES
 			"gils_500",
 			"gils_1000",
