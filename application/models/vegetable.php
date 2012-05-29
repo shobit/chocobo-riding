@@ -54,10 +54,10 @@ class Vegetable_Model extends ORM
 	public function get_effects()
 	{
 		return array(
-			'xp' => array(5, 200), 
-			'pl' => array(5, 100), 
-			'hp' => array(10, 2000), 
-			'mp' => array(3, 200),
+			'xp' => array(5, 100), 
+			'pl' => array(5, 60), 
+			'hp' => array(10, 200), 
+			'mp' => array(3, 20),
 		);
 	}
     
