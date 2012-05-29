@@ -40,13 +40,13 @@ class Vegetable_Controller extends Template_Controller
 						$chocobo->set_exp($effect->value);
 						break;
 					case 'pl':
-						$chocobo->pl += $effect->value;
+						$chocobo->set_pl($effect->value);
 						break;
 					case 'hp':
-						$chocobo->hp += $effect->value;
+						$chocobo->set_hp($effect->value);
 						break;
 					case 'mp':
-						$chocobo->mp += $effect->value;
+						$chocobo->set_mp($effect->value);
 						break;
 					case 'rage':
 						$chocobo->set_rage($effect->value);

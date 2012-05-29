@@ -229,13 +229,58 @@ class Chocobo_Model extends ORM {
 	}
 	
 	/**
+	 * Modifie les PL du chocobo
+	 *
+	 * @param int $pl
+	 */
+	public function set_pl($pl)
+	{
+		$pl_min = 0;
+		$pl_max = $this->attr('pl_limit');
+		$pl = $this->pl + $pl;
+		$pl = max($pl_min, $pl);
+		$pl = min($pl_max, $pl);
+		$this->pl = $pl;
+	}
+
+	/**
+	 * Modifie les HP du chocobo
+	 *
+	 * @param int $hp
+	 */
+	public function set_hp($hp)
+	{
+		$hp_min = 0;
+		$hp_max = $this->attr('hp_limit');
+		$hp = $this->hp + $hp;
+		$hp = max($hp_min, $hp);
+		$hp = min($hp_max, $hp);
+		$this->hp = $hp;
+	}
+
+	/**
+	 * Modifie les MP du chocobo
+	 *
+	 * @param int $mp
+	 */
+	public function set_mp($mp)
+	{
+		$mp_min = 0;
+		$mp_max = $this->attr('mp_limit');
+		$mp = $this->mp + $mp;
+		$mp = max($mp_min, $mp);
+		$mp = min($mp_max, $mp);
+		$this->mp = $mp;
+	}
+
+	/**
 	 * Modifie l'expérience du chocobo
 	 *
 	 * @param int $gain XP gagné
 	 */
 	public function set_exp($gain) 
 	{
-		$res 	 = array(
+		$res = array(
 			'level' 		=> 0,
 			'classe' 		=> 0, 
 			'nb_levels' 	=> 0, 
@@ -243,8 +288,9 @@ class Chocobo_Model extends ORM {
 			'nb_points'		=> 0,
 			'speed'			=> 0, 
 			'endur'			=> 0, 
-			'intel'			=> 0);
-		$xp  	 = $this->xp + $gain;
+			'intel'			=> 0
+		);
+		$xp = $this->xp + $gain;
 		
 		while ($xp >= 100 and $this->level < $this->lvl_limit) #montée d'un niveau
 		{
@@ -266,12 +312,12 @@ class Chocobo_Model extends ORM {
 				"level_100"
 			)); 
 			
-			$new_classe = false;
-			if ($this->classe == 0 and $this->level >= 10) $new_classe = true;
-			if ($this->classe == 1 and $this->level >= 30) $new_classe = true;
-			if ($this->classe == 2 and $this->level >= 50) $new_classe = true;
-			if ($this->classe == 3 and $this->level >= 70) $new_classe = true;
-			if ($this->classe == 4 and $this->level >= 90) $new_classe = true;
+			$new_classe = FALSE;
+			if ($this->classe == 0 and $this->level >= 10) $new_classe = TRUE;
+			if ($this->classe == 1 and $this->level >= 30) $new_classe = TRUE;
+			if ($this->classe == 2 and $this->level >= 50) $new_classe = TRUE;
+			if ($this->classe == 3 and $this->level >= 70) $new_classe = TRUE;
+			if ($this->classe == 4 and $this->level >= 90) $new_classe = TRUE;
 			if ($new_classe) #montée d'une classe
 			{
 				$this->classe ++;
@@ -330,10 +376,11 @@ class Chocobo_Model extends ORM {
 	 */
 	public function set_rage($rage)
 	{
-		$rage_limit	= $this->attr('rage_limit');
+		$rage_min = 0;
+		$rage_max = $this->attr('rage_limit');
 		$rage = $this->rage + $rage;
-		$rage = min($rage, $rage_limit);
-		$rage = max($rage, 0);
+		$rage = min($rage_max, $rage);
+		$rage = max($rage_min, $rage);
 		$this->rage = $rage;
 	}
 	
@@ -344,9 +391,11 @@ class Chocobo_Model extends ORM {
 	 */
 	public function set_fame($fame)
 	{
+		$fame_min = 0.01;
+		$fame_max = 1;
 		$fame = $this->fame + $fame;
-		$fame = min($fame, 1);
-		$fame = max($fame, 0.01);
+		$fame = min($fame_max, $fame);
+		$fame = max($fame_min, $fame);
 		$this->fame = $fame;
 		$this->listen_success(array( # SUCCES
 			"fame_075",
