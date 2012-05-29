@@ -229,11 +229,11 @@ class Chocobo_Model extends ORM {
 	}
 	
 	/**
-	 * (void) modifie l'expérience du chocobo
+	 * Modifie l'expérience du chocobo
 	 *
-	 * (int) $gain
+	 * @param int $gain XP gagné
 	 */
-	public function set_exp ( $gain ) 
+	public function set_exp($gain) 
 	{
 		$res 	 = array(
 			'level' 		=> 0,
@@ -324,11 +324,11 @@ class Chocobo_Model extends ORM {
 	}
 	
 	/**
-	 * (void) modifie la rage du chocobo
+	 * Modifie la rage du chocobo
 	 *
-	 * (int) $rage
+	 * @param int $rage
 	 */
-	public function set_rage ( $rage )
+	public function set_rage($rage)
 	{
 		$rage_limit	= $this->attr('rage_limit');
 		$rage = $this->rage + $rage;
@@ -338,11 +338,11 @@ class Chocobo_Model extends ORM {
 	}
 	
 	/**
-	 * (void) modifie la côte du chocobo
+	 * Modifie la côte du chocobo
 	 *
-	 * (float) $fame
+	 * @param float $fame
 	 */
-	public function set_fame ( $fame )
+	public function set_fame($fame)
 	{
 		$fame = $this->fame + $fame;
 		$fame = min($fame, 1);
@@ -357,11 +357,11 @@ class Chocobo_Model extends ORM {
 	}
 	
 	/**
-	 * (void) modifie la vitesse record du chocobo
+	 * Modifie la vitesse record du chocobo
 	 *
-	 * (float) $max_speed
+	 * @param float $max_speed
 	 */
-	public function set_max_speed ( $max_speed )
+	public function set_max_speed($max_speed)
 	{
 		if ($max_speed > $this->max_speed)
 		{
