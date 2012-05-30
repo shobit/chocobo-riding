@@ -74,7 +74,7 @@ class Vegetable_Model extends ORM
 		$res .= html::anchor(
 			'', 
 			'<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>', 
-			array('class' => 'jtiprel', 'rel' => '#vegetable' . $this->id)
+			array('class' => 'jtiprel', 'rel' => '#vegetable' . $this->id, 'onclick' => 'return false')
 		);
 		$res .= '<div id="vegetable' . $this->id . '" style="display:none;">
 			<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>

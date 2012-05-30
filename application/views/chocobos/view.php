@@ -460,7 +460,7 @@
 		if ($chocobo->user->id == $user->id and count($chocobo->user->chocobos) > 1)
 		{
 			$texte = "Are you sure ?";
-			echo html::anchor('chocobo/sale/' . $chocobo->name, 'Vendre', array('class' => 'button', 'onclick' => "return confirm('$texte');"));
+			echo html::anchor('chocobo/sale/' . $chocobo->id, 'Vendre', array('class' => 'button', 'onclick' => "return confirm('$texte');"));
 		}
 		?>
 	</div>

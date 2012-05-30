@@ -424,32 +424,31 @@ class Chocobo_Model extends ORM {
 			));
 		}
 	}
-	
-	// TODO FUNC: Informations du chocobo en popup (HTML)
+
 	public function vignette() 
 	{
-		$speed = $this->attr('speed');
-		$intel = $this->attr('intel');
-		$endur = $this->attr('endur');
+		$res  = '';
+		//$res .= html::image('images/items/vegetables/vegetable'.$this->name.'.gif');
+		$res .= html::anchor(
+			'', 
+			'<font style="font-weight:bold; color:#000;">' . $this->name . '</font>', 
+			array('class' => 'jtiprel', 'rel' => '#chocobo' . $this->id, 'onclick' => 'return false')
+		);
+		$res .= '<div id="chocobo' . $this->id . '" style="display:none;">
+			<font style="font-weight:bold; color:#000;">' . $this->name . '</font>
+			     <small>';
 		
-		$res  = "";
-		$res .= html::anchor('chocobo/view/'.$this->name, $this->name, array('id'=>'a'.$this->id.'_r'));
-		$res .= '<div id="tip'.$this->id.'_r" style="display:none;">
-			<b>'.$this->name.'</b> ('.$this->user->username.')<br />
-			<small>Niveau '.$this->level.', Côte '.$this->display_fame().'<br />
-			Vit: '.$speed.' / Int: '.$intel.' / End: '.$endur.'</small>
-		</div>
-		<script type="text/javascript">
-			$(window).bind(\'load\', function() {
-				$(\'#a'.$this->id.'_r\').bubbletip($(\'#tip'.$this->id.'_r\'), {
-					deltaDirection: \'right\',
-					offsetLeft: 20
-				});
-			});
-		</script>';
+		$res .= '<br />Niveau : ' . ' ' . $this->level . ' /' . $this->lvl_limit;
+		$res .= '<br />Vitesse : ' . ' ' . $this->attr('speed');
+		$res .= '<br />Intelligence : ' . ' ' . $this->attr('intel');
+		$res .= '<br />Endurance : ' . ' ' . $this->attr('endur');
 		
+		$res .=	'</small>
+		</div>';
 		return $res;
 	}
+
+
 	
 	/**
 	 * Génère un nouveau chocobo à l'aide d'une noix

@@ -41,7 +41,7 @@ $boxes = $user->boxes;
 			<tr class="item">
 				<?php 
 				$price = $chocobo->lvl_limit * 20;
-				$chocobo->name = ($chocobo->gender == 1) ? 'Chocobo mâle': 'Chocobo femelle';
+				$chocobo->name = ($chocobo->gender == 2) ? 'Chocobo mâle': 'Chocobo femelle';
 				?>
 				<td class="icon"><?php echo html::image('images/chocobos/yellow/generic.gif') ?></td>
 				<td class="name"><?php echo $chocobo->vignette() ?></td>

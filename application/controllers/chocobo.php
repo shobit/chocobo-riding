@@ -110,20 +110,63 @@ class Chocobo_Controller extends Template_Controller {
 	}
 
 	/**
-	 * vend un chocobo qui appartient au joueur en session
-	 * 
+	 * Achète un chocobo pour le joueur en session
+	 *
+	 * @param int $id ID du chocobo à acheter
 	 */
-	public function sale ( $name ) 
+	public function buy($id)
 	{
 		$this->authorize('logged_in');
 		
-		$chocobo_session = $this->session->get('chocobo');
+		$user = $this->session->get('user');
+
+		$chocobo = ORM::factory('chocobo', $id);
+
+		if ( ! $chocobo->loaded)
+		{
+			$msg = 'chocobo_not_found';
+		}
+
+		if ($chocobo->user_id != 0)
+		{
+			$msg = 'chocobo_not_purchasable';
+		}
+
+		if ($user->gils < $chocobo->get_price())
+		{
+			$msg = 'not_enough_gils';
+		}
+
+		if (count($user->chocobos) >= $user->boxes)
+		{
+			$msg = 'no_more_boxes';
+		}
+
+		if ( ! isset($msg))
+		{
+			$chocobo->user_id = $user->id;
+			$chocobo->save();
+			$user->set_gils($user->gils - $chocobo->get_price());
+			$user->save();
+			$msg = 'Chocobo acheté!';
+		}
+		
+		gen::add_jgrowl($msg);
+		url::redirect('shop');
+	}
+
+	/**
+	 * Vend un chocobo qui appartient au joueur en session
+	 * 
+	 * @param int $id ID du chocobo à vendre
+	 */
+	public function sale($id) 
+	{
+		$this->authorize('logged_in');
 		
 		$user = $this->session->get('user');
 		
-		$chocobo = ORM::factory('chocobo')->where('name', $name)->find();
-		
-		$msg = '';
+		$chocobo = ORM::factory('chocobo', $id);
 		
 		if ( ! $chocobo->loaded) 
 		{
@@ -140,23 +183,24 @@ class Chocobo_Controller extends Template_Controller {
 			$msg = 'chocobo_alone';
 		}
 		
-		if (empty($msg)) 
+		if ( ! isset($msg)) 
 		{
 			$price = $chocobo->get_price();
 			$user->set_gils($user->gils + $price);
 			$user->nbr_chocobos_saled++;
 			$user->save();
 			
-			gen::add_jgrowl('Vente - Chocobo ' . $chocobo->name . ' vendu ! (' . $price . ' Gils)');
-			
 			$chocobo->delete();
+			$msg = 'Chocobo vendu!';
 			
-			$ch = $user->chocobos[0];
-			
-			$this->session->set('chocobo', $ch);
+			$user->reload();
+			$chocobo = $user->chocobos[0];
+			if ($chocobo->id == $id) $chocobo = $user->chocobos[1];
+			$this->session->set('chocobo', $chocobo);
 		}
 		
-		url::redirect('chocobo/view/' . $ch->name);
+		gen::add_jgrowl($msg);
+		url::redirect('chocobo/view/' . $chocobo->name);
 	}
 
 }
