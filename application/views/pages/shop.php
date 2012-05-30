@@ -37,6 +37,23 @@ $boxes = $user->boxes;
 			</tr>
 			<?php endforeach; ?>
 
+			<?php foreach($nuts as $nut): ?>
+			<tr class="item">
+				<?php $price = $nut->price ?>
+				<td class="icon"><?php echo html::image('images/items/nuts/nut' . $vegetable->name . '.gif') ?></td>
+				<td class="name"><?php echo $nut->vignette() ?></td>
+				<td class="price"><?php echo $price ?> Gils</td>
+				<td class="form"> 
+					<?php
+					if ($gils >= $price) 
+					{
+						echo html::anchor('nut/buy/' . $nut->id, Kohana::lang('shop.buy'), array('class' => 'button'));
+					}
+					?>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+
 			<?php foreach($chocobos as $chocobo): ?>
 			<tr class="item">
 				<?php 
