@@ -82,7 +82,7 @@ class Vegetable_Model extends ORM
 		
 		foreach ($this->vegetable_effects as $effect)
 		{
-			$res .= "<br />" . Kohana::lang('chocobo.' . $effect->name) . ' +' . $effect->value;
+			$res .= "<br />" . Kohana::lang('vegetable.' . $effect->name) . ' +' . $effect->value;
 		}
 		
 		$res .=	'</small>

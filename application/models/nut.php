@@ -1,92 +1,125 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php 
 /**
- * Nut Model
- *
- * @author     Menencia
- * @copyright  (c) 2010
+ * Modèle noix
  */
 class Nut_Model extends ORM 
 {
-
 	protected $belongs_to = array('user');
+	protected $has_many = array('nut_effects');
 	
-    // Relations entre modèles
-	
-	var $colours = array(); # array[8]
+    var $colours = array(); # array[8]
 	var $jobs = array();
 	
     /**
-	 * Nut random generator
+	 * Génère une noix aléatoirement
 	 * 
-	 * @access public
-	 * @param mixed $chance
-	 * @param mixed $user
-	 * @return void
+	 * @param int $user_id
+	 * @param int $level
+	 * @param int $rarity
 	 */
-	public function generate($chance, $user)
+	public function generate($user_id, $level, $rarity_max=3)
 	{
-    	// setting interval value
-		$min_value = max(1, $chance - 20);
-		$max_value = 100;
+    	// Détermination du nom (8 possibles)
+		$name = ceil($level /12.85);
 		
-		// calculating base value
-		$value = rand($min_value, min($chance, $max_value));
-		
-		// setting name
-		$name = floor($value / 12.5);
-		
-		//setting color
-		$colour = floor($value / $name);
-		
-		//setting job
-		$job = floor($value / $name);
-		
-		// setting price
-		$price  = $value;
-		
-    	// setting rarity | 0 ~ 4
-		$rarity = floor($value / 23);
-		
-		$this->user_id 	= $user->id;
+		// Rareté
+		$rarity = rand(0, $rarity_max);
+
+		// Création de la noix
+		$this->user_id 		= $user_id;
 		$this->name 		= $name;
-		$this->rarity		= $rarity;
+		$this->rarity 		= $rarity;
 		$this->gender 		= rand(1, 2);   
-		$this->level 		= 1;
-		$this->colour 		= $colour;
-		$this->job			= $job;
-		$this->price 		= $price; 
+		$this->level 		= $level;
+		$this->price 		= $level * ($rarity +1) +60;
 		$this->save();
+
+		// Détermination des effets
+		$nbr_effects = $rarity +1; 
+		$coeff_max = $nbr_effects * $level;
+		$coeffs = num::split_sum($coeff_max, $nbr_effects);
+		$t_effects = $this->get_effects();
+		$effects_tmp = array_rand($t_effects, $nbr_effects);
+		$effects = is_string($effects_tmp) ? array($effects_tmp) : $effects_tmp;
+
+		for($i = 0; $i < $nbr_effects; $i++)
+		{
+			$value = $t_effects[$effects[$i]][0] + ceil(($t_effects[$effects[$i]][1] - $t_effects[$effects[$i]][0]) *$coeffs[$i] /100 );
+			ORM::factory('nut_effect')->add($this->id, $effects[$i], $value);
+		}
+	}
+
+	/**
+	 * Retourne le tableau des caractéristiques d'effets de la noix
+	 *
+	 * @return Tableau associatif
+	 */
+	public function get_effects()
+	{
+		return array(
+			'speed' => array(1, 10), 
+			'intel' => array(1, 10), 
+			'endur' => array(1, 10),
+			'lvl_limit' => array(1, 4),
+			'yellow' => array(1, 50),
+			'red' => array(1, 50),
+			'blue' => array(1, 50),
+			'green' => array(1, 50),
+			'black' => array(1, 50),
+			'silver' => array(1, 50),
+			'white' => array(1, 50),
+			'gold' => array(1, 50),
+			'chocobo' => array(1, 50),
+			'knight' => array(1, 50),
+			'scholar' => array(1, 50),
+			'thief' => array(1, 50),
+			'ninja' => array(1, 50),
+			'whitemage' => array(1, 50),
+			'blackmage' => array(1, 50),
+			'darkknight' => array(1, 50),
+			'dragoon' => array(1, 50),
+		);
 	}
 	
     /**
-	 * Nut bubbletip
-	 * 
-	 * @access public
-	 * @return void
-	 */
+     * Affiche le nom de l'objet et au survol un pop-up d'information
+     *
+     * @return Code HTML
+     */
 	public function vignette() 
 	{
-		$res  = " ";
-		//$res .= html::image('images/items/nuts/nut'.$this->name.'.gif');
-		$res .= html::anchor('void(0);', $this->name(), array('id'=>'nut'.$this->id.'_a'));
-		$res .= '<div id="nut'.$this->id.'_t" style="display:none;">
-			<b>'.$this->name().'</b>
-				 ';
-		if ($this->level > 0) $res .= "<br />Niveau +".$this->level;
-		if ($this->speed > 0) $res .= "<br />Vitesse +".$this->speed;
-		if ($this->intel > 0) $res .= "<br />Intelligence +".$this->intel;
-		if ($this->endur > 0) $res .= "<br />Endurance +".$this->endur;
-		$res .=	'
-		</div>
-		<script type="text/javascript">
-			$(\'#nut'.$this->id.'_a\').bubbletip($(\'#nut'.$this->id.'_t\'), {
-				deltaDirection: \'right\',
-				offsetLeft: 20
-			});
-		</script>';
+		$res  = '';
+		//$res .= html::image('images/items/vegetables/vegetable'.$this->name.'.gif');
+		$res .= html::anchor(
+			'', 
+			'<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>', 
+			array('class' => 'jtiprel', 'rel' => '#nut' . $this->id, 'onclick' => 'return false')
+		);
+		$res .= '<div id="nut' . $this->id . '" style="display:none;">
+			<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>
+			     <small>';
+		
+		foreach ($this->nut_effects as $effect)
+		{
+			$res .= "<br />" . Kohana::lang('nut.' . $effect->name) . ' +' . $effect->value;
+		}
+		
+		$res .=	'</small>
+		</div>';
 		return $res;
 	}
 	
+	/**
+	 * Retourne la couleur en héxadécimal du nom de l'objet (selon sa rareté)
+	 *
+	 * @return String
+	 */
+	public function color()
+	{
+		$colors = array('#000', '#009', '#609', '#f60');
+		return $colors[$this->rarity];
+	}
+
 	/**
 	 * Display nut name
 	 * 
