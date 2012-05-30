@@ -138,10 +138,10 @@ a.menuNotSelected:hover {color: #2C193A;}
 #strategy a.grey, #strategy a.grey:visited {color:#999; text-decoration: none;}
 #strategy a.grey:hover {text-decoration: underline;}
 
-a#shop, a#shop:visited {
+a.shop, a.shop:visited {
 	color:#fff; background-color: #888; text-decoration: none; 
 	font-variant: small-caps; padding: 2px; }
-a#shop:hover {background-color: #333;}
+a.shop:hover {background-color: #333;}
 
 
 /* -------------------------------------------------------------------]
@@ -236,13 +236,13 @@ div.leftPart3 {
 [                                                                     ] 
 [------------------------------------------------------------------- */
 
-table#shop {width: 100%; border-collapse: collapse;}
-table#shop tr {border: 1px solid #bbb;}
-table#shop td {height: 30px;}
-table#shop td.icon {width: 20px; text-align: center;}
-table#shop td.name {width: 150px;}
-table#shop td.price {width: 100px; text-align: center;}
-table#shop td.form {width: 50px; text-align: center;}
+table.shop {width: 100%; border-collapse: collapse;}
+table.shop tr {border: 1px solid #bbb;}
+table.shop td {height: 30px;}
+table.shop td.icon {width: 20px; text-align: center;}
+table.shop td.name {width: 150px;}
+table.shop td.price {width: 100px; text-align: center;}
+table.shop td.form {width: 50px; text-align: center;}
 input#gils {border: 0px solid #fff; text-align: center; font-weight: bold;}
 .no_display {display: none;}
 

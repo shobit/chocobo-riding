@@ -61,7 +61,7 @@ class Fusion_Controller extends Template_Controller {
 				
 				# adding baby
 				$level = min($male->level, $female->level);
-				$baby = Chocobo_Model::add_one($user->id, $nut, $level);
+				$baby = ORM::factory('chocobo')->generate($user->id, $nut, $level);
 				$baby->father = $male->id;
 				$baby->mother = $female->id;
 				$baby->save();

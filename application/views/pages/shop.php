@@ -6,9 +6,11 @@ $boxes = $user->boxes;
 <h1><?= Kohana::lang('shop.title') ?></h1>
 <div id="prelude"><?= Kohana::lang('shop.prelude') ?></div>
 
+<p><b>Niveau de la boutique : <?php echo ($user->shop +1); ?></b></p>
+
 <div class="leftPart2">
 	
-	<table id="shop">
+	<table class="shop">
 		<thead>
 				<tr>
 					<th></th>
@@ -34,6 +36,26 @@ $boxes = $user->boxes;
 				</td>
 			</tr>
 			<?php endforeach; ?>
+
+			<?php foreach($chocobos as $chocobo): ?>
+			<tr class="item">
+				<?php 
+				$price = $chocobo->lvl_limit * 20;
+				$chocobo->name = ($chocobo->gender == 1) ? 'Chocobo mâle': 'Chocobo femelle';
+				?>
+				<td class="icon"><?php echo html::image('images/chocobos/yellow/generic.gif') ?></td>
+				<td class="name"><?php echo $chocobo->vignette() ?></td>
+				<td class="price"><?php echo $price ?> Gils</td>
+				<td class="form"> 
+					<?php
+					if ($gils >= $price) 
+					{
+						echo html::anchor('chocobo/buy/' . $chocobo->id, Kohana::lang('shop.buy'), array('class' => 'button'));
+					}
+					?>
+				</td>
+			</tr>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
 
@@ -49,28 +71,3 @@ $boxes = $user->boxes;
 	
 	</center>
 </div>
-
-<script>
-$(function(){
-	$('#shop').dataTable({
-            "oLanguage": {
-			    "sProcessing":     "Traitement en cours...",
-			    "sLengthMenu":     "Afficher _MENU_ éléments",
-			    "sZeroRecords":    "Aucun élément à afficher",
-			    "sInfo":           "Affichage de l'élement _START_ à _END_ sur _TOTAL_ éléments",
-			    "sInfoEmpty":      "Affichage de l'élement 0 à 0 sur 0 éléments",
-			    "sInfoFiltered":   "(filtré de _MAX_ éléments au total)",
-			    "sInfoPostFix":    "",
-			    "sSearch":         "Rechercher :",
-			    "sLoadingRecords": "Téléchargement...",
-			    "sUrl":            "",
-			    "oPaginate": {
-			        "sFirst":    "Premier",
-			        "sPrevious": "Précédent",
-			        "sNext":     "Suivant",
-			        "sLast":     "Dernier"
-			    }
-			}
-        });
-});
-</script>

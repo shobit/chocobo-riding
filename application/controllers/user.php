@@ -302,9 +302,8 @@ class User_Controller extends Template_Controller {
 			
 			$nut = ORM::factory('nut');
 			$nut->gender = rand(1, 2);
-			$nut->level = 0;
-   			Chocobo_Model::add_one($user->id, $nut);
-			
+			ORM::factory('chocobo')->generate($user->id, $nut);
+
 			gen::add_jgrowl(Kohana::lang('jgrowl.activate_success'));
 			url::redirect('home');
 		} else {

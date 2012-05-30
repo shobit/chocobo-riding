@@ -156,23 +156,13 @@ class Nut_Model extends ORM
 	}
 	
 	/**
-	 * Pick colour for baby chocobo
+	 * Retourne la couleur du chocobo selon les caractéristiques de la noix
 	 * 
-	 * @access public
-	 * @return void
+	 * @return int
 	 */
 	public function choose_colour()
 	{
-		$this->colours[0] = max(0, 100 - array_sum($this->colours));
-		$alea = rand(1, 100);
-		$num = 0;
-		$sum = $this->colours[0];
-		while ($sum <= $alea or $num == 8)
-		{
-			$num ++;
-			$sum += $this->colours[$num];
-		}
-		return $num;
+		return 0;
 	}
 	
 	public function initiate_jobs()

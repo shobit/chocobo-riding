@@ -451,21 +451,25 @@ class Chocobo_Model extends ORM {
 		return $res;
 	}
 	
-	// adding a new chocobo into DB
-	public static function add_one($user_id, $nut, $level=16)
+	/**
+	 * Génère un nouveau chocobo à l'aide d'une noix
+	 *
+	 * @param int $user_id
+	 * @param object $nut
+	 * @param int $level
+	 */
+	public function generate($user_id, $nut, $level=16)
 	{
-		if ($user_id!=0 and $nut!=null) 
+		if ($nut != NULL) 
 		{
-			$chocobo = ORM::factory('chocobo');
-			$chocobo->user_id = $user_id;
-			$chocobo->status	= ($nut->level == 0) ? 0 : 2; #bébé
-        	$chocobo->level 	= 1;
-        	$chocobo->fame 		= 1;
+			$this->user_id 		= $user_id;
+        	$this->level 		= 1;
+        	$this->fame 		= 1;
        	
-       		$chocobo->lvl_limit = $level+$nut->level;
-        	$chocobo->gender 	= $nut->gender;
-        	$chocobo->colour 	= $nut->choose_colour(); #renvoie le numéro de couleur
-        	$chocobo->listen_success(array( #SUCCES
+       		$this->lvl_limit 	= $level + $nut->level;
+        	$this->gender 		= $nut->gender;
+        	$this->colour 		= $nut->choose_colour(); #renvoie le numéro de couleur
+        	$this->listen_success(array( #SUCCES
         		"chocobo_red", 
         		"chocobo_blue",
         		"chocobo_green",
@@ -475,21 +479,21 @@ class Chocobo_Model extends ORM {
         		"chocobo_gold"
         	));
         	
-        	$chocobo->job 		= $nut->choose_job($chocobo->lvl_limit);
+        	$this->job 			= $nut->choose_job($this->lvl_limit);
         	// Ajouter succès jobs ici
         
-        	$chocobo->speed 	= 20 + $nut->speed;
-        	$chocobo->intel 	= 20 + $nut->intel;
-        	$chocobo->endur 	= 20 + $nut->endur;
+        	$this->speed 		= 20 + $nut->speed;
+        	$this->intel 		= 20 + $nut->intel;
+        	$this->endur 		= 20 + $nut->endur;
         	
-        	$chocobo->pl	 	= $chocobo->endur *2;
-        	$chocobo->hp 		= $chocobo->endur *3;
-        	$chocobo->mp 		= $chocobo->intel *1;
+        	$this->pl	 		= $this->endur *2;
+        	$this->hp 			= $this->endur *3;
+        	$this->mp 			= $this->intel *1;
         	
-        	$chocobo->birthday 	= time();
-        	$chocobo->save();
+        	$this->birthday 	= time();
+        	$this->save();
         	
-        	return $chocobo;
+        	return $this;
         }
 	}
 	
