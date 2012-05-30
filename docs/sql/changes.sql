@@ -9,3 +9,5 @@ ALTER TABLE  `vegetables` CHANGE  `value`  `level` INT( 11 ) NOT NULL DEFAULT  '
 
 ALTER TABLE  `vegetable_effects` CHANGE  `name`  `name` VARCHAR( 10 ) NOT NULL
 
+ALTER TABLE  `users` ADD  `shop` INT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `items`
+

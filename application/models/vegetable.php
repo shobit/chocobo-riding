@@ -55,10 +55,10 @@ class Vegetable_Model extends ORM
 	{
 		return array(
 			'xp' => array(5, 100), 
-			'pl' => array(5, 60), 
-			'hp' => array(5, 200), 
-			'mp' => array(1, 20), 
-			'rage' => array(1, 20),
+			'pl' => array(10, 100), 
+			'hp' => array(15, 500), 
+			'mp' => array(1, 50), 
+			'rage' => array(1, 50),
 		);
 	}
     
