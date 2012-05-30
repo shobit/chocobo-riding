@@ -49,19 +49,36 @@ class Nut_Controller extends Template_Controller
 		url::redirect('shop');
 	}
 
+	/**
+	 * Vend une noix pour le joueur en session
+	 *
+	 * @param int $id ID de la noix à vendre
+	 */
 	public function sale($id)
 	{
 		$this->authorize('logged_in');
-		$user = $this->session->get('user');
-		$nut = ORM::factory('nut')->find($id);
 		
-		if ($nut->id >0 and $user->id == $nut->user_id) {
-			$sale = $nut->price;
-			$user->set_gils($user->gils + $sale);
+		$user = $this->session->get('user');
+		
+		$nut = ORM::factory('nut', $id);
+		
+		if ( ! $nut->loaded)
+		{
+			$msg = 'nut_not_found';
+		}
+
+		if ($nut->user_id != $user->id)
+		{
+			$msg = 'nut_not_owned';
+		}
+
+		if ( ! isset($msg)) 
+		{
+			$user->set_gils($user->gils + $nut->price);
 			$user->save();
 			
 			$nut->delete();
-			gen::add_jgrowl("Vente - Noix vendue ! (".$sale." Gils)");
+			gen::add_jgrowl('Noix vendu!');
 		}
 		
 		url::redirect("inventory");
