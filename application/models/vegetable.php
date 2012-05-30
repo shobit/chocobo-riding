@@ -6,7 +6,7 @@ class Vegetable_Model extends ORM
 {
     
     protected $belongs_to = array('user');
-    protected $has_many = array('vegetable_effect');
+    protected $has_many = array('vegetable_effects');
     
     /**
 	 * Génère un légume aléatoirement
@@ -80,7 +80,7 @@ class Vegetable_Model extends ORM
 			<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>
 			     <small>';
 		
-		foreach ($this->vegetable_effect as $effect)
+		foreach ($this->vegetable_effects as $effect)
 		{
 			$res .= "<br />" . Kohana::lang('chocobo.' . $effect->name) . ' +' . $effect->value;
 		}
@@ -127,7 +127,7 @@ class Vegetable_Model extends ORM
 	 */
 	public function delete()
 	{
-		foreach($this->vegetable_effect as $effect) $effect->delete();
+		foreach($this->vegetable_effects as $effect) $effect->delete();
 
 		parent::delete();
 	}
