@@ -259,5 +259,15 @@ class Nut_Model extends ORM
 		$jobs = array_keys($this->jobs());
 		return $jobs[$job];
 	}
+
+	/**
+	 * Supprime une noix
+	 */
+	public function delete()
+	{
+		foreach($this->nut_effects as $effect) $effect->delete();
+
+		parent::delete();
+	}
 	
 }
