@@ -17,7 +17,7 @@
 	.race .gils {width: 50px;}
 	.race .nbr_chocobos {width: 50px;}
 	
-	.results {width: 735px; border: 1px solid #CECECE; border-collapse: collapse;}
+	.results {width: 780px; border: 1px solid #CECECE; border-collapse: collapse;}
 	.results th {text-align: center; font-size: 10px;}
 	.results td {text-align: center; border: 1px solid #CECECE;}
 	.result {height: 30px;}
@@ -27,8 +27,8 @@
 	.result .pl {width: 50px;}
 	.result .bonus {width: 100px;}
 	.result .nbr_chocobos {width: 50px;}
-	.result .date {width: 135px;}
-	.result .options {width: 100px;}
+	.result .date {width: 180px;}
+	.result .delete {width: 100px;}
 </style>
 
 <h1><?php echo Kohana::lang('race.index.title') . ' ' . html::image("images/classes/$classe.gif") ?></h1>
@@ -93,7 +93,7 @@
 		<th>Gils</th>
 		<th>Arrivée</th>
 		<th>Date</th>
-		<th>Options</th>
+		<th>Supprimer</th>
 	</tr>
 	<?php foreach ($results as $result): 
 		$not_seen = ( ! $result->seen) ? ' not_seen': '';
@@ -111,7 +111,7 @@
 				echo ' <b>' . $tl['short'] . '</b>';
 				?>
 			</td>
-			<td class="options">
+			<td class="delete">
 				<?php
 					if ($result->seen)
 					{
