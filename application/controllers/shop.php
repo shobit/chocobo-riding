@@ -54,7 +54,7 @@ class Shop_Controller extends Template_Controller
 			if ($nbr == 0)
 			{
 				$nut->gender = $i;
-				ORM::factory('chocobo')->generate(0, $nut, $level);
+				ORM::factory('chocobo')->generate(0, $nut, $level-1);
 			}
 		}
 		$chocobos = ORM::factory('chocobo')->where(array('user_id' => 0, 'lvl_limit' => $level))->orderby('gender', 'asc')->find_all();

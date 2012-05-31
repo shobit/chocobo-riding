@@ -465,8 +465,9 @@ class Chocobo_Model extends ORM {
         	$this->level 		= 1;
         	$this->fame 		= 1;
        	
-       		$this->lvl_limit 	= $level + $nut->level +1;
+       		$this->lvl_limit 	= $level + $nut->get_effect('lvl_limit') +1;
         	$this->gender 		= $nut->gender;
+        	$this->colour 		= $nut->choose_color();
         	$this->listen_success(array( #SUCCES
         		"chocobo_red", 
         		"chocobo_blue",
@@ -476,11 +477,13 @@ class Chocobo_Model extends ORM {
         		"chocobo_white",
         		"chocobo_gold"
         	));
+        	
+        	$this->job 			= $nut->choose_job();
         	// Ajouter succès jobs ici
         
-        	$this->speed 		= 20 + $nut->speed;
-        	$this->intel 		= 20 + $nut->intel;
-        	$this->endur 		= 20 + $nut->endur;
+        	$this->speed 		= 20 + $nut->get_effect('speed');
+        	$this->intel 		= 20 + $nut->get_effect('intel');
+        	$this->endur 		= 20 + $nut->get_effect('endur');
         	
         	$this->pl	 		= $this->endur *2;
         	$this->hp 			= $this->endur *3;

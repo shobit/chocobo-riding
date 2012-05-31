@@ -26,6 +26,8 @@ class num extends num_Core {
 	 */
 	public static function rand_pick($array)
 	{
+		if (empty($array)) return 0;
+
 		$max = array_sum($array);
 		$alea = rand(1, $max);
 		$num = 0;

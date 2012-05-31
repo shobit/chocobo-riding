@@ -80,6 +80,26 @@ class Nut_Model extends ORM
 			'dragoon' => array(1, 50),
 		);
 	}
+
+	/**
+	 * Retourne la valeur de l'effet associé à une noix, 0 si non trouvé
+	 *
+	 * @param string $effect Nom de l'effet
+	 * @return int
+	 */
+	public function get_effect($effect)
+	{
+		foreach ($this->nut_effects as $effect)
+		{
+			if ($effect->name == $effect)
+			{
+				return $effect->value;
+				break;
+			}
+		}
+
+		return 0;
+	}
 	
     /**
      * Retourne le nom de l'objet (+pop-up)
@@ -253,7 +273,7 @@ class Nut_Model extends ORM
 	 * 
 	 * @return int
 	 */
-	public function choose_job($level)
+	public function choose_job()
 	{
 		$job = num::rand_pick($this->jobs);
 		$jobs = array_keys($this->jobs());
