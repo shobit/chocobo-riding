@@ -14,7 +14,7 @@
 	<center>
 		<p><?php echo html::image('images/theme/home.jpg', array('width'=>200)); ?></p><br />
 		<p><?php 
-			echo html::anchor('register', 
+			echo html::anchor('users/new', 
 				Kohana::lang('home.register'), 
 				array('class'=>'button')
 			); 
