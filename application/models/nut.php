@@ -31,7 +31,7 @@ class Nut_Model extends ORM
 		$this->rarity 		= $rarity;
 		$this->gender 		= rand(1, 2);   
 		$this->level 		= $level;
-		$this->price 		= $level * ($rarity +1) +60;
+		$this->price 		= $level * ($rarity +1) +200;
 		$this->save();
 
 		// Détermination des effets
