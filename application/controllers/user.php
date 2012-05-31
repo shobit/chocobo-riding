@@ -142,7 +142,7 @@ class User_Controller extends Template_Controller {
 				$user->save();
 				
                 //Redirect
-                url::redirect('user/view/'.$user->username);
+                url::redirect('users/' . $user->id);
             } else {
                 $errors = arr::overwrite($errors, $post->errors('form_error_messages'));
             }  
