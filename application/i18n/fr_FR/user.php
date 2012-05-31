@@ -48,5 +48,6 @@ $lang = array (
 		'prelude2' => "Laissez moi devinez! Hmm.. votre compte n'est pas activé, c'est bien ça? Normalement, le lien d'activation vous a été envoyé par mail! Vérifiez, vous n'avez rien, Kupo? Mais sachez que des fois ça prend du temps de les recevoir ces mails.. Si encore, on s'en occupait! Enfin, toujours rien? Eh bien, il ne vous reste plus qu'à compléter ce formulaire pour en avoir un nouveau.",
 		'mail_title' => "Chocobo Riding - Changement",
 		'mail_content' => "Bonjour et bienvenue sur Chocobo Riding!<br /><br />Informations de connexion : <br />Pseudo: %username%<br />Password: %password%<br /><br />Lien d'activation: %link%<br /><br />Site Web: http://chocobo-riding.com"
-	)
+	),
+	'title_login' => 'Se connecter',
 );
