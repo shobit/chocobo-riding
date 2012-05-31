@@ -44,8 +44,8 @@
 		echo html::stylesheet('js/lib/tipsy/tipsy.css', 'screen', false);
 
 		// DATATABLE
-		echo html::script('js/lib/datatables/media/js/jquery.dataTables.min.js'); 
-		echo html::stylesheet('js/lib/datatables/media/css/jquery.dataTables.css', 'screen', false);
+		echo html::script('js/lib/dataTables/media/js/jquery.dataTables.min.js'); 
+		echo html::stylesheet('js/lib/dataTables/media/css/jquery.dataTables.css', 'screen', false);
 		
 		// JTIP
 		echo html::script('js/lib/jtip/jtip.js'); 
