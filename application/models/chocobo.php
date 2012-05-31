@@ -544,6 +544,7 @@ class Chocobo_Model extends ORM {
 	public function update_race ()
 	{
 		// repère si le chocobo du joueur est inscrit à une course qui a déjà commencé
+		$this->db->query('START TRANSACTION');
 		$race = ORM::factory('race', $this->race_id);
 		if ($race->loaded and $race->start < time())
 		{
@@ -551,6 +552,7 @@ class Chocobo_Model extends ORM {
 			$s = new Simulation();
 			$s->run($race);
 		}
+		$this->db->query('COMMIT');
 		
 		// repère si le chocobo possède un historique de course non vu et non notifié
 		// Note : ne peut pas en avoir plusieurs
