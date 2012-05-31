@@ -11,3 +11,8 @@ ALTER TABLE  `vegetable_effects` CHANGE  `name`  `name` VARCHAR( 10 ) NOT NULL
 
 ALTER TABLE  `users` ADD  `shop` INT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `items`
 
+ALTER TABLE  `nuts` DROP  `level` ,
+DROP  `speed` ,
+DROP  `intel` ,
+DROP  `endur` ,
+DROP  `colour` ;
