@@ -7,8 +7,8 @@ class Nut_Model extends ORM
 	protected $belongs_to = array('user');
 	protected $has_many = array('nut_effects');
 	
-    var $colours = array(); # array[8]
-	var $jobs = array();
+    var $colors = NULL;
+    var $jobs = NULL;
 	
     /**
 	 * Génère une noix aléatoirement
@@ -82,7 +82,7 @@ class Nut_Model extends ORM
 	}
 	
     /**
-     * Affiche le nom de l'objet et au survol un pop-up d'information
+     * Retourne le nom de l'objet (+pop-up)
      *
      * @return Code HTML
      */
@@ -110,7 +110,7 @@ class Nut_Model extends ORM
 	}
 	
 	/**
-	 * Retourne la couleur en héxadécimal du nom de l'objet (selon sa rareté)
+	 * Retourne la couleur en héxadécimal de la rareté de la noix
 	 *
 	 * @return String
 	 */
@@ -121,10 +121,9 @@ class Nut_Model extends ORM
 	}
 
 	/**
-	 * Display nut name
+	 * Retourne le nom de la noix
 	 * 
-	 * @access public
-	 * @return void
+	 * @return string
 	 */
 	public function name()
 	{
@@ -143,49 +142,50 @@ class Nut_Model extends ORM
 	}
 	
 	/**
-	 * Init colours
-	 * 
-	 * @access public
-	 * @return void
+	 * Retourne la liste des couleurs
+	 *
+	 * @return array
 	 */
-	public function initiate_colours()
+	public function colors()
 	{
-		switch ($this->name)
+		return array(
+			'yellow' 	=> 0,
+			'red' 		=> 0,
+			'blue' 		=> 0,
+			'green' 	=> 0,
+			'black' 	=> 0,
+			'silver' 	=> 0,
+			'white' 	=> 0,
+			'gold' 		=> 0,
+		);
+	}
+
+	/**
+	 * Initialise le tableau des couleurs selon les effets de la noix
+	 * 
+	 * @return array
+	 */
+	public function initiate_colors()
+	{
+		$res = $this->colors();
+		foreach ($this->nut_effects as $effect)
 		{
-			case 1 : $res = array(0, 0, 0, 0, 0, 0, 0, 0); $num = 0; break; // jaune
-			case 2 : $res = array(0,10, 0, 0, 0, 0, 0, 0); $num = 1; break; // rouge
-			case 3 : $res = array(0, 0,10, 0, 0, 0, 0, 0); $num = 2; break; // bleu
-			case 4 : $res = array(0, 0, 0,10, 0, 0, 0, 0); $num = 3; break; // vert
-			case 5 : $res = array(0,10, 0,10, 5, 0, 0, 0); $num = 4; break; // noir
-			case 6 : $res = array(0, 0,10,10, 0, 5, 0, 0); $num = 5; break; // argent
-			case 7 : $res = array(0,10, 0,10, 0, 0, 5, 0); $num = 6; break; // blanc
-			case 8 : $res = array(0,10,10,10, 5, 5, 5, 1); $num = 7; break; // or
+			if (array_key_exists($effect->name, $res))
+			{
+				$res[$effect->name] += $effect->value;
+			}
 		}
-		if ($this->colour > 0) $res[$num] += $this->colour;
-		$this->colours = $res;
+		$this->colors = $res;
 	}
 	
 	/**
-	 * Change colours with chocobo stats
+	 * Modifie le tableau des couleurs selon la couleur du chocobo
 	 * 
-	 * @access public
-	 * @param mixed $chocobo
-	 * @return void
+	 * @param object $chocobo
 	 */
-	public function change_colours($chocobo)
+	public function change_colors($chocobo)
 	{
-		$s = $chocobo->speed;
-		$i = $chocobo->intel;
-		$e = $chocobo->endur;
-		if 		($s>100 and $i>100 and $e>100) 	$num = 7; 
-		elseif 	($s>75 and $i>50 and $e>75) 	$num = 6;
-		elseif 	($s>50 and $i>75 and $e>75) 	$num = 5;
-		elseif 	($s>75 and $i>75 and $e>50) 	$num = 4;
-		elseif 	($s>25 and $i>25 and $e>50) 	$num = 3;
-		elseif 	($s>25 and $i>50 and $e>25) 	$num = 2;
-		elseif 	($s>50 and $i>25 and $e>25) 	$num = 1;
-		else 									$num = 0;
-		$this->colours[$num] += 5; 
+		$this->colors[$chocobo->display_colour('code')] += floor($chocobo->level /2);
 	}
 	
 	/**
@@ -193,36 +193,71 @@ class Nut_Model extends ORM
 	 * 
 	 * @return int
 	 */
-	public function choose_colour()
+	public function choose_color()
 	{
-		return 0;
+		$color = num::rand_pick($this->colors);
+		$colors = array_keys($this->colors());
+		return $colors[$color];
+	}
+
+	/**
+	 * Retourne la liste des jobs
+	 *
+	 * @return array
+	 */
+	public function jobs()
+	{
+		return array(
+			'chocobo' 		=> 0,
+			'knight' 		=> 0,
+			'scholar' 		=> 0,
+			'thief' 		=> 0,
+			'ninja' 		=> 0,
+			'whitemage' 	=> 0,
+			'blackmage' 	=> 0,
+			'darkknight' 	=> 0,
+			'dragoon' 		=> 0
+		);
 	}
 	
+	/**
+	 * Initialise le tableau des jobs selon les effets de la noix
+	 * 
+	 * @return array
+	 */
 	public function initiate_jobs()
 	{
-		$this->jobs = array(11, 10, 8, 7, 5, 4, 2, 1);
+		$res = $this->jobs();
+		foreach ($this->nut_effects as $effect)
+		{
+			if (array_key_exists($effect->name, $res))
+			{
+				$res[$effect->name] += $effect->value;
+			}
+		}
+		$this->jobs = $res;
 	}
 	
+	/**
+	 * Modifie le tableau des jobs selon la couleur du chocobo
+	 * 
+	 * @param object $chocobo
+	 */
 	public function change_jobs($chocobo)
 	{
-		$this->jobs[$chocobo->job] += 5;
+		$this->jobs[$chocobo->display_job('code')] += floor($chocobo->level /2);
 	}
 	
+	/**
+	 * Retourne la couleur du chocobo selon les caractéristiques de la noix
+	 * 
+	 * @return int
+	 */
 	public function choose_job($level)
 	{
-		$paliers = array(20, 40, 30, 50, 40, 60, 50, 70);
-		$res = 0; $i = 7;
-		while ($i >= 0 and $res == 0)
-		{
-			if ($level >= $paliers[$i])
-			{
-				$rand = rand(1, 100);
-				$chance = $this->colours[$i] +($level -$paliers[$i]) /2;
-				if ($rand <= $chance) $res = $i;
-			}
-			$i --;
-		}
-		return $res;
+		$job = num::rand_pick($this->jobs);
+		$jobs = array_keys($this->jobs());
+		return $jobs[$job];
 	}
 	
 }

@@ -31,11 +31,11 @@ class Fusion_Controller extends Template_Controller {
 			$post->add_callbacks('boxes', 	array($this, '_no_boxes'));
 			
 			# executing fusion
-			if ($post->validate()) {
-			
+			if ($post->validate()) 
+			{
 				# initing nut
-				$nut = ORM::factory('nut')->find($post->nut);
-				$nut->initiate_colours();
+				$nut = ORM::factory('nut', $post->nut);
+				$nut->initiate_colors();
 				$nut->initiate_jobs();
 				
 				# setting fusion delay (1 day)
@@ -44,19 +44,19 @@ class Fusion_Controller extends Template_Controller {
 				$female_id = ($chocobo->gender == 1) ? $chocobo->id : $post->partner;
 				
 				# setting father /male
-				$male = ORM::factory('chocobo')->find($male_id);
-				$nut->change_colours($male);
+				$male = ORM::factory('chocobo', $male_id);
+				$nut->change_colors($male);
 				$nut->change_jobs($male);
 				if ($male->user->id == $user->id) $male->mated = $delay;
-				$male->nb_mated += 1;
+				$male->nb_mated++;
 				$male->save();
 				
 				# setting mother /female
-				$female = ORM::factory('chocobo')->find($female_id);
-				$nut->change_colours($female);
+				$female = ORM::factory('chocobo', $female_id);
+				$nut->change_colors($female);
 				$nut->change_jobs($female);
 				if ($female->user->id == $user->id) $female->mated = $delay;
-				$female->nb_mated += 1;
+				$female->nb_mated++;
 				$female->save();
 				
 				# adding baby
@@ -69,7 +69,7 @@ class Fusion_Controller extends Template_Controller {
 				# deleting nut
 				$nut->delete();
 				
-				$user->nbr_birthdays += 1;
+				$user->nbr_birthdays++;
 				$user->save();
 				
 				gen::add_jgrowl(Kohana::lang('jgrowl.new_baby'));

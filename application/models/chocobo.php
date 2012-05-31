@@ -465,9 +465,9 @@ class Chocobo_Model extends ORM {
         	$this->level 		= 1;
         	$this->fame 		= 1;
        	
-       		$this->lvl_limit 	= $level + $nut->level;
+       		$this->lvl_limit 	= $level + $nut->level +1;
         	$this->gender 		= $nut->gender;
-        	$this->colour 		= $nut->choose_colour(); #renvoie le numéro de couleur
+        	$this->colour 		= $nut->choose_colour();
         	$this->listen_success(array( #SUCCES
         		"chocobo_red", 
         		"chocobo_blue",
