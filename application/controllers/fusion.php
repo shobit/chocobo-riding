@@ -91,7 +91,7 @@ class Fusion_Controller extends Template_Controller {
 			->where('gender', $gender)
 			->where('level', $chocobo->lvl_limit)
 			->where('lvl_limit', $chocobo->lvl_limit)
-			->where('status', 0)
+			->where('race_id', 0)
 			->orderby(NULL, 'RAND()')
 			->find_all(5);
 		
@@ -106,13 +106,17 @@ class Fusion_Controller extends Template_Controller {
 		$this->template->content = $view;
 	}
 	
-	// include - verify the chocobo matches
-	public function _chocobo_matches(Validation $array, $field) {
+	/**
+	 * Vérifie que le chocobo en session est apte à s'accoupler
+	 */
+	public function _chocobo_matches(Validation $array, $field) 
+	{
 		$chocobo = $this->session->get('chocobo');
 		$res = false;
-		if ($chocobo->status != 0) $res = true;
+		if ($chocobo->race_id != 0) $res = true;
 		if ($chocobo->mated > time()) $res = true;
-		if ($res) {
+		if ($res) 
+		{
 			$array->add_error($field, 'matches');
 		}
 	}
@@ -126,7 +130,7 @@ class Fusion_Controller extends Template_Controller {
 		if ($partner->id == $chocobo->id) $res = true;
 		if ($partner->gender == $chocobo->gender) $res = true;
 		if ($partner->user->id == $chocobo->user->id and $partner->mated > time()) $res = true;
-		if ($partner->user->id == $chocobo->user->id and $partner->status != 0) $res = true;
+		if ($partner->user->id == $chocobo->user->id and $partner->race_id != 0) $res = true;
 		if ($res) {
 			$array->add_error($field, 'matches');
 		}

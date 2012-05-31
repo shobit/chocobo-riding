@@ -17,7 +17,7 @@ class Equipment_Controller extends Template_Controller
 		
 		if ($equipment->id >0 and 
 			$user->id == $equipment->user_id and
-			$chocobo->status == 0) 
+			$chocobo->race_id == 0) 
 		{
 			foreach ($chocobo->equipment as $equip)
 			{
@@ -44,7 +44,7 @@ class Equipment_Controller extends Template_Controller
 		
 		if ($equipment->id >0 and 
 			$user->id == $equipment->user_id and
-			$chocobo->status == 0) 
+			$chocobo->race_id == 0) 
 		{
 			$equipment->chocobo_id = NULL;
 			$equipment->save();

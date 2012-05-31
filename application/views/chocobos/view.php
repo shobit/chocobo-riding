@@ -446,12 +446,8 @@
 	<!-- IMAGE -->
 	<div class="chocobo_image">
 		<?php 
-		if ($chocobo->status == 2)	
-			echo html::image('images/chocobos/'.$chocobo->display_colour('code').
-				'/baby/big.png');
-		else	
-			echo html::image('images/chocobos/'.$chocobo->display_colour('code').
-				'/'.$chocobo->display_job('code').'/big.png'); 
+		echo html::image('images/chocobos/'.$chocobo->display_colour('code').
+			'/'.$chocobo->display_job('code').'/big.png'); 
 		?>	
 	</div>
 	

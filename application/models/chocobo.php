@@ -10,11 +10,8 @@ class Chocobo_Model extends ORM {
     		$url = "images/chocobos/".gen::colour($this->colour)."/generic.gif";
     	elseif ($format == "menu") 
     	{
-    		if ($this->status == 2)
-    			$url = "images/chocobos/".gen::colour($this->colour)."/baby/menu.png";
-    		else
-	    		$url = "images/chocobos/".gen::colour($this->colour)."/".
-    				$this->display_job('code')."/".$format.".png";
+    		$url = "images/chocobos/".gen::colour($this->colour)."/".
+    			$this->display_job('code')."/".$format.".png";
     	}
     	return html::image($url);
     }
@@ -48,17 +45,13 @@ class Chocobo_Model extends ORM {
     
     public function display_status() {
     	$res = "";
-    	switch($this->status) 
+    	if ($this->race_id == 0)
     	{
-    		case 0:
-    			$res = "Libre";
-    			break;
-    		case 2:
-    			$res = "Bébé";
-    			break;
-    		case 3:
-    			$res = html::anchor('races/'.$this->race_id, "En course");
-    			break;
+    		$res = 'Libre';
+    	}
+    	else
+    	{
+    		$res = html::anchor('races/' . $this->race_id, 'En course');
     	}
     	return $res;
     }

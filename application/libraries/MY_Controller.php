@@ -129,7 +129,7 @@ class Controller extends Controller_Core
         	foreach ($user->chocobos as $chocobo) 
         	{
         		$chocobo->regain();
-        		if ($chocobo->status == 2) $chocobo->baby_status();
+        		//if ($chocobo->status == 2) $chocobo->baby_status();
         		
 				if ( (empty($chocobo->name)) and 
 					(Router::$current_uri != 'chocobo/edit') and 
