@@ -317,11 +317,6 @@ class Race_Controller extends Template_Controller {
 			$msg = 'result_not_found';
 		}
 		
-		if ( ! $result->seen)
-		{
-			$msg = 'result_not_seen';
-		}
-		
 		if (empty($msg))
 		{
 			$result->to_delete();

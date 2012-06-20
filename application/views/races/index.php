@@ -113,10 +113,7 @@
 			</td>
 			<td class="delete">
 				<?php
-					if ($result->seen)
-					{
-						echo html::anchor('#', html::image('images/icons/delete.png', array('class' => 'icon', 'title' => 'Supprimer', 'rel' => 'tipsy')), array('class' => 'delete_result', 'id'=>'race' . $result->race->id));
-					}
+					echo html::anchor('#', html::image('images/icons/delete.png', array('class' => 'icon', 'title' => 'Supprimer', 'rel' => 'tipsy')), array('class' => 'delete_result', 'id'=>'race' . $result->race->id));
 				?>
 			</td>
 		</tr>
