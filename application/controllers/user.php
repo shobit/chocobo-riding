@@ -76,6 +76,100 @@ class User_Controller extends Template_Controller {
 	    	url::redirect('users');
 		}
 	}
+
+	public function upgrade_boxes()
+	{
+		$this->authorize('logged_in');
+
+		$user = $this->session->get('user');
+		$gils = $user->gils;
+		
+		$cost = $user->get_boxes_cost();
+
+		if ($gils < $cost)
+		{
+			$msg = 'not_enough_gils';
+		}
+
+		if ( ! isset($msg)) 
+		{
+			$msg = 'Box+ acheté !';
+			$user->set_gils(-$cost);
+			$user->boxes++;
+			$user->save();
+			
+			$user->listen_success(array( # SUCCES
+				"boxes_3",
+				"boxes_5",
+				"boxes_7"
+			));
+		}
+
+		gen::add_jgrowl($msg);
+		url::redirect('shop');
+	}
+
+	public function upgrade_inventory()
+	{
+		$this->authorize('logged_in');
+
+		$user = $this->session->get('user');
+		$gils = $user->gils;
+		
+		$cost = $user->get_inventory_cost();
+
+		if ($gils < $cost)
+		{
+			$msg = 'not_enough_gils';
+		}
+
+		if ( ! isset($msg)) 
+		{
+			$msg = 'Inventaire+ acheté !';
+			$user->set_gils(-$cost);
+			$user->items += 2;
+			$user->save();
+
+			$user->listen_success(array( # SUCCES
+				"items_12",
+				"items_15",
+				"items_20"
+			));
+		}
+
+		gen::add_jgrowl($msg);
+		url::redirect('shop');
+	}
+
+	/**
+	 * Augmenter de 1 le niveau de la boutique du joueur en session
+	 *
+	 */
+	public function upgrade_shop()
+	{
+		$this->authorize('logged_in');
+
+		$user = $this->session->get('user');
+		$gils = $user->gils;
+		
+		$cost = $user->get_shop_cost();
+
+		if ($gils < $cost)
+		{
+			$msg = 'not_enough_gils';
+		}
+
+		if ( ! isset($msg)) 
+		{
+			$msg = 'Boutique+ acheté !';
+			$user->set_gils(-$cost);
+			$user->shop++;
+			$user->save();
+		}
+
+		gen::add_jgrowl($msg);
+		url::redirect('shop');
+	}
 	
 	// FUNC: éditer la fiche du user de la session en cours
 	public function edit() {
