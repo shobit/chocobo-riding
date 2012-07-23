@@ -63,6 +63,8 @@ a:hover {
 	text-decoration: underline;
 }
 
+.icon4 {margin-bottom: -4px;}
+
 .clearleft {clear: left;}
 .clearright {clear: right;}
 .clearBoth {clear: both;}

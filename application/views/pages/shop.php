@@ -1,12 +1,17 @@
+<style>
+.upgrade_shop {margin: 10px 0 30px 0;}
+a.upgrade, a.upgrade:visited {background-color: #600; color: #FFF; padding: 4px; border-radius: 5px; font-size: 11px;}
+</style>
+
 <?php
 $gils = $user->gils;
 $boxes = $user->boxes;
+$shop = $user->shop;
+$gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 ?>
 
-<h1><?= Kohana::lang('shop.title') ?></h1>
-<div id="prelude"><?= Kohana::lang('shop.prelude') ?></div>
-
-<p><b>Niveau de la boutique : <?php echo ($user->shop +1); ?></b></p>
+<h1><?php echo Kohana::lang('shop.title') ?></h1>
+<div id="prelude"><?php echo Kohana::lang('shop.prelude') ?></div>
 
 <div class="leftPart2">
 	
@@ -25,7 +30,7 @@ $boxes = $user->boxes;
 				<?php $price = $vegetable->price ?>
 				<td class="icon"><?php echo html::image('images/items/vegetables/vegetable' . $vegetable->name . '.gif') ?></td>
 				<td class="name"><?php echo $vegetable->vignette() ?></td>
-				<td class="price"><?php echo $price ?> Gils</td>
+				<td class="price"><?php echo $price . $gils_png ?></td>
 				<td class="form"> 
 					<?php
 					if ($gils >= $price) 
@@ -42,7 +47,7 @@ $boxes = $user->boxes;
 				<?php $price = $nut->price ?>
 				<td class="icon"><?php echo html::image('images/items/nuts/nut' . $vegetable->name . '.gif') ?></td>
 				<td class="name"><?php echo $nut->vignette() ?></td>
-				<td class="price"><?php echo $price ?> Gils</td>
+				<td class="price"><?php echo $price . $gils_png ?></td>
 				<td class="form"> 
 					<?php
 					if ($gils >= $price) 
@@ -62,7 +67,7 @@ $boxes = $user->boxes;
 				?>
 				<td class="icon"><?php echo html::image('images/chocobos/yellow/generic.gif') ?></td>
 				<td class="name"><?php echo $chocobo->vignette() ?></td>
-				<td class="price"><?php echo $price ?> Gils</td>
+				<td class="price"><?php echo $price . $gils_png ?></td>
 				<td class="form"> 
 					<?php
 					if ($gils >= $price) 
@@ -73,6 +78,52 @@ $boxes = $user->boxes;
 				</td>
 			</tr>
 			<?php endforeach; ?>
+
+			<tr class="item">
+				<?php $cost = $user->get_boxes_cost() ?>
+				<td class="icon"></td>
+				<td class="name">Box +</td>
+				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="form"> 
+					<?php
+					if ($gils >= $cost) 
+					{
+						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_boxes', 'class' => 'button'));
+					}
+					?>
+				</td>
+			</tr>
+
+			<tr class="item">
+				<?php $cost = $user->get_inventory_cost() ?>
+				<td class="icon"></td>
+				<td class="name">Inventaire +</td>
+				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="form"> 
+					<?php
+					if ($gils >= $cost) 
+					{
+						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_inventory', 'class' => 'button'));
+					}
+					?>
+				</td>
+			</tr>
+
+			<tr class="item">
+				<?php $cost = $user->get_shop_cost() ?>
+				<td class="icon"></td>
+				<td class="name">Boutique +</td>
+				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="form"> 
+					<?php
+					if ($gils >= $cost) 
+					{
+						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_shop', 'class' => 'button'));
+					}
+					?>
+				</td>
+			</tr>
+
 		</tbody>
 	</table>
 
@@ -88,3 +139,11 @@ $boxes = $user->boxes;
 	
 	</center>
 </div>
+
+<script>
+$(function(){
+	$('.button').click(function(){
+		$(this).parent().html('En cours..');
+	});
+});
+</script>
