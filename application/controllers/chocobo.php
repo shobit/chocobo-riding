@@ -121,6 +121,7 @@ class Chocobo_Controller extends Template_Controller {
 		$user = $this->session->get('user');
 
 		$chocobo = ORM::factory('chocobo', $id);
+		$cost = $chocobo->get_price();
 
 		if ( ! $chocobo->loaded)
 		{
@@ -132,7 +133,7 @@ class Chocobo_Controller extends Template_Controller {
 			$msg = 'chocobo_not_purchasable';
 		}
 
-		if ($user->gils < $chocobo->get_price())
+		if ($user->gils < $cost)
 		{
 			$msg = 'not_enough_gils';
 		}
@@ -146,7 +147,7 @@ class Chocobo_Controller extends Template_Controller {
 		{
 			$chocobo->user_id = $user->id;
 			$chocobo->save();
-			$user->set_gils($user->gils - $chocobo->get_price());
+			$user->set_gils(-$cost);
 			$user->save();
 			$msg = 'Chocobo acheté!';
 		}
@@ -186,7 +187,7 @@ class Chocobo_Controller extends Template_Controller {
 		if ( ! isset($msg)) 
 		{
 			$price = $chocobo->get_price();
-			$user->set_gils($user->gils + $price);
+			$user->set_gils($price);
 			$user->nbr_chocobos_saled++;
 			$user->save();
 			

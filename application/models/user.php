@@ -15,19 +15,21 @@ class User_Model extends ORM {
     public $ITEMS_LIMIT = 20;
     
     /**
-     * (void) modifie le montant de Gils du joueur
-     *
-     * (int) $gils
+     * Ajoute ou retire une somme d'argent au montant de gils du joueur
+     * @param int
      */
-    public function set_gils ( $gils )
+    public function set_gils($gils)
     {
-    	$this->gils = $gils;
-    	$this->listen_success(array( # SUCCES
-			"gils_500",
-			"gils_1000",
-			"gils_5000",
-			"gils_10000"
-		));
+    	$this->gils += $gils;
+        if ($gils > 0)
+        {
+        	$this->listen_success(array( # SUCCES
+    			"gils_500",
+    			"gils_1000",
+    			"gils_5000",
+    			"gils_10000"
+    		));
+        }
     }
     
     /**
@@ -83,6 +85,33 @@ class User_Model extends ORM {
  	{
  		return html::anchor('users/' . $this->id . '/' . $this->username, $this->username);
  	}
+
+    /**
+     * Retourne le prix du prochain niveau de l'écurie
+     * @return int
+     */
+    public function get_boxes_cost()
+    {
+        return 1000 + ($this->boxes - 2) * 300;
+    }
+
+    /**
+     * Retourne le prix du prochain niveau de l'inventaire
+     * @return int
+     */
+    public function get_inventory_cost()
+    {
+        return 1000 + ($this->items - 20) * 1000;
+    }
+
+    /**
+     * Retourne le prix du prochain niveau de la boutique
+     * @return int
+     */
+    public function get_shop_cost()
+    {
+        return ($this->shop * $this->shop + 1) * 1000;
+    }
     
 	public function display_gender()
 	{

@@ -94,7 +94,7 @@ class Vegetable_Controller extends Template_Controller
 		{
 			$vegetable->user_id = $user->id;
 			$vegetable->save();
-			$user->set_gils($user->gils - $vegetable->price);
+			$user->set_gils(-$vegetable->price);
 			$user->save();
 			$msg = 'Légume acheté!';
 		}
@@ -128,7 +128,7 @@ class Vegetable_Controller extends Template_Controller
 
 		if ( ! isset($msg)) 
 		{
-			$user->set_gils($user->gils + $vegetable->price);
+			$user->set_gils($vegetable->price);
 			$user->save();
 			
 			$vegetable->delete();

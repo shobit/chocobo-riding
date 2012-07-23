@@ -228,7 +228,7 @@ class Simulation {
 			}
 			
 			// gils
-			$c->user->set_gils( $c->user->gils + ceil(($nbr_chocobos - $result->position + 1) * $race->circuit->gils/6) );
+			$c->user->set_gils( ceil(($nbr_chocobos - $result->position + 1) * $race->circuit->gils/6) );
 			$c->user->save();
 			
 			// côte

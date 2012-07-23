@@ -40,7 +40,7 @@ class Nut_Controller extends Template_Controller
 		{
 			$nut->user_id = $user->id;
 			$nut->save();
-			$user->set_gils($user->gils - $nut->price);
+			$user->set_gils(-$nut->price);
 			$user->save();
 			$msg = 'Noix acheté!';
 		}
@@ -74,7 +74,7 @@ class Nut_Controller extends Template_Controller
 
 		if ( ! isset($msg)) 
 		{
-			$user->set_gils($user->gils + $nut->price);
+			$user->set_gils($nut->price);
 			$user->save();
 			
 			$nut->delete();
