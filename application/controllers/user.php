@@ -127,7 +127,7 @@ class User_Controller extends Template_Controller {
 		{
 			$msg = 'Inventaire+ acheté !';
 			$user->set_gils(-$cost);
-			$user->items += 2;
+			$user->items++;
 			$user->save();
 
 			$user->listen_success(array( # SUCCES

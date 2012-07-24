@@ -96,6 +96,15 @@ class User_Model extends ORM {
 	}
 
 	/**
+	 * Retourne la limite de l'inventaire du joueur
+	 * return int
+	 */
+	public function get_items()
+	{
+		return 10 + $this->items;
+	}
+
+	/**
 	 * Retourne le prix du prochain niveau de l'écurie
 	 * @return int
 	 */
