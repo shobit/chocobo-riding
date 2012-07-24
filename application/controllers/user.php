@@ -91,6 +91,11 @@ class User_Controller extends Template_Controller {
 			$msg = 'not_enough_gils';
 		}
 
+		if ($user->boxes < 5)
+		{
+			$msg = 'boxes_max';
+		}
+
 		if ( ! isset($msg)) 
 		{
 			$msg = 'Box+ acheté !';
@@ -121,6 +126,11 @@ class User_Controller extends Template_Controller {
 		if ($gils < $cost)
 		{
 			$msg = 'not_enough_gils';
+		}
+
+		if ($user->items < 5)
+		{
+			$msg = 'items_max';
 		}
 
 		if ( ! isset($msg)) 
@@ -157,6 +167,11 @@ class User_Controller extends Template_Controller {
 		if ($gils < $cost)
 		{
 			$msg = 'not_enough_gils';
+		}
+
+		if ($user->shop < 5)
+		{
+			$msg = 'shop_max';
 		}
 
 		if ( ! isset($msg)) 

@@ -81,10 +81,21 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 				<?php $cost = $user->get_boxes_cost() ?>
 				<td class="icon"></td>
 				<td class="name">Box +</td>
-				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="price">
+					<?php 
+					if ($user->boxes < 5)
+					{
+						echo $cost . $gils_png;
+					}
+					else
+					{
+						echo 'max.';
+					}
+					?>
+				</td>
 				<td class="form"> 
 					<?php
-					if ($gils >= $cost) 
+					if ($gils >= $cost and $user->boxes < 5) 
 					{
 						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_boxes', 'class' => 'button'));
 					}
@@ -96,10 +107,21 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 				<?php $cost = $user->get_inventory_cost() ?>
 				<td class="icon"></td>
 				<td class="name">Inventaire +</td>
-				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="price">
+					<?php 
+					if ($user->items < 5)
+					{
+						echo $cost . $gils_png;
+					}
+					else
+					{
+						echo 'max.';
+					}
+					?>
+				</td>
 				<td class="form"> 
 					<?php
-					if ($gils >= $cost) 
+					if ($gils >= $cost and $user->items < 5) 
 					{
 						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_inventory', 'class' => 'button'));
 					}
@@ -111,10 +133,21 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 				<?php $cost = $user->get_shop_cost() ?>
 				<td class="icon"></td>
 				<td class="name">Boutique +</td>
-				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="price">
+					<?php 
+					if ($user->shop < 5)
+					{
+						echo $cost . $gils_png;
+					}
+					else
+					{
+						echo 'max.';
+					}
+					?>
+				</td>
 				<td class="form"> 
 					<?php
-					if ($gils >= $cost) 
+					if ($gils >= $cost and $user->shop < 5) 
 					{
 						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_shop', 'class' => 'button'));
 					}
