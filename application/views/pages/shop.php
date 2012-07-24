@@ -5,7 +5,6 @@ a.upgrade, a.upgrade:visited {background-color: #600; color: #FFF; padding: 4px;
 
 <?php
 $gils = $user->gils;
-$shop = $user->shop;
 $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 ?>
 

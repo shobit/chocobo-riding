@@ -105,6 +105,15 @@ class User_Model extends ORM {
 	}
 
 	/**
+	 * Retourne le niveau de la boutique du joueur
+	 * return int
+	 */
+	public function get_shop()
+	{
+		return 0 + $this->shop;
+	}
+
+	/**
 	 * Retourne le prix du prochain niveau de l'écurie
 	 * @return int
 	 */
