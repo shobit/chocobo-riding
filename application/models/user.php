@@ -101,7 +101,7 @@ class User_Model extends ORM {
 	 */
 	public function get_items()
 	{
-		return 10 + $this->items;
+		return 10 + $this->items * 2;
 	}
 
 	/**

@@ -91,7 +91,7 @@ class User_Controller extends Template_Controller {
 			$msg = 'not_enough_gils';
 		}
 
-		if ($user->boxes < 5)
+		if ($user->boxes >= 5)
 		{
 			$msg = 'boxes_max';
 		}
@@ -128,7 +128,7 @@ class User_Controller extends Template_Controller {
 			$msg = 'not_enough_gils';
 		}
 
-		if ($user->items < 5)
+		if ($user->items >= 5)
 		{
 			$msg = 'items_max';
 		}
@@ -169,7 +169,7 @@ class User_Controller extends Template_Controller {
 			$msg = 'not_enough_gils';
 		}
 
-		if ($user->shop < 5)
+		if ($user->shop >= 5)
 		{
 			$msg = 'shop_max';
 		}
