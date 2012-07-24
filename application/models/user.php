@@ -87,6 +87,15 @@ class User_Model extends ORM {
 	}
 
 	/**
+	 * Retourne le nombre de box de l'écurie du joueur
+	 * return int
+	 */
+	public function get_boxes()
+	{
+		return 2 + $this->boxes;
+	}
+
+	/**
 	 * Retourne le prix du prochain niveau de l'écurie
 	 * @return int
 	 */
@@ -173,12 +182,12 @@ class User_Model extends ORM {
 				case "gils_1000": if ($this->gils > 1000) $res = TRUE; break;
 				case "gils_5000": if ($this->gils > 5000) $res = TRUE; break;
 				case "gils_10000": if ($this->gils > 10000) $res = TRUE; break;
-				case "boxes_3": if ($this->boxes >= 3) $res = TRUE; break;
-				case "boxes_5": if ($this->boxes >= 5) $res = TRUE; break;
-				case "boxes_7": if ($this->boxes >= 7) $res = TRUE; break;
-				case "items_12": if ($this->items >= 12) $res = TRUE; break;
-				case "items_15": if ($this->items >= 15) $res = TRUE; break;
-				case "items_20": if ($this->items >= 20) $res = TRUE; break;
+				case "boxes_3": if ($this->get_boxes() >= 3) $res = TRUE; break;
+				case "boxes_5": if ($this->get_boxes() >= 5) $res = TRUE; break;
+				case "boxes_7": if ($this->get_boxes() >= 7) $res = TRUE; break;
+				case "items_12": if ($this->get_items() >= 12) $res = TRUE; break;
+				case "items_15": if ($this->get_items() >= 15) $res = TRUE; break;
+				case "items_20": if ($this->get_items() >= 20) $res = TRUE; break;
 				case "birthdays_25": if ($this->nbr_birthdays >= 25) $res = TRUE; break;
 				case "birthdays_50": if ($this->nbr_birthdays >= 50) $res = TRUE; break;
 				case "birthdays_75": if ($this->nbr_birthdays >= 75) $res = TRUE; break;

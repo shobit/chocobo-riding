@@ -13,7 +13,7 @@ if (!empty($res)) {
 	echo '<div class="msgAttention">'.$res."</div>";
 }
 
-$boxes = $user->boxes;
+$boxes = $user->get_boxes();
 echo form::hidden('chocobo', $chocobo->id);
 echo form::hidden('boxes', $boxes);
 $genders = array('', 'female', 'male');

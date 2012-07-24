@@ -152,7 +152,7 @@ class Fusion_Controller extends Template_Controller {
 	// include - verify there's a box for the baby chocobo
 	public function _no_boxes(Validation $array, $field) {
 		$user = $this->session->get('user');
-        $box_free = (count($user->chocobos) < $user->boxes);
+        $box_free = (count($user->chocobos) < $user->get_boxes());
         if (!$box_free) {
             $array->add_error($field, 'no_boxes');
         }

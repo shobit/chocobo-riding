@@ -113,7 +113,7 @@ if (adminRights()) {
 	
 		<fieldset class="listChocobos">
 			<?php 
-				echo '<legend>Ecurie <small>('.count($user->chocobos).'/'.$user->boxes.' chocobos)</small></legend>';
+				echo '<legend>Ecurie <small>('.count($user->chocobos).'/'.$user->get_boxes().' chocobos)</small></legend>';
 			?>
 			<table class="form">
 				<?php foreach($user->chocobos as $n => $chocobo) { ?>
