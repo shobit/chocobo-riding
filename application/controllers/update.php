@@ -12,7 +12,7 @@ class Update_Controller extends Template_Controller {
 
 		$update = ORM::factory('update', $id);
 		$form = $update->as_array();
-		$form['date'] = '';
+		if ($update->date == '00-00-00 00:00:00') { $form['date'] = 0; }
 
 		$this->profiler->disable();
     }
@@ -31,7 +31,7 @@ class Update_Controller extends Template_Controller {
        	if (isset($post->delete) and $post->delete)
        	{
        		$success = TRUE;
-       		
+
        		$update->delete();
        	}
 
@@ -47,17 +47,7 @@ class Update_Controller extends Template_Controller {
     			$update->content = $post->content; 
     		}
     		
-    		if (isset($post->date)) 
-    		{
-				// TODO
-    			$date = time();
-    		}
-    		else 
-    		{
-    			$date = time();
-    		}
-
-    		$update->date = $date;
+    		$update->date = (!empty($post->date)) ? $post->date : date('Y-m-d H:i:s');
 			
 			$update->save();
     	}

@@ -16,7 +16,7 @@
 
 <div class="field">
 	<div class="label"><?php echo form::label('content', 'Secondaire') ?></div>
-	<div><?php echo form::input('content', $form['content']) ?></div>
+	<div><?php echo form::textarea('content', $form['content']) ?></div>
 	<div class="clearleft"></div>
 </div>
 

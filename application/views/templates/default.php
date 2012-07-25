@@ -94,7 +94,7 @@
 				<?php echo View::factory('elements/menu') ?>
 			</div>
 			
-			<div class="content">
+			<div id="page">
 				<?php echo $content ?>
 			</div>
 			

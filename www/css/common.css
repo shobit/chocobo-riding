@@ -29,7 +29,7 @@ body {
 	padding-left: 10px;
 }
 
-.content {
+#page {
 	float: left;
 	width: 780px;
 	min-height: 200px;
