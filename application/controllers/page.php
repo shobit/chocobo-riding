@@ -21,7 +21,7 @@ class Page_Controller extends Template_Controller {
         $user = $this->session->get('user');
 
         $updates = ORM::factory('update')
-        	->orderby('created', 'desc')
+        	->orderby('date', 'desc')
         	->find_all();
     }
 	

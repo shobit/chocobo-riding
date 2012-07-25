@@ -40,6 +40,10 @@
 		echo html::script('js/lib/tipsy/jquery.tipsy.js'); 
 		echo html::stylesheet('js/lib/tipsy/tipsy.css', 'screen', false);
 
+		// FANCYBOX
+		echo html::stylesheet('js/lib/fancybox/jquery.fancybox.css', 'screen', false);
+		echo html::script('js/lib/fancybox/jquery.fancybox.pack.js');
+
 		// DATATABLE
 		echo html::script('js/lib/dataTables/media/js/jquery.dataTables.min.js'); 
 		echo html::stylesheet('js/lib/dataTables/media/css/jquery.dataTables.css', 'screen', false);
@@ -57,7 +61,7 @@
 	
 	<script type="text/javascript">
 	
-		var baseUrl = "<?php echo (IN_PRODUCTION ? "http://chocobo-riding.com/" : "http://localhost/chocobo-riding/www/"); ?>";
+		var baseUrl = "<?php echo (IN_PRODUCTION ? "http://chocobo-riding.com/" : "http://localhost:8888/chocobo-riding/www/"); ?>";
 		
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-5385370-6']);

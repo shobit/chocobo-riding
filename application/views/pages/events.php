@@ -11,9 +11,17 @@
 
 if ($user->has_role('admin'))
 {
-	echo html::anchor('', 'Ajouter');
+	echo html::anchor('update/edit/0', 'Ajouter', array('class' => 'fancybox fancybox.ajax'));
 }
 
-var_dump(count($updates));
+foreach($updates as $update)
+{
+	echo '<div class="update">';
+	echo ' <div class="type">' . $update->type . '</div>';
+	echo ' <div class="title">' . $update->title . '</div>';
+	echo ' <div class="content">' . $update->content . '</div>';
+	echo ' <div class="date">' . date::display($update->date) . '</div>';
+	echo '</div>';
+}
 
 ?>
