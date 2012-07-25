@@ -22,7 +22,7 @@ class Page_Controller extends Template_Controller {
 
         $updates = ORM::factory('update')
         	->orderby('date', 'desc')
-        	->find_all();
+        	->find_all(15);
     }
 	
 	public function tutorial()

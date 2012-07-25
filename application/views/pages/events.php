@@ -1,8 +1,23 @@
 <style>
 .update {position: relative; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 20px;}
-.update .wrapper-type {float: left; width: 90px; text-align: right; padding-right: 10px;}
-	.type {color: #000; padding: 3px; font-family: monospace;}
-	.add {background-color: #090; color: #fff;}
+.update .wrapper-type {float: left; width: 100px; text-align: right;}
+	.type {
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		text-transform: uppercase;
+		background-color: #333;
+		color: #fff;
+		font-size: 10px;
+		font-weight: bold;
+		padding: 3px 6px;
+		margin-right: 10px;
+		text-shadow: 0 1px 1px rgba(50,50,50,0.5)
+	}
+	.added {background-color: #7C29A9; color: #fff;}
+	.fixed {background-color: #226EC7; color: #fff;}
+	.improved {background-color: #97B931; color: #fff;}
+	.new {background-color: #7c29a9; color: #fff;}
 .update .title {margin-left: 100px; font-weight: bold; line-height: 18px;}
 .update div.content {margin-left: 100px; line-height: 18px;}
 .update .date {margin-left: 100px; font-size: 10px; color: #999; line-height: 18px;}
