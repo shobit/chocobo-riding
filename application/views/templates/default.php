@@ -36,10 +36,7 @@
     	echo html::script('js/lib/jGrowl/jquery.jgrowl.min.js');
 		echo html::stylesheet('js/lib/jGrowl/jquery.jgrowl', 'screen', false);
     	
-		// BUBBLETIP
-		echo html::script('js/lib/bubbletip.min.js');
-		echo html::stylesheet('js/lib/bubbletip/bubbletip.css', 'screen', false);
-		
+		// TIPSY
 		echo html::script('js/lib/tipsy/jquery.tipsy.js'); 
 		echo html::stylesheet('js/lib/tipsy/tipsy.css', 'screen', false);
 
