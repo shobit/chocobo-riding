@@ -80,7 +80,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<tr class="item">
 				<?php $cost = $user->get_boxes_cost() ?>
 				<td class="icon"></td>
-				<td class="name">Box +</td>
+				<td class="name"><?php echo vignette::display('Box +', "Ajoute 1 box à l'écurie") ?></td>
 				<td class="price">
 					<?php 
 					if ($user->boxes < 5)
@@ -106,7 +106,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<tr class="item">
 				<?php $cost = $user->get_inventory_cost() ?>
 				<td class="icon"></td>
-				<td class="name">Inventaire +</td>
+				<td class="name"><?php echo vignette::display('Inventaire +', "Ajoute 2 places dans l'inventaire") ?></td>
 				<td class="price">
 					<?php 
 					if ($user->items < 5)
@@ -132,7 +132,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<tr class="item">
 				<?php $cost = $user->get_shop_cost() ?>
 				<td class="icon"></td>
-				<td class="name">Boutique +</td>
+				<td class="name"><?php echo vignette::display('Boutique +', "Augmente de 1 le niveau de la boutique") ?></td>
 				<td class="price">
 					<?php 
 					if ($user->shop < 5)
