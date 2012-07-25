@@ -14,7 +14,15 @@ class Page_Controller extends Template_Controller {
     public function events()
 	{
 		$this->template->title = "Evénements";
-        $this->template->content = new View('pages/events');
+        $this->template->content = View::factory('pages/events')
+        	->bind('user', $user)
+        	->bind('updates', $updates);
+
+        $user = $this->session->get('user');
+
+        $updates = ORM::factory('update')
+        	->orderby('created', 'desc')
+        	->find_all();
     }
 	
 	public function tutorial()

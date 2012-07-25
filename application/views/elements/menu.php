@@ -87,10 +87,10 @@ if ( ! $user->loaded):
 	<?php $url = url::current() ?>
 	
 	<?php
-	$selected = (strrpos($url, 'home') === FALSE) ? '' : ' class="selected"';
+	$selected = (strrpos($url, 'page/events') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php //echo html::anchor('page/events', 'Événements') ?>
+		<?php echo html::anchor('page/events', 'Événements') ?>
 	</li>
 	
 	<?php
