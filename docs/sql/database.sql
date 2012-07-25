@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Lun 23 Juillet 2012 à 13:32
+-- Généré le : Jeu 26 Juillet 2012 à 00:01
 -- Version du serveur: 5.5.9
 -- Version de PHP: 5.3.6
 
@@ -12,6 +12,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Base de données: `chocobo-riding`
 --
+CREATE DATABASE `chocobo-riding` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `chocobo-riding`;
 
 -- --------------------------------------------------------
 
@@ -77,6 +79,21 @@ CREATE TABLE `circuits` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `comment_notifications`
+--
+
+CREATE TABLE `comment_notifications` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `topic_id` int(10) unsigned NOT NULL,
+  `comment_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `created` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `comments`
 --
 
@@ -102,21 +119,6 @@ CREATE TABLE `comments_favorites` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `comment_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `comment_notifications`
---
-
-CREATE TABLE `comment_notifications` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `topic_id` int(10) unsigned NOT NULL,
-  `comment_id` int(11) unsigned NOT NULL,
-  `user_id` int(11) unsigned NOT NULL,
-  `created` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -218,6 +220,21 @@ CREATE TABLE `flows` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `message_notifications`
+--
+
+CREATE TABLE `message_notifications` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `discussion_id` int(10) unsigned NOT NULL,
+  `message_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `created` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `messages`
 --
 
@@ -235,17 +252,16 @@ CREATE TABLE `messages` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `message_notifications`
+-- Structure de la table `nut_effects`
 --
 
-CREATE TABLE `message_notifications` (
+CREATE TABLE `nut_effects` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `discussion_id` int(10) unsigned NOT NULL,
-  `message_id` int(11) unsigned NOT NULL,
-  `user_id` int(11) unsigned NOT NULL,
-  `created` int(10) unsigned NOT NULL,
+  `nut_id` int(10) unsigned NOT NULL,
+  `name` varchar(10) NOT NULL,
+  `value` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -264,20 +280,6 @@ CREATE TABLE `nuts` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `nut_effects`
---
-
-CREATE TABLE `nut_effects` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `nut_id` int(10) unsigned NOT NULL,
-  `name` varchar(10) NOT NULL,
-  `value` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -434,6 +436,21 @@ CREATE TABLE `topics` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `updates`
+--
+
+CREATE TABLE `updates` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `content` tinytext NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -451,9 +468,9 @@ CREATE TABLE `users` (
   `design_id` int(11) DEFAULT NULL,
   `quest` int(11) NOT NULL DEFAULT '0',
   `gils` int(11) NOT NULL DEFAULT '200',
-  `boxes` int(3) NOT NULL DEFAULT '2',
-  `items` int(11) NOT NULL DEFAULT '10',
-  `shop` int(10) unsigned NOT NULL DEFAULT '0',
+  `boxes` int(3) unsigned NOT NULL DEFAULT '0',
+  `items` int(3) unsigned NOT NULL DEFAULT '0',
+  `shop` int(3) unsigned NOT NULL DEFAULT '0',
   `nbr_birthdays` int(11) NOT NULL DEFAULT '0',
   `nbr_chocobos_saled` int(11) NOT NULL DEFAULT '0',
   `notif_forum` tinyint(1) NOT NULL DEFAULT '0',
@@ -475,6 +492,20 @@ CREATE TABLE `users` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `vegetable_effects`
+--
+
+CREATE TABLE `vegetable_effects` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `vegetable_id` int(10) unsigned NOT NULL,
+  `name` varchar(10) NOT NULL,
+  `value` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `vegetables`
 --
 
@@ -488,20 +519,6 @@ CREATE TABLE `vegetables` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `vegetable_effects`
---
-
-CREATE TABLE `vegetable_effects` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `vegetable_id` int(10) unsigned NOT NULL,
-  `name` varchar(10) NOT NULL,
-  `value` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
