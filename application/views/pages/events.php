@@ -1,28 +1,67 @@
 <style>
-.hour {font-size: 10px; color: #999;}
+.update {position: relative; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 20px;}
+.update .wrapper-type {float: left; width: 100px; text-align: right;}
+	.type {
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		text-transform: uppercase;
+		background-color: #333;
+		color: #fff;
+		font-size: 10px;
+		font-weight: bold;
+		padding: 3px 6px;
+		margin-right: 10px;
+		text-shadow: 0 1px 1px rgba(50,50,50,0.5)
+	}
+	.added {background-color: #7C29A9; color: #fff;}
+	.fixed {background-color: #226EC7; color: #fff;}
+	.improved {background-color: #97B931; color: #fff;}
+	.new {background-color: #7c29a9; color: #fff;}
+.update .title {margin-left: 100px; font-weight: bold; line-height: 18px;}
+.update div.content {margin-left: 100px; line-height: 18px;}
+.update .date {margin-left: 100px; font-size: 10px; color: #999; line-height: 18px;}
 </style>
 
 <h1>Evénements</h1>
-<div id="prelude">Voici les 15 derniers commits effectués sur le site. Vous pouvez trouver plus d'informations sur le code (qui est open source) en allant sur la page Github. Restez au fait des nouveautés du site ! Si vous avez des questions ou autres, n'hésitez pas à les poser sur le forum ou la Shoutbox :)</div>
+<div id="prelude">Voici les dernières mises à jour du site. 
+	Restez au fait des nouveautés du site ! 
+	Si vous avez des questions ou autres, n'hésitez pas à les poser sur le forum ou la Shoutbox :)</div>
 
 <?php
 
-$feed = "https://github.com/Menencia/chocobo-riding/commits/master.atom";
-$posts = feed::parse($feed);
-$last = '';
-foreach ($posts as $i => $post)
+if ($user->has_role('admin'))
 {
-	$date = explode('T', $post['updated']);
-	$date1 = explode('-', $date[0]);
-	$tmp = explode('-', $date[1]);
-	$date2 = explode(':', $tmp[0]);
-	$time = mktime($date2[0], $date2[1], $date2[2], $date1[1], $date1[2], $date1[0]);
-	$time += 7*3600;
-	$new = $date[0];
-	if ($i != 0 and $new !== $last) echo '<br /><br />';
-	if ($new !== $last) echo '<b>' . date::display($time) . '</b><br />';
-	echo '<br />' . $post['title'] . ' <span class="hour">' . date('H:i', $time + 2*3600) . '</span>';
-	$last = $new;
+	echo html::anchor('update/edit/0', 'Ajouter', array('class' => 'button fancybox fancybox.ajax'));
+}
+
+foreach ($updates as $update)
+{
+	echo '<div class="update">';
+	if ($user->has_role('admin'))
+	{
+		echo '<div class="options">';
+		echo html::anchor('update/edit/' . $update->id, html::image('images/icons/edit.png'), array('class' => 'fancybox fancybox.ajax'));
+		echo '</div>';
+	}
+	echo ' <div class="wrapper-type"><span class="type ' . $update->type . '">' . $update->type . '</span></div>';
+	echo ' <div class="title">' . $update->title . '</div>';
+	echo ' <div class="content">' . $update->content . '</div>';
+	echo ' <div class="date">' . date::display(strtotime($update->date)) . '</div>';
+	echo ' <div class="clearleft"></div>';
+	echo '</div>';
 }
 
 ?>
+
+<script>
+$(function(){
+	
+	$('.update').hover(function(){
+		$(this).find('.options').fadeIn('slow');
+	}, function(){
+		$(this).find('.options').hide();
+	});	
+
+})
+</script>
