@@ -8,7 +8,7 @@ $gils = $user->gils;
 $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 ?>
 
-<h1><?php echo Kohana::lang('shop.title') ?></h1>
+<h1><?php echo Kohana::lang('shop.title') . ' nv' . $user->get_shop() ?></h1>
 <div id="prelude"><?php echo Kohana::lang('shop.prelude') ?></div>
 
 <div class="leftPart2">

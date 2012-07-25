@@ -110,7 +110,7 @@ class User_Model extends ORM {
 	 */
 	public function get_shop()
 	{
-		return 0 + $this->shop;
+		return 1 + $this->shop;
 	}
 
 	/**
