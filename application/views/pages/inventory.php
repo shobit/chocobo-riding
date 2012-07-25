@@ -1,7 +1,7 @@
 <h1><?php echo Kohana::lang('inventory.title'); ?></h1>
 <div id="prelude"><?php echo Kohana::lang('inventory.prelude'); ?></div>
 
-<p><b>Nombre d'objets possédés : <?= $nbr_items ?>/<?= $user->items ?> 
+<p><b>Nombre d'objets possédés : <?= $nbr_items ?>/<?= $user->get_items() ?> 
 <small>(+<?= $nbr_equipped ?>)</small></b></p>
 
 <div class="leftPart2">

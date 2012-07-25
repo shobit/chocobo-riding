@@ -5,12 +5,10 @@ a.upgrade, a.upgrade:visited {background-color: #600; color: #FFF; padding: 4px;
 
 <?php
 $gils = $user->gils;
-$boxes = $user->boxes;
-$shop = $user->shop;
 $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 ?>
 
-<h1><?php echo Kohana::lang('shop.title') ?></h1>
+<h1><?php echo Kohana::lang('shop.title') . ' nv' . $user->get_shop() ?></h1>
 <div id="prelude"><?php echo Kohana::lang('shop.prelude') ?></div>
 
 <div class="leftPart2">
@@ -82,13 +80,24 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<tr class="item">
 				<?php $cost = $user->get_boxes_cost() ?>
 				<td class="icon"></td>
-				<td class="name">Box +</td>
-				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="name"><?php echo vignette::display('Box +', "Ajoute 1 box à l'écurie") ?></td>
+				<td class="price">
+					<?php 
+					if ($user->boxes < 5)
+					{
+						echo $cost . $gils_png;
+					}
+					else
+					{
+						echo 'max.';
+					}
+					?>
+				</td>
 				<td class="form"> 
 					<?php
-					if ($gils >= $cost) 
+					if ($gils >= $cost and $user->boxes < 5) 
 					{
-						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_boxes', 'class' => 'button'));
+						echo html::anchor('user/upgrade_boxes', Kohana::lang('shop.buy'), array('id' => 'upgrade_boxes', 'class' => 'button'));
 					}
 					?>
 				</td>
@@ -97,13 +106,24 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<tr class="item">
 				<?php $cost = $user->get_inventory_cost() ?>
 				<td class="icon"></td>
-				<td class="name">Inventaire +</td>
-				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="name"><?php echo vignette::display('Inventaire +', "Ajoute 2 places dans l'inventaire") ?></td>
+				<td class="price">
+					<?php 
+					if ($user->items < 5)
+					{
+						echo $cost . $gils_png;
+					}
+					else
+					{
+						echo 'max.';
+					}
+					?>
+				</td>
 				<td class="form"> 
 					<?php
-					if ($gils >= $cost) 
+					if ($gils >= $cost and $user->items < 5) 
 					{
-						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_inventory', 'class' => 'button'));
+						echo html::anchor('user/upgrade_inventory', Kohana::lang('shop.buy'), array('id' => 'upgrade_inventory', 'class' => 'button'));
 					}
 					?>
 				</td>
@@ -112,11 +132,22 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<tr class="item">
 				<?php $cost = $user->get_shop_cost() ?>
 				<td class="icon"></td>
-				<td class="name">Boutique +</td>
-				<td class="price"><?php echo $cost . $gils_png ?></td>
+				<td class="name"><?php echo vignette::display('Boutique +', "Augmente de 1 le niveau de la boutique") ?></td>
+				<td class="price">
+					<?php 
+					if ($user->shop < 5)
+					{
+						echo $cost . $gils_png;
+					}
+					else
+					{
+						echo 'max.';
+					}
+					?>
+				</td>
 				<td class="form"> 
 					<?php
-					if ($gils >= $cost) 
+					if ($gils >= $cost and $user->shop < 5) 
 					{
 						echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_shop', 'class' => 'button'));
 					}

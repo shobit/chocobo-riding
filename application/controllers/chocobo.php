@@ -138,7 +138,7 @@ class Chocobo_Controller extends Template_Controller {
 			$msg = 'not_enough_gils';
 		}
 
-		if (count($user->chocobos) >= $user->boxes)
+		if (count($user->chocobos) >= $user->get_boxes())
 		{
 			$msg = 'no_more_boxes';
 		}
