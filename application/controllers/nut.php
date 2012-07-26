@@ -79,7 +79,8 @@ class Nut_Controller extends Template_Controller
 
 		if ( ! isset($msg)) 
 		{
-			$user->set_gils($nut->price);
+			$price = floor($nut->price /2);
+			$user->set_gils($price);
 			$user->save();
 			
 			$nut->delete();
