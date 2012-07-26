@@ -87,11 +87,11 @@ class Nut_Model extends ORM
 	 * @param string $effect Nom de l'effet
 	 * @return int
 	 */
-	public function get_effect($effect)
+	public function get_effect($effect_name)
 	{
 		foreach ($this->nut_effects as $effect)
 		{
-			if ($effect->name == $effect)
+			if ($effect->name == $effect_name)
 			{
 				return $effect->value;
 				break;
