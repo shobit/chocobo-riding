@@ -36,6 +36,11 @@ class Nut_Controller extends Template_Controller
 			$msg = 'not_enough_gils';
 		}
 
+		if ($user->nbr_items() >= $user->get_items())
+		{
+			$msg = 'full_inventory';
+		}
+
 		if ( ! isset($msg))
 		{
 			$nut->user_id = $user->id;
