@@ -21,48 +21,61 @@ $lang = array (
 	'resistance' 	=> 'Résistance',
 
 	// Jambières
-	'0_0_0' => 'Jambières usées',
-	'0_0_1' => 'Jambières de fortune',
-	'0_0_2' => 'Jambières équilibrées',
-	'0_0_3' => 'Jambières précieuses',
-
-	// "Jambières diamant",
-	// "Jambières émeraude",
-
-	'0_1_0' => "Jambières de vitesse",
-	'0_1_1' => "Jambières de rapidité",
-	'0_1_2' => "Jambières chronos",
-	'0_1_3' => "Jambières d’initiative",
+	'0_0_0' => "Jambières de vitesse",
+	'0_0_1' => "Jambières de rapidité",
+	'0_0_2' => "Jambières chronos",
+	'0_0_3' => "Jambières Sleipnir",
 	
-	'0_2_0' => "Jambières de souffle",
-	'0_2_1' => "Jambières brise léger",
-	'0_2_2' => "Jambières rafale",
-	'0_2_3' => "Jambières de tacticien",
+	'0_1_0' => "Jambières de souffle",
+	'0_1_1' => "Jambières brise léger",
+	'0_1_2' => "Jambières rafale",
+	'0_1_3' => "Jambières Zéphyr",
+	
+	'0_2_0' => "Jambières de régénération",
+	'0_2_1' => "Jambières de soin",
+	'0_2_2' => "Jambières de vie",
+	'0_2_3' => "Jambières Yggdrasil",
 	
 	'0_3_0' => "Jambières d’agilité",
 	'0_3_1' => "Jambières de souplesse",
 	'0_3_2' => "Jambières d’habilité",
-	'0_3_3' => "Jambières de fougue",
+	'0_3_3' => "Jambières Hrungnir",
 	
 	'0_4_0' => "Jambières de célérité",
 	'0_4_1' => "Jambières de vélocité",
 	'0_4_2' => "Jambières de sprint",
-	'0_4_3' => "Jambières d’ardeur",
+	'0_4_3' => "Jambières Fenrir",
 	
 	'0_5_0' => "Jambières de vivacité",
 	'0_5_1' => "Jambières d’acuité",
 	'0_5_2' => "Jambières de vigueur",
-	'0_5_3' => "Jambières de victoire",
+	'0_5_3' => "Jambières Fafnir",
 	
-	'0_6_0' => "Jambières de stratège",
-	'0_6_1' => "Jambières de leader",
-	'0_6_2' => "Jambières de légende",
-	'0_6_3' => "Jambières Fafnir",
+	'0_6_0' => "Jambières d’ardeur",
+	'0_6_1' => "Jambières de fougue",
+	'0_6_2' => "Jambières de flamme",
+	'0_6_3' => "Jambières Ifrit",
 	
-	'0_7_0' => "Jambières Sleipnir",
-	'0_7_1' => "Jambières Hrungnir",
-	'0_7_2' => "Jambières Zéphyr",
-	'0_7_3' => "Jambières Fenrir",
+	'0_7_0' => "Jambières d’initiative",
+	'0_7_1' => "Jambières de tacticien",
+	'0_7_2' => "Jambières de leader",
+	'0_7_3' => "Jambières de légende",
+	
+	/*'1_10_1' => "Jambières de bois",
+	'1_10_2' => "Jambières de fer",
+	'1_10_3' => "Jambières d’argent",
+	'1_10_4' => "Jambières de mythril",
+	
+	'1_x0_0' => "Jambières usées",
+	
+	'1_x2_2' => "Jambières équilibré",
+	'1_x2_3' => "Jambières diamant",
+	'1_x2_4' => "Jambières émeraude",
+	
+	'1_x3_3' => "Jambières précieuses",
+	'1_x3_4' => "Jambières de stratège",
+
+	'1_x4_4' => "Jambières de victoire",*/
 
 	// Harnais
 	'1_0_0' => "Harnais d’endurance",
