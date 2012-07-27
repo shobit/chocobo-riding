@@ -20,11 +20,14 @@ class Equipment_Model extends ORM {
 		// Rareté
 		$rarity = rand(0, $rarity_max);
 		
+		// Type
+		$type = rand(0, 2);
+
 		// Création de l'équipement
 		$this->user_id 		= $user_id;
-		$this->name 		= $name;
+		$this->name 		= $type . '_' . $name . '_' . $rarity;
 		$this->rarity 		= $rarity;
-		$this->type 		= rand(0, 2);
+		$this->type 		= $type;
 		$this->resistance 	= $level;
 		$this->level 		= $level;
 		$this->price 		= $level * ($rarity +1) +60;
@@ -166,18 +169,7 @@ class Equipment_Model extends ORM {
 	 */
 	public function name()
 	{
-		switch ($this->name)
-		{
-			case 1 : $name = "Equipment 1"; break;
-			case 2 : $name = "Equipment 2";	break;
-			case 3 : $name = "Equipment 3";	break;
-			case 4 : $name = "Equipment 4";	break;
-			case 5 : $name = "Equipment 5";	break;
-			case 6 : $name = "Equipment 6";	break;
-			case 7 : $name = "Equipment 7";	break;
-			case 8 : $name = "Equipment 8";	break;
-		}
-		return $name;
+		return Kohana::lang('equipment.' . $this->name);
 	}
 	
 	/**

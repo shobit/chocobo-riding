@@ -60,7 +60,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<?php foreach($equipments as $equipment): ?>
 			<tr class="item">
 				<?php $price = $equipment->price ?>
-				<td class="icon"><?php echo html::image('images/items/nuts/equipment' . $vegetable->name . '.gif') ?></td>
+				<td class="icon"></td>
 				<td class="name"><?php echo $equipment->vignette() ?></td>
 				<td class="price"><?php echo $price . $gils_png ?></td>
 				<td class="form"> 
