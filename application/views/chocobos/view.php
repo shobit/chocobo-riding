@@ -425,7 +425,7 @@
 		<div class="image"><?php echo html::image('images/icons/resistance.gif') ?></div>
 		<div class="l-wrapper">
 			<div class="label">résistance</div>
-			<div class="value">0</div>
+			<div class="value"><?php echo $chocobo->attr('resistance') ?></div>
 			<div class="p-wrapper"></div>
 			<div class="info">
 				Les équipements du chocobo lui procurent une protection contre les attaques ennemies.<br />

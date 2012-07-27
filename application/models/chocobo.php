@@ -158,6 +158,8 @@ class Chocobo_Model extends ORM {
 					$bonus_equip += $effect->value;
 				}
 			}
+
+			if ($c == 'resistance') { $bonus_equip += $equip->resistance; }
 		}
 		
 		$res['equipment'] = $bonus_equip;
