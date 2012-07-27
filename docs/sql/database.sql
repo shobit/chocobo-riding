@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Jeu 26 Juillet 2012 à 00:01
+-- Généré le : Ven 27 Juillet 2012 à 18:00
 -- Version du serveur: 5.5.9
 -- Version de PHP: 5.3.6
 
@@ -168,37 +168,37 @@ CREATE TABLE `discussions` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `effects`
+-- Structure de la table `equipment`
 --
 
-CREATE TABLE `effects` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `equipment_id` int(11) DEFAULT NULL,
+CREATE TABLE `equipment` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `chocobo_id` int(11) unsigned NOT NULL,
   `name` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `value` int(11) NOT NULL,
+  `rarity` int(1) unsigned NOT NULL,
+  `type` int(1) unsigned NOT NULL,
+  `resistance` int(3) unsigned NOT NULL,
+  `level` int(3) unsigned NOT NULL,
+  `price` int(4) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `equipment_id` (`equipment_id`)
+  KEY `chocobo_id` (`chocobo_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `equipment`
+-- Structure de la table `equipment_effects`
 --
 
-CREATE TABLE `equipment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `chocobo_id` int(11) DEFAULT NULL,
-  `name` varchar(10) CHARACTER SET utf8 NOT NULL,
-  `rarity` int(11) NOT NULL DEFAULT '0',
-  `type` int(11) NOT NULL DEFAULT '0',
-  `resistance` int(11) NOT NULL DEFAULT '0',
-  `element` int(11) NOT NULL DEFAULT '0',
-  `price` int(11) NOT NULL DEFAULT '0',
+CREATE TABLE `equipment_effects` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `equipment_id` int(11) unsigned NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `value` int(4) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `chocobo_id` (`chocobo_id`),
-  KEY `user_id` (`user_id`)
+  KEY `equipment_id` (`equipment_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
