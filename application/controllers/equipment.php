@@ -8,6 +8,52 @@
 class Equipment_Controller extends Template_Controller 
 {
 
+	/**
+	 * Achète un équipement pour le joueur en session
+	 *
+	 * @param int $id ID de l'équipement à acheter
+	 */
+	public function buy($id)
+	{
+		$this->authorize('logged_in');
+		
+		$user = $this->session->get('user');
+
+		$equipment = ORM::factory('equipment', $id);
+
+		if ( ! $equipment->loaded)
+		{
+			$msg = 'vegetable_not_found';
+		}
+
+		if ($equipment->user_id != 0)
+		{
+			$msg = 'vegetable_not_purchasable';
+		}
+
+		if ($user->gils < $equipment->price)
+		{
+			$msg = 'not_enough_gils';
+		}
+
+		if ($user->nbr_items() >= $user->get_items())
+		{
+			$msg = 'full_inventory';
+		}
+
+		if ( ! isset($msg))
+		{
+			$equipment->user_id = $user->id;
+			$equipment->save();
+			$user->set_gils(-$equipment->price);
+			$user->save();
+			$msg = 'Légume acheté!';
+		}
+		
+		gen::add_jgrowl($msg);
+		url::redirect('shop');
+	}
+
 	public function apply($id)
 	{
 		$this->authorize('logged_in');
