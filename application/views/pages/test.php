@@ -2,13 +2,12 @@
 
 <?php
 
-$res = array('red' => 13, 'yellow' => 2);
+//$c = ORM::factory('chocobo', 1);
+//echo $c->attr('endur');
 
-echo num::rand_pick($res);
+//$e = ORM::factory('equipment');
+//$e->generate(0, 1, 3);
 
- //$e = ORM::factory('nut');
- //$e->generate(0, 1, 3);
-
- //echo $e->vignette();
+//echo $e->vignette();
 
 ?>

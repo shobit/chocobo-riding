@@ -1,114 +1,185 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
  
 class Equipment_Model extends ORM {
-    
-    protected $belongs_to = array('user', 'chocobo');
-    
-    protected $has_many = array('effects');
-    
-    /**
-     * Générateur aléatoire d'équipement
-     * 
-     * @access public
-     * @param int 		$chance 0~100
-     * @param int 		$colour 0~4
-     * @param int 		$level 0~100
-     * @param object 	$user
-     * @return void
-     */
-    public function generate($chance, $colour, $level, $user)
-    {
-    	// Effects lists
-    	$speeds = array("speed"=>5, "pl_limit"=>100, "pl_up"=>0.1, "pl_recup"=>5);
-    	$endurs = array("endur"=>5, "hp_limit"=>50, "hp_up"=>0.1, "hp_recup"=>5);
-    	$intels = array("intel"=>5, "mp_limit"=>25, "mp_up"=>0.1, "mp_recup"=>5);
-    	$alls   = array("bonus_gils"=>100, "bonus_xp"=>100, "windfall"=>100);
-    	
-    	// Type | 0 ~ 2
-    	$types = array('speed', 'endur', 'intel');
-    	$type  = rand(0, 2);
-    	
-    	// Resistance | 1 ~ 10
-    	$resistance = ceil($chance /10);
-    	
-    	// Element | 0 ~ 4
-    	$element = rand(0, 4);
-		
-		// Rarity | 0 ~ 4
-		$rarity = min($level - $chance, $colour);
-		$rarity = max($rarity, 0);
-		
-    	// Nombre d'effets | 1 ~ 3
-    	$nbr_effects = floor($rarity /2) +1;
-    	$list_effects = array_merge($alls, ${$types[$type].'s'});
-    	$rand_effects = array_rand($list_effects, $nbr_effects);
-		if ( ! is_array($rand_effects)) $rand_effects[] = $rand_effects;
-    	
-		foreach ($rand_effects as $effect_name)
-    	{
-    		$effect 		= ORM::factory('effect');
-    		$effect->name 	= $effect_name;
-    		$effect->value 	= ceil($chance /100 *$list_effects[$effect_name]);
-    		
-    		$effects[] 		= $effect;
-    	}
-    	
-    	// Price
-    	$price = $chance;
-    	
-    	// Name
-    	$name = $type.'_'.$name;
-    	
-    	// Finalizing
-    	$this->user_id 	= $user->id;
-    	$this->chocobo_id 	= null;
-    	$this->name 		= $name;
-    	$this->rarity		= $rarity;
-    	$this->type 		= $type +1;
-    	$this->resistance 	= $resistance;
-    	$this->element 		= $element;
-    	$this->price 		= $price; 
-    	$this->save();
-    	
-    	foreach ($effects as $effect)
-    	{
-    		$effect->equipment_id = $this->id;
-    		$effect->save();
-    	}
-    }
-    
-    public function vignette() 
+	
+	protected $belongs_to = array('user', 'chocobo');
+	protected $has_many = array('equipment_effects');
+	
+	/**
+	 * Génère un équipement aléatoirement
+	 * 
+	 * @param int $user_id ID du joueur auquel sera associé l'équipment
+	 * @param int $level Niveau de l'équipment
+	 * @param int $rarity_max Rareté maximum de l'équipement généré
+	 */
+	public function generate($user_id, $level, $rarity_max=3)
 	{
-		$res  = " ";
-		$res .= html::anchor('void(0);', $this->name(), array('id'=>'equipment'.$this->id.'_a'));
-		$res .= '<div id="equipment'.$this->id.'_t" style="display:none;">
-			<b>'.$this->name().'</b>
-			     <br />Armure : '.$this->resistance;
-		foreach($this->effects as $effect)
+		// Détermination du nom (1ère partie - 8 possibilités)
+		$name = ceil($level /12.85);
+
+		// Rareté
+		$rarity = rand(0, $rarity_max);
+		
+		// Type
+		$type = rand(0, 2);
+
+		// Création de l'équipement
+		$this->user_id 		= $user_id;
+		$this->name 		= $type . '_' . $name . '_' . $rarity;
+		$this->rarity 		= $rarity;
+		$this->type 		= $type;
+		$this->resistance 	= $level;
+		$this->level 		= $level;
+		$this->price 		= $level * ($rarity +1) +120;
+		$this->save();
+
+		// Détermination des effets
+		$nbr_effects = $rarity +1; 
+		$coeff_max = $nbr_effects * $level;
+		$coeffs = num::split_sum($coeff_max, $nbr_effects);
+		$t_effects = $this->get_effects();
+		$effects_tmp = array_rand($t_effects, $nbr_effects);
+		$effects = is_string($effects_tmp) ? array($effects_tmp) : $effects_tmp;
+
+		for($i = 0; $i < $nbr_effects; $i++)
 		{
-			$res .= '<br />'.$effect->vignette();
+			$value = $t_effects[$effects[$i]][0] + ceil(($t_effects[$effects[$i]][1] - $t_effects[$effects[$i]][0]) *$coeffs[$i] /100 );
+			ORM::factory('equipment_effect')->add($this->id, $effects[$i], $value);
 		}
-		$res .=	'
-		</div>
-		<script type="text/javascript">
-			$(\'#equipment'.$this->id.'_a\').bubbletip($(\'#equipment'.$this->id.'_t\'), {
-				deltaDirection: \'right\',
-				offsetLeft: 20
-			});
-		</script>';
+	}
+
+	/**
+	 * Retourne le tableau des caractéristiques d'effets d'un équipement
+	 *
+	 * @return Tableau associatif
+	 */
+	public function get_effects()
+	{
+		switch ($this->type) 
+		{
+
+			case 0: // Jambières
+				$res1 = array(
+					'speed' => array(1, 20), 
+					'pl_limit' => array(10, 100), 
+					'pl_up' => array(5, 100), 
+					'pl_recup' => array(5, 100),
+				);
+				break;
+
+			case 1: // Harnais
+				$res1 = array(
+					'endur' => array(1, 20), 
+					'hp_limit' => array(10, 500), 
+					'hp_up' => array(5, 100), 
+					'hp_recup' => array(5, 100),
+				);
+				break;
+
+			case 2: // Casque
+				$res1 = array(
+					'intel' => array(1, 20), 
+					'mp_limit' => array(5, 50), 
+					'mp_up' => array(5, 100), 
+					'mp_recup' => array(5, 100),
+				);
+				break;
+			
+			default:
+				$res1 = array();
+				break;
+
+		}
+
+		$res2 = array(
+			'rage_limit' => array(1, 10),
+			'pc_limit' => array(1, 5),
+			'bonus_gils' => array(5, 100),
+			'bonus_xp' => array(5, 100),
+			'bonus_items' => array(5, 100),
+			'resistance' => array(1, 20),
+		);
+		
+		return array_merge($res1, $res2);
+	}
+	
+	/**
+	 * Retourne la valeur de l'effet associé à une noix, 0 si non trouvé
+	 *
+	 * @param string $effect Nom de l'effet
+	 * @return int
+	 */
+	public function get_effect($effect_name)
+	{
+		foreach ($this->equipment_effects as $effect)
+		{
+			if ($effect->name == $effect_name)
+			{
+				return $effect->value;
+				break;
+			}
+		}
+
+		return 0;
+	}
+
+	/**
+     * Affiche le nom de l'objet et au survol un pop-up d'information
+     *
+     * @return Code HTML
+     */
+	public function vignette() 
+	{
+		$res  = '';
+		$res .= html::anchor(
+			'', 
+			'<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>', 
+			array('class' => 'jtiprel', 'rel' => '#vegetable' . $this->id, 'onclick' => 'return false')
+		);
+		$res .= '<div id="vegetable' . $this->id . '" style="display:none;">
+			<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>
+			     <small>';
+		
+		$res .= "<br />" . Kohana::lang('equipment.resistance') . ' : ' . ($this->resistance + $this->get_effect('resistance'));
+		foreach ($this->equipment_effects as $effect)
+		{
+			$res .= "<br />" . Kohana::lang('equipment.' . $effect->name) . ' +' . $effect->value;
+		}
+		
+		$res .=	'</small>
+		</div>';
 		return $res;
 	}
-	
-	public function name()
+
+	/**
+	 * Retourne la couleur en héxadécimal du nom de l'objet (selon sa rareté)
+	 *
+	 * @return String
+	 */
+	public function color()
 	{
-		return Kohana::lang('equipment.'.$this->name);
+		$colors = array('#000', '#009', '#609', '#f60');
+		return $colors[$this->rarity];
 	}
 	
+	/**
+	 * Retourne le nom de l'objet
+	 *
+	 * @return String
+	 */
+	public function name()
+	{
+		return Kohana::lang('equipment.' . $this->name);
+	}
+	
+	/**
+	 * Supprime un légume
+	 */
 	public function delete()
 	{
-		foreach ($this->effects as $effect) $effect->delete();
+		foreach ($this->equipment_effects as $effect) $effect->delete();
 		
 		parent::delete();
 	}
-    
+	
 }

@@ -52,7 +52,7 @@
 		?><tr class="item">
 			<td class="icon"><?php echo html::image('images/items/equips/equip'.$equip->type.'.gif') ?></td>
 			<td class="name"><?php echo $equip->vignette() ?></td>
-			<td class="price"><?php echo $equip->price ?> Gils</td>
+			<td class="price"><?php echo floor($equip->price /2) ?> Gils</td>
 			<td class="form">
 				<?php 
 				if ($equip->chocobo_id == NULL)

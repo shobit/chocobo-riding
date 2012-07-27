@@ -179,7 +179,7 @@ class User_Model extends ORM {
 		$nbr += count($this->nuts);
 		$nbr += ORM::factory('equipment')
 			->where('user_id', $this->id)
-			->where('chocobo_id', NULL)
+			->where('chocobo_id', 0)
 			->count_all();
 		return $nbr;
 	}
