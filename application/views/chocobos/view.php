@@ -251,7 +251,7 @@
 			<div class="label">vitesse</div>
 			<div class="value">
 				<?php
-				echo $chocobo->speed;
+				echo $chocobo->attr('speed');
 				if ($mine and $chocobo->points > 0)
 				{
 					echo html::anchor(
@@ -262,7 +262,7 @@
 				?>
 			</div>
 			<div class="p-wrapper">
-				<?php echo progress::display($chocobo->speed, 175, 180) ?>
+				<?php echo progress::display($chocobo->attr('speed'), 175, 180) ?>
 			</div>
 			<div class="info">
 				La vitesse influe dans les calculs de la vitesse moyenne en course. 
@@ -281,7 +281,7 @@
 			<div class="label">endurance</div>
 			<div class="value">
 				<?php
-				echo $chocobo->endur;
+				echo $chocobo->attr('endur');
 				if ($mine and $chocobo->points > 0)
 				{
 					echo html::anchor(
@@ -292,7 +292,7 @@
 				?>
 			</div>
 			<div class="p-wrapper">
-				<?php echo progress::display($chocobo->endur, 175, 180) ?>
+				<?php echo progress::display($chocobo->attr('endur'), 175, 180) ?>
 			</div>
 			<div class="info">
 				L'endurance intervient dans le calcul des HP et des PL du chocobo.<br />
@@ -307,7 +307,7 @@
 			<div class="label">intelligence</div>
 			<div class="value">
 				<?php
-				echo $chocobo->intel; 
+				echo $chocobo->attr('intel'); 
 				if ($mine and $chocobo->points > 0)
 				{
 					echo html::anchor(
@@ -318,7 +318,7 @@
 				?>
 			</div>
 			<div class="p-wrapper">
-				<?php echo progress::display($chocobo->intel, 175, 180) ?>
+				<?php echo progress::display($chocobo->attr('intel'), 175, 180) ?>
 			</div>
 			<div class="info">
 				L'intelligence intervient dans le calcul des MP et des PC du chocobo.<br />

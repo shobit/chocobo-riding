@@ -2,9 +2,12 @@
 
 <?php
 
-$e = ORM::factory('equipment');
-$e->generate(0, 1, 3);
+//$c = ORM::factory('chocobo', 1);
+//echo $c->attr('endur');
 
-echo $e->vignette();
+//$e = ORM::factory('equipment');
+//$e->generate(0, 1, 3);
+
+//echo $e->vignette();
 
 ?>
