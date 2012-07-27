@@ -118,10 +118,10 @@ $lang = array (
 	'1_7_2' => "Harnais de leader",
 	'1_7_3' => "Harnais de légende",
 	
-	/*'2_8_1' => "Harnais de novice",
-	'2_8_2' => "Harnais de chercheur",
-	'2_8_3' => "Harnais radar",
-	'2_8_4' => "Harnais aimant à trésor",
+	/*'2_10_1' => "Harnais de bois",
+	'2_10_2' => "Harnais de fer",
+	'2_10_3' => "Harnais d’argent",
+	'2_10_4' => "Harnais de mythril",
 	
 	'2_x0_0' => "Harnais usé",
 	
@@ -161,7 +161,7 @@ $lang = array (
 	'2_4_3' => "Casque de perspicacité",
 	
 	'2_5_0' => "Casque de précision",
-	'2_5_1' => "Casque d’adresse",
+	'2_5_3' => "Casque d’adresse",
 	'2_5_2' => "Casque de justesse",
 	'2_5_3' => "Casque de dextérité",
 	
@@ -189,5 +189,5 @@ $lang = array (
 	'3_x3_3' => "Casque précieux",
 	'3_x3_4' => "Casque de stratège",
 
-	'3_x4_4' => "Casque de victoire"*/
+	'3_x4_4' => "Casque de victoire",*/
 );
