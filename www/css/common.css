@@ -8,42 +8,42 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
-	font-size: 12px;
+	font-size: 16px;
+	font-family: 'PT Sans', sans-serif;
 }
 
-.container {
-	width: 1024px;
+table {font-family: 'PT Sans', sans-serif;}
+
+#header {height: 100px; background-color: #f5f5f5; border-bottom: 1px solid #e5e5e5;}
+	
+	.logo {width: 970px; margin: auto; padding-left: 30px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 40px; padding-top: 52px;}
+
+	#header .part1 {color: rgb(10,4,5);}
+	#header .part2 {color: rgb(174,174,174);}
+	#header .part3 {color: #355F9C; font-weight: normal;}
+
+.site {
+	width: 1000px;
 	margin: auto;
 	background-color: #fff;
-}
-
-#header {
-	background-image: url("../images/theme/banner_beta.png");
-	height: 146px;
+	margin-top: 20px;
 }
 	
 .vmenu {
 	float: left;
-	width: 200px;
-	padding-top: 20px;
-	padding-left: 10px;
+	width: 180px;
+	font-family: 'PT Sans Narrow', sans-serif;
+	margin-left: 30px;
+	font-size: 20px;
 }
 
 #page {
 	float: left;
-	width: 780px;
+	width: 756px;
 	min-height: 200px;
-	padding: 20px 20px 40px 13px;
-	border-left: 1px solid #999;
+	padding: 0 20px 40px 13px;
+	border-left: 1px dotted #ddd;
 }
-
-	h2 {
-		margin: 0;
-		font-variant: small-caps;
-		font-size: 14px;
-		background-color: #eee;
-		padding: 3px;
-	}
 	
 #footer {
 	width: 95%;
@@ -68,6 +68,16 @@ a:hover {
 .clearleft {clear: left;}
 .clearright {clear: right;}
 .clearBoth {clear: both;}
+
+.table1 {width: 100%; border-collapse: collapse;}
+.table1 th {text-align: left; border-left: 1px solid #CECECE; font-size: 10px;}
+.table1 td {text-align: left; border-left: 1px solid #CECECE;}
+.tr1:hover {background-color: #eee;}
+.tr1 {height: 30px;}
+.tr1 .len250 {width: 250px;}
+.tr1 .len50 {width: 50px;}
+
+.actions {margin-top: 20px;}
 	
 /* -------------------------------------------------------------------]
 [                                                                     ]
@@ -247,13 +257,6 @@ table.shop td.price {width: 100px; text-align: center;}
 table.shop td.form {width: 50px; text-align: center;}
 input#gils {border: 0px solid #fff; text-align: center; font-weight: bold;}
 .no_display {display: none;}
-
-div.circuit {
-	border-top: 2px solid #cecece;
-	border-bottom: 2px solid #cecece;
-	background-color: #efefef;
-	margin: 15px 0 15px 0;
-}
 
 div.column4 div.title {
 	font-size: 11px;
@@ -497,10 +500,14 @@ fieldset#about legend {
 [------------------------------------------------------------------- */
 
 h1 {
-	color: #777;
-	border-bottom: 1px solid #777;
-	margin: 10px 0;
+	margin: 0;
 	font-variant: small-caps;
+	background-color: #355F9C;
+	color: #fff;
+	padding: 6px; 
+	text-transform: lowercase;
+	box-shadow: 5px 6px #333;
+	margin-top: 5px;
 }
 
 h2 {

@@ -3,8 +3,6 @@
 [ 					      CODENAME: default                           ]
 [------------------------------------------------------------------- */
 
-@import url("../common.css");
-
 body {
 	background: url("images/motif.png");
 }

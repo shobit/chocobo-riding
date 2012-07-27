@@ -1,22 +1,4 @@
 <style>
-	.col1 {
-		float: right;
-		width: 175px;
-		padding: 3px;
-		text-align: center;
-	}
-
-	.races {width: 500px; border: 1px solid #CECECE; border-collapse: collapse;}
-	.races th {text-align: center; font-size: 10px;}
-	.races td {text-align: center; border: 1px solid #CECECE;}
-	.race {height: 30px;}
-	.race .name {width: 250px;}
-	.race .length {width: 50px;}
-	.race .pl {width: 50px;}
-	.race .xp {width: 50px;}
-	.race .gils {width: 50px;}
-	.race .nbr_chocobos {width: 50px;}
-	
 	.results {width: 780px; border: 1px solid #CECECE; border-collapse: collapse;}
 	.results th {text-align: center; font-size: 10px;}
 	.results td {text-align: center; border: 1px solid #CECECE;}
@@ -31,60 +13,58 @@
 	.result .delete {width: 100px;}
 </style>
 
-<h1><?php echo Kohana::lang('race.index.title') . ' ' . html::image("images/classes/$classe.gif") ?></h1>
-<div id="prelude"><?php echo Kohana::lang('race.index.prelude') ?></div>
+<table class="table1">
+	<tr>
+		<th>Nom</th>
+		<th>Distance</th>
+		<th>PL</th>
+		<th>XP</th>
+		<th>Gils</th>
+		<th>Départ</th>
+	</tr>
+	<?php foreach ($races as $race): ?>
+	<tr class="tr1">
+		<td class="len250"><?php echo html::anchor('races/' . $race->id, $race->circuit->name()) ?></td>
+		<td class="len50"><?php echo $race->circuit->length ?></td>
+		<td class="len50"><?php echo $race->circuit->pl ?></td>
+		<td class="len50"><?php echo $race->circuit->xp ?></td>
+		<td class="len50"><?php echo $race->circuit->gils ?></td>
+		<td class="len50"><?php echo count($race->chocobos) ?></td>
+	</tr>
+	<?php endforeach; ?>
+</table>
 
-<h2>Courses officielles</h2>
-
-<div class="circuit">
-	<div class="col1">
-		<?php echo html::image('images/pages/circuits.jpg', array('class'=>'location')) ?>
-		
-		<br /><?php echo html::image('images/icons/hour2.png'); ?>
-		<span style="display: inline;" id="<?php echo $races[0]->id; ?>">--:--</span>
-				
-		<script language=JavaScript>
-			decompte(
-				'<?php echo $races[0]->id  ?>', 
-				'<?php echo ($races[0]->start - time()) ?>', 
-				'<?php echo Kohana::lang('race.index.finished') ?>',
-				false
-			);
-		</script>
+<div class="actions">	
+	<div>
+		<?php 
+		echo html::image('images/icons/arrow_right.gif', array('style' => 'margin-bottom: -3px; margin-right: 3px;'));
+		echo html::anchor('races', 'Rafraîchir cette page'); 
+		?>
 	</div>
-	
-	<table class="races">
-		<tr>
-			<th>Nom</th>
-			<th>Distance</th>
-			<th>PL</th>
-			<th>XP</th>
-			<th>Gils</th>
-			<th>Départ</th>
-		</tr>
-		<?php foreach ($races as $race): ?>
-		<tr class="race">
-			<td class="name"><?php echo html::anchor('races/' . $race->id, $race->circuit->name()) ?></td>
-			<td class="length"><?php echo $race->circuit->length ?></td>
-			<td class="pl"><?php echo $race->circuit->pl ?></td>
-			<td class="xp"><?php echo $race->circuit->xp ?></td>
-			<td class="gils"><?php echo $race->circuit->gils ?></td>
-			<td class="nbr_chocobos"><?php echo count($race->chocobos) ?></td>
-		</tr>
-		<?php endforeach; ?>
-	</table>
-	
+
+	<div>
+		<?php 
+		echo html::image('images/icons/arrow_right.gif', array('style' => 'margin-bottom: -3px; margin-right: 3px;'));
+		echo html::anchor('races', "Voir l'historique des dernières courses"); 
+		?>
+	</div>
+
+	<div style="display:none;">
+		<?php echo html::image('images/icons/hour2.png'); ?>
+			<span style="display: inline;" id="<?php echo $races[0]->id; ?>">--:--</span>
+					
+			<script language=JavaScript>
+				decompte(
+					'<?php echo $races[0]->id  ?>', 
+					'<?php echo ($races[0]->start - time()) ?>', 
+					'<?php echo Kohana::lang('race.index.finished') ?>',
+					false
+				);
+			</script>
+	</div>
 </div>
 
-<div style="float:right;">
-	<?= html::anchor('races', Kohana::lang('race.refresh'), array('class'=>"button")) ?>
-</div>
-
-<div class="clearBoth"></div>
-
-<h2>Historique des courses</h2>
-
-<table class="results">
+<table class="results" style="display:none;">
 	<tr>
 		<th>Nom</th>
 		<th>Distance</th>

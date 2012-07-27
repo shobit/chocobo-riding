@@ -16,26 +16,27 @@
 		
 		// FAVICON
 		echo html::link('images/theme/favicon.ico', 'icon', 'image/ico');
-    	
-    	// CSS
-    	$design = $this->session->get('design');
-    	echo html::stylesheet('css/'.$design.'/style.css', 'screen', false);
-    	
-    	// RSS
-    	echo html::link('topic/rss_updates', 'alternate', 'application/rss+xml', false);
-    	
-    	// JQUERY
-    	echo html::script('js/lib/jquery.js');
-    	//echo html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js');
-    	
-    	// FCBKcomplete
-    	echo html::stylesheet('js/lib/FCBKcomplete/style.css', 'screen', false);
-    	echo html::script('js/lib/FCBKcomplete/jquery.fcbkcomplete.js');
-    	
-    	// JGROWL
-    	echo html::script('js/lib/jGrowl/jquery.jgrowl.min.js');
+		
+		// CSS
+		echo html::stylesheet('css/common.css', 'screen', false);
+		//$design = $this->session->get('design');
+		//echo html::stylesheet('css/'.$design.'/style.css', 'screen', false);
+		
+		// RSS
+		echo html::link('topic/rss_updates', 'alternate', 'application/rss+xml', false);
+		
+		// JQUERY
+		echo html::script('js/lib/jquery.js');
+		//echo html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js');
+		
+		// FCBKcomplete
+		echo html::stylesheet('js/lib/FCBKcomplete/style.css', 'screen', false);
+		echo html::script('js/lib/FCBKcomplete/jquery.fcbkcomplete.js');
+		
+		// JGROWL
+		echo html::script('js/lib/jGrowl/jquery.jgrowl.min.js');
 		echo html::stylesheet('js/lib/jGrowl/jquery.jgrowl', 'screen', false);
-    	
+		
 		// TIPSY
 		echo html::script('js/lib/tipsy/jquery.tipsy.js'); 
 		echo html::stylesheet('js/lib/tipsy/tipsy.css', 'screen', false);
@@ -53,12 +54,16 @@
 		echo html::stylesheet('js/lib/jtip/jtip.css', 'screen', false);
 		
 		// MYSCRIPT
-    	echo html::script('js/script.js');
-    ?>
+		echo html::script('js/script.js');
+	?>
 	<!--[if IE]> 
 	<?php echo html::stylesheet('js/lib/bubbletip/bubbletip-IE.css', 'screen', false); ?>
 	<![endif]-->
-	
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Advent+Pro' rel='stylesheet' type='text/css'>
+	<link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+
 	<script type="text/javascript">
 	
 		var baseUrl = "<?php echo (IN_PRODUCTION ? "http://chocobo-riding.com/" : "http://localhost:8888/chocobo-riding/www/"); ?>";
@@ -78,36 +83,40 @@
 </head>
 
 <body>
-	<div id="jgrowl_content"><?php echo View::factory("elements/jgrowl") ?></div>
+	<!--a href="https://github.com/Menencia/chocobo-riding">
+		<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
+	</a-->
 
-	<div class="container">
+	<div id="jgrowl_content"><?php echo View::factory("elements/jgrowl") ?></div>
 	
-		<div class="before"></div>
-		
-		<div class="site">
-						
-			<div id="header"></div>
-				
-			<div class="hmenu"></div>
-				
-			<div class="vmenu">
-				<?php echo View::factory('elements/menu') ?>
-			</div>
+	<div id="header">
+		<div class="logo">
+			<span class="part1">Chocobo</span><span class="part2">-</span><span class="part3">Riding</span>
+		</div>
+	</div>
+
+	<div class="hmenu"></div>
 			
-			<div id="page">
-				<?php echo $content ?>
-			</div>
-			
-			<div class="clearleft"></div>
-			
-			<div id="footer"><?php echo View::factory('elements/footer') ?></div>
-			
+	<div class="site">
+					
+		<div class="vmenu">
+			<?php echo View::factory('elements/menu') ?>
 		</div>
 		
-		<div class="after"></div>
-	
+		<div id="page">
+			<?php echo $content ?>
+		</div>
+		
+		<div class="clearleft"></div>
+		
+		<div id="footer">
+			<?php echo View::factory('elements/footer') ?>
+		</div>
+		
 	</div>
 	
+	<div class="after"></div>
+
 </body>
 
 </html>
