@@ -30,7 +30,7 @@ class Equipment_Model extends ORM {
 		$this->type 		= $type;
 		$this->resistance 	= $level;
 		$this->level 		= $level;
-		$this->price 		= $level * ($rarity +1) +60;
+		$this->price 		= $level * ($rarity +1) +120;
 		$this->save();
 
 		// Détermination des effets
@@ -60,28 +60,28 @@ class Equipment_Model extends ORM {
 
 			case 0: // Jambières
 				$res1 = array(
-					'speed' => array(5, 100), 
+					'speed' => array(1, 20), 
 					'pl_limit' => array(10, 100), 
-					'pl_up' => array(15, 500), 
-					'pl_recup' => array(1, 50),
+					'pl_up' => array(5, 100), 
+					'pl_recup' => array(5, 100),
 				);
 				break;
 
 			case 1: // Harnais
 				$res1 = array(
-					'endur' => array(5, 100), 
-					'hp_limit' => array(10, 100), 
-					'hp_up' => array(15, 500), 
-					'hp_recup' => array(1, 50),
+					'endur' => array(1, 20), 
+					'hp_limit' => array(10, 500), 
+					'hp_up' => array(5, 100), 
+					'hp_recup' => array(5, 100),
 				);
 				break;
 
 			case 2: // Casque
 				$res1 = array(
-					'intel' => array(5, 100), 
-					'mp_limit' => array(10, 100), 
-					'mp_up' => array(15, 500), 
-					'mp_recup' => array(1, 50),
+					'intel' => array(1, 20), 
+					'mp_limit' => array(5, 50), 
+					'mp_up' => array(5, 100), 
+					'mp_recup' => array(5, 100),
 				);
 				break;
 			
@@ -92,12 +92,12 @@ class Equipment_Model extends ORM {
 		}
 
 		$res2 = array(
-			'rage_limit' => array(5, 100),
-			'pc_limit' => array(5, 100),
+			'rage_limit' => array(1, 10),
+			'pc_limit' => array(1, 5),
 			'bonus_gils' => array(5, 100),
 			'bonus_xp' => array(5, 100),
 			'bonus_items' => array(5, 100),
-			'resistance' => array(5, 100),
+			'resistance' => array(1, 20),
 		);
 		
 		return array_merge($res1, $res2);
