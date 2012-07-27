@@ -14,6 +14,7 @@ class Shop_Controller extends Template_Controller
 	    	->bind('user', $user)
 	    	->bind('vegetables', $vegetables)
 	    	->bind('nuts', $nuts)
+	    	->bind('equipments', $equipments)
 	    	->bind('chocobos', $chocobos);
 
 	    $this->authorize('logged_in');
@@ -43,6 +44,18 @@ class Shop_Controller extends Template_Controller
 			$nbr++;
 		}
 		$nuts = ORM::factory('nut')->where(array('user_id' => 0, 'level' => $level))->orderby('level', 'asc')->find_all();
+
+		// Equipement
+		$levels = array(1, 13, 26, 39, 52, 65, 78, 90);
+	    $level = $levels[$user->shop];
+	    
+	    $nbr = ORM::factory('equipment')->where(array('user_id' => 0, 'level' => $level))->count_all();
+		while ($nbr < 3)
+		{
+			ORM::factory('equipment')->generate(0, $level, 0);
+			$nbr++;
+		}
+		$equipments = ORM::factory('equipment')->where(array('user_id' => 0, 'level' => $level))->orderby('level', 'asc')->find_all();
 
 		// Chocobos
 		$level = 16 + $user->shop * 10;

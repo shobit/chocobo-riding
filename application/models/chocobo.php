@@ -130,10 +130,10 @@ class Chocobo_Model extends ORM {
 			// ALL
 			case 'bonus_gils': 	$base = 0; break;
 			case 'bonus_xp': 	$base = 0; break;
+			case 'bonus_items': $base = 0; break;
 			
 			// returned values
 			case 'rage_limit': 		return max($this->level, 10);
-			case 'moral_limit': 	return 100;
 			case 'pc_limit': 		return ceil($this->attr('intel') /2); 
 			
 			// Master_* & resistance	
@@ -151,7 +151,7 @@ class Chocobo_Model extends ORM {
 		
 		foreach($this->equipment as $equip) 
 		{
-			foreach($equip->effects as $effect)
+			foreach($equip->equipment_effects as $effect)
 			{	
 				if ($effect->name == $c) 
 				{

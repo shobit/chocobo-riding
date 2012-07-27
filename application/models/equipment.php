@@ -89,9 +89,11 @@ class Equipment_Model extends ORM {
 		}
 
 		$res2 = array(
+			'rage_limit' => array(5, 100),
+			'pc_limit' => array(5, 100),
 			'bonus_gils' => array(5, 100),
 			'bonus_xp' => array(5, 100),
-			'windfall' => array(5, 100),
+			'bonus_items' => array(5, 100),
 			'resistance' => array(5, 100),
 		);
 		
