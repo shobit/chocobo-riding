@@ -1,92 +1,82 @@
-<h1><?php echo Kohana::lang('inventory.title'); ?></h1>
-<div id="prelude"><?php echo Kohana::lang('inventory.prelude'); ?></div>
+<h2>Nombre d'objets possédés : <?php echo $nbr_items ?>/<?= $user->get_items() ?> (+<?php echo $nbr_equipped ?>)</h2>
 
-<p><b>Nombre d'objets possédés : <?php echo $nbr_items ?>/<?= $user->get_items() ?> 
-<small>(+<?php echo $nbr_equipped ?>)</small></b></p>
+<?php 
+$gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 
-<div class="leftPart2">
+if ($nbr_items >0 or $nbr_equipped >0) { 
+?>
 
-	<?php if ($nbr_items >0 or $nbr_equipped >0) { ?>
-	
-	<table class="shop">
-	
+	<table class="table1">
+		<tr>
+			<th>Nom</th>
+			<th>Prix</th>
+			<th></th>
+			<th></th>
+		</tr>
+
 	<?php
 	foreach ($vegetables as $vegetable)
 	{
-		?><tr class="item">
-			<td class="icon"><?php echo html::image('images/items/vegetables/vegetable'.$vegetable->name.'.gif') ?></td>
-			<td class="name"><?php echo $vegetable->vignette() ?></td>
-			<td class="price"><?php echo floor($vegetable->price /2) ?> Gils</td>
-			<td class="form">
+		?><tr class="tr1">
+			<td class="lenmax"><?php echo $vegetable->vignette() ?></td>
+			<td class="len150"><?php echo floor($vegetable->price /2) . $gils_png ?></td>
+			<td class="len100">
 				<?php 
-				echo html::anchor('vegetable/apply/'.$vegetable->id, 'utiliser', array("class"=>"shop")).' ';
+				echo html::anchor('vegetable/sale/'.$vegetable->id, 'Vendre', array("class"=>"button"));
 				?>
 			</td>
-			<td class="form">
+			<td class="len100">
 				<?php 
-				echo html::anchor('vegetable/sale/'.$vegetable->id, 'vendre', array("class"=>"shop"));
+				echo html::anchor('vegetable/apply/'.$vegetable->id, 'Utiliser', array("class"=>"button")).' ';
 				?>
 			</td>
 		</tr><?php
 	}
-	
+
 	foreach ($nuts as $nut)
 	{
-		?><tr class="item">
-			<td class="icon"><?php echo html::image('images/items/nuts/nut'.$nut->name.'.gif') ?></td>
-			<td class="name"><?php echo $nut->vignette() ?></td>
-			<td class="price"><?php echo floor($nut->price /2) ?> Gils</td>
-			<td class="form"></td>
-			<td class="form">
+		?><tr class="tr1">
+			<td class="lenmax"><?php echo $nut->vignette() ?></td>
+			<td class="len150"><?php echo floor($nut->price /2) . $gils_png ?></td>
+			<td class="len100">
 				<?php 
-				echo html::anchor('nut/sale/'.$nut->id, 'vendre', array("class"=>"shop"));
+				echo html::anchor('nut/sale/'.$nut->id, 'Vendre', array("class"=>"button"));
 				?>
 			</td>
+			<td class="len100"></td>
 		</tr><?php
 	}
-	
+
 	foreach ($equipment as $equip)
 	{
 		if ($equip->chocobo_id == NULL or $equip->chocobo_id == $chocobo->id) 
 		{
-		?><tr class="item">
-			<td class="icon"><?php echo html::image('images/items/equips/equip'.$equip->type.'.gif') ?></td>
-			<td class="name"><?php echo $equip->vignette() ?></td>
-			<td class="price"><?php echo floor($equip->price /2) ?> Gils</td>
-			<td class="form">
+		?><tr class="tr1">
+			<td class="lenmax"><?php echo $equip->vignette() ?></td>
+			<td class="len150"><?php echo floor($equip->price /2) . $gils_png?></td>
+			<td class="len100">
 				<?php 
-				if ($equip->chocobo_id == NULL)
-					echo html::anchor('equipment/apply/'.$equip->id, 'équiper', array("class"=>"shop"));
-				else
-					echo html::anchor('equipment/desapply/'.$equip->id, 'déséquiper', array("class"=>"shop"));
+				echo html::anchor('equipment/sale/'.$equip->id, 'Vendre', array("class"=>"button"));
 				?>
 			</td>
-			<td class="form">
+			<td class="len100">
 				<?php 
-				echo html::anchor('equipment/sale/'.$equip->id, 'vendre', array("class"=>"shop"));
+				if ($equip->chocobo_id == NULL)
+					echo html::anchor('equipment/apply/'.$equip->id, 'Equiper', array("class"=>"button"));
+				else
+					echo html::anchor('equipment/desapply/'.$equip->id, 'Déséquiper', array("class"=>"button"));
 				?>
 			</td>
 		</tr><?php
 		}
 	}
 	?>
-	
+
 	</table>
+
+<?php } else { ?>
 	
-	<?php } else { ?>
-		
-		<p><i>Votre inventaire est vide !</i></p>
+	<p><i>Votre inventaire est vide !</i></p>
 
-	<?php } ?>
-
-</div>
-
-<div class="leftPart">
-	<center>
-		<p><?php echo html::image('images/pages/inventory.gif'); ?></p><br />
-		
-	</center>
-</div>
-
-
+<?php } ?>
 	

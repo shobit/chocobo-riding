@@ -45,7 +45,7 @@ $lang = array
 		'bubble' => "Augmente la limite dans l'inventaire"
 	),
 	'gils_remain' => "Gils restants:",
-	'buy' => "acheter"
+	'buy' => "Acheter"
 );
 
 ?>

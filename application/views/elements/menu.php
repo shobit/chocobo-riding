@@ -5,7 +5,7 @@
 		padding: 0;
 	}
 	
-	li {clear: right; padding: 5px 0 5px 0; }
+	li {clear: right; padding: 5px 0 5px 5px; }
 	li:hover {background-color: #eee;}
 	li.selected {background-color: #355F9C;}
 	li.selected a {color: #fff;}

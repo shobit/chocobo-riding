@@ -1,74 +1,57 @@
-<style>
-	.loading {font-size: 10px; color: #999; font-style: italic; display: none;}
-	
-</style>
+<h2>Début de la prochaine course dans 
+	<span id="<?php echo $race->id ?>">--:--</span> 
+	<?php echo html::image('images/icons/hour2.png') ?>
+</h2>
 
-<h1><?php echo Kohana::lang('race.view_start.title') . ' ' . html::image('images/classes/' . $race->circuit->classe . '.gif'); ?></h1>
-<div id="prelude"><?php echo Kohana::lang('location.' . $race->circuit->code . '.prelude'); ?></div>
+<script>
+	decompte(
+		'<?php echo $race->id  ?>', 
+		'<?php echo ($race->start - time()) ?>', 
+		'<?php echo Kohana::lang('race.index.finished') ?>',
+		false
+	);
+</script>
 
-<?php echo new View("races/description", array('race' => $race)); ?>
-	
-<div style="float:right;">
-	<?php 
-	$display_on = ' style="display:inline;"';
-	$display_off = ' style="display:none;"';
-	
-	$registered = ($chocobo->race_id === $race->id);
-	
-	$register = ( ! $registered and $can_register['success']) ? $display_on: $display_off;
-	$unregister = ($registered and $can_unregister['success']) ? $display_on: $display_off;
-	
-	if ( ! $registered) 
-	{
-		echo $can_register['msg'];
-	}
-	
-	if ($registered) 
-	{
-		echo $can_unregister['msg'];
-	}
-	
-	?>
-	
-	<span id="register"<?php echo $register; ?>>
-		+ <?php echo html::anchor('races/' . $race->id . '/register', Kohana::lang('race.register'), array('id' => 'a-subscribe')); ?> 
-		<span class="loading">en cours</span>
-	</span>
-	
-	<span id="unregister"<?php echo $unregister; ?>>
-		- <?php echo html::anchor('races/' . $race->id . '/unregister', Kohana::lang('race.unregister'), array('id' => 'a-unsubscribe')); ?> 
-		<span class="loading">en cours</span>
-	</span>
-	
-	<?php
-	echo html::anchor('races/' . $race->id, Kohana::lang('race.refresh'), array('class' => 'button'));
-	
-	echo html::anchor('races', Kohana::lang('race.back'), array('class' => 'button'));
-	?>
-</div>
-	
-<div class="column3">
-	<?php
-	$nbr_chocobos = count($race->chocobos);
-	if ($nbr_chocobos > 0) 
-	{
-	?>
-		<div class="title">Départ</div>
-		<table class="circuitInside">
-			<?php foreach ($race->chocobos as $chocobo): ?>
-				<tr>
-					<td><?= html::image('images/icons/normal_sepia.jpg') ?></td>
-					<td class="icons"><?= $chocobo->image('mini'); ?></td>
-					<td>
-						<?php echo $chocobo->vignette(); ?>
-					</td>
-				</tr>
-			<?php endforeach; ?>
-		</table>
-	<?php 
-	} 
-	?>
-</div>
+<?php
+$display_on = ' style="display:inline;"';
+$display_off = ' style="display:none;"';
 
-<div class="clearBoth"></div>
-<?= $wave ?>
+$registered = ($chocobo->race_id === $race->id);
+
+$register = ( ! $registered and $can_register['success']);
+$unregister = ($registered and $can_unregister['success']);
+?>
+
+<table class="table1">
+	<tr>
+		<th>Nom</th>
+		<th>PL</th>
+		<th></th>
+	</tr>
+	<tr class="tr1">
+		<td class="lenmax"><?php echo $race->circuit->name() ?></td>
+		<td class="len150"><?php echo $race->circuit->pl ?></td>
+		<td class="len100">
+			<?php if ($register) { echo html::anchor('races/' . $race->id . '/register', "S'inscrire", array('class' => 'button')); } ?>
+			<?php if ($unregister) { echo html::anchor('races/' . $race->id . '/unregister', 'Se désinscrire', array('class' => 'button')); } ?>
+		</td>
+	</tr>
+</table>
+
+<?php if (count($race->chocobos) > 0): ?>
+	<h2>Chocobos inscrits : <?php echo count($race->chocobos) ?> /6</h2>
+
+	<table class="table1">
+		<tr>
+			<th>Nom</th>
+		</tr>
+
+		<?php foreach ($race->chocobos as $chocobo): ?>
+			<tr class="tr1">
+				<td class="lenmax"><?php echo $chocobo->vignette() ?></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+<?php endif; ?>
+
+<?php //echo $wave ?>

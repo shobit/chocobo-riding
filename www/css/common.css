@@ -25,8 +25,6 @@ table {font-family: 'PT Sans', sans-serif;}
 .site {
 	width: 1000px;
 	margin: auto;
-	background-color: #fff;
-	margin-top: 20px;
 }
 	
 .vmenu {
@@ -35,14 +33,16 @@ table {font-family: 'PT Sans', sans-serif;}
 	font-family: 'PT Sans Narrow', sans-serif;
 	margin-left: 30px;
 	font-size: 20px;
+	margin-top: 20px;
+	border-right: 10px solid #355F9C;
 }
 
 #page {
 	float: left;
-	width: 756px;
-	min-height: 200px;
-	padding: 0 20px 40px 13px;
-	border-left: 1px dotted #ddd;
+	width: 700px;
+	min-height: 500px;
+	margin-left: 50px;
+	padding: 20px 20px 0 10px;
 }
 	
 #footer {
@@ -69,15 +69,14 @@ a:hover {
 .clearright {clear: right;}
 .clearBoth {clear: both;}
 
-.table1 {width: 100%; border-collapse: collapse;}
-.table1 th {text-align: left; border-left: 1px solid #CECECE; font-size: 10px;}
-.table1 td {text-align: left; border-left: 1px solid #CECECE;}
+.table1 {width: 100%; border-collapse: collapse; margin-bottom: 50px;}
+.table1 th {text-align: left; font-size: 10px;}
+.table1 td {text-align: left; border: 1px solid #eee; padding-left: 2px;}
 .tr1:hover {background-color: #eee;}
 .tr1 {height: 30px;}
-.tr1 .len250 {width: 250px;}
-.tr1 .len50 {width: 50px;}
-
-.actions {margin-top: 20px;}
+.tr1 .lenmax {border-left: 3px solid #999;}
+.tr1 .len150 {width: 150px;}
+.tr1 .len100 {width: 100px;}
 	
 /* -------------------------------------------------------------------]
 [                                                                     ]
@@ -95,31 +94,6 @@ div#after2 a, div#after2 a:visited {text-decoration: none; color: #4f4f4f;}
 div#after2 a:hover {text-decoration: underline; color: #131313;}
 div.jGrowl a, div.jGrowl a:visited {text-decoration: none; color: #fff;}
 div.jGrowl a:hover {text-decoration: underline;}
-
-.button, .button:visited {
-	display: inline;
-	background: #000 url("../images/theme/glass.png") repeat-x 0 50%;
-	padding:5px;
-	margin:4px;
-	cursor:pointer;
-	font: 85% "Droid Sans", arial;
-	background-color: #fff;
-	border: none;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	-o-border-radius:4px;
-	border-radius:4px;
-	-moz-box-shadow:0 0 2px #333;
-	-webkit-box-shadow:0 0 2px #333;
-	-o-box-shadow:0 0 2px #333;
-	box-shadow:0 0 2px #333;
-}
-
-.button:hover {text-decoration: none; background-color: #eee;}
-.blue, .blue:visited, .blue:hover {background-color: #3B5998; color: #fff;}
-.grey, .grey:visited, .grey:hover {background-color: #999; color: #fff;}
-.red, .red:visited {background-color: #fcc;}
-.red:hover{background-color: #f99;}
 
 .menu{
 	background-color: #fff; 
@@ -149,11 +123,6 @@ a.menuNotSelected:hover {color: #2C193A;}
 #strategy a.blue:hover {text-decoration: underline;}
 #strategy a.grey, #strategy a.grey:visited {color:#999; text-decoration: none;}
 #strategy a.grey:hover {text-decoration: underline;}
-
-a.shop, a.shop:visited {
-	color:#fff; background-color: #888; text-decoration: none; 
-	font-variant: small-caps; padding: 2px; }
-a.shop:hover {background-color: #333;}
 
 
 /* -------------------------------------------------------------------]
@@ -379,8 +348,6 @@ table.forum tr.sticky {background-color: #c4cfdc;}*/
 .paginator {text-align: right;}
 .paginator img {margin-bottom: -2px;}
 .pagination {display: inline;}
-.form-button, .form-button:visited {color:#fff; background-color: #888; text-decoration: none; font-variant: small-caps; padding: 2px; }
-.form-button:hover {background-color: #333;}
 .forum tr.notified {background-color: #fff;}
 .forum tr.notified td.username {font-weight: bold;}
 .forum tr.notified td.title span.title {font-weight: bold;}
@@ -511,9 +478,13 @@ h1 {
 }
 
 h2 {
-	color: #666;
-	border-bottom: 1px solid #ddd;
-	font-variant: small-caps;
+	font-size: 18px;
+	text-transform: uppercase;
+	padding: 2px;
+	background-color: #333;
+	color: #fff;
+	margin-top: 0;
+	margin-bottom: 20px;
 }
 
 div#prelude {
@@ -553,82 +524,24 @@ a.topictitle:hover {text-decoration: underline;}
 a.discussiontitle, a.discussiontitle:visited {color: #333; font-weight: bold;}
 a.discussiontitle:hover {text-decoration: underline;}
 
-a.button.grey, a.button.grey:visited {text-decoration: none; color: #444;}
-a.button.grey:hover {text-decoration: none;}
-
-a.button.blue, a.button.blue:visited {text-decoration: none; color: #fff;}
-a.button.blue:hover {text-decoration: none;}
-
 a.jgrowl, a.jgrowl:visited {text-decoration: none; color: #fff;}
 a.jgrowl:hover {text-decoration: underline;}
 
 .notif {width: 13px; height: 13px; text-align: center; padding: 2px; display: inline-block; background-color: #eee; color: #000;}
 .notif.not_seen {background-color: #d00; color: #fff;}	
 
-.button {
-	padding: 0 8px;
-	margin: 3px;
-	line-height: 27px;
-	text-align: center;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	-o-border-radius: 2px;
-	font-weight: bold;
-	font-size: 11px;
-	display: inline-block;
-	cursor: default;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-.button:hover {
-	cursor: pointer;
-}
-
-.button:active {
-	box-shadow: inset 1px 2px rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: inset 1px 2px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: inset 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.button:focus {
-	border: 1px solid transparent;
-	outline: 0 transparent;
-}
-
-.grey {
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	background-image: -webkit-linear-gradient(top,#f5f5f5,#F1F1F1);
-	background-image: -moz-linear-gradient(top,#f5f5f5,#F1F1F1);
-	background-image: -ms-linear-gradient(top,#f5f5f5,#F1F1F1);
-	background-image: -o-linear-gradient(top,#f5f5f5,#F1F1F1);
-	background-image: linear-gradient(top,#f5f5f5,#F1F1F1);
-	color: #444;
-}
-
-.grey:hover {
-	border: 1px solid #c6c6c6;
-}
-
-.blue {
-	border: 1px solid #3079ed;
-	background-image: -webkit-linear-gradient(top,#4d90fE,#4787ed);
-	background-image: -moz-linear-gradient(top,#4d90fE,#4787ed);
-	background-image: -ms-linear-gradient(top,#4d90fE,#4787ed);
-	background-image: -o-linear-gradient(top,#4d90fE,#4787ed);
-	background-image: linear-gradient(top,#4d90fE,#4787ed);
+a.button {
+	padding: 2px;
+	font-size: 16px;
+	display: block;
+	background-color: #278827;
 	color: #fff;
+	width: 100px;
 }
 
-.blue:hover {
-	border: 1px solid #2f5bb7;
-	background-image: -webkit-linear-gradient(top,#4d90fE,#357ae8);
-	background-image: -moz-linear-gradient(top,#4d90fE,#357ae8);
-	background-image: -ms-linear-gradient(top,#4d90fE,#357ae8);
-	background-image: -o-linear-gradient(top,#4d90fE,#357ae8);
-	background-image: linear-gradient(top,#4d90fE,#357ae8);
+a.button:hover {
+	background-color: #134913;
+	text-decoration: none;
 }
 
 .icon12 {margin-bottom: -2px;}

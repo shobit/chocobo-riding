@@ -3,6 +3,8 @@
 a.upgrade, a.upgrade:visited {background-color: #600; color: #FFF; padding: 4px; border-radius: 5px; font-size: 11px;}
 </style>
 
+<h2>Niveau de la boutique : <?php echo $user->get_shop() ?></h2>
+
 <?php
 $gils = $user->gils;
 $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
@@ -18,9 +20,9 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 	<?php foreach($vegetables as $vegetable): ?>
 	<tr class="tr1">
 		<?php $price = $vegetable->price ?>
-		<td class="len250"><?php echo $vegetable->vignette() ?></td>
-		<td class="len50"><?php echo $price . $gils_png ?></td>
-		<td class="len50"> 
+		<td class="lenmax"><?php echo $vegetable->vignette() ?></td>
+		<td class="len150"><?php echo $price . $gils_png ?></td>
+		<td class="len100"> 
 			<?php
 			if ($gils >= $price) 
 			{
@@ -34,9 +36,9 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 	<?php foreach($nuts as $nut): ?>
 	<tr class="tr1">
 		<?php $price = $nut->price ?>
-		<td class="len250"><?php echo $nut->vignette() ?></td>
-		<td class="len50"><?php echo $price . $gils_png ?></td>
-		<td class="len50"> 
+		<td class="lenmax"><?php echo $nut->vignette() ?></td>
+		<td class="len150"><?php echo $price . $gils_png ?></td>
+		<td class="len100"> 
 			<?php
 			if ($gils >= $price) 
 			{
@@ -50,9 +52,9 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 	<?php foreach($equipments as $equipment): ?>
 	<tr class="tr1">
 		<?php $price = $equipment->price ?>
-		<td class="len250"><?php echo $equipment->vignette() ?></td>
-		<td class="len50"><?php echo $price . $gils_png ?></td>
-		<td class="len50"> 
+		<td class="lenmax"><?php echo $equipment->vignette() ?></td>
+		<td class="len150"><?php echo $price . $gils_png ?></td>
+		<td class="len100"> 
 			<?php
 			if ($gils >= $price) 
 			{
@@ -69,9 +71,9 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 		$price = $chocobo->lvl_limit * 20;
 		$chocobo->name = ($chocobo->gender == 2) ? 'Chocobo mâle': 'Chocobo femelle';
 		?>
-		<td class="len250"><?php echo $chocobo->vignette() ?></td>
-		<td class="len50"><?php echo $price . $gils_png ?></td>
-		<td class="len50"> 
+		<td class="lenmax"><?php echo $chocobo->vignette() ?></td>
+		<td class="len150"><?php echo $price . $gils_png ?></td>
+		<td class="len100"> 
 			<?php
 			if ($gils >= $price) 
 			{
@@ -84,8 +86,8 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 
 	<tr class="tr1">
 		<?php $cost = $user->get_boxes_cost() ?>
-		<td class="len250"><?php echo vignette::display('Box +', "Ajoute 1 box à l'écurie") ?></td>
-		<td class="len50">
+		<td class="lenmax"><?php echo vignette::display('Box +', "Ajoute 1 box à l'écurie") ?></td>
+		<td class="len150">
 			<?php 
 			if ($user->boxes < 5)
 			{
@@ -97,7 +99,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			}
 			?>
 		</td>
-		<td class="len50"> 
+		<td class="len100"> 
 			<?php
 			if ($gils >= $cost and $user->boxes < 5) 
 			{
@@ -109,8 +111,8 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 
 	<tr class="tr1">
 		<?php $cost = $user->get_inventory_cost() ?>
-		<td class="len250"><?php echo vignette::display('Inventaire +', "Ajoute 2 places dans l'inventaire") ?></td>
-		<td class="len50">
+		<td class="lenmax"><?php echo vignette::display('Inventaire +', "Ajoute 2 places dans l'inventaire") ?></td>
+		<td class="len150">
 			<?php 
 			if ($user->items < 5)
 			{
@@ -122,7 +124,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			}
 			?>
 		</td>
-		<td class="len50"> 
+		<td class="len100"> 
 			<?php
 			if ($gils >= $cost and $user->items < 5) 
 			{
@@ -134,8 +136,8 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 
 	<tr class="tr1">
 		<?php $cost = $user->get_shop_cost() ?>
-		<td class="len250"><?php echo vignette::display('Boutique +', "Augmente de 1 le niveau de la boutique") ?></td>
-		<td class="len50">
+		<td class="lenmax"><?php echo vignette::display('Boutique +', "Augmente de 1 le niveau de la boutique") ?></td>
+		<td class="len150">
 			<?php 
 			if ($user->shop < 5)
 			{
@@ -147,7 +149,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			}
 			?>
 		</td>
-		<td class="len50"> 
+		<td class="len100"> 
 			<?php
 			if ($gils >= $cost and $user->shop < 5) 
 			{
