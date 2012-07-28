@@ -32,8 +32,8 @@ $unregister = ($registered and $can_unregister['success']);
 		<td class="lenmax"><?php echo $race->circuit->name() ?></td>
 		<td class="len150"><?php echo $race->circuit->pl ?></td>
 		<td class="len100">
-			<?php if ($register) { echo html::anchor('races/' . $race->id . '/register', "S'inscrire", array('class' => 'button')); } ?>
-			<?php if ($unregister) { echo html::anchor('races/' . $race->id . '/unregister', 'Se désinscrire', array('class' => 'button')); } ?>
+			<?php if ($register) { echo html::anchor('races/' . $race->id . '/register', "S'inscrire", array('class' => 'button green')); } ?>
+			<?php if ($unregister) { echo html::anchor('races/' . $race->id . '/unregister', 'Se désinscrire', array('class' => 'button red')); } ?>
 		</td>
 	</tr>
 </table>

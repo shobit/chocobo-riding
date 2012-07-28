@@ -50,13 +50,6 @@ if ( ! $user->loaded):
 <ul>
 	
 	<?php
-	$selected = (strrpos($url, 'page/events') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php echo html::anchor('page/events', 'Améliorations') ?>
-	</li>
-			
-	<?php
 	$selected = (strrpos($url, 'races') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>

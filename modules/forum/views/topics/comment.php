@@ -54,7 +54,6 @@ if ($comment_notification->loaded)
 			if ($first_comment)
 			{
 				echo $topic->title;
-				echo $topic->display_view_tags();
 			}
 			?>
 		</div>

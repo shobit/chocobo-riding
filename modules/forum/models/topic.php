@@ -3,8 +3,6 @@
 class Topic_Model extends ORM {
     
     protected $has_many = array('comments');
-    
-    protected $has_and_belongs_to_many = array('tags');
 	
     // vérifie sur le joueur a le droit de lecture/écriture sur un sujet
     public function allow ( $user, $action = 'r' ) 

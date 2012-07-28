@@ -37,7 +37,7 @@
 	<tr class="tr1">
 		<td class="lenmax"><?php echo $race->circuit->name() ?></td>
 		<td class="len150"><?php echo $race->circuit->pl ?></td>
-		<td class="len100"><?php echo html::anchor('races/' . $race->id, 'Voir', array('class' => 'button')) ?></td>
+		<td class="len100"><?php echo html::anchor('races/' . $race->id, 'Voir', array('class' => 'button green')) ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>
@@ -59,12 +59,12 @@
 				<td class="lenmax"><?php echo $result->race->circuit->name() ?></td>
 				<td class="len100">
 					<?php
-						echo html::anchor('', 'Supprimer', array('class' => 'button delete_result', 'id' => 'race' . $result->race->id));
+						echo html::anchor('', 'Supprimer', array('class' => 'button red delete_result', 'id' => 'race' . $result->race->id));
 					?>
 				</td>
 				<td class="len100">
 					<?php
-						echo html::anchor('races/' . $result->race->id, 'Voir', array('class' => 'button'));
+						echo html::anchor('races/' . $result->race->id, 'Voir', array('class' => 'button green'));
 					?>
 				</td>
 			</tr>

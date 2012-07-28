@@ -1,9 +1,3 @@
-<style>
-	input[type=text], input[type=password] 
-		{width: 300px; font-size: 14px; outline: none; padding: 6px; border: 1px solid #899BC1;}
-	input.button {}
-</style>
-
 <?php echo form::open(); ?>
 	
 <div>
@@ -19,11 +13,11 @@
 </div>
 
 <div>
-	<?php echo form::input('email', $form['email'], 'placeholder="Adresse email"') ?></td>
+	<?php echo form::input('email', $form['email'], 'placeholder="Adresse email" style="margin-bottom: 6px;"') ?></td>
 </div>
 
 <div>
-	<?php echo html::anchor('', "S'inscrire", array('id' => 'submit', 'class' => 'button')); ?> 
+	<?php echo html::anchor('', "S'inscrire", array('id' => 'submit', 'class' => 'button blue')); ?> 
 </div>
 
 <?php 

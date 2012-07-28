@@ -53,138 +53,61 @@ table {font-family: 'PT Sans', sans-serif;}
 	margin-top: 30px;
 	padding-top: 10px;
 }
-	
-a, a:visited {
-	color: #009;
-	text-decoration: none;
-}
 
-a:hover {
-	text-decoration: underline;
-}
+/* LINKS */	
+a {color: #009;text-decoration: none;}
+a:hover {text-decoration: underline;}
+#footer a {text-decoration: none; color: #6e6e6e;}
+#footer a:hover {text-decoration: underline; color: #525252;}
+.jGrowl a {text-decoration: none; color: #fff;}
+.jGrowl a:hover {text-decoration: underline;}
+.jtiprel {color: #333; cursor: help;}
+.jtiprel:hover {text-decoration: none;}
 
 .icon4 {margin-bottom: -4px;}
-
+.fright {float: right;}
 .clearleft {clear: left;}
 .clearright {clear: right;}
 .clearBoth {clear: both;}
 
+/* TABLE */
 .table1 {width: 100%; border-collapse: collapse; margin-bottom: 50px;}
 .table1 th {text-align: left; font-size: 10px;}
 .table1 td {text-align: left; border: 1px solid #eee; padding-left: 2px;}
 .tr1:hover {background-color: #eee;}
 .tr1 {height: 30px;}
-.tr1 .lenmax {border-left: 3px solid #999;}
+.tr1 .lenmax {}
 .tr1 .len150 {width: 150px;}
 .tr1 .len100 {width: 100px;}
-	
-/* -------------------------------------------------------------------]
-[                                                                     ]
-[ 								LINKS                                 ]
-[                                                                     ] 
-[------------------------------------------------------------------- */
 
-a, a:visited {text-decoration: none; color: #4E3D59;}
-a:hover {text-decoration: underline; color: #2C193A;}
-div#hmenu a, div#hmenu a:visited {text-decoration: none; color: #8b7551;}
-div#hmenu a:hover {text-decoration: none; color: #634d3a;}
-div#footer a, div#footer a:visited {text-decoration: none; color: #6e6e6e;}
-div#footer a:hover {text-decoration: underline; color: #525252;}
-div#after2 a, div#after2 a:visited {text-decoration: none; color: #4f4f4f;}
-div#after2 a:hover {text-decoration: underline; color: #131313;}
-div.jGrowl a, div.jGrowl a:visited {text-decoration: none; color: #fff;}
-div.jGrowl a:hover {text-decoration: underline;}
-
-.menu{
-	background-color: #fff; 
-	position:absolute; 
-	top:17px; left:3px; 
-	padding: 2px 5px 2px 5px;
-	z-index: 7;
-	display:none;
-	min-width: 94px;
-	-moz-box-shadow:0 0 2px #333;
-	-webkit-box-shadow:0 0 2px #333;
-	-o-box-shadow:0 0 2px #333;
-	box-shadow:0 0 2px #333;}
-.action-category:hover{cursor:pointer; background-color: #bbb;}
-.action-space{border-top: 1px dotted #bbb; height: 4px; margin-top:4px;}
-
-a.menuSelected, a.menuSelected:visited {color: #2C193A; text-decoration: none;}
-a.menuSelected:hover {color: #000;}
-a.menuNotSelected, a.menuNotSelected:visited {color: #aaa; text-decoration: none;}
-a.menuNotSelected:hover {color: #2C193A;}
-
-#strategy a.red, #strategy a.red:visited {color:#900; text-decoration: none;}
-#strategy a.red:hover {text-decoration: underline;}
-#strategy a.green, #strategy a.blue:visited {color:#090; text-decoration: none;}
-#strategy a.green:hover {text-decoration: underline;}
-#strategy a.blue, #strategy a.blue:visited {color:#009; text-decoration: none;}
-#strategy a.blue:hover {text-decoration: underline;}
-#strategy a.grey, #strategy a.grey:visited {color:#999; text-decoration: none;}
-#strategy a.grey:hover {text-decoration: underline;}
-
-
-/* -------------------------------------------------------------------]
-[                                                                     ]
-[ 								IMAGES                                ]
-[                                                                     ] 
-[------------------------------------------------------------------- */
-
-img.imageRight {
-	padding: 3px;
-	float: right;
-	margin: 10px;
+/* FORUM types */
+.wrapper-type {text-align: right; vertical-align: top;}
+.type {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	text-transform: uppercase;
+	background-color: #333;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 3px 6px;
+	margin-right: 10px;
+	text-shadow: 0 1px 1px rgba(50,50,50,0.5)
 }
+.announce {background-color: #7C29A9; color: #fff;}
+.update {background-color: #7C29A9; color: #fff;}
+.bug {background-color: #226EC7; color: #fff;}
+.request {background-color: #97B931; color: #fff;}
 
+/* FORUM autres */
+.nbr_comments {background-color: #F1EBEB; padding: 3px;}
+.date {font-size: 10px; color: #999; line-height: 18px;}
+
+/* IMAGES */
 a img {border: 0px;}
-
-img.img1 {
-	border: 1px solid #222;
-}
-
-img.location, img.mini_avatar, img.img2 {
-    border: 1px solid #222;
-    padding: 1px;
-}
-
-div.divRight {float: right;	margin: 5px;}
-div.divRight img {border: 1px solid #32475D; padding: 3px;}
-
-div.divRight2 {float: right;}
-
-div.divLeft {float: left; margin: 5px;}
-div.divLeft img {border: 1px solid #32475D; padding: 3px;}
-
-img.floatLeft {
-	float: left;
-	margin: 5px;
-	border: 1px solid #222;
-}
-
-img.floatLeft2 {
-	float: left;
-	margin: 5px;
-}
-
-img.floatLeft3 {
-	float: left;
-	border: 1px solid #222;
-}
-
-img.floatLeft4 {
-	float: left;
-	margin: 5px;
-	margin-top: 3px;
-}
-
-img.success_jgrowl{
-	float: left;
-	margin-right: 5px;
-	width: 45px;
-	height: 45px;
-	border: 1px solid #000;
-}
+img.location {border: 1px solid #222; padding: 1px;}
+img.success_jgrowl {float: left; margin-right: 5px; width: 45px; height: 45px; border: 1px solid #000;}
 
 /* -------------------------------------------------------------------]
 [                                                                     ]
@@ -213,252 +136,14 @@ div.leftPart3 {
 
 /* -------------------------------------------------------------------]
 [                                                                     ]
-[ 								TABLES                                ]
-[                                                                     ] 
-[------------------------------------------------------------------- */
-
-table.shop {width: 100%; border-collapse: collapse;}
-table.shop tr {border: 1px solid #bbb;}
-table.shop td {height: 30px;}
-table.shop td.icon {width: 20px; text-align: center;}
-table.shop td.name {width: 150px;}
-table.shop td.price {width: 100px; text-align: center;}
-table.shop td.form {width: 50px; text-align: center;}
-input#gils {border: 0px solid #fff; text-align: center; font-weight: bold;}
-.no_display {display: none;}
-
-div.column4 div.title {
-	font-size: 11px;
-	font-weight: bold;
-	font-variant: small-caps;
-	margin-bottom: 10px;
-	letter-spacing: 2px;
-	border-bottom: 1px solid #000;
-}
-
-div.column4 {
-	float: left;
-	width: 80%;
-	padding: 3px;
-}
-
-div.column3 div.title {
-	font-size: 11px;
-	font-weight: bold;
-	font-variant: small-caps;
-	margin-bottom: 10px;
-	letter-spacing: 2px;
-	border-bottom: 1px solid #000;
-}
-
-div.column3 {
-	float: left;
-	width: 50%;
-	padding: 3px;
-}
-
-div.column2 div.title {
-	font-size: 11px;
-	font-weight: bold;
-	font-variant: small-caps;
-	margin-bottom: 10px;
-	letter-spacing: 2px;
-}
-
-div.column2 {
-	float: left;
-	width: 175px;
-	padding: 3px;
-}
-
-table.participants {
-	width: 90%;
-	margin: auto;
-	border-collapse: collapse;
-}
-
-table.participants tr.top {
-	border-top: 2px solid #cecece;
-	border-bottom: 2px solid #cecece;
-	background-color: #efefef;
-}
-
-table.participants td {
-	padding: 6px;
-	vertical-align: middle;
-}
-
-table.circuitInside {
-	font-size: 10px;
-	vertical-align: middle;
-}
-
-table.circuitInside th {
-	font-size: 11px;
-	font-weight: bold;
-	font-variant: small-caps;
-	padding-bottom: 3px;
-	letter-spacing: 2px;
-}
-
-table.circuitInside td.icon {
-	width: 18px;
-	height: 18px;
-	text-align: center;
-}
-
-table.informations {
-    width: 100%;
-    margin: auto;
-	font-variant: small-caps;
-	color: #724211;
-	border: 1px solid #724211;
-	background-color: #f5eae1;
-    border-collapse: collapse;
-    text-align: center;
-}
-	
-table.informations td.label {
-	letter-spacing: 1px;
-	padding: 10px;
-	font-weight: bold;
-}
-
-.forum {width: 100%; margin: auto; border: 1px solid #cecece; border-collapse: collapse;}
-.forum tr {background-color: #eee; border: 1px solid #D5D5D5;}
-.forum tr:hover {background-color: #ddd;}
-.forum td.username:hover{cursor: pointer;}
-.forum td.title:hover{cursor: pointer;}
-.forum td.type:hover{cursor: pointer;}
-.forum td.date:hover{cursor: pointer;}
-.forum tr.notified:hover {background-color: #ddd; cursor: pointer;}
-/*table.forum tr.top {background-color: #cdcdcd; font-weight: normal; border: 1px solid #bbb;}
-table.forum tr.top:hover {background-color: #cdcdcd;}
-table.forum tr.dark {background-color: #efefef;}
-table.forum tr.sticky {background-color: #c4cfdc;}*/
-.forum td {padding: 8px 0 7px; color: #202020; vertical-align: top;}
-.forum td.icon {width: 25px; text-align: center;}
-.forum td.username {width: 80px; font-size: 90%;}
-.forum td.arrow {width: 15px; text-align: center;}
-.forum td.title {width: 531px; padding-right: 5px;}
-.forum .overflow {overflow: hidden; height: 15px;}
-.forum .content {color: #6D6D6D; font-size: 85%;}
-.forum td.type {width: 30px; text-align: center;}
-.forum td.date {width: 50px; text-align: right; font-size: 85%; padding-right: 2px;}
-.paginator {text-align: right;}
-.paginator img {margin-bottom: -2px;}
-.pagination {display: inline;}
-.forum tr.notified {background-color: #fff;}
-.forum tr.notified td.username {font-weight: bold;}
-.forum tr.notified td.title span.title {font-weight: bold;}
-.forum tr.notified td.date {font-weight: bold;}
-.forum a, .forum a:visited {text-decoration: none;}
-.forum a:hover {text-decoration: none;}
-
-table.forum2 {
-    width: 100%;
-    margin: auto;
-}
-
-table.forum2 td.dark {background-color: #FAFAFA;} /*efefef*/
-table.forum2 td.modo {background-color: #F4FAFF;} /*f5e6ff*/
-table.forum2 td.admin {background-color: #FAF4FF;}
-table.forum2 td.left {width: 90px; padding: 10px; vertical-align: top; text-align: center;}
-table.forum2 td.right {vertical-align: top; padding: 10px 10px 15px 10px;}
-table.forum2 div.signature {font-variant: small-caps; font-size: 11px; 
-    border-top: 1px dotted #cccccc; margin-bottom: 20px; padding-top: 5px;}
-    
-div.interests span.somme {font-size: 1.1em; font-weight: bold;}
-div.interests span.red {color: #900}
-div.interests span.green {color: #090}
-div.interests span.green a, div.interests span.green a:visited 
-	{text-decoration: none; color: #090; font-weight: bold;}
-div.interests span.green a:hover {text-decoration: none;}
-div.interests span.red a, div.interests span.red a:visited 
-	{text-decoration: none; color: #900; font-weight: bold;}
-div.interests span.red a:hover {text-decoration: none;}
-div.interests span.grey a, div.interests span.grey a:visited 
-	{text-decoration: none; color: #999;}
-div.interests span.grey a:hover {text-decoration: none;}
-div.interests span.none {display: none;}
-
-table.barre {
-    width: 100%;
-    margin: 0;
-    font-variant: small-caps;
-}
-table.barre td#after-right {text-align: right;}
-table.barre td.icons {width: 35px; text-align: right;}
-
-/* -------------------------------------------------------------------]
-[                                                                     ]
 [ 								FORMS                                 ]
 [                                                                     ] 
 [------------------------------------------------------------------- */
 
-form.frm_connexion input {
-	height: 20px;
-	border: 1px solid #fff99a;
-	background-color: #ffeb81;
-	text-align: center;
-}
-
-div.hr {margin-top: 20px; padding-bottom: 20px; border-top: 1px solid #ddd;}
-
-form.frm_edits textarea {
-	border: 1px #ddd solid;
-    width: 95%;
-    height: 200px;
-}
-
-form.frm_edits input[type=text], form.frm_edits input[type=password] {
-	padding: 2px;
-	font-size: 14px;
-	font-family: Arial;
-	color: #3d4067;
-	width: 150px;
-	border: 1px solid #BDC7D8;
-	outline: 0;
-}
-
-select{border: 1px solid #BDC7D8; outline: 0;}
-
-form.frm_edits div.reply {
-    background-color: #efefef;
-    padding: 5px;
-}
-
-form.frm_edits table {width: 100%;}
-form.frm_edits table td.label {padding: 10px;}
+input[type=text], input[type=password] {width: 300px; font-size: 14px; outline: none; padding: 6px; border: 1px solid #899BC1; margin-bottom: 3px;}
+input.button {}
 
 textarea#textile {width: 95%; height: 100px; border: 1px solid #aaa; padding: 5px;}
-
-/* -------------------------------------------------------------------]
-[                                                                     ]
-[ 								FIELDSETS                             ]
-[                                                                     ] 
-[------------------------------------------------------------------- */
-
-fieldset.listChocobos {
-	border: 1px solid #cdcdcd;	
-}
-
-fieldset.listChocobos legend {
-	font-weight: bold;
-	font-variant: small-caps;
-	color: #c1c1c1;
-}
-
-fieldset#about {
-	size: 90%;
-	border: 1px dotted #898998;
-	background-color: #fefeef;
-}
-
-fieldset#about legend {
-	font-weight: bold;
-	font-variant: small-caps;
-}
 
 /* -------------------------------------------------------------------]
 [                                                                     ]
@@ -467,14 +152,7 @@ fieldset#about legend {
 [------------------------------------------------------------------- */
 
 h1 {
-	margin: 0;
-	font-variant: small-caps;
-	background-color: #355F9C;
-	color: #fff;
-	padding: 6px; 
-	text-transform: lowercase;
-	box-shadow: 5px 6px #333;
-	margin-top: 5px;
+	display: none;
 }
 
 h2 {
@@ -502,21 +180,6 @@ span.darkText {color: #000; font-weight: bold;}
 span.online {color: #090; font-size: 10px;}
 
 /* FORUM */
-	
-a.tag, a.tag:visited {
-	font-size: 11px;
-	color: #900;
-	margin-left: 5px;
-	text-decoration: none;
-	letter-spacing: 1px;
-	font-style: italic;
-	font-weight: normal;
-}
-
-a.tag:hover {
-	color: #b00;
-	text-decoration: none;
-}
 
 a.topictitle, a.topictitle:visited {color: #333; font-weight: bold;}
 a.topictitle:hover {text-decoration: underline;}
@@ -534,13 +197,16 @@ a.button {
 	padding: 2px;
 	font-size: 16px;
 	display: block;
-	background-color: #278827;
 	color: #fff;
 	width: 100px;
 }
 
+a.button.green {background-color: #278827;}
+a.button.blue {background-color: #355F9C;}
+a.button.red {background-color: #A72323;}
+
 a.button:hover {
-	background-color: #134913;
+	background-color: #333;
 	text-decoration: none;
 }
 
@@ -577,94 +243,5 @@ div.msgInfo {
 	padding: 4px 4px 4px 19px;
     margin: 5px;
 }
-
-/* -------------------------------------------------------------------]
-[                                                                     ]
-[ 								EVENTS                                ]
-[                                                                     ] 
-[------------------------------------------------------------------- */
-
-/*border: 3px solid #900;*/
-div.event {margin: 0 0 30px; padding: 10px;}
-div.e_red {background-color: #feefef;}
-div.e_green {background-color: #effeef;}
-div.e_blue {background-color: #efeffe;}
-div.e_header {border-bottom: 1px solid #888; margin-bottom: 10px;}
-div.e_first div.e_header {border-bottom: 1px solid #900;}
-div.e_comments {float: right; font-size: 11px;}
-div.e_title {font-weight: bold; font-variant: small-caps; font-size: 16px;}
-div.e_first div.e_title {font-size: 18px; color: #900;}
-div.e_created {font-size: 11px; font-style: italic; color: #aaa;}
-div.e_content {}
-
-/* -------------------------------------------------------------------]
-[                                                                     ]
-[ 								WAVE                                  ]
-[                                                                     ] 
-[------------------------------------------------------------------- */
-
-div#wave div.title {
-	font-size: 11px;
-	font-weight: bold;
-	font-variant: small-caps;
-	letter-spacing: 2px;
-	border-bottom: 1px solid #a9a;
-}
-
-div#wave div.corpse {
-	border: 1px solid #bab;
-	padding: 5px;
-	padding-top: 10px;
-	background-color: #feeffe;
-}
-
-div#wave input#content {
-	width: 85%;
-	padding: 4px;
-	color: #666;
-	font-weight: bold;
-	border: 1px solid #888;
-}
-
-div#wave div.wave_content {
-	height: 200px;
-	overflow: auto;
-}
-
-#wave_table {margin-top: 15px;}
-
-/* -------------------------------------------------------------------]
-[                                                                     ]
-[ 								BILLET                                ]
-[                                                                     ] 
-[------------------------------------------------------------------- */
-
-div.billet {
-	width: 145px;
-	float: left;
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-div.closeBillet {
-	clear: left;
-}
-
-/* -------------------------------------------------------------------]
-[                                                                     ]
-[ 								TUTORIAL                              ]
-[                                                                     ] 
-[------------------------------------------------------------------- */
-
-div.help {
-	border: 1px solid #bcb;
-	background-color: #fefeef;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding: 5px;
-}
-
-/*-------------------------------------------------------------------*/
-
 
 

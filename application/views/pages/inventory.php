@@ -22,12 +22,12 @@ if ($nbr_items >0 or $nbr_equipped >0) {
 			<td class="len150"><?php echo floor($vegetable->price /2) . $gils_png ?></td>
 			<td class="len100">
 				<?php 
-				echo html::anchor('vegetable/sale/'.$vegetable->id, 'Vendre', array("class"=>"button"));
+				echo html::anchor('vegetable/sale/'.$vegetable->id, 'Vendre', array("class"=>"button red"));
 				?>
 			</td>
 			<td class="len100">
 				<?php 
-				echo html::anchor('vegetable/apply/'.$vegetable->id, 'Utiliser', array("class"=>"button")).' ';
+				echo html::anchor('vegetable/apply/'.$vegetable->id, 'Utiliser', array("class"=>"button green")).' ';
 				?>
 			</td>
 		</tr><?php
@@ -40,7 +40,7 @@ if ($nbr_items >0 or $nbr_equipped >0) {
 			<td class="len150"><?php echo floor($nut->price /2) . $gils_png ?></td>
 			<td class="len100">
 				<?php 
-				echo html::anchor('nut/sale/'.$nut->id, 'Vendre', array("class"=>"button"));
+				echo html::anchor('nut/sale/'.$nut->id, 'Vendre', array("class"=>"button red"));
 				?>
 			</td>
 			<td class="len100"></td>
@@ -56,15 +56,15 @@ if ($nbr_items >0 or $nbr_equipped >0) {
 			<td class="len150"><?php echo floor($equip->price /2) . $gils_png?></td>
 			<td class="len100">
 				<?php 
-				echo html::anchor('equipment/sale/'.$equip->id, 'Vendre', array("class"=>"button"));
+				echo html::anchor('equipment/sale/'.$equip->id, 'Vendre', array("class"=>"button red"));
 				?>
 			</td>
 			<td class="len100">
 				<?php 
 				if ($equip->chocobo_id == NULL)
-					echo html::anchor('equipment/apply/'.$equip->id, 'Equiper', array("class"=>"button"));
+					echo html::anchor('equipment/apply/'.$equip->id, 'Equiper', array("class"=>"button green"));
 				else
-					echo html::anchor('equipment/desapply/'.$equip->id, 'Déséquiper', array("class"=>"button"));
+					echo html::anchor('equipment/desapply/'.$equip->id, 'Déséquiper', array("class"=>"button green"));
 				?>
 			</td>
 		</tr><?php

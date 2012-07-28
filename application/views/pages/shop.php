@@ -26,7 +26,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<?php
 			if ($gils >= $price) 
 			{
-				echo html::anchor('vegetable/buy/' . $vegetable->id, Kohana::lang('shop.buy'), array('class' => 'button'));
+				echo html::anchor('vegetable/buy/' . $vegetable->id, Kohana::lang('shop.buy'), array('class' => 'button green'));
 			}
 			?>
 		</td>
@@ -42,7 +42,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<?php
 			if ($gils >= $price) 
 			{
-				echo html::anchor('nut/buy/' . $nut->id, Kohana::lang('shop.buy'), array('class' => 'button'));
+				echo html::anchor('nut/buy/' . $nut->id, Kohana::lang('shop.buy'), array('class' => 'button green'));
 			}
 			?>
 		</td>
@@ -58,7 +58,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<?php
 			if ($gils >= $price) 
 			{
-				echo html::anchor('equipment/buy/' . $equipment->id, Kohana::lang('shop.buy'), array('class' => 'button'));
+				echo html::anchor('equipment/buy/' . $equipment->id, Kohana::lang('shop.buy'), array('class' => 'button green'));
 			}
 			?>
 		</td>
@@ -77,7 +77,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<?php
 			if ($gils >= $price) 
 			{
-				echo html::anchor('chocobo/buy/' . $chocobo->id, Kohana::lang('shop.buy'), array('class' => 'button'));
+				echo html::anchor('chocobo/buy/' . $chocobo->id, Kohana::lang('shop.buy'), array('class' => 'button green'));
 			}
 			?>
 		</td>
@@ -103,7 +103,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<?php
 			if ($gils >= $cost and $user->boxes < 5) 
 			{
-				echo html::anchor('user/upgrade_boxes', Kohana::lang('shop.buy'), array('id' => 'upgrade_boxes', 'class' => 'button'));
+				echo html::anchor('user/upgrade_boxes', Kohana::lang('shop.buy'), array('id' => 'upgrade_boxes', 'class' => 'button green'));
 			}
 			?>
 		</td>
@@ -128,7 +128,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<?php
 			if ($gils >= $cost and $user->items < 5) 
 			{
-				echo html::anchor('user/upgrade_inventory', Kohana::lang('shop.buy'), array('id' => 'upgrade_inventory', 'class' => 'button'));
+				echo html::anchor('user/upgrade_inventory', Kohana::lang('shop.buy'), array('id' => 'upgrade_inventory', 'class' => 'button green'));
 			}
 			?>
 		</td>
@@ -153,7 +153,7 @@ $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));
 			<?php
 			if ($gils >= $cost and $user->shop < 5) 
 			{
-				echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_shop', 'class' => 'button'));
+				echo html::anchor('user/upgrade_shop', Kohana::lang('shop.buy'), array('id' => 'upgrade_shop', 'class' => 'button green'));
 			}
 			?>
 		</td>

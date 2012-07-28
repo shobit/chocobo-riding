@@ -14,13 +14,9 @@ class date extends date_Core {
 		
 		$tps = max(1, time() - $date);
 		
-		if ($tps == 1) // seconds
-		{
-			$ago = $tps . ' seconde';
-		}
-		elseif ($tps < 60) 
+		if ($tps < 60) 
 		{ 
-			$ago = $tps . ' secondes';
+			$ago = 'un instant';
 		}
 		else 
 		{
@@ -28,7 +24,7 @@ class date extends date_Core {
 			
 			if ($tps == 1) // minutes
 			{
-				$ago = 'environ ' . $tps . ' minute';
+				$ago = $tps . ' minute';
 			}
 			elseif ($tps < 60) 
 			{ 
@@ -40,7 +36,7 @@ class date extends date_Core {
 				
 				if ($tps == 1) // hours
 				{
-					$ago = 'environ ' . $tps . ' heure';
+					$ago = $tps . ' heure';
 				}
 				else
 				{ 
