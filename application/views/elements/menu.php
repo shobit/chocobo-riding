@@ -23,22 +23,31 @@
 </style>
 
 <?php
+$url = url::current();
 $user = $this->session->get('user');
 if ( ! $user->loaded):
 ?>
 
+<?php $menus = array(
+	'presentation' 	=> 'page/home',
+	'connection' 	=> 'users/login',
+	'register' 		=> 'users/new',
+	'forum' 		=> 'topics',
+) ?>
 <ul>
-	<li><?php echo html::anchor('page/home', Kohana::lang('menu.presentation')); ?></li>
-	<li class="selected"><?php echo html::anchor('users/login', Kohana::lang('menu.connection')); ?></li>
-	<li><?php echo html::anchor('users/new', Kohana::lang('menu.register')); ?></li>
-	<li><?php echo html::anchor('topics', 'Forum'); ?></li>
-	<li><?php echo html::anchor('page/about', 'À propos'); ?></li>
+	<?php foreach ($menus as $menu => $path): ?>
+	<?php
+		$selected = (strrpos($url, $path) === FALSE) ? '' : ' class="selected"';
+		?>
+		<li<?php echo $selected ?>>
+			<?php echo html::anchor($path, Kohana::lang("menu.$menu")) ?>
+		</li>
+	<?php endforeach; ?>
 </ul>
 
 <?php else: ?>
 
 <ul>
-	<?php $url = url::current() ?>
 	
 	<?php
 	$selected = (strrpos($url, 'page/events') === FALSE) ? '' : ' class="selected"';
