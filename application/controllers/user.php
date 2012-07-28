@@ -65,10 +65,12 @@ class User_Controller extends Template_Controller {
 	{
 		$this->template->content = View::factory('users/view')
 			->bind('user', $user)
-			->bind('u', $u);
+			->bind('u', $u)
+			->bind('c', $c);
 	
 		$u = $this->session->get('user');
-		
+		$c = $this->session->get('chocobo');
+
 		$user = ORM::factory('user', $id);
 		
 		if ( ! $user->loaded)

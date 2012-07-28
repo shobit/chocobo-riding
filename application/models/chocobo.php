@@ -5,7 +5,7 @@ class Chocobo_Model extends ORM {
     protected $belongs_to = array('user', 'race');
     protected $has_many = array('results', 'equipment');
     
-    public function image($format, $options) {
+    public function image($format, $options=array()) {
     	if ($format == "mini") 
     		$url = "images/chocobos/".gen::colour($this->colour)."/generic.gif";
     	elseif ($format == "menu") 
@@ -423,10 +423,10 @@ class Chocobo_Model extends ORM {
 	public function vignette() 
 	{
 		$content = '';
-		$content .= '<br />Niveau : ' . ' ' . $this->level . ' /' . $this->lvl_limit;
-		$content .= '<br />Vitesse : ' . ' ' . $this->attr('speed');
-		$content .= '<br />Intelligence : ' . ' ' . $this->attr('intel');
-		$content .= '<br />Endurance : ' . ' ' . $this->attr('endur');
+		$content .= 'Niveau : ' . ' ' . $this->level . ' /' . $this->lvl_limit . '<br />';
+		$content .= 'Vitesse : ' . ' ' . $this->attr('speed') . '<br />';
+		$content .= 'Intelligence : ' . ' ' . $this->attr('intel') . '<br />';
+		$content .= 'Endurance : ' . ' ' . $this->attr('endur') . '<br />';
 		
 		return vignette::display($this->name, $content);
 	}

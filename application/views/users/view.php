@@ -1,142 +1,129 @@
-<?php
+<h2>Informations</h2>
 
-/*
-
-if (adminRights()) {
-	$texte = "Are You Sure?";
-	e($html->link($html->image('forum/delete.gif'), 
-		array(
-			'view'=>'delete', 
-			'user_id'=>$id),
-		array(
-			'title'=>'Supprimer', 
-			'onClick'=>'javascript:return confirme(\''.$texte.'\');'
-		)));
+<?php 
+if ($user->id == $u->id)
+{
+	echo html::anchor('/user/edit', 'Modifier', array('class'=>'button blue fright'));
 }
-
-*/
-
 ?>
 
-<h1>Profil de user</h1>
-<div id="prelude"></div>
+<div class="clearright"></div>
 
-	<div class="leftPart">
-			
-		<table class="informations">
-		
-			<tr>
-				<td class="label">Nom</td>
-				<td class="value">
-					<?= $user->username ?>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Statut</td>
-				<td class="value">
-					<?= $user->role() ?>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Genre</td>
-				<td class="value">
-					<?= $user->display_gender() ?>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Langue</td>
-				<td class="value">
-				<?= $user->locale ?>
-				</td>
-			</tr>
-			<?php if (!empty($user->birthday)) { ?>
-			<tr>
-				<td class="label">Naissance</td>
-				<td class="value">
-					<?= $user->birthday ?>
-				</td>
-			</tr>
-			<?php } ?>
-			<tr>
-				<td class="label">Argent</td>
-				<td class="value">
-				<?php
-					echo html::image('images/theme/gil.gif');
-					echo $user->gils;
-				?>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Succès</td>
-				<td class="value">
-				<?php
-					echo html::image('images/theme/etoile.png');
-					$nbr_titles = ORM::factory('title')->count_all();
-					$content = count($user->successes).'<small>/'.$nbr_titles.'</small>';
-					echo html::anchor('success/view/'.$user->username, $content);
-				?>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Histoire</td>
-				<td class="value">
-				<?php
-					if ($user->quest == 0) echo 'Prologue';
-					else echo 'Chapitre '.$user->quest;
-				?>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Inscrit</td>
-				<td class="value">
-				<?php
-					$tl = gen::time_left($user->created);
-					echo $tl['short'];
-				?>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Connecté</td>
-				<td class="value">
-				<?php
-					$tl = gen::time_left($user->updated);
-					echo $tl['short'];
-				?>
-				</td>
-			</tr>
-	
-		</table>
-	
-	</div>
-	
-	<div class="leftPart">
-	
-		<fieldset class="listChocobos">
-			<?php 
-				echo '<legend>Ecurie <small>('.count($user->chocobos).'/'.$user->get_boxes().' chocobos)</small></legend>';
+<table class="table1">
+
+	<tr>
+		<th>Champ</th>
+		<th>Valeur</th>
+		<th></th>
+	</tr>
+
+	<tr class="tr1">
+		<td class="len150">Nom</td>
+		<td class="lenmax">
+			<?php echo $user->username ?>
+		</td>
+		<td class="len100"></td>
+	</tr>
+	<tr class="tr1">
+		<td class="len150">Statut</td>
+		<td class="lenmax">
+			<?= $user->role() ?>
+		</td>
+		<td class="len100"></td>
+	</tr>
+	<tr class="tr1">
+		<td class="len150">Genre</td>
+		<td class="lenmax">
+			<?= $user->display_gender() ?>
+		</td>
+		<td class="len100"></td>
+	</tr>
+	<tr class="tr1">
+		<td class="len150">Langue</td>
+		<td class="lenmax">
+		<?= $user->locale ?>
+		</td>
+		<td class="len100"></td>
+	</tr>
+	<?php if (!empty($user->birthday)) { ?>
+	<tr class="tr1">
+		<td class="len150">Naissance</td>
+		<td class="lenmax">
+			<?= $user->birthday ?>
+		</td>
+		<td class="len100"></td>
+	</tr>
+	<?php } ?>
+	<tr class="tr1">
+		<td class="len150">Argent</td>
+		<td class="lenmax">
+			<?php
+			echo $user->gils;
+			echo html::image('images/theme/gil.gif');
 			?>
-			<table class="form">
-				<?php foreach($user->chocobos as $n => $chocobo) { ?>
-				<tr>
-					<td class="label"><?php //html::image($chocobo->displayImage("small"))); ?></td>
-					<td class="value"><?= html::anchor('chocobo/view/'.$chocobo->name, 
-						' Box n°'.($n+1).': <b>'.$chocobo->name.'</b>'); ?></td>
-				</tr>
-				<?php } ?>
-			</table>
-		</fieldset>
-		
-	</div>
+		</td>
+		<td class="len100"></td>
+	</tr>
+	<tr class="tr1">
+		<td class="len150">Succès</td>
+		<td class="lenmax">
+		<?php
+			$nbr_titles = ORM::factory('title')->count_all();
+			echo count($user->successes).'<small>/'.$nbr_titles.'</small>';
+		?>
+		</td>
+		<td class="len100">
+			<?php
+			echo html::anchor('success/view/' . $user->username, 'Voir', array('class' => 'button green'));
+			?>
+		</td>
+	</tr>
+	<tr class="tr1">
+		<td class="len150">Inscrit</td>
+		<td class="lenmax">
+			<?php echo date::display($user->created) ?>
+		</td>
+		<td class="len100"></td>
+	</tr>
+	<tr class="tr1">
+		<td class="len150">Connecté</td>
+		<td class="lenmax">
+			<?php echo date::display($user->updated) ?>
+		</td>
+		<td class="len100"></td>
+	</tr>
+
+</table>
 	
-	<div class="leftPart">
+<h2>Chocobos dans l'écurie : <?php echo count($user->chocobos).'/'.$user->get_boxes() ?></h2>
 	
-		<!-- IMAGE -->
-		<center>
-			<?php $image = $user->image; ?>
-			<p><?= $user->image('thumbmail'); ?></p>
-			<p><?php echo html::anchor('/user/edit', 'préférences', array('class'=>'button')); ?></p>
-		</center>
-	
-	</div>
-	
-	<div class="clearBoth"></div>
+<table class="table1">
+	<tr>
+		<th>Nom</th>
+		<?php if ($user->id == $u->id): ?><th></th><?php endif; ?>
+		<th></th>
+	</tr>
+
+	<?php foreach($user->chocobos as $n => $chocobo): ?>
+	<tr class="tr1">
+		<td class="lenmax">
+			<?php echo $chocobo->vignette() ?>
+		</td>
+
+		<?php if ($user->id == $u->id): ?>
+		<td class="len100">
+			<?php 
+			if ($chocobo->id != $c->id)
+			{
+				echo html::anchor('chocobo/change/' . $chocobo->name, 'Choisir', array('class' => 'button blue'));
+			}
+			?>
+		</td>
+		<?php endif; ?>
+
+		<td class="len100">
+			<?php echo html::anchor('chocobo/view/' . $chocobo->name, 'Voir', array('class' => 'button green')) ?>
+		</td>
+	</tr>
+	<?php endforeach; ?>
+</table>
