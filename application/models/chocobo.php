@@ -5,7 +5,7 @@ class Chocobo_Model extends ORM {
     protected $belongs_to = array('user', 'race');
     protected $has_many = array('results', 'equipment');
     
-    public function image($format) {
+    public function image($format, $options) {
     	if ($format == "mini") 
     		$url = "images/chocobos/".gen::colour($this->colour)."/generic.gif";
     	elseif ($format == "menu") 
@@ -13,7 +13,7 @@ class Chocobo_Model extends ORM {
     		$url = "images/chocobos/".gen::colour($this->colour)."/".
     			$this->display_job('code')."/".$format.".png";
     	}
-    	return html::image($url);
+    	return html::image($url, $options);
     }
     
     public function display_colour($format) {
@@ -431,7 +431,13 @@ class Chocobo_Model extends ORM {
 		return vignette::display($this->name, $content);
 	}
 
-
+	/*
+	 * génère le lien pour accéder au profil du chocobo
+	 */
+	public function link ()
+	{
+		return html::anchor('chocobo/view/' . $this->name, $this->name);
+	}
 	
 	/**
 	 * Génère un nouveau chocobo à l'aide d'une noix

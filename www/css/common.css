@@ -16,11 +16,17 @@ table {font-family: 'PT Sans', sans-serif;}
 
 #header {height: 100px; background-color: #f5f5f5; border-bottom: 1px solid #e5e5e5;}
 	
-	.logo {width: 970px; margin: auto; padding-left: 30px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 40px; padding-top: 52px;}
+	.wrapper-header {width: 1000px; margin: auto;}
 
-	#header .part1 {color: rgb(10,4,5);}
-	#header .part2 {color: rgb(174,174,174);}
-	#header .part3 {color: #355F9C; font-weight: normal;}
+	.logo {float: left; width: 300px; margin: auto; padding-left: 30px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 40px; padding-top: 49px;}
+
+		#header .part1 {color: rgb(10,4,5);}
+		#header .part2 {color: rgb(174,174,174);}
+		#header .part3 {color: #355F9C; font-weight: normal;}
+
+	.dashboard {text-align: right; margin-right: 20px; padding-top: 72px;}
+
+		.item {float: right; margin-left: 30px;}
 
 .site {
 	width: 1000px;
@@ -55,7 +61,7 @@ table {font-family: 'PT Sans', sans-serif;}
 }
 
 /* LINKS */	
-a {color: #009;text-decoration: none;}
+a {color: #355F9C;text-decoration: none;}
 a:hover {text-decoration: underline;}
 #footer a {text-decoration: none; color: #6e6e6e;}
 #footer a:hover {text-decoration: underline; color: #525252;}
@@ -145,7 +151,6 @@ div.leftPart3 {
 [------------------------------------------------------------------- */
 
 input[type=text], input[type=password] {width: 300px; font-size: 14px; outline: none; padding: 6px; border: 1px solid #899BC1; margin-bottom: 3px;}
-input.button {}
 
 textarea#textile {width: 95%; height: 100px; border: 1px solid #aaa; padding: 5px;}
 
