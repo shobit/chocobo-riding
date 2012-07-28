@@ -24,11 +24,6 @@
 .date {font-size: 10px; color: #999; line-height: 18px;}
 </style>
 
-<?php if ($user->has_role('admin'))
-{
-	echo html::anchor('update/edit/0', 'Ajouter', array('class' => 'button fancybox fancybox.ajax', 'style' => 'float: right;'));
-}?>
-
 <h2>Améliorations</h2>
 
 <table class="table1">
@@ -45,7 +40,6 @@
 			</td>
 			<td class="lenmax">
 				<div class="title"><?php echo $update->title ?></div>
-				<div class="content"><?php echo $update->content ?></div>
 				<div class="date"><?php echo date::display(strtotime($update->date)) ?></div>
 			</td>
 			<?php if ($user->has_role('admin')): ?>
@@ -56,6 +50,17 @@
 		</tr>
 	<?php endforeach; ?>
 </table>
+
+<?php if ($user->has_role('admin')): ?>
+<div class="actions">
+	<div>
+		<?php
+		echo html::image('images/icons/arrow_right.gif', array('class' => 'icon4')) . ' ';
+		echo html::anchor('update/edit/0', 'Ajouter une note de version', array('class' => 'fancybox fancybox.ajax'));
+		?>
+	</div>
+</div>
+<?php endif; ?>
 
 <script>
 $(function(){
