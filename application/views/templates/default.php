@@ -18,9 +18,8 @@
 		echo html::link('images/theme/favicon.ico', 'icon', 'image/ico');
 		
 		// CSS
-		echo html::stylesheet('css/common.css', 'screen', false);
-		//$design = $this->session->get('design');
-		//echo html::stylesheet('css/'.$design.'/style.css', 'screen', false);
+		$design = $this->session->get('design');
+		echo html::stylesheet('css/' . $design . '/style.css', 'screen', FALSE);
 		
 		// RSS
 		echo html::link('topic/rss_updates', 'alternate', 'application/rss+xml', false);
