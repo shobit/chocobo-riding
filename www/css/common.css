@@ -61,7 +61,11 @@ a:hover {text-decoration: underline;}
 #footer a:hover {text-decoration: underline; color: #525252;}
 .jGrowl a {text-decoration: none; color: #fff;}
 .jGrowl a:hover {text-decoration: underline;}
-.jtiprel {color: #333; cursor: help;}
+.jtiprel {cursor: help;}
+.jtiprel.black {color: #333;}
+.jtiprel.blue {color: #009;}
+.jtiprel.purple {color: #609;}
+.jtiprel.orange {color: #f60;}
 .jtiprel:hover {text-decoration: none;}
 
 .icon4 {margin-bottom: -4px;}

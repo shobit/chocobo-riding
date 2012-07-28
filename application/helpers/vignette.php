@@ -2,13 +2,13 @@
  
 class vignette_Core {
 	
-	public static function display($title, $content)
+	public static function display($title, $content, $color='black')
 	{
 		$rand = uniqid();
 		$html = '';
 		$html .= html::anchor(
 			'', $title, 
-			array('class' => 'jtiprel', 'rel' => '#vignette' . $rand, 'onclick' => 'return false')
+			array('class' => 'jtiprel ' . $color, 'rel' => '#vignette' . $rand, 'onclick' => 'return false')
 		);
 		$html .= '<div id="vignette' . $rand . '" style="display:none;">';
 		$html .= '<font style="font-weight:bold; color:#000;">' . $title . '</font>';

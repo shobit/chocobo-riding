@@ -422,25 +422,13 @@ class Chocobo_Model extends ORM {
 
 	public function vignette() 
 	{
-		$res  = '';
-		//$res .= html::image('images/items/vegetables/vegetable'.$this->name.'.gif');
-		$res .= html::anchor(
-			'', 
-			'<font style="font-weight:bold; color:#000;">' . $this->name . '</font>', 
-			array('class' => 'jtiprel', 'rel' => '#chocobo' . $this->id, 'onclick' => 'return false')
-		);
-		$res .= '<div id="chocobo' . $this->id . '" style="display:none;">
-			<font style="font-weight:bold; color:#000;">' . $this->name . '</font>
-			     <small>';
+		$content = '';
+		$content .= '<br />Niveau : ' . ' ' . $this->level . ' /' . $this->lvl_limit;
+		$content .= '<br />Vitesse : ' . ' ' . $this->attr('speed');
+		$content .= '<br />Intelligence : ' . ' ' . $this->attr('intel');
+		$content .= '<br />Endurance : ' . ' ' . $this->attr('endur');
 		
-		$res .= '<br />Niveau : ' . ' ' . $this->level . ' /' . $this->lvl_limit;
-		$res .= '<br />Vitesse : ' . ' ' . $this->attr('speed');
-		$res .= '<br />Intelligence : ' . ' ' . $this->attr('intel');
-		$res .= '<br />Endurance : ' . ' ' . $this->attr('endur');
-		
-		$res .=	'</small>
-		</div>';
-		return $res;
+		return vignette::display($this->name, $content);
 	}
 
 
