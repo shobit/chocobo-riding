@@ -110,7 +110,7 @@
 		<div class="clearleft"></div>
 		
 		<div id="footer">
-			<?php echo View::factory('elements/footer') ?>
+			<?php //echo View::factory('elements/footer') ?>
 		</div>
 		
 	</div>
