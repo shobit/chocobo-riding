@@ -6,7 +6,7 @@
 <?php echo form::open() ?>
 
 <div>
-	<?php echo form::input('username', '', 'placeholder="Pseudo ou adresse email"') ?>
+	<?php echo form::input('username', '', 'placeholder="Pseudo"') ?>
 </div>
 
 <div>
