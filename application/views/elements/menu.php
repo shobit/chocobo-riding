@@ -50,6 +50,13 @@ if ( ! $user->loaded):
 <ul>
 	
 	<?php
+	$selected = (strrpos($url, '/chocobos') === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?>>
+		<?php echo html::anchor('users/' . $user->id . '/chocobos', 'Écurie'); ?>
+	</li>
+
+	<?php
 	$selected = (strrpos($url, 'races') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
@@ -144,6 +151,29 @@ if ( ! $user->loaded):
 	<li<?php echo $selected ?>>
 		<a href="<?php echo url::base() ?>discussions">
 			Messages
+			<?php
+			$nbr_messages = ORM::factory('message_notification')
+				->where('user_id', $user->id)
+				->count_all();
+			
+			if ($nbr_messages > 0):
+			?>
+			<div class="rfloat notif not_seen">
+				<?php echo $nbr_messages ?>
+			</div>
+			<?php endif; ?>
+		</a>
+	</li>
+
+	<?php
+	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 30px; position: absolute; left: -20px;">
+			<?php echo html::anchor('user/logout', html::image('images/icons/logout.gif')) ?>
+		</div>
+		<a href="<?php echo url::base() ?>users/<?php echo $user->id ?>">
+			Compte
 			<?php
 			$nbr_messages = ORM::factory('message_notification')
 				->where('user_id', $user->id)

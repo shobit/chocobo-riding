@@ -16,8 +16,8 @@ $config['users/login'] = "user/login";
 $config['users/new'] = "user/register";
 $config['users/logout'] = "user/logout";
 
-$config['users/([0-9]+)'] = "user/view/$1";
-$config['users/([0-9]+)/([0-9a-zA-Z-_]+)'] = "user/view/$1";
+$config['users/([0-9a-z]+)'] = "user/view/$1";
+$config['users/([0-9a-z]+)/([a-z]+)'] = "user/view/$1/$2";
 $config['users/edit'] = "user/edit";
 $config['users/delete'] = "user/delete";
 

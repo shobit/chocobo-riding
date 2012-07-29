@@ -61,12 +61,13 @@ class User_Controller extends Template_Controller {
 	 * vue de la fiche d'un user
 	 * var $username STRING
 	 */
-	public function view ( $id ) 
+	public function view($id, $section='') 
 	{
 		$this->template->content = View::factory('users/view')
 			->bind('user', $user)
 			->bind('u', $u)
-			->bind('c', $c);
+			->bind('c', $c)
+			->bind('section', $section);
 	
 		$u = $this->session->get('user');
 		$c = $this->session->get('chocobo');

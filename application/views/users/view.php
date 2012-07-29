@@ -1,3 +1,4 @@
+<?php if ($section == ''): ?>
 <h2>Informations</h2>
 
 <?php 
@@ -65,16 +66,29 @@ if ($user->id == $u->id)
 		<td class="len100"></td>
 	</tr>
 	<tr class="tr1">
-		<td class="len150">Succès</td>
+		<td class="len150">Chocobos</td>
 		<td class="lenmax">
 		<?php
-			$nbr_titles = ORM::factory('title')->count_all();
-			echo count($user->successes).'<small>/'.$nbr_titles.'</small>';
+			echo count($user->chocobos) . '<small>/' . $user->get_boxes() . '</small>';
 		?>
 		</td>
 		<td class="len100">
 			<?php
-			echo html::anchor('success/view/' . $user->username, 'Voir', array('class' => 'button green'));
+			echo html::anchor('users/' . $user->id . '/chocobos', 'Voir', array('class' => 'button green'));
+			?>
+		</td>
+	</tr>
+	<tr class="tr1">
+		<td class="len150">Succès</td>
+		<td class="lenmax">
+		<?php
+			$nbr_titles = ORM::factory('title')->count_all();
+			echo count($user->successes) . '<small>/' . $nbr_titles . '</small>';
+		?>
+		</td>
+		<td class="len100">
+			<?php
+			echo html::anchor('users/' . $user->id . '/achievements', 'Voir', array('class' => 'button green'));
 			?>
 		</td>
 	</tr>
@@ -94,7 +108,9 @@ if ($user->id == $u->id)
 	</tr>
 
 </table>
+<?php endif; ?>
 	
+<?php if ($section == 'chocobos'): ?>
 <h2>Chocobos dans l'écurie : <?php echo count($user->chocobos).'/'.$user->get_boxes() ?></h2>
 	
 <table class="table1">
@@ -127,3 +143,4 @@ if ($user->id == $u->id)
 	</tr>
 	<?php endforeach; ?>
 </table>
+<?php endif; ?>

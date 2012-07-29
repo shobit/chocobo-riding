@@ -1,247 +1,102 @@
 <style>
-	div.line_tab {
-		margin-bottom: 20px;
-	}
-	
-	div.line {
-		font-size: 1.0em;
-		padding: 6px 0 0 6px;
-	}
-	
-	div.line1 {
-		font-size: 1.1em;
-		letter-spacing: 1px;
-		font-weight: bold;
-	}
-	
-	div.line_rouge, span.line_rouge {color: #800000;}
-	div.line_vert, span.line_vert {color: #184500;}
-	div.line_bleu, span.line_bleu {color: #191970;}
-	div.line_gris, span.line_gris {color: #555;}
-	div.line_noir, span.line_noir {color: #000;}
-	
-	div.bord_rouge {border-bottom: 1px dotted #800000;}
-	div.bord_vert {border-bottom: 1px dotted #184500;}
-	div.bord_bleu {border-bottom: 1px dotted #191970;}
-	div.bord_gris {border-bottom: 1px dotted #555;}
-	div.bord_noir {border-bottom: 1px dotted #000;}
-	
-	.image {
-		width: 16px;
-		height: 16px;
-		float: left;
-		margin: 4px 3px 0 0;
-	}
-	.l-wrapper {
-		float: left;
-		width: 180px;
-	}
-	.label {
-		width: 50%; 
-		float: left; 
-		font-variant: small-caps;
-		font-size: 16px;
-		font-family: Arial;
-		letter-spacing: 1px;
-		color: #999;
-	}
-	.value {
-		text-align: right;
-		color: #666;
-	}
-	.p-wrapper {border-top: 1px solid #bbb; margin-bottom: 10px;}
-	.p-wrapper2 {border-top: 1px solid #bbb; margin-bottom: 13px;}
-	.p-wrapper3 {border-top: 1px solid #bbb; margin-bottom: 49px;}
-	.p-wrapper4 {border-top: 1px solid #bbb; margin-bottom: 46px;}
-	.progress {height: 3px;}
-	.p-green {background-color: #090;}
-	.p-yellow {background-color: #900;}
-	.p-red {background-color: #900;}
-	.p-grey {background-color: #999;}
-	.info {display:none;}
-	
-	span.attributes {font-weight: normal; font-size: 10px;}
-	
-	.raise {margin-left: 3px; margin-bottom: -4px;}
-	
-	/* 3" */
-	.chocobo_image {
-		height: 140px;
-		text-align: center;
-	}
-	
-	#i-wrapper {
-		margin-top: 62px;
-		border-top: 1px solid #999;
-		letter-spacing: 2px;
-		font-family: Arial;
-		color: #999;
-	}
-	
-	.actions {text-align: center;}
-	
+.progress {height: 3px;}
+.p-green {background-color: #090;}
+.p-yellow {background-color: #900;}
+.p-red {background-color: #900;}
+.p-grey {background-color: #999;}
 </style>
 
-<?php
-	//echo html::script('js/fusion.js');
-	//echo html::script('js/chocobo_view.js');
-	
-	$mine = ($chocobo->user->id == $user->id);
-?>
-
-<h1><?=  Kohana::lang('chocobo.view.title') ?></h1>
-<div id="prelude"><?=  Kohana::lang('chocobo.view.prelude') ?></div>
+<?php $mine = ($chocobo->user->id == $user->id) ?>
 
 <?php
 //////////////////
 ///// INFORMATIONS
 //////////////////
 ?>
-<div class="leftPart">
 
-	<div class="line">
-		<div class="image"></div>
-		<div class="l-wrapper">
-			<div class="label">nom</div>
-			<div class="value"><?php echo $chocobo->name ?></div>
-			<div class="p-wrapper2"></div>
-			<div class="info">Nom du chocobo.</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
-	
-	<div class="line">
-		<div class="image"></div>
-		<div class="l-wrapper">
-			<div class="label">couleur</div>
-			<div class="value"><?php echo $chocobo->display_colour('zone') ?></div>
-			<div class="p-wrapper2"></div>
-			<div class="info">
-				La couleur du chocobo privilégie l'évolutions de 
-				certaines caractéristiques sur d'autres.
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
-	
-	<div class="line">
-		<div class="image"></div>
-		<div class="l-wrapper">
-			<div class="label">job</div>
-			<div class="value">chocobo</div>
-			<div class="p-wrapper2"></div>
-			<div class="info">
-				Le job procure des compétences de courses à votre chocobo.
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
-	
-	<div class="line">
-		<div class="image"></div>
-		<div class="l-wrapper">
-			<div class="label">classe</div>
-			<div class="value"><?php echo $chocobo->display_classe() ?></div>
-			<div class="p-wrapper2"></div>
-			<div class="info">
-				Votre chocobo monte de classe à certains niveaux. 
-				Il ne peut courir qu'à des courses de même classe.
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
-	
-	<div class="line">
-		<div class="image"></div>
-		<div class="l-wrapper">
-			<div class="label">niveau</div>
-			<div class="value"><?php echo $chocobo->level ?></div>
-			<div class="p-wrapper">
-				<?php echo progress::display($chocobo->level, $chocobo->lvl_limit, 180) ?>
-			</div>
-			<div class="info">
-				Le niveau du chocobo est le résultat de l'expérience acquise dans les courses.<br />
-				Niveau maximal : <b><?php echo $chocobo->lvl_limit ?></b>
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
+<h2>Informations</h2>
 
-	<div class="line">
-		<div class="image"><?php echo html::image('images/icons/exp.gif') ?></div>
-		<div class="l-wrapper">
-			<div class="label">exp</div>
-			<div class="value"><?php echo $chocobo->xp ?></div>
-			<div class="p-wrapper4">
-				<?php echo progress::display($chocobo->xp, 100, 180) ?>
-			</div>
-			<div class="info">
-				Votre chocobo gagne de l'expérience en fin 
-				de course et peut ainsi monter de niveau.
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
+<table class="table1">
+
+	<tr>
+		<th>Champ</th>
+		<th>Valeur</th>
+		<th></th>
+	</tr>
+
+	<tr class="tr1">
+		<td class="len150">Nom</td>
+		<td class="lenmax"><?php echo $chocobo->name ?></td>
+		<td class="len100"></td>
+	</tr>
 	
-	<div class="line">
-		<div class="image"><?php echo html::image('images/icons/cel.gif') ?></div>
-		<div class="l-wrapper">
-			<div class="label">côte</div>
-			<div class="value"><?php echo $chocobo->display_fame() ?></div>
-			<div class="p-wrapper">
-				<?php echo progress::display(1 - $chocobo->fame + 0.01, 1, 180) ?>
-			</div>
-			<div class="info">
-				Plus la côte du chocobo est faible, plus le chocobo est cher à la revente.
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
+	<tr class="tr1">
+		<td class="len150">Couleur</td>
+		<td class="lenmax"><?php echo ucfirst($chocobo->display_colour('zone')) ?></td>
+		<td class="len100"></td>
+	</tr>
 	
-	<div class="line">
-		<div class="image"><?php echo html::image('images/icons/speed.jpg') ?></div>
-		<div class="l-wrapper">
-			<div class="label">vitesse max</div>
-			<div class="value"><?php echo $chocobo->max_speed ?> km/h</div>
-			<div class="p-wrapper">
-				<?php echo progress::display($chocobo->max_speed, 175, 180) ?>
-			</div>
-			<div class="info">
-				La vitesse maximale que votre chocobo a atteint dans les courses.
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
+	<tr class="tr1">
+		<td class="len150">Job</td>
+		<td class="lenmax">Chocobo</td>
+		<td class="len100"></td>
+	</tr>
 	
-	<div class="line">
-		<div class="image"><?php echo html::image('images/icons/gils.png') ?></div>
-		<div class="l-wrapper">
-			<div class="label">prix</div>
-			<div class="value"><?php echo $chocobo->get_price() ?> gils</div>
-			<div class="p-wrapper">
-				<?php echo progress::display(0, 1, 180) ?>
-			</div>
-			<div class="info">
-				Le prix auquel vous pouvez négocier votre chocobo si vous le mettez en vente.
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
+	<tr class="tr1">
+		<td class="len150">classe</td>
+		<td class="lenmax"><?php echo $chocobo->display_classe() ?></td>
+		<td class="len100">
+			<?php echo progress::display($chocobo->classe, 5, 100) ?>
+		</td>
+	</tr>
 	
-	<div class="line">
-		<div class="image"><?php echo html::image('images/icons/birthday.png') ?></div>
-		<div class="l-wrapper">
-			<div class="label">naissance</div>
-			<div class="value"><?php echo date::display($chocobo->birthday); ?></div>
-			<div class="p-wrapper2"></div>
-			<div class="info">
-				Le jour de naissance de votre chocobo.
-			</div>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
+	<tr class="tr1">
+		<td class="len150">Niveau</td>
+		<td class="lenmax"><?php echo $chocobo->level . ' /' . $chocobo->lvl_limit ?></td>
+		<td class="p-wrapper len100">
+			<?php echo progress::display($chocobo->level, $chocobo->lvl_limit, 100) ?>
+		</td>
+	</tr>
+
+	<tr class="tr1">
+		<td class="len150">Expérience</td>
+		<td class="lenmax"><?php echo $chocobo->xp ?>xp /100</td>
+		<td class="len100 p-wrapper4">
+			<?php echo progress::display($chocobo->xp, 100, 100) ?>
+		</td>
+	</tr>
 	
-</div>
+	<tr class="tr1">
+		<td class="len150">Côte</td>
+		<td class="lenmax"><?php echo $chocobo->display_fame() ?></td>
+		<td class="len100 p-wrapper">
+			<?php echo progress::display(1 - $chocobo->fame + 0.01, 1, 100) ?>
+		</td>
+	</tr>
+	
+	<tr class="tr1">
+		<td class="len150">Vitesse max</td>
+		<td class="lenmax"><?php echo $chocobo->max_speed ?> km/h</td>
+		<td class="len100 p-wrapper">
+			<?php echo progress::display($chocobo->max_speed, 175, 100) ?>
+		</td>
+	</tr>
+	
+	<tr class="tr1">
+		<td class="len150">Prix</td>
+		<td class="lenmax"><?php echo $chocobo->get_price() . html::image('images/icons/gils.png', array('class' => 'icon4')) ?></td>
+		<td class="len100 p-wrapper">
+			<?php echo progress::display(0, 1, 100) ?>
+		</td>
+	</tr>
+	
+	<tr class="tr1">
+		<td class="len150">naissance</td>
+		<td class="lenmax"><?php echo date::display($chocobo->birthday) ?></td>
+		<td class="len100 p-wrapper2"></td>
+	</tr>
+	
+</table>
 
 <div class="leftPart">
 

@@ -93,14 +93,12 @@
 			<div class="logo">
 				<span class="part1">Chocobo</span><span class="part2">-</span><span class="part3">Riding</span>
 			</div>
-			<div class="dashboard">
-				<?php echo View::factory('elements/dashboard') ?>
+			<div class="search">
+				<?php echo View::factory('elements/search') ?>
 			</div>
 		</div>
 	</div>
 
-	<div class="hmenu"></div>
-			
 	<div class="site">
 					
 		<div class="vmenu">
@@ -113,13 +111,11 @@
 		
 		<div class="clearleft"></div>
 		
-		<div id="footer">
-			<?php //echo View::factory('elements/footer') ?>
-		</div>
-		
 	</div>
-	
-	<div class="after"></div>
+
+	<div id="footer">
+		<?php //echo View::factory('elements/footer') ?>
+	</div>
 
 </body>
 
