@@ -47,7 +47,30 @@ if ( ! $user->loaded):
 
 <?php else: ?>
 
-<ul>
+<ul id="menu-default">
+
+	<?php
+	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 16px; position: absolute; left: -20px;">
+			<?php echo html::anchor('user/logout', html::image('images/icons/logout.gif')) ?>
+		</div>
+		<?php echo $user->link() ?>
+	</li>
+
+	<?php
+	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 16px; position: absolute; left: -20px; top: 6px;">
+			<?php echo html::anchor('', html::image('images/icons/list.png'), array('class' => 'toggle-stable')) ?>
+		</div>
+		<?php 
+		$chocobo = $this->session->get('chocobo');
+		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
+		?>
+	</li>
 	
 	<?php
 	$selected = (strrpos($url, '/chocobos') === FALSE) ? '' : ' class="selected"';
@@ -164,29 +187,41 @@ if ( ! $user->loaded):
 			<?php endif; ?>
 		</a>
 	</li>
+</ul>
+
+<ul id="menu-stable" style="display: none;">
 
 	<?php
 	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
-		<div style="width: 30px; position: absolute; left: -20px;">
+		<div style="width: 16px; position: absolute; left: -20px;">
 			<?php echo html::anchor('user/logout', html::image('images/icons/logout.gif')) ?>
 		</div>
-		<a href="<?php echo url::base() ?>users/<?php echo $user->id ?>">
-			Compte
-			<?php
-			$nbr_messages = ORM::factory('message_notification')
-				->where('user_id', $user->id)
-				->count_all();
-			
-			if ($nbr_messages > 0):
-			?>
-			<div class="rfloat notif not_seen">
-				<?php echo $nbr_messages ?>
-			</div>
-			<?php endif; ?>
-		</a>
+		<?php echo $user->link() ?>
 	</li>
+
+	<?php
+	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 16px; position: absolute; left: -20px; top: 6px;">
+			<?php echo html::anchor('', html::image('images/icons/list.png'), array('class' => 'toggle-stable')) ?>
+		</div>
+		<?php 
+		$chocobo = $this->session->get('chocobo');
+		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
+		?>
+	</li>
+
+	<?php foreach ($user->chocobos as $c): 
+	if ($chocobo->id != $c->id): ?>
+	<li>
+		<?php echo html::anchor('chocobo/change/' . $c->name, $c->name) ?>
+	</li>
+	<?php endif;
+	endforeach; ?>
+
 </ul>
 
 <?php if ($user->has_role('admin') and FALSE): ?>
@@ -210,5 +245,15 @@ if ( ! $user->loaded):
 </ul>
 </p>
 <?php endif; ?>
+
+<script>
+$(function(){
+	$('.toggle-stable').click(function(){
+		$('#menu-default').toggle();
+		$('#menu-stable').toggle();
+		return false;
+	});
+});
+</script>
 
 <?php endif; ?>
