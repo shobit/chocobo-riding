@@ -71,13 +71,6 @@ if ( ! $user->loaded):
 		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
 		?>
 	</li>
-	
-	<?php
-	$selected = (strrpos($url, '/chocobos') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php echo html::anchor('users/' . $user->id . '/chocobos', 'Écurie'); ?>
-	</li>
 
 	<?php
 	$selected = (strrpos($url, 'races') === FALSE) ? '' : ' class="selected"';
@@ -114,31 +107,17 @@ if ( ! $user->loaded):
 	</li>
 	
 	<?php
-	$selected = (strrpos($url, 'fusion') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php echo html::anchor('fusion', 'Fusion'); ?>
-	</li>
-	
-	<?php
 	$selected = (strrpos($url, 'success/') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('success/view/' . $user->username, 'Succès'); ?>
+		<?php echo html::anchor('success/view/' . $user->username, 'Jockeys'); ?>
 	</li>
 	
 	<?php
 	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('rankings', 'Classements'); ?>
-	</li>
-	
-	<?php
-	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php echo html::anchor('tutorial', 'Tutorial'); ?>
+		<?php echo html::anchor('rankings', 'Chocobos'); ?>
 	</li>
 	
 	<?php
@@ -186,6 +165,20 @@ if ( ! $user->loaded):
 			</div>
 			<?php endif; ?>
 		</a>
+	</li>
+
+	<?php
+	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?>>
+		<?php echo html::anchor('tutorial', 'Aide'); ?>
+	</li>
+
+	<?php
+	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?>>
+		<?php echo html::anchor('tutorial', 'A propos'); ?>
 	</li>
 </ul>
 
