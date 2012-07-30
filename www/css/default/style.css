@@ -14,7 +14,7 @@ body {
 
 table {font-family: 'PT Sans', sans-serif;}
 
-#header {height: 100px; background-color: #f5f5f5; border-bottom: 1px solid #e5e5e5;}
+#header {height: 100px; background: url(images/tile-header.png) #f5f5f5; border-bottom: 1px solid #e5e5e5;}
 	
 	.wrapper-header {width: 1000px; margin: auto;}
 
@@ -49,10 +49,11 @@ table {font-family: 'PT Sans', sans-serif;}
 }
 	
 #footer {
-	height: 100px; 
-	background-color: #f5f5f5; 
-	border-top: 1px solid #e5e5e5;
+	height: 200px; 
+	background: url(images/tile-footer.png) #f5f5f5;
 	margin-top: 20px;
+	border-top: 10px solid #1d1d1d;
+    box-shadow: 0 -10px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* LINKS */	
