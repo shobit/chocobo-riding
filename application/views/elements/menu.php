@@ -55,7 +55,7 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -20px;">
-			<?php echo html::anchor('user/logout', html::image('images/icons/logout.gif')) ?>
+			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png')) ?>
 		</div>
 		<?php echo $user->link() ?>
 	</li>
@@ -65,7 +65,7 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -20px; top: 6px;">
-			<?php echo html::anchor('', html::image('images/icons/list.png'), array('class' => 'toggle-stable')) ?>
+			<?php echo html::anchor('', html::image('images/icons/list-off.png'), array('class' => 'toggle-stable')) ?>
 		</div>
 		<?php 
 		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
@@ -189,7 +189,7 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -20px;">
-			<?php echo html::anchor('user/logout', html::image('images/icons/logout.gif')) ?>
+			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png')) ?>
 		</div>
 		<?php echo $user->link() ?>
 	</li>
@@ -199,7 +199,7 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -20px; top: 6px;">
-			<?php echo html::anchor('', html::image('images/icons/list.png'), array('class' => 'toggle-stable')) ?>
+			<?php echo html::anchor('', html::image('images/icons/list-on.png'), array('class' => 'toggle-stable')) ?>
 		</div>
 		<?php 
 		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
