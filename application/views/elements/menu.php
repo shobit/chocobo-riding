@@ -25,6 +25,7 @@
 <?php
 $url = url::current();
 $user = $this->session->get('user');
+$chocobo = $this->session->get('chocobo');
 if ( ! $user->loaded):
 ?>
 
@@ -60,14 +61,13 @@ if ( ! $user->loaded):
 	</li>
 
 	<?php
-	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
+	$selected = ($url !== 'chocobos/' . $chocobo->id) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -20px; top: 6px;">
 			<?php echo html::anchor('', html::image('images/icons/list.png'), array('class' => 'toggle-stable')) ?>
 		</div>
 		<?php 
-		$chocobo = $this->session->get('chocobo');
 		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
 		?>
 	</li>
@@ -195,14 +195,13 @@ if ( ! $user->loaded):
 	</li>
 
 	<?php
-	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
+	$selected = ($url !== 'chocobos/' . $chocobo->id) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -20px; top: 6px;">
 			<?php echo html::anchor('', html::image('images/icons/list.png'), array('class' => 'toggle-stable')) ?>
 		</div>
 		<?php 
-		$chocobo = $this->session->get('chocobo');
 		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
 		?>
 	</li>
