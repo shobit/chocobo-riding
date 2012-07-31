@@ -23,8 +23,6 @@ body::after {
 	left: 0;
 }
 
-table {font-family: 'PT Sans', sans-serif;}
-
 #header {
 	height: 10px; 
 	background: url(images/tile-footer.png) #f5f5f5;
@@ -94,6 +92,7 @@ a:hover {text-decoration: underline;}
 .clearBoth {clear: both;}
 
 /* TABLE */
+table {font-family: 'PT Sans', sans-serif;}
 .table1 {width: 100%; border-collapse: collapse; margin-bottom: 50px;}
 .table1 th {text-align: left; font-size: 10px;}
 .table1 td {text-align: left; border: 1px solid #eee; padding-left: 2px;}

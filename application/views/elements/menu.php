@@ -5,11 +5,11 @@
 		padding: 0;
 	}
 	
-	li {clear: right; padding: 5px 0 5px 5px; }
+	li {clear: right;}
 	li:hover {background-color: #eee;}
 	li.selected {background-color: #355F9C;}
 	li.selected a {color: #fff;}
-	li a {color: #333; display: block;}
+	li a {color: #333; display: block; padding: 5px 0 5px 5px;}
 	li a:hover {text-decoration: none;}
 	.rfloat {float: right; margin: -2px 20px 0 0;}
 	
@@ -54,7 +54,7 @@ if ( ! $user->loaded):
 	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
-		<div style="width: 16px; position: absolute; left: -20px;">
+		<div style="width: 16px; position: absolute; left: -25px;">
 			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png')) ?>
 		</div>
 		<?php echo $user->link() ?>
@@ -64,7 +64,7 @@ if ( ! $user->loaded):
 	$selected = ($url !== 'chocobos/' . $chocobo->id) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
-		<div style="width: 16px; position: absolute; left: -20px; top: 6px;">
+		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
 			<?php echo html::anchor('', html::image('images/icons/list-off.png'), array('class' => 'toggle-stable')) ?>
 		</div>
 		<?php 
@@ -188,7 +188,7 @@ if ( ! $user->loaded):
 	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
-		<div style="width: 16px; position: absolute; left: -20px;">
+		<div style="width: 16px; position: absolute; left: -25px;">
 			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png')) ?>
 		</div>
 		<?php echo $user->link() ?>
@@ -198,7 +198,7 @@ if ( ! $user->loaded):
 	$selected = ($url !== 'chocobos/' . $chocobo->id) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
-		<div style="width: 16px; position: absolute; left: -20px; top: 6px;">
+		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
 			<?php echo html::anchor('', html::image('images/icons/list-on.png'), array('class' => 'toggle-stable')) ?>
 		</div>
 		<?php 
