@@ -88,8 +88,10 @@
 
 	<div id="jgrowl_content"><?php echo View::factory("elements/jgrowl") ?></div>
 	
-	<div id="header">
-		<div class="wrapper-header">
+	<div id="header"></div>
+
+	<div class="hmenu">
+		<div class="wrapper-hmenu">
 			<div class="logo">
 				<span class="part1">Chocobo</span><span class="part2">-</span><span class="part3">Riding</span>
 			</div>

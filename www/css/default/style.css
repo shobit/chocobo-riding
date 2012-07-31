@@ -10,48 +10,65 @@ body {
 	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
 	font-size: 16px;
 	font-family: 'PT Sans', sans-serif;
+	background: url(images/tile-header.png) #f5f5f5;
+}
+
+body::after {
+	content: '';
+	height: 10px;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.1);
+	position: absolute;
+	top: 10px;
+	left: 0;
 }
 
 table {font-family: 'PT Sans', sans-serif;}
 
-#header {height: 100px; background: url(images/tile-header.png) #f5f5f5; border-bottom: 1px solid #e5e5e5;}
-	
-	.wrapper-header {width: 1000px; margin: auto;}
+#header {
+	height: 10px; 
+	background: url(images/tile-footer.png) #f5f5f5;
+}
 
-	.logo {float: left; width: 300px; margin: auto; padding-left: 30px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 40px; padding-top: 49px;}
+.hmenu {}
 
-		#header .part1 {color: rgb(10,4,5);}
-		#header .part2 {color: rgb(174,174,174);}
-		#header .part3 {color: #355F9C; font-weight: normal;}
+	.wrapper-hmenu {width: 1000px; margin: auto; background-color: #fff; position: relative; height: 80px;}
 
-	.search {text-align: right; margin-right: 20px; padding-top: 56px;}
+	.logo {position: absolute; width: 300px; top: 30px; left: 30px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 40px;}
+
+		.hmenu .part1 {color: rgb(10,4,5);}
+		.hmenu .part2 {color: rgb(174,174,174);}
+		.hmenu .part3 {color: #355F9C; font-weight: normal;}
+
+	.search {}
 
 .site {
 	width: 1000px;
 	margin: auto;
+	background: #fff;
+	padding-bottom: 20px;
 }
 	
-.vmenu {
-	float: left;
-	width: 180px;
-	font-family: 'PT Sans Narrow', sans-serif;
-	margin-left: 30px;
-	font-size: 20px;
-	margin-top: 20px;
-	border-right: 10px solid #355F9C;
-}
+	.vmenu {
+		float: left;
+		width: 180px;
+		font-family: 'PT Sans Narrow', sans-serif;
+		margin-left: 30px;
+		font-size: 20px;
+		margin-top: 20px;
+		border-right: 10px solid #355F9C;
+	}
 
-#page {
-	float: left;
-	width: 700px;
-	margin-left: 50px;
-	padding: 20px 20px 0 10px;
-}
+	#page {
+		float: left;
+		width: 700px;
+		margin-left: 50px;
+		padding: 20px 20px 0 10px;
+	}
 	
 #footer {
 	height: 200px; 
 	background: url(images/tile-footer.png) #f5f5f5;
-	margin-top: 20px;
 	border-top: 10px solid #1d1d1d;
     box-shadow: 0 -10px 0 rgba(0, 0, 0, 0.1);
 }
