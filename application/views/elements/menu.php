@@ -107,17 +107,17 @@ if ( ! $user->loaded):
 	</li>
 	
 	<?php
-	$selected = (strrpos($url, 'success/') === FALSE) ? '' : ' class="selected"';
+	$selected = ((strrpos($url, 'users/') !== FALSE) and ($url !== 'users/' . $user->id)) ? ' class="selected"' : '';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('success/view/' . $user->username, 'Jockeys'); ?>
+		<?php echo html::anchor('users', 'Jockeys'); ?>
 	</li>
 	
 	<?php
-	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
+	$selected = ((strrpos($url, 'chocobos/') !== FALSE) and ($url !== 'chocobos/' . $chocobo->id)) ? ' class="selected"' : '';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('rankings', 'Chocobos'); ?>
+		<?php echo html::anchor('chocobos', 'Chocobos'); ?>
 	</li>
 	
 	<?php
