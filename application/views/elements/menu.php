@@ -168,17 +168,17 @@ if ( ! $user->loaded):
 	</li>
 
 	<?php
-	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
+	$selected = (strrpos($url, 'guide') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('tutorial', 'Aide'); ?>
+		<?php echo html::anchor('guide', 'Guide'); ?>
 	</li>
 
 	<?php
-	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
+	$selected = (strrpos($url, 'updates') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('tutorial', 'A propos'); ?>
+		<?php echo html::anchor('updates', 'A propos'); ?>
 	</li>
 </ul>
 

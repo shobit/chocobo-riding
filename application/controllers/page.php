@@ -10,24 +10,10 @@ class Page_Controller extends Template_Controller {
         $this->template->title = "Présentation";
         $this->template->content = new View('pages/home');
     }
-    
-    public function events()
-	{
-		$this->template->title = "Evénements";
-        $this->template->content = View::factory('pages/events')
-        	->bind('user', $user)
-        	->bind('updates', $updates);
-
-        $user = $this->session->get('user');
-
-        $updates = ORM::factory('update')
-        	->orderby('date', 'desc')
-        	->find_all(15);
-    }
 	
-	public function tutorial()
+	public function guide()
 	{
-		$this->template->content = new View('pages/tutorial');
+		$this->template->content = new View('pages/guide');
 	}
 		
 	public function error()
