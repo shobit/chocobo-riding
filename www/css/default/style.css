@@ -37,6 +37,15 @@ body::after {
 		.hmenu .part1 {color: rgb(10,4,5);}
 		.hmenu .part2 {color: rgb(174,174,174);}
 		.hmenu .part3 {color: #355F9C; font-weight: normal;}
+		.hmenu .part4 {
+			margin-left: 10px;
+			font-size: 16px;
+			background-color: #900;
+			color: white;
+			padding: 3px;
+			letter-spacing: 1px;
+			padding-top: 44px;
+		}		
 
 	.search {}
 

@@ -93,7 +93,7 @@
 	<div class="hmenu">
 		<div class="wrapper-hmenu">
 			<div class="logo">
-				<span class="part1">Chocobo</span><span class="part2">-</span><span class="part3">Riding</span>
+				<span class="part1">Chocobo</span><span class="part2">-</span><span class="part3">Riding</span><span class="part4">beta</span>
 			</div>
 			<div class="search">
 				<?php echo View::factory('elements/search') ?>
