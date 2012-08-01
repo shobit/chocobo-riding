@@ -138,7 +138,7 @@ if ($user->id == $u->id)
 		<?php endif; ?>
 
 		<td class="len100">
-			<?php echo html::anchor('chocobo/view/' . $chocobo->name, 'Voir', array('class' => 'button green')) ?>
+			<?php echo html::anchor('chocobos/' . $chocobo->id, 'Voir', array('class' => 'button green')) ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
