@@ -2,6 +2,9 @@
 
 $config['_default'] = "page/home";
 $config['home'] = "page/home";
+$config['login'] = "user/login";
+$config['register'] = "user/register";
+$config['logout'] = "user/logout";
 
 $config['about'] = "page/about";
 $config['shoutbox'] = "page/shoutbox";
@@ -11,10 +14,6 @@ $config['error'] = "page/error";
 
 $config['locale/([a-zA-Z_]+)'] = "page/locale/$1";
 $config['design/([a-zA-Z_]+)'] = "page/design/$1";
-
-$config['users/login'] = "user/login";
-$config['users/new'] = "user/register";
-$config['users/logout'] = "user/logout";
 
 $config['users/([0-9a-z]+)'] = "user/view/$1";
 $config['users/([0-9a-z]+)/([a-z]+)'] = "user/view/$1/$2";

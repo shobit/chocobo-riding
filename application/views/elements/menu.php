@@ -30,9 +30,9 @@ if ( ! $user->loaded):
 ?>
 
 <?php $menus = array(
-	'presentation' 	=> 'page/home',
-	'connection' 	=> 'users/login',
-	'register' 		=> 'users/new',
+	'presentation' 	=> 'home',
+	'connection' 	=> 'login',
+	'register' 		=> 'register',
 	'forum' 		=> 'topics',
 ) ?>
 <ul>
