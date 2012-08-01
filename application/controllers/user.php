@@ -57,9 +57,22 @@ class User_Controller extends Template_Controller {
 		url::redirect('home');
 	}
 	
+	/**
+	 * Vue de tous les jockeys
+	 */
+	public function index()
+	{
+		$this->template->content = View::factory('users/index')
+			->bind('users', $users)
+			->bind('u', $u);
+
+		$u = $this->session->get('user');
+
+		$users = ORM::factory('user')->find_all();
+	}
+
 	/*
-	 * vue de la fiche d'un user
-	 * var $username STRING
+	 * Vue de la fiche d'un jockey
 	 */
 	public function view($id, $section='') 
 	{

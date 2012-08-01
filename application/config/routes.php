@@ -17,6 +17,7 @@ $config['error'] = "page/error";
 $config['locale/([a-zA-Z_]+)'] = "page/locale/$1";
 $config['design/([a-zA-Z_]+)'] = "page/design/$1";
 
+$config['users'] = "user/index";
 $config['users/([0-9a-z]+)'] = "user/view/$1";
 $config['users/([0-9a-z]+)/([a-z]+)'] = "user/view/$1/$2";
 $config['users/edit'] = "user/edit";

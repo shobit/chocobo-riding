@@ -45,8 +45,8 @@
 		echo html::script('js/lib/fancybox/jquery.fancybox.pack.js');
 
 		// DATATABLE
-		echo html::script('js/lib/dataTables/media/js/jquery.dataTables.min.js'); 
-		echo html::stylesheet('js/lib/dataTables/media/css/jquery.dataTables.css', 'screen', false);
+		echo html::script('js/lib/dataTables/js/jquery.dataTables.min.js'); 
+		echo html::stylesheet('js/lib/dataTables/css/jquery.dataTables.css', 'screen', false);
 		
 		// JTIP
 		echo html::script('js/lib/jtip/jtip.js'); 
