@@ -220,8 +220,8 @@ a.discussiontitle:hover {text-decoration: underline;}
 a.jgrowl, a.jgrowl:visited {text-decoration: none; color: #fff;}
 a.jgrowl:hover {text-decoration: underline;}
 
-.notif {width: 13px; height: 13px; text-align: center; padding: 2px; display: inline-block; background-color: #eee; color: #000;}
-.notif.not_seen {background-color: #d00; color: #fff;}	
+.notif {text-align: center; padding: 3px 6px 0px 6px; display: inline-block; color: #355F9C;}
+.notif.not_seen {background-color: #355F9C; color: #fff;}	
 
 a.button {
 	padding: 2px;

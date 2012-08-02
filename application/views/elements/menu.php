@@ -11,7 +11,7 @@
 	li.selected a {color: #fff;}
 	li a {color: #333; display: block; padding: 5px 0 5px 5px;}
 	li a:hover {text-decoration: none;}
-	.rfloat {float: right; margin: -2px 20px 0 0;}
+	.rfloat {float: right; margin: -1px 10px 0 0;}
 	
 	.menutitle {
 		margin-top: 10px;
@@ -110,7 +110,21 @@ if ( ! $user->loaded):
 	$selected = ((strrpos($url, 'users') !== FALSE) and ($url !== 'users/' . $user->id)) ? ' class="selected"' : '';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('users', 'Jockeys'); ?>
+		<a href="<?php echo url::base() ?>users">
+			Jockeys
+			<?php
+			$tps = time() - 5*60;
+			$nbr_connected = ORM::factory('user')
+				->where('connected>', $tps)
+				->count_all();
+			$nbr_connected = 5;
+			if ($nbr_connected > 0):
+			?>
+			<div class="rfloat notif">
+				<?php echo $nbr_connected ?>
+			</div>
+			<?php endif; ?>
+		</a>
 	</li>
 	
 	<?php
