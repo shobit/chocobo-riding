@@ -5,49 +5,21 @@ class Topic_Controller extends Template_Controller
 {
 
 	// liste tous les sujets du forum
-	public function index ( $tags = 'all', $page = NULL, $num = 1 )
+	public function index()
 	{
 		
 		$this->template->content = View::factory('topics/index')
 			->bind('user', $user)
-			->bind('topics', $topics)
-			->bind('nbr_topics', $nbr_topics)
-			->bind('pagination', $pagination)
-			->bind('tags', $tags);
-		
+			->bind('topics', $topics);
+			
 		$user = $this->session->get('user');
 		
-		$topics_per_page = Kohana::config('topic.topics_per_page');
-		
-		$this->db->select('to.id');
-		$this->db->from('topics AS to');
-		$this->db->where('to.archived', FALSE);
-		
-		if ($tags != 'all')
-		{
-			$this->db->join('tags_topics AS tt', 
-				array(
-					'to.id' => 'tt.topic_id'
-				), null, 'LEFT');
-			$this->db->join('tags AS ta', 
-				array(
-					'ta.id' => 'tt.tag_id'
-				), null, 'LEFT');
-			$this->db->where('ta.ref', $tags);
-		}
-		
-		$this->db->orderby('to.updated', 'DESC');
-		$this->db->limit($topics_per_page, ($num - 1) * $topics_per_page);
-		$topics = $this->db->get();
-		$nbr_topics = $this->db->count_last_query();
-			
-		$pagination = new Pagination(array(
-	  		'base_url' 			=> 'topics/' . $tags . '/page/',
-	  		'uri_segment' 		=> 'page', 
-	    	'total_items' 		=> $nbr_topics, 
-	    	'items_per_page' 	=> $topics_per_page, 
-	    	'style' 			=> 'punbb'
-		));
+		$types = array('added', 'new');
+
+		$topics = ORM::factory('topic')
+			->where('archived', FALSE)
+			->orderby('updated', 'DESC')
+			->find_all();
 	}
 	
 	// vue d'un sujet
@@ -106,9 +78,6 @@ class Topic_Controller extends Template_Controller
 		$form['topic'] = $topic->as_array();
 		$form['comment'] = $comment->as_array();
 		
-		// gestion des tags
-		$form['topic']['tags'] = $topic->display_form_tags();
-		
 		$errors = $form;
 		
 		if ($_POST) 
@@ -121,7 +90,8 @@ class Topic_Controller extends Template_Controller
         	if ($post->validate()) 
         	{
         		// TOPIC
-        		$topic->title = $post->title;
+        		$topic->type = $post->type;
+                $topic->title = $post->title;
                 
                 if ($user->has_role(array('modo', 'admin')))
                 {
@@ -133,24 +103,6 @@ class Topic_Controller extends Template_Controller
                 	$topic->created = time();
                 }
                 if ($id == 0 or $comment->user_id == $user->id) $topic->updated = time();
-                
-                // gestion des tags
-                $tags = explode(',', $post->tags);
-                $tag_ids = array();
-                foreach ($tags as $tag_name)
-                {
-					$tag_name = trim($tag_name);
-					if (empty($tag_name)) { continue; }
-					$tag = ORM::factory('tag', array('ref' => url::title($tag_name)));
-					if ( ! $tag->loaded)
-					{
-						$tag->ref = url::title($tag_name);
-						$tag->name = $tag_name;
-						$tag->save();
-					}
-					$tag_ids[] = $tag->id;
-                }
-                $topic->tags = $tag_ids;
                 
                 $topic->save();
 				

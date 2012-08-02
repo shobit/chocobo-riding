@@ -1,113 +1,52 @@
 <style>
-	.race {width: 598px; border: 1px solid #999; padding: 10px 0 10px 0; text-align: center; line-height: 26px;}
-	.race .classe {float: left; width: 48px; color: #bbb; font-size: 26px;}
-	.race .name {float: left; width: 110px; font-weight: bold;}
-	.race .private {float: left; width: 110px;}
-	.race .length {float: left; width: 110px;}
-	.race .round {float: left; width: 110px;}
-	.race .scheduled {float: left; width: 110px;}
-	
-	.results {width: 500px; border-left: 1px solid #999; border-right: 1px solid #999; margin: auto; display: none;}
-	.results .box {border-bottom: 1px solid #999; text-align: center; line-height: 26px; padding: 3px 0 3px 0;}
-	.results .position {float: left; width: 100px; color: #bbb; font-size: 26px;}
-	.results .chocobo {float: left; width: 100px; text-align: left;}
-	.results .chrono {float: left; width: 150px;}
-	.results .course_avg {float: left; width: 150px;}
-	
 	.controls {width: 500px; margin: auto; text-align: center; padding: 3px 0 3px 0;}
 	
-	.simulation {
-		background: url('<?php echo url::base(); ?>images/race/circuit.jpg') no-repeat;
-		width: 730px;
-		height: 475px;
-		margin: 5px 0 0 0;
-	}
-	.simulation .box {position: relative; height: 50px; padding: 5px 0 5px;}
-	.simulation .label {
-		position: absolute; 
-		width: 82px; 
-		top: 24px; 
-		left: 5px;
-		font-variant: small-caps;
-		font-weight: bold;
-		font-size: 16px;
-		text-align: right;
-	}
-	.simulation .allure {position: absolute; left:100px; width: 50px; height: 50px;}
-	.simulation .event {
-		position: absolute; 
-		top: 15px; 
-		left: 30px; 
-		display: none; 
-		font-size: 10px; 
-		background-color: #fafafa; 
-		border: 1px solid #999;
-		padding: 3px;
-		-moz-box-shadow: 2px 2px 1px #888;
-		-webkit-box-shadow: 2px 2px 1px #888;
-		box-shadow: 2px 2px 1px #888;
-	}
-	.simulation .course {color: #999;}
-	.simulation .title {font-weight: bold;}
-	
-	#timer {}
-	#slowmotion {font-style: italic; display: none;}
-	
-	.icon {margin-bottom: -3px;}
-	.icon12 {cursor: pointer;}
-	.clear {clear: both;}
+	.allure {position: absolute; top: 0; left: 0; width: 30px; height: 30px;}
 </style>
 
-<h1><?php echo Kohana::lang('race.view_results.title') . ' ' . html::image("images/classes/" . $race->circuit->classe . ".gif"); ?></h1>
-<div id="prelude"><?php echo Kohana::lang('location.' . $race->circuit->code . '.prelude'); ?></div>
+<h2>Course terminée</h2>
 
-<?php echo new View("races/description", array('race' => $race)); ?>
-
-<div style="width: 600px; margin: auto;">
-	<div class="race">
-		<div class="classe">
-			<?php echo $race->circuit->classe ?>
-		</div>
-		<div class="name">
-			<?php echo $race->circuit->name() ?>
-		</div>
-		<div class="length">
-			<?php echo $race->circuit->length ?>m
-		</div>
-		<div class="round">
-			Round <?php //echo $race->round; ?>
-		</div>
-		<div class="scheduled">
+<table class="table1">
+	<tr>
+		<th>Nom</th>
+		<th>Date</th>
+	</tr>
+	<tr class="tr1">
+		<td class="lenmax"><?php echo $race->circuit->name() ?></td>
+		<td class="len150">
 			<?php echo date::display($race->start) ?>
-		</div>
-		<div class="clearBoth"></div>
-	</div>
-	
-	<div class="results">
-		<?php 
-		arr::order($results, 'position', 'asc');
-		foreach ($results as $result): ?>
-		
-			<div class="box">
-				<div class="position">
-					<?php echo $result['position'] ?>
-				</div>
-				<div class="chocobo">
-					<?php echo $result['name'] ?>
-				</div>
-				<div class="chrono">
-					<?php echo html::image('images/icons/clock.png', array('class' => 'icon12')) ?> 
-					<?php echo date::chrono($result['time']) ?>
-				</div>
-				<div class="course_avg">
-					<?php echo html::image('images/icons/speed.jpg', array('class' => 'icon')) ?>
-					<?php echo number_format($result['course_avg'], 3, '.', '') ?> m/s
-				</div>
-				<div class="clearBoth"></div>
-			</div>
-		
-		<?php endforeach; ?>
-	</div>
+		</td>
+	</tr>
+</table>
+
+<h2>Chocobos à l'arrivée</h2>
+
+<table class="table1">
+	<tr>
+		<th>Nom</th>
+		<th>Temps</th>
+		<th>Vitesse</th>
+	</tr>
+
+	<?php 
+	arr::order($results, 'position', 'asc');
+	foreach ($results as $result): 
+	?>
+	<tr class="tr1">
+		<td class="lenmax"><?php echo $result['name'] ?></td>
+		<td class="len150">
+			<?php echo html::image('images/icons/clock.png', array('class' => 'icon12')) ?> 
+			<?php echo date::chrono($result['time']) ?>
+		</td>
+		<td class="len150">
+			<?php echo html::image('images/icons/speed.jpg', array('class' => 'icon')) ?>
+			<?php echo number_format($result['course_avg'], 3, '.', '') ?> m/s
+		</td>
+	</tr>
+	<?php endforeach; ?>
+</table>
+
+<div style="width: 600px; margin: auto; display:none;">
 	
 	<div class="controls">
 		<?php
@@ -121,30 +60,34 @@
 	</div>
 </div>
 
-<div class="simulation">
-		
-	<div style="height: 48px;"></div>
+<h2>Simulation</h2>
+
+<table class="table1">
+	<tr>
+		<th>Nom</th>
+		<th>Progression</th>
+		<th>Vitesse</th>
+	</tr>
+
 	<?php 
 	arr::order($results, 'box', 'asc');
 	foreach ($results as $result): ?>
 	
-		<div class="box">
-			<span class="label"><?php echo $result['name'] ?></span> 
-			<div id="<?php echo $result['name'] ?>">
+		<tr class="tr1" id="<?php echo $result['name'] ?>">
+			<td class="len150"><?php echo $result['name'] ?></td> 
+			<td class="lenmax" style="position: relative;">
 				<?php echo html::image('images/race/waiting.png', array('class' => 'allure')) ?>
-				<span class="event">
-					<span class="distance"></span>
-					<span class="course"></span>
-					<span class="title"></span>
-				</span>
+			</td>
+			<td class="len150">
+				<span class="course"></span>
 			</div>
-		</div>
+		</tr>
 	
 	<?php endforeach; ?>
 	
-</div>
+</table>
 
-<?php echo $wave; ?>
+<?php //echo $wave ?>
 
 <script>
 
@@ -180,8 +123,8 @@
 		
 		this.length = length;
 		
-		this.left_min = 100;
-		this.left_max = 488;
+		this.left_min = 0;
+		this.left_max = 356;
 		
 		this.maintimer = null;
 		this.timer = 1000;

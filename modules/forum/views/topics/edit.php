@@ -24,12 +24,12 @@ require_once Kohana::find_file('libraries', 'markdown');
 <?php
 if ($form['topic']['id'] == 0)
 {
-	?><h1>Forum : nouveau sujet</h1><?php
+	?><h2>Nouveau sujet</h2><?php
 	echo form::open('topics/new');
 }
 else
 {
-	?><h1>Forum : éditer un sujet</h1><?php
+	?><h2>Editer un sujet</h2><?php
 	echo form::open('topics/' . $form['topic']['id'] . '/edit');
 }
 ?>
@@ -42,9 +42,9 @@ else
 	</div>
 	<div class="clearleft"></div>
 	
-	<div class="left">tags</div>
+	<div class="left">type</div>
 	<div class="right">
-		<?php echo form::input('tags', $form['topic']['tags']) ?>
+		<?php echo form::input('type', $form['topic']['type']) ?>
 	</div>
 	<div class="clearleft"></div>
 		

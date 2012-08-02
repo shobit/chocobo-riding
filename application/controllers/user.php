@@ -41,7 +41,7 @@ class User_Controller extends Template_Controller {
         			cookie::set('username', $user->username, 7*24*3600);
         			cookie::set('password', $user->password, 7*24*3600);
         		}
-        		url::redirect('page/events');
+        		url::redirect('updates');
         	}
         }
     }
@@ -57,18 +57,34 @@ class User_Controller extends Template_Controller {
 		url::redirect('home');
 	}
 	
-	/*
-	 * vue de la fiche d'un user
-	 * var $username STRING
+	/**
+	 * Vue de tous les jockeys
 	 */
-	public function view ( $id ) 
+	public function index()
+	{
+		$this->template->content = View::factory('users/index')
+			->bind('users', $users)
+			->bind('u', $u);
+
+		$u = $this->session->get('user');
+
+		$users = ORM::factory('user')->find_all();
+	}
+
+	/*
+	 * Vue de la fiche d'un jockey
+	 */
+	public function view($id, $section='') 
 	{
 		$this->template->content = View::factory('users/view')
 			->bind('user', $user)
-			->bind('u', $u);
+			->bind('u', $u)
+			->bind('c', $c)
+			->bind('section', $section);
 	
 		$u = $this->session->get('user');
-		
+		$c = $this->session->get('chocobo');
+
 		$user = ORM::factory('user', $id);
 		
 		if ( ! $user->loaded)

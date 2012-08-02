@@ -1,24 +1,37 @@
 <?php
 class Chocobo_Controller extends Template_Controller {
 
+	/**
+	 * Vue de tous les chocobos
+	 */
+	public function index()
+	{
+		$this->template->content = View::factory('chocobos/index')
+			->bind('chocobos', $chocobos)
+			->bind('c', $c);
+
+		$c = $this->session->get('chocobo');
+
+		$chocobos = ORM::factory('chocobo')
+			->where('name !=', '')
+			->find_all();
+	}
+
 	// FUNC: vue de la fiche d'un chocobo
 	// var $name STRING
-	public function view($name="")
+	public function view($id, $section='')
 	{
 		$this->authorize('logged_in');
-		if ($name != null) {
-			$view = new View('chocobos/view');
-			$user = $this->session->get('user');
-			$chocobo = $this->session->get('chocobo');
-			$view->user = $user;
-			$view->chocobo_session = $chocobo;
-			$view->chocobo = ($name == $chocobo->name)
-				? $chocobo
-				: ORM::factory('chocobo')->where('name', $name)->find();
-			$this->template->content = $view;
-		} else {
-			url::redirect('chocobo/index');
-		}
+		
+		$this->template->content = View::factory('chocobos/view')
+			->bind('user', $u)
+			->bind('chocobo_session', $c)
+			->bind('chocobo', $chocobo);
+		
+		$u = $this->session->get('user');
+		$c = $this->session->get('chocobo');
+		
+		$chocobo = ORM::factory('chocobo', $id);
 	}
 
 	// FUNC: change de chocobo principal

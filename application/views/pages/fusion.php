@@ -1,6 +1,3 @@
-<h1><?= Kohana::lang('fusion.title') ?></h1>
-<div id="prelude"><?= Kohana::lang('fusion.prelude') ?></div>
-
 <?php
 echo form::open('fusion');
 
@@ -17,9 +14,6 @@ $boxes = $user->get_boxes();
 echo form::hidden('chocobo', $chocobo->id);
 echo form::hidden('boxes', $boxes);
 $genders = array('', 'female', 'male');
-
-echo '<p>'.$chocobo->image('mini').' <b>'.$chocobo->name.', nv'.$chocobo->level;
-echo '<small>/'.$chocobo->lvl_limit.'</small> ('.$chocobo->display_status().')</b></p>';
 
 ?><h2>Partenaires <?= html::image('images/icons/'.$genders[$gender].'.png'); ?></h2><?php
 

@@ -130,25 +130,14 @@ class Equipment_Model extends ORM {
      */
 	public function vignette() 
 	{
-		$res  = '';
-		$res .= html::anchor(
-			'', 
-			'<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>', 
-			array('class' => 'jtiprel', 'rel' => '#vegetable' . $this->id, 'onclick' => 'return false')
-		);
-		$res .= '<div id="vegetable' . $this->id . '" style="display:none;">
-			<font style="font-weight:bold; color:' . $this->color() . '">' . $this->name() . '</font>
-			     <small>';
+		$content = '';
 		
-		$res .= "<br />" . Kohana::lang('equipment.resistance') . ' : ' . ($this->resistance + $this->get_effect('resistance'));
 		foreach ($this->equipment_effects as $effect)
 		{
-			$res .= "<br />" . Kohana::lang('equipment.' . $effect->name) . ' +' . $effect->value;
+			$content .= Kohana::lang('equipment.' . $effect->name) . ' +' . $effect->value . '<br />';
 		}
 		
-		$res .=	'</small>
-		</div>';
-		return $res;
+		return vignette::display($this->name(), $content, $this->color());
 	}
 
 	/**
@@ -158,7 +147,7 @@ class Equipment_Model extends ORM {
 	 */
 	public function color()
 	{
-		$colors = array('#000', '#009', '#609', '#f60');
+		$colors = array('black', 'blue', 'purple', 'orange');
 		return $colors[$this->rarity];
 	}
 	

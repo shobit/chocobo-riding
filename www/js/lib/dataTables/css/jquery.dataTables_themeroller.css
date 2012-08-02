@@ -1,4 +1,5 @@
 
+
 /*
  * Table
  */
@@ -6,20 +7,17 @@ table.dataTable {
 	margin: 0 auto;
 	clear: both;
 	width: 100%;
+	border-collapse: collapse;
 }
 
 table.dataTable thead th {
-	padding: 3px 18px 3px 10px;
-	border-bottom: 1px solid black;
-	font-weight: bold;
+	padding: 3px 0px 3px 10px;
 	cursor: pointer;
 	*cursor: hand;
 }
 
 table.dataTable tfoot th {
-	padding: 3px 18px 3px 10px;
-	border-top: 1px solid black;
-	font-weight: bold;
+	padding: 3px 10px;
 }
 
 table.dataTable td {
@@ -46,9 +44,15 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
  * Table wrapper
  */
 .dataTables_wrapper {
-	/*position: relative;*/
+	position: relative;
 	clear: both;
-	zoom : 1;
+	*zoom: 1;
+}
+.dataTables_wrapper .ui-widget-header {
+	font-weight: normal;
+}
+.dataTables_wrapper .ui-toolbar {
+	padding: 5px;
 }
 
 
@@ -73,6 +77,7 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
  * Table information
  */
 .dataTables_info {
+	padding-top: 3px;
 	clear: both;
 	float: left;
 }
@@ -84,6 +89,24 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 .dataTables_paginate {
 	float: right;
 	text-align: right;
+}
+
+.dataTables_paginate .ui-button {
+	margin-right: -0.1em !important;
+}
+
+.paging_two_button .ui-button {
+	float: left;
+	cursor: pointer;
+	* cursor: hand;
+}
+
+.paging_full_numbers .ui-button {
+	padding: 2px 6px;
+	margin: 0;
+	cursor: pointer;
+	* cursor: hand;
+	color: #333 !important;
 }
 
 /* Two button pagination - previous / next */
@@ -133,10 +156,6 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 .paginate_disabled_next { background: url('../images/forward_disabled.png') no-repeat top right; }
 
 /* Full number pagination */
-.paging_full_numbers {
-	height: 22px;
-	line-height: 22px;
-}
 .paging_full_numbers a:active {
 	outline: none
 }
@@ -194,13 +213,19 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 /*
  * Sorting
  */
-.sorting { background: url('../images/sort_both.png') no-repeat center right; }
-.sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
-.sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+table.dataTable thead th div.DataTables_sort_wrapper {
+	position: relative;
+	padding-right: 20px;
+	padding-right: 20px;
+}
 
-.sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
-.sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
- 
+table.dataTable thead th div.DataTables_sort_wrapper span {
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	right: 0;
+}
+
 table.dataTable th:active {
 	outline: none;
 }

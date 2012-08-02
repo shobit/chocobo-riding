@@ -2,6 +2,11 @@
 
 $config['_default'] = "page/home";
 $config['home'] = "page/home";
+$config['login'] = "user/login";
+$config['register'] = "user/register";
+$config['logout'] = "user/logout";
+$config['guide'] = "page/guide";
+$config['updates'] = "update/index";
 
 $config['about'] = "page/about";
 $config['shoutbox'] = "page/shoutbox";
@@ -12,15 +17,13 @@ $config['error'] = "page/error";
 $config['locale/([a-zA-Z_]+)'] = "page/locale/$1";
 $config['design/([a-zA-Z_]+)'] = "page/design/$1";
 
-$config['users/login'] = "user/login";
-$config['users/new'] = "user/register";
-$config['users/logout'] = "user/logout";
-
-$config['users/([0-9]+)'] = "user/view/$1";
-$config['users/([0-9]+)/([0-9a-zA-Z-_]+)'] = "user/view/$1";
+$config['users'] = "user/index";
+$config['users/([0-9a-z]+)'] = "user/view/$1";
+$config['users/([0-9a-z]+)/([a-z]+)'] = "user/view/$1/$2";
 $config['users/edit'] = "user/edit";
 $config['users/delete'] = "user/delete";
 
+$config['chocobos'] = "chocobo/index";
 $config['chocobos/([0-9]+)'] = "chocobo/view/$1";
 $config['chocobos/([0-9]+)/([0-9a-zA-Z-_]+)'] = "chocobo/view/$1";
 

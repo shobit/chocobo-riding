@@ -1,50 +1,22 @@
-<style>
-	.infos {margin: 20px 0 0 0; border-bottom: 1px solid #ddd;}
-	.infos .pages {color: #999; font-weight: bold; float: right; font-size: 16px;}
-	.infos .nbr_topics {font-size: 16px;}
-	.infos .nbr_topics .nbr {color: #999;}
-	
-	.topics {width: 100%; margin: 0 0 20px 0;}
-	.topic {border-bottom: 1px solid #ddd; position: relative;}
-	.topic .left {width: 30px; float: left; margin: 14px 0 0 18px;}
-	.topic .right {width: 600px; float: left; margin: 14px 0 14px 14px;}
-	.topic .author {margin: 1px 0 1px 0;}
-	.topic .title {line-height: 1.28; margin: 5px 0 5px 0;}
-	.topic .footer {color: #999; line-height: 17px;}
-	.topic .date {float: left;}
-	.topic .icon {margin-bottom: -3px; cursor: pointer;}
-	.topic .icon2 {margin: 0 3px -2px 0;}
-	
-	.topic .favon {font-weight: bold; font-style: italic; color: #333;}
-	.topic .hidden {display: none;}
-	.topic.not_seen {background-color: #fee;}
-</style>
+<h2>Nombre de sujets : <?php echo count($topics) ?></h2>
 
-<h1>Forum</h1>
+<?php if ($user->loaded): ?>
+	<?php echo html::anchor('topics/new', 'Créer', array('class' => 'button blue fright')) ?>
+	<div class="clearright;"></div>
+<?php endif; ?>
 
-<div class="infos">
+<table id="topics" class="table1">
 	
-	<div class="pages">
-		<b><?php echo $pagination->render() ?></b>
-	</div>
-	
-	<div class="nbr_topics">
-		<?php 
-		echo ' <span class="nbr">' . $nbr_topics . '</span> ';
-		echo Kohana::lang('topic.' . inflector::plural('topic', $nbr_topics));
-		if ($tags != 'all') 
-		{
-			echo ' comportant le tag #' . $tags;
-		}
-		?>
-	</div>
-	
-</div>
+	<thead>
+		<tr>
+			<th>Type</th>
+			<th>Titre</th>
+			<th>Date</th>
+			<th></th>
+		</tr>
+	</thead>
 
-<div class="clearright"></div>
-
-<div class="topics">
-	
+	<tbody>
 	<?php
 	foreach ($topics as $n => $t) 
 	{
@@ -59,8 +31,25 @@
 		$not_seen = ($nbr_notifications > 0) ? ' not_seen': '';		
 	?>
 		
-	<div class="topic<?php echo $not_seen ?>" id="topic<?php echo $topic->id ?>">
-		<div class="options">
+	<tr class="tr1 topic<?php echo $not_seen ?>" id="topic<?php echo $topic->id ?>">	
+		<td class="wrapper-type len100 bleft">
+			<?php if ( ! empty($topic->type)): ?>
+				<span class="type <?php echo $topic->type ?>"><?php echo $topic->type ?></span>
+			<?php endif; ?>
+		</td>
+			
+		<td class="lenmax">
+			<div class="title">
+				<span class="nbr_comments"><?php echo ($nbr_comments - 1) ?></span> 
+				<?php echo $topic->title ?>
+			</div>
+		</td>
+
+		<td class="date len100">
+			<?php echo date::display($topic->updated) ?>
+		</td>
+		
+		<!--td class="options">
 			<?php
 			if ($topic->allow($user, 'w'))
 			{
@@ -71,93 +60,31 @@
 						array('class' => 'delete_topic', 'id'=>'topic' . $topic->id));
 			}
 			?>
-		</div>
-		<div class="left">
-			<?php echo $last_comment->user->image('mini') ?>
-    	</div>
-    	<div class="right">
-    		<div class="author">
-    			<?php 
-    			$nbr_comments = count($topic->comments) - 1;
-    			
-				$last_url = $last_comment->url();
-				
-				if ($nbr_comments == 0)
-				{
-					echo $first_comment->user->link() . ' a créé un nouveau sujet : ';
-				}
-				else
-				{
-					echo $last_comment->user->link() . ' a posté ';
-    				echo html::anchor($last_url, 'un commentaire') . ' sur le sujet : ';
-				}
-    			?>
-    		</div>
-    		
-    		<div class="title">
-	    		<?php 
-	    		$nbr_comments = ($nbr_notifications > 0) ? $nbr_notifications: $nbr_comments;
-	    		if ($nbr_comments > 0) 
-				{
-					echo '<span class="notif' . $not_seen . '">' . $nbr_comments . '</span> ';
-				}
-				
-	    		echo html::anchor('topics/' . $topic->id, $topic->title, array('class' => 'topictitle'));
-	    		echo $topic->display_view_tags();
-				?>
-    		</div>
-    		
-    		<div class="footer">
-	    		<?php
-	    		echo date::display(max($first_comment->created, $first_comment->updated));
-	    		
-	    		if ($first_comment->updated > $first_comment->created) 
-				{
-					echo ' (modification)';
-				}
-				
-	    		$nb_interests = $this->db
-					->where('comment_id', $first_comment->id)
-					->count_records('comments_favorites');
-				
-				$hidden = ($nb_interests == 0) ? 'hidden' : '';
-				$favtext = ($user->has(ORM::factory('c_favorite', $first_comment->id))) ? 'new': 'empty';
-				
-				if ($user->loaded or $nb_interests > 0)
-				{
-					echo '<span id="nbfavs' . $first_comment->id . 'w" class="nbfavsw '.$hidden.'">';
-					echo ' &nbsp; <span id="nbfavs' . $first_comment->id . '" class="nbfavs favon">+' . $nb_interests . '</span>';
-			      	echo '</span>';
-				}
-						      	
-		      	if ($user->loaded)
-	      		{
-			      	echo '<span class="favw" style="display: none;">';
-			      	echo ' &nbsp; ' . html::image('images/forum/star-' . $favtext . '.png', array('id' => 'fav' . $first_comment->id, 'class' => 'fav icon'));
-					echo '</span>';
-				}
-				
-				?>
-			</div>
-    	</div>
-		<div class="clearleft"></div>
-	</div>
+		</td-->
+
+		<td class="len100">
+			<?php echo html::anchor('topics/' . $topic->id, 'Lire', array('class' => 'button green')) ?>
+		</td>
+	</tr>
 		
 	<?php
 	}
 	?>
+	</tbody>
 
-</div>
-
-<?php 
-if ($user->loaded) 
-{
-	echo html::anchor('topics/new', 'Créer un nouveau sujet', array('class' => 'button blue')); 
-}
-?>
+</table>
 
 <script>
 $(document).ready(function(){
+
+	$('#topics').dataTable({
+		"bLengthChange": false,
+		"iDisplayLength": 10,
+		"aaSorting": [ [2,'desc'] ],
+		"oLanguage": {
+			"sUrl": "js/lib/dataTables/i18n/dataTables.french.txt"
+		}
+	});
 
 	$('*[rel=tipsy]').tipsy({gravity: 's'});
 	

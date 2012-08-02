@@ -7,8 +7,9 @@
 	
 	li {clear: right;}
 	li:hover {background-color: #eee;}
-	li.selected {background-color: #ddd;}
-	li a, li a:visited {color: #333; padding: 5px 0 5px 0; display: block; padding-left: 20px;}
+	li.selected {background-color: #355F9C;}
+	li.selected a {color: #fff;}
+	li a {color: #333; display: block; padding: 5px 0 5px 5px;}
 	li a:hover {text-decoration: none;}
 	.rfloat {float: right; margin: -2px 20px 0 0;}
 	
@@ -22,84 +23,55 @@
 </style>
 
 <?php
+$url = url::current();
 $user = $this->session->get('user');
+$chocobo = $this->session->get('chocobo');
 if ( ! $user->loaded):
 ?>
 
-<p>
+<?php $menus = array(
+	'presentation' 	=> 'home',
+	'connection' 	=> 'login',
+	'register' 		=> 'register',
+	'forum' 		=> 'topics',
+) ?>
 <ul>
-	<li><?php echo html::anchor('page/home', Kohana::lang('menu.presentation')); ?></li>
-	<li><?php echo html::anchor('users/login', Kohana::lang('menu.connection')); ?></li>
-	<li><?php echo html::anchor('users/new', Kohana::lang('menu.register')); ?></li>
-	<li><?php echo html::anchor('topics', 'Forum'); ?></li>
-	<li><?php echo html::anchor('page/about', 'À propos'); ?></li>
+	<?php foreach ($menus as $menu => $path): ?>
+	<?php
+		$selected = (strrpos($url, $path) === FALSE) ? '' : ' class="selected"';
+		?>
+		<li<?php echo $selected ?>>
+			<?php echo html::anchor($path, Kohana::lang("menu.$menu")) ?>
+		</li>
+	<?php endforeach; ?>
 </ul>
-</p>
 
 <?php else: ?>
 
-<div style="float:left;">
-	<?php 
-	echo $user->image('mini');
-	?>
-</div>
+<ul id="menu-default">
 
-<div style="float:left; margin-left:10px;">
-	<?php 
-	echo '<span style="font-weight: bold;">' . $user->link() . '</span><br />';
-	echo $user->gils . ' Gils';
-	?>
-</div>
-
-<div class="clearleft"></div>
-
-<div class="menutitle"><?php echo Kohana::lang('menu.stable'); ?></div>
-
-<p>
-<ul>
 	<?php
-	//$user->reload();
-	$c = $this->session->get('chocobo');
-	foreach ($user->chocobos as $chocobo)
-	{
-		$selected = ($c->id !== $chocobo->id) ? '' : ' class="selected"';
+	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 16px; position: absolute; left: -25px;">
+			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png')) ?>
+		</div>
+		<?php echo $user->link() ?>
+	</li>
+
+	<?php
+	$selected = ($url !== 'chocobos/' . $chocobo->id) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
+			<?php echo html::anchor('', html::image('images/icons/list-off.png'), array('class' => 'toggle-stable')) ?>
+		</div>
+		<?php 
+		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
 		?>
-		<li<?php echo $selected ?>>
-			<a href="<?php echo url::base() ?>chocobo/change/<?php echo $chocobo->name ?>">
-				<?php echo $chocobo->name ?>
-				<div class="rfloat notif">
-					<?php 
-					echo $chocobo->pl;
-					?>
-				</div>
-			</a>
-		</li>
-		<?php
-	}
-	?>
-</ul>
-</p>
-
-<div class="menutitle"><?php echo Kohana::lang('menu.title'); ?></div>
-
-<p>
-<ul>
-	<?php $url = url::current() ?>
-	
-	<?php
-	$selected = (strrpos($url, 'page/events') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php echo html::anchor('page/events', 'Événements') ?>
 	</li>
-	
-	<?php
-	$selected = (strrpos($url, 'chocobos/' . $user->id) === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php //echo html::anchor('chocobos/' . $user->chocobo->id . '/' . $user->chocobo->name, 'Chocobo'); ?>
-	</li>
-			
+
 	<?php
 	$selected = (strrpos($url, 'races') === FALSE) ? '' : ' class="selected"';
 	?>
@@ -135,37 +107,20 @@ if ( ! $user->loaded):
 	</li>
 	
 	<?php
-	$selected = (strrpos($url, 'fusion') === FALSE) ? '' : ' class="selected"';
+	$selected = ((strrpos($url, 'users') !== FALSE) and ($url !== 'users/' . $user->id)) ? ' class="selected"' : '';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('fusion', 'Fusion'); ?>
+		<?php echo html::anchor('users', 'Jockeys'); ?>
 	</li>
 	
 	<?php
-	$selected = (strrpos($url, 'success/') === FALSE) ? '' : ' class="selected"';
+	$selected = ((strrpos($url, 'chocobos') !== FALSE) and ($url !== 'chocobos/' . $chocobo->id)) ? ' class="selected"' : '';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('success/view/' . $user->username, 'Succès'); ?>
+		<?php echo html::anchor('chocobos', 'Chocobos'); ?>
 	</li>
 	
-	<?php
-	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php echo html::anchor('rankings', 'Classements'); ?>
-	</li>
-	
-	<?php
-	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php echo html::anchor('tutorial', 'Tutorial'); ?>
-	</li>
-	
-	<?php
-	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
+	<li>
 		<?php echo html::anchor('shoutbox', 'Shoutbox', array('onclick' => 'javascript:openShoutbox(); return false;')); ?>
 	</li>
 		
@@ -208,14 +163,57 @@ if ( ! $user->loaded):
 			<?php endif; ?>
 		</a>
 	</li>
-		
-	<li>
-	<?php echo html::anchor('users/logout', Kohana::lang('menu.deconnection')); ?>
+
+	<?php
+	$selected = (strrpos($url, 'guide') === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?>>
+		<?php echo html::anchor('guide', 'Guide'); ?>
+	</li>
+
+	<?php
+	$selected = (strrpos($url, 'updates') === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?>>
+		<?php echo html::anchor('updates', 'A propos'); ?>
 	</li>
 </ul>
-</p>
 
-<?php if ($user->has_role('admin')): ?>
+<ul id="menu-stable" style="display: none;">
+
+	<?php
+	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 16px; position: absolute; left: -25px;">
+			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png')) ?>
+		</div>
+		<?php echo $user->link() ?>
+	</li>
+
+	<?php
+	$selected = ($url !== 'chocobos/' . $chocobo->id) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
+			<?php echo html::anchor('', html::image('images/icons/list-on.png'), array('class' => 'toggle-stable')) ?>
+		</div>
+		<?php 
+		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
+		?>
+	</li>
+
+	<?php foreach ($user->chocobos as $c): 
+	if ($chocobo->id != $c->id): ?>
+	<li>
+		<?php echo html::anchor('chocobo/change/' . $c->name, $c->name) ?>
+	</li>
+	<?php endif;
+	endforeach; ?>
+
+</ul>
+
+<?php if ($user->has_role('admin') and FALSE): ?>
 <div class="menutitle">Administration</div>
 <p>
 <ul>
@@ -236,5 +234,15 @@ if ( ! $user->loaded):
 </ul>
 </p>
 <?php endif; ?>
+
+<script>
+$(function(){
+	$('.toggle-stable').click(function(){
+		$('#menu-default').toggle();
+		$('#menu-stable').toggle();
+		return false;
+	});
+});
+</script>
 
 <?php endif; ?>

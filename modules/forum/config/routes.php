@@ -2,6 +2,7 @@
 
 // topics
 $config['topics'] = 'topic/index';
+$config['updates'] = 'topic/updates';
 $config['topics/all/page/([0-9]+)'] = "topic/index/all/page/$1";
 
 $config['topics/search/tags/([a-zA-Z0-9-_]+)'] = "topic/index/$1";

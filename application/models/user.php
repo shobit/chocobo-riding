@@ -83,7 +83,7 @@ class User_Model extends ORM {
 	 */
 	public function link ()
 	{
-		return html::anchor('users/' . $this->id . '/' . $this->username, $this->username);
+		return html::anchor('users/' . $this->id, $this->username);
 	}
 
 	/**
