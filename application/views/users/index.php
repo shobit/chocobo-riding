@@ -2,18 +2,20 @@
 
 <table id="users" class="table1">
 	<thead>
-		<tr>
-			<th>Nom</th>
-			<th>Dernière connexion</th>
+		<tr class="first">
+			<th class="lenmax">Nom</th>
+			<th class="len100">Dernière connexion</th>
 			<th></th>
+			<th class="len100"></th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php foreach ($users as $user): ?>
-		<tr class="tr1">
-			<td class="lenmax"><?php echo $user->username ?></td>
-			<td class="len150 date"><?php echo date::display($user->connected) ?></td>
-			<td class="len100"><?php echo html::anchor('users/' . $user->id, 'Voir', array('class' => 'button green')) ?></td>
+		<tr>
+			<td><?php echo $user->username ?></td>
+			<td class="date"><?php echo $user->connected ?></td>
+			<td><?php echo date::display($user->connected) ?></td>
+			<td><?php echo html::anchor('users/' . $user->id, 'Voir', array('class' => 'button green')) ?></td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>
@@ -26,6 +28,16 @@ $(function(){
 		"bLengthChange": false,
 		"iDisplayLength": 10,
 		"aaSorting": [ [1,'desc'] ],
+		"aoColumnDefs": [ 
+            {
+                "fnRender": function ( oObj, sVal ) {
+                    return oObj.aData[2];
+                },
+                "bUseRendered": false,
+                "aTargets": [ 1 ]
+            },
+            { "bVisible": false,  "aTargets": [ 2 ] }
+        ],
 		"oLanguage": {
 			"sUrl": "js/lib/dataTables/i18n/dataTables.french.txt"
 		}

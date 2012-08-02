@@ -8,12 +8,12 @@
 
 <table class="table1">
 	<tr>
-		<th>Nom</th>
-		<th>Date</th>
+		<th class="lenmax">Nom</th>
+		<th class="len150">Date</th>
 	</tr>
-	<tr class="tr1">
-		<td class="lenmax"><?php echo $race->circuit->name() ?></td>
-		<td class="len150">
+	<tr>
+		<td><?php echo $race->circuit->name() ?></td>
+		<td>
 			<?php echo date::display($race->start) ?>
 		</td>
 	</tr>
@@ -23,22 +23,22 @@
 
 <table class="table1">
 	<tr>
-		<th>Nom</th>
-		<th>Temps</th>
-		<th>Vitesse</th>
+		<th class="lenmax">Nom</th>
+		<th class="len150">Temps</th>
+		<th class="len150">Vitesse</th>
 	</tr>
 
 	<?php 
 	arr::order($results, 'position', 'asc');
 	foreach ($results as $result): 
 	?>
-	<tr class="tr1">
-		<td class="lenmax"><?php echo $result['name'] ?></td>
-		<td class="len150">
+	<tr>
+		<td><?php echo $result['name'] ?></td>
+		<td>
 			<?php echo html::image('images/icons/clock.png', array('class' => 'icon12')) ?> 
 			<?php echo date::chrono($result['time']) ?>
 		</td>
-		<td class="len150">
+		<td>
 			<?php echo html::image('images/icons/speed.jpg', array('class' => 'icon')) ?>
 			<?php echo number_format($result['course_avg'], 3, '.', '') ?> m/s
 		</td>
@@ -64,21 +64,21 @@
 
 <table class="table1">
 	<tr>
-		<th>Nom</th>
-		<th>Progression</th>
-		<th>Vitesse</th>
+		<th class="len150">Nom</th>
+		<th class="lenmax">Progression</th>
+		<th class="len150">Vitesse</th>
 	</tr>
 
 	<?php 
 	arr::order($results, 'box', 'asc');
 	foreach ($results as $result): ?>
 	
-		<tr class="tr1" id="<?php echo $result['name'] ?>">
-			<td class="len150"><?php echo $result['name'] ?></td> 
-			<td class="lenmax" style="position: relative;">
+		<tr id="<?php echo $result['name'] ?>">
+			<td><?php echo $result['name'] ?></td> 
+			<td style="position: relative;">
 				<?php echo html::image('images/race/waiting.png', array('class' => 'allure')) ?>
 			</td>
-			<td class="len150">
+			<td>
 				<span class="course"></span>
 			</div>
 		</tr>

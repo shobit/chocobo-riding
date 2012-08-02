@@ -12,99 +12,101 @@ if ($user->id == $u->id)
 
 <table class="table1">
 
-	<tr>
-		<th>Champ</th>
-		<th>Valeur</th>
-		<th></th>
+	<tr class="first">
+		<th class="len150">Champ</th>
+		<th class="lenmax">Valeur</th>
+		<th class="len100"></th>
 	</tr>
 
-	<tr class="tr1">
-		<td class="len150">Nom</td>
-		<td class="lenmax">
+	<tr>
+		<td>Nom</td>
+		<td>
 			<?php echo $user->username ?>
 		</td>
-		<td class="len100"></td>
+		<td></td>
 	</tr>
-	<tr class="tr1">
-		<td class="len150">Statut</td>
-		<td class="lenmax">
-			<?= $user->role() ?>
+	<tr>
+		<td>Statut</td>
+		<td>
+			<?php echo $user->role() ?>
 		</td>
-		<td class="len100"></td>
+		<td></td>
 	</tr>
-	<tr class="tr1">
-		<td class="len150">Genre</td>
-		<td class="lenmax">
-			<?= $user->display_gender() ?>
+	<tr>
+		<td>Genre</td>
+		<td>
+			<?php echo $user->display_gender() ?>
 		</td>
-		<td class="len100"></td>
+		<td></td>
 	</tr>
-	<tr class="tr1">
-		<td class="len150">Langue</td>
-		<td class="lenmax">
-		<?= $user->locale ?>
+	<tr>
+		<td>Langue</td>
+		<td>
+			<?php echo $user->locale ?>
 		</td>
-		<td class="len100"></td>
+		<td></td>
 	</tr>
+
 	<?php if (!empty($user->birthday)) { ?>
-	<tr class="tr1">
-		<td class="len150">Naissance</td>
-		<td class="lenmax">
+	<tr>
+		<td>Naissance</td>
+		<td>
 			<?= $user->birthday ?>
 		</td>
-		<td class="len100"></td>
+		<td></td>
 	</tr>
 	<?php } ?>
-	<tr class="tr1">
-		<td class="len150">Argent</td>
-		<td class="lenmax">
+
+	<tr>
+		<td>Argent</td>
+		<td>
 			<?php
 			echo $user->gils;
 			echo html::image('images/theme/gil.gif');
 			?>
 		</td>
-		<td class="len100"></td>
+		<td></td>
 	</tr>
-	<tr class="tr1">
-		<td class="len150">Chocobos</td>
-		<td class="lenmax">
+	<tr>
+		<td>Chocobos</td>
+		<td>
 		<?php
 			echo count($user->chocobos) . '<small>/' . $user->get_boxes() . '</small>';
 		?>
 		</td>
-		<td class="len100">
+		<td>
 			<?php
 			echo html::anchor('users/' . $user->id . '/chocobos', 'Voir', array('class' => 'button green'));
 			?>
 		</td>
 	</tr>
-	<tr class="tr1">
-		<td class="len150">Succès</td>
-		<td class="lenmax">
+	<tr>
+		<td>Succès</td>
+		<td>
 		<?php
 			$nbr_titles = ORM::factory('title')->count_all();
 			echo count($user->successes) . '<small>/' . $nbr_titles . '</small>';
 		?>
 		</td>
-		<td class="len100">
+		<td>
 			<?php
 			echo html::anchor('users/' . $user->id . '/achievements', 'Voir', array('class' => 'button green'));
 			?>
 		</td>
 	</tr>
-	<tr class="tr1">
-		<td class="len150">Inscrit</td>
-		<td class="lenmax">
+	<tr>
+		<td>Inscrit</td>
+		<td>
 			<?php echo date::display($user->created) ?>
 		</td>
-		<td class="len100"></td>
+		<td></td>
 	</tr>
-	<tr class="tr1">
-		<td class="len150">Connecté</td>
-		<td class="lenmax">
+	<tr>
+		<td>Connecté</td>
+		<td>
 			<?php echo date::display($user->updated) ?>
 		</td>
-		<td class="len100"></td>
+		<td></td>
 	</tr>
 
 </table>
@@ -114,20 +116,20 @@ if ($user->id == $u->id)
 <h2>Chocobos dans l'écurie : <?php echo count($user->chocobos).'/'.$user->get_boxes() ?></h2>
 	
 <table class="table1">
-	<tr>
-		<th>Nom</th>
-		<?php if ($user->id == $u->id): ?><th></th><?php endif; ?>
-		<th></th>
+	<tr class="first">
+		<th class="lenmax">Nom</th>
+		<?php if ($user->id == $u->id): ?><th class="len100"></th><?php endif; ?>
+		<th class="len100"></th>
 	</tr>
 
 	<?php foreach($user->chocobos as $n => $chocobo): ?>
-	<tr class="tr1">
-		<td class="lenmax">
+	<tr>
+		<td>
 			<?php echo $chocobo->vignette() ?>
 		</td>
 
 		<?php if ($user->id == $u->id): ?>
-		<td class="len100">
+		<td>
 			<?php 
 			if ($chocobo->id != $c->id)
 			{
@@ -137,7 +139,7 @@ if ($user->id == $u->id)
 		</td>
 		<?php endif; ?>
 
-		<td class="len100">
+		<td>
 			<?php echo html::anchor('chocobos/' . $chocobo->id, 'Voir', array('class' => 'button green')) ?>
 		</td>
 	</tr>

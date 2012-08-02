@@ -28,16 +28,16 @@
 </script>
 
 <table class="table1">
-	<tr>
-		<th>Nom</th>
-		<th>PL</th>
-		<th></th>
+	<tr class="first">
+		<th class="lenmax">Nom</th>
+		<th class="len150">PL</th>
+		<th class="len100"></th>
 	</tr>
 	<?php foreach ($races as $race): ?>
-	<tr class="tr1">
-		<td class="lenmax"><?php echo $race->circuit->name() ?></td>
-		<td class="len150"><?php echo $race->circuit->pl ?></td>
-		<td class="len100"><?php echo html::anchor('races/' . $race->id, 'Voir', array('class' => 'button green')) ?></td>
+	<tr>
+		<td><?php echo $race->circuit->name() ?></td>
+		<td><?php echo $race->circuit->pl ?></td>
+		<td><?php echo html::anchor('races/' . $race->id, 'Voir', array('class' => 'button green')) ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>
@@ -48,21 +48,21 @@
 
 	<table class="table1">
 		<tr>
-			<th>Nom</th>
-			<th></th>
-			<th></th>
+			<th class="lenmax">Nom</th>
+			<th class="len100"></th>
+			<th class="len100"></th>
 		</tr>
 		<?php foreach ($results as $result): 
 			$not_seen = ( ! $result->seen) ? ' not_seen': '';
 			?>
-			<tr class="tr1 result<?php echo $not_seen ?>" id="result<?php echo $result->race->id ?>">
-				<td class="lenmax"><?php echo $result->race->circuit->name() ?></td>
-				<td class="len100">
+			<tr class="result<?php echo $not_seen ?>" id="result<?php echo $result->race->id ?>">
+				<td><?php echo $result->race->circuit->name() ?></td>
+				<td>
 					<?php
 						echo html::anchor('', 'Supprimer', array('class' => 'button red delete_result', 'id' => 'race' . $result->race->id));
 					?>
 				</td>
-				<td class="len100">
+				<td>
 					<?php
 						echo html::anchor('races/' . $result->race->id, 'Voir', array('class' => 'button green'));
 					?>

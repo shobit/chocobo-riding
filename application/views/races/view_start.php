@@ -23,15 +23,15 @@ $unregister = ($registered and $can_unregister['success']);
 ?>
 
 <table class="table1">
-	<tr>
-		<th>Nom</th>
-		<th>PL</th>
-		<th></th>
+	<tr class="first">
+		<th class="lenmax">Nom</th>
+		<th class="len150">PL</th>
+		<th class="len100"></th>
 	</tr>
-	<tr class="tr1">
-		<td class="lenmax"><?php echo $race->circuit->name() ?></td>
-		<td class="len150"><?php echo $race->circuit->pl ?></td>
-		<td class="len100">
+	<tr>
+		<td><?php echo $race->circuit->name() ?></td>
+		<td><?php echo $race->circuit->pl ?></td>
+		<td>
 			<?php if ($register) { echo html::anchor('races/' . $race->id . '/register', "S'inscrire", array('class' => 'button green')); } ?>
 			<?php if ($unregister) { echo html::anchor('races/' . $race->id . '/unregister', 'Se désinscrire', array('class' => 'button red')); } ?>
 		</td>
@@ -42,13 +42,13 @@ $unregister = ($registered and $can_unregister['success']);
 	<h2>Chocobos inscrits : <?php echo count($race->chocobos) ?> /6</h2>
 
 	<table class="table1">
-		<tr>
-			<th>Nom</th>
+		<tr class="first">
+			<th class="lenmax">Nom</th>
 		</tr>
 
 		<?php foreach ($race->chocobos as $chocobo): ?>
-			<tr class="tr1">
-				<td class="lenmax"><?php echo $chocobo->vignette() ?></td>
+			<tr>
+				<td><?php echo $chocobo->vignette() ?></td>
 			</tr>
 		<?php endforeach; ?>
 	</table>

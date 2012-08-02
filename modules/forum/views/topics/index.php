@@ -9,10 +9,11 @@
 	
 	<thead>
 		<tr>
-			<th>Type</th>
-			<th>Titre</th>
-			<th>Date</th>
+			<th class="len100">Type</th>
+			<th class="lenmax">Titre</th>
+			<th class="len100">Dernier post</th>
 			<th></th>
+			<th class="len100"></th>
 		</tr>
 	</thead>
 
@@ -31,38 +32,27 @@
 		$not_seen = ($nbr_notifications > 0) ? ' not_seen': '';		
 	?>
 		
-	<tr class="tr1 topic<?php echo $not_seen ?>" id="topic<?php echo $topic->id ?>">	
-		<td class="wrapper-type len100 bleft">
+	<tr class="topic<?php echo $not_seen ?>" id="topic<?php echo $topic->id ?>">	
+		<td class="wrapper-type">
 			<?php if ( ! empty($topic->type)): ?>
 				<span class="type <?php echo $topic->type ?>"><?php echo $topic->type ?></span>
 			<?php endif; ?>
 		</td>
 			
-		<td class="lenmax">
-			<div class="title">
-				<span class="nbr_comments"><?php echo ($nbr_comments - 1) ?></span> 
-				<?php echo $topic->title ?>
-			</div>
+		<td class="title">
+			<span class="nbr_comments"><?php echo ($nbr_comments - 1) ?></span> 
+			<?php echo $topic->title ?>
 		</td>
 
-		<td class="date len100">
+		<td class="date">
+			<?php echo $topic->updated ?>
+		</td>
+
+		<td>
 			<?php echo date::display($topic->updated) ?>
 		</td>
 		
-		<!--td class="options">
-			<?php
-			if ($topic->allow($user, 'w'))
-			{
-				echo html::anchor('topics/' . $topic->id . '/edit', 
-					html::image('images/icons/edit.png', array('class' => 'icon', 'title' => 'Modifier', 'rel' => 'tipsy'))) . ' | ';
-				echo html::anchor('#', 
-					html::image('images/icons/delete.png', array('class' => 'icon', 'title' => 'Supprimer', 'rel' => 'tipsy')), 
-						array('class' => 'delete_topic', 'id'=>'topic' . $topic->id));
-			}
-			?>
-		</td-->
-
-		<td class="len100">
+		<td>
 			<?php echo html::anchor('topics/' . $topic->id, 'Lire', array('class' => 'button green')) ?>
 		</td>
 	</tr>
@@ -81,6 +71,16 @@ $(document).ready(function(){
 		"bLengthChange": false,
 		"iDisplayLength": 10,
 		"aaSorting": [ [2,'desc'] ],
+		"aoColumnDefs": [ 
+            {
+                "fnRender": function ( oObj, sVal ) {
+                    return oObj.aData[3];
+                },
+                "bUseRendered": false,
+                "aTargets": [ 2 ]
+            },
+            { "bVisible": false,  "aTargets": [ 3 ] }
+        ],
 		"oLanguage": {
 			"sUrl": "js/lib/dataTables/i18n/dataTables.french.txt"
 		}
