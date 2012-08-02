@@ -1,10 +1,6 @@
 /*
  * Table
  */
-table.dataTable {
-	clear: both;
-}
-
 table.dataTable thead th {
 	border-bottom: 1px solid black;
 	cursor: pointer;
@@ -15,8 +11,6 @@ table.dataTable thead th {
  * Filter
  */
 .dataTables_filter {
-	float: right;
-	text-align: right;
 	margin-bottom: 20px;
 }
 

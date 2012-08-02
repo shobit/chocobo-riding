@@ -5,15 +5,18 @@
 	<div class="clearright;"></div>
 <?php endif; ?>
 
-<table class="table1">
-	<tr>
-		<th>Type</th>
-		<th>Titre</th>
-		<th>Date</th>
-		<th></th>
-	</tr>
+<table id="topics" class="table1">
+	
+	<thead>
+		<tr>
+			<th>Type</th>
+			<th>Titre</th>
+			<th>Date</th>
+			<th></th>
+		</tr>
+	</thead>
 
-
+	<tbody>
 	<?php
 	foreach ($topics as $n => $t) 
 	{
@@ -67,11 +70,21 @@
 	<?php
 	}
 	?>
+	</tbody>
 
 </table>
 
 <script>
 $(document).ready(function(){
+
+	$('#topics').dataTable({
+		"bLengthChange": false,
+		"iDisplayLength": 10,
+		"aaSorting": [ [2,'desc'] ],
+		"oLanguage": {
+			"sUrl": "js/lib/dataTables/i18n/dataTables.french.txt"
+		}
+	});
 
 	$('*[rel=tipsy]').tipsy({gravity: 's'});
 	
