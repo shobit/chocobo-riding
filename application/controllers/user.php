@@ -68,7 +68,9 @@ class User_Controller extends Template_Controller {
 
 		$u = $this->session->get('user');
 
-		$users = ORM::factory('user')->find_all();
+		$users = ORM::factory('user')
+			->where('activated', TRUE)
+			->find_all();
 	}
 
 	/*
