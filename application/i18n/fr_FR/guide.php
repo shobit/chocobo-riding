@@ -3,7 +3,7 @@
 $lang = array (
     'title' => "Tutoriel",
     'prelude' => "Aaaah! Je savais bien que vous finirez par venir ici :) C'est bien, ça prouve que vous ne savez pas tout et que vous allez peut-être apprendre pleins d'astuces dans votre partie. Hmm, et bien, vous savez quoi, Kupo ? je crois bien que je peux vous être utile sur ce coup là. J'ai écrit un super tutoriel qui comblera toutes vos attentes! Bonne lecture \o/",
-    'link' => "Lire le tutoriel<br /><small>(Documentation avancée)</small>",
+    'link' => "Lire le tutoriel (Documentation avancée)",
     'help' => array(
     	'title' => "Que faire après votre inscription sur Chocobo Riding ?",
     	'content1' => "<b>1.</b> Faites courrir votre chocobo à des courses d'entraînement en priorité, à des courses de compétitions une fois arrivé à son niveau maximum, et à des promenades quand son souffle est bas.<br /><br /><small>Votre chocobo est au niveau 1 lorsqu'il commence à courrir. En faisant des courses d'entrainement, il gagnera des points dans ses aptitudes (vitesse, intelligence ou endurance) qui auront des effets sur sa vitesse de course. Entraînez votre chocobo jusqu'à ce qu'il ait atteint son niveau maximum (niveau 16) avant de faire des courses de compétition. Et n'hésitez pas non plus à vous lancer dans des promenades pour régénérer votre chocobo.</small>",
