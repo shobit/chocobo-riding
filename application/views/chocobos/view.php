@@ -55,7 +55,7 @@
 	</tr>
 	
 	<tr>
-		<td>classe</td>
+		<td>Classe</td>
 		<td><?php echo $chocobo->display_classe() ?></td>
 		<td>
 			<?php echo progress::display($chocobo->classe, 5, 100) ?>
@@ -191,7 +191,7 @@
 	
 	<tr>
 		<td>PL</td>
-		<td><?php echo $chocobo->pl ?></td>
+		<td><?php echo $chocobo->pl ?> /<?php echo $chocobo->attr('pl_limit') ?></td>
 		<td class="p-wrapper">
 			<?php echo progress::display($chocobo->pl, $chocobo->attr('pl_limit'), 100) ?>
 		</td>
@@ -199,7 +199,7 @@
 		
 	<tr>
 		<td>HP</td>
-		<td><?php echo $chocobo->hp ?></td>
+		<td><?php echo $chocobo->hp ?> /<?php echo $chocobo->attr('hp_limit') ?></td>
 		<td class="p-wrapper">
 			<?php echo progress::display($chocobo->hp, $chocobo->attr('hp_limit'), 100) ?>
 		</td>
@@ -207,7 +207,7 @@
 	
 	<tr>
 		<td>MP</td>
-		<td><?php echo $chocobo->mp ?></td>
+		<td><?php echo $chocobo->mp ?> /<?php echo $chocobo->attr('mp_limit') ?></td>
 		<td class="p-wrapper">
 			<?php echo progress::display($chocobo->mp, $chocobo->attr('mp_limit'), 100) ?>
 		</td>
@@ -215,7 +215,7 @@
 	
 	<tr>
 		<td>PC</td>
-		<td><?php echo $chocobo->attr('pc_limit') ?></td>
+		<td><?php echo $chocobo->attr('pc_limit') ?> /<?php echo $chocobo->attr('pc_limit') ?></td>
 		<td class="p-wrapper">
 			<?php echo progress::display($chocobo->attr('pc_limit'), $chocobo->attr('pc_limit'), 100) ?>
 		</td>
@@ -223,7 +223,7 @@
 	
 	<tr>
 		<td>Rage</td>
-		<td><?php echo $chocobo->rage ?></td>
+		<td><?php echo $chocobo->rage ?> /<?php echo $chocobo->attr('rage_limit') ?></td>
 		<td class="p-wrapper">
 			<?php echo progress::display($chocobo->rage, $chocobo->attr('rage_limit'), 100) ?>
 		</td>
