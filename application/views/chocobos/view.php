@@ -25,8 +25,20 @@
 	</tr>
 
 	<tr>
+		<td>Jockey</td>
+		<td><?php echo $chocobo->user->username ?></td>
+		<td><?php echo html::anchor('users/' . $chocobo->user_id, 'Voir', array('class' => 'button green')) ?></td>
+	</tr>
+
+	<tr>
 		<td>Nom</td>
 		<td><?php echo $chocobo->name ?></td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>Genre</td>
+		<td><?php echo $chocobo->display_gender('zone') ?></td>
 		<td></td>
 	</tr>
 	
