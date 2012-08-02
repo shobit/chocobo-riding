@@ -436,7 +436,7 @@ class Chocobo_Model extends ORM {
 	 */
 	public function link ()
 	{
-		return html::anchor('chocobo/view/' . $this->name, $this->name);
+		return html::anchor('chocobos/' . $this->id, $this->name);
 	}
 	
 	/**

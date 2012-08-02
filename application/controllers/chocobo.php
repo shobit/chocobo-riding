@@ -34,26 +34,30 @@ class Chocobo_Controller extends Template_Controller {
 		$chocobo = ORM::factory('chocobo', $id);
 	}
 
-	// FUNC: change de chocobo principal
-	// var $name STRING
-	public function change($name)
+	/**
+	 * Change de chocobo principal
+	 */
+	public function change($id)
 	{
 		$this->authorize('logged_in');
+		
 		$user = $this->session->get('user');
-		$chocobos = ORM::factory('chocobo')->where('user_id', $user->id)->select_list('id', 'name');
-		if (in_array($name, $chocobos)) {
-			$chocobo = ORM::factory('chocobo')->where('name', $name)->find();
+		$chocobo = ORM::factory('chocobo', $id);
+		
+		if ($chocobo->user_id == $user->id) 
+		{
 			$last_chocobo = $this->session->get('chocobo');
 			$this->session->set('chocobo', $chocobo);
-			$link = 'chocobo/view/'.$name;
+			$link = 'chocobos/' . $id;
 			$url = explode('/', request::referrer());
-			if ($chocobo->id != $last_chocobo->id and
-				request::referrer() != 'chocobo/view/'.$last_chocobo->name)
+			if ($chocobo->id != $last_chocobo->id and request::referrer() != $link)
+			{
 				$link = request::referrer();
-			//if (request::referrer() == 'circuit/view/'.$last_chocobo->name)
-			// url::redirect('circuit');
+			}
 			url::redirect($link);
-		} else {
+		} 
+		else 
+		{
 			url::redirect(request::referrer());
 		}
 	}
@@ -75,7 +79,7 @@ class Chocobo_Controller extends Template_Controller {
 			if ($post->validate()) {
 				$chocobo->name = $post->name;
 				$chocobo->save();
-				url::redirect('chocobo/view/'.$chocobo->name);
+				url::redirect('chocobos/' . $chocobo->id);
 			} else {
 				$form = arr::overwrite($form, $post->as_array());
 				$errors = arr::overwrite($errors, $post->errors('form_error_messages'));
@@ -111,7 +115,7 @@ class Chocobo_Controller extends Template_Controller {
 		}
 		// Traitement Ajax ou pas
 		if (!$res or !request::is_ajax()) {
-			url::redirect("chocobo/view/".$chocobo->name);
+			url::redirect('chocobos/' . $chocobo->id);
 		}
 		else {
 			echo $chocobo->points;
@@ -214,7 +218,7 @@ class Chocobo_Controller extends Template_Controller {
 		}
 		
 		gen::add_jgrowl($msg);
-		url::redirect('chocobo/view/' . $chocobo->name);
+		url::redirect('chocobos/' . $chocobo->id);
 	}
 
 }

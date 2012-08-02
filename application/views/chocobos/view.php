@@ -86,7 +86,13 @@
 		<td class="len150">Prix</td>
 		<td class="lenmax"><?php echo $chocobo->get_price() . html::image('images/icons/gils.png', array('class' => 'icon4')) ?></td>
 		<td class="len100 p-wrapper">
-			<?php echo progress::display(0, 1, 100) ?>
+			<?php
+			if ($chocobo->user_id == $user->id and count($chocobo->user->chocobos) > 1)
+			{
+				$texte = "Confirmer ?";
+				echo html::anchor('chocobo/sale/' . $chocobo->id, 'Vendre', array('class' => 'button red', 'onclick' => "return confirm('$texte');"));
+			}
+			?>
 		</td>
 	</tr>
 	

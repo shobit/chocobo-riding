@@ -131,7 +131,7 @@ if ($user->id == $u->id)
 			<?php 
 			if ($chocobo->id != $c->id)
 			{
-				echo html::anchor('chocobo/change/' . $chocobo->name, 'Choisir', array('class' => 'button blue'));
+				echo html::anchor('chocobo/change/' . $chocobo->id, 'Choisir', array('class' => 'button blue'));
 			}
 			?>
 		</td>

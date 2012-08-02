@@ -206,7 +206,7 @@ if ( ! $user->loaded):
 	<?php foreach ($user->chocobos as $c): 
 	if ($chocobo->id != $c->id): ?>
 	<li>
-		<?php echo html::anchor('chocobo/change/' . $c->name, $c->name) ?>
+		<?php echo html::anchor('chocobo/change/' . $c->id, $c->name) ?>
 	</li>
 	<?php endif;
 	endforeach; ?>
