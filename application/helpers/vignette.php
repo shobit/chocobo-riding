@@ -8,13 +8,11 @@ class vignette_Core {
 		$html = '';
 		$html .= html::anchor(
 			'', $title, 
-			array('class' => 'jtiprel ' . $color, 'rel' => '#vignette' . $rand, 'onclick' => 'return false')
+			array('class' => 'jtiprel ' . $color, 'rel' => '#vignette' . $rand, 'name' => $title, 'onclick' => 'return false')
 		);
 		$html .= '<div id="vignette' . $rand . '" style="display:none;">';
-		$html .= '<font style="font-weight:bold; color:#000;">' . $title . '</font>';
-		$html .= '<br /><small>';
 		$html .= $content;
-		$html .= '</small></div>';
+		$html .= '</div>';
 		
 		return $html;
 	}
