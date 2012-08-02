@@ -104,7 +104,7 @@ a:hover {text-decoration: underline;}
 table {font-family: 'PT Sans', sans-serif;}
 .table1 {width: 100%; border-collapse: collapse; margin-bottom: 20px;}
 .table1 th {text-align: left; font-size: 10px;}
-.table1 td {text-align: left; border: 1px solid #eee; padding-left: 2px;}
+.table1 td {text-align: left; border: 1px solid #eee; padding-left: 2px; vertical-align: top;}
 .tr1:hover {background-color: #eee;}
 .tr1 {height: 30px;}
 .tr1 .lenmax {}
@@ -112,7 +112,7 @@ table {font-family: 'PT Sans', sans-serif;}
 .tr1 .len100 {width: 100px;}
 
 /* FORUM types */
-.wrapper-type {text-align: right; vertical-align: top;}
+.wrapper-type {text-align: right;}
 .type {
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
