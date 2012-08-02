@@ -1,6 +1,20 @@
 <?php
 class Chocobo_Controller extends Template_Controller {
 
+	/**
+	 * Vue de tous les chocobos
+	 */
+	public function index()
+	{
+		$this->template->content = View::factory('chocobos/index')
+			->bind('chocobos', $chocobos)
+			->bind('c', $c);
+
+		$c = $this->session->get('chocobo');
+
+		$chocobos = ORM::factory('chocobo')->find_all();
+	}
+
 	// FUNC: vue de la fiche d'un chocobo
 	// var $name STRING
 	public function view($id, $section='')

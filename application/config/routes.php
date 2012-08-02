@@ -23,6 +23,7 @@ $config['users/([0-9a-z]+)/([a-z]+)'] = "user/view/$1/$2";
 $config['users/edit'] = "user/edit";
 $config['users/delete'] = "user/delete";
 
+$config['chocobos'] = "chocobo/index";
 $config['chocobos/([0-9]+)'] = "chocobo/view/$1";
 $config['chocobos/([0-9]+)/([0-9a-zA-Z-_]+)'] = "chocobo/view/$1";
 
