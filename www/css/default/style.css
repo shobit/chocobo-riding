@@ -221,7 +221,9 @@ a.jgrowl, a.jgrowl:visited {text-decoration: none; color: #fff;}
 a.jgrowl:hover {text-decoration: underline;}
 
 .notif {text-align: center; padding: 3px 6px 0px 6px; display: inline-block; color: #355F9C;}
-.notif.not_seen {background-color: #355F9C; color: #fff;}	
+.notif.not_seen {background-color: #355F9C; color: #fff;}
+li.selected .notif {text-align: center; padding: 3px 6px 0px 6px; display: inline-block; color: #fff;}
+li.selected .notif.not_seen {background-color: #fff; color: #355F9C;}
 
 a.button {
 	padding: 2px;

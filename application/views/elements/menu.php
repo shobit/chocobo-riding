@@ -117,11 +117,10 @@ if ( ! $user->loaded):
 			$nbr_connected = ORM::factory('user')
 				->where('connected>', $tps)
 				->count_all();
-			$nbr_connected = 5;
-			if ($nbr_connected > 0):
+			if ($nbr_connected > 1):
 			?>
 			<div class="rfloat notif">
-				<?php echo $nbr_connected ?>
+				<?php echo $nbr_connected - 1 ?>
 			</div>
 			<?php endif; ?>
 		</a>
