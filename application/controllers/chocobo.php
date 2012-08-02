@@ -12,7 +12,9 @@ class Chocobo_Controller extends Template_Controller {
 
 		$c = $this->session->get('chocobo');
 
-		$chocobos = ORM::factory('chocobo')->find_all();
+		$chocobos = ORM::factory('chocobo')
+			->where('name !=', '')
+			->find_all();
 	}
 
 	// FUNC: vue de la fiche d'un chocobo
