@@ -132,7 +132,7 @@ table {font-family: 'PT Sans', sans-serif;}
 .request {background-color: #97B931; color: #fff;}
 
 /* FORUM autres */
-.nbr_comments {background-color: #F1EBEB; padding: 3px;}
+.nbr_comments, .nbr_messages {background-color: #eee; padding: 3px;}
 .date {font-size: 10px; color: #999; line-height: 18px;}
 
 /* IMAGES */

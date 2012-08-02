@@ -3,18 +3,17 @@
 class Discussion_Controller extends Template_Controller 
 {
 
-	// liste tous les messages
-	public function index ( $page = NULL, $num = 1)
+	/**
+	 * Liste de tous les messages
+	 */
+	public function index()
 	{
 		
 		$this->template->content = View::factory('discussions/index')
 			->bind('user', $user)
-			->bind('discussions', $discussions)
-			->bind('pagination', $pagination);
+			->bind('discussions', $discussions);
 		
 		$user = $this->session->get('user');
-		
-		$discussions_per_page = Kohana::config('discussion.discussions_per_page');
 		
 		$this->db->select('d.id');
 		$this->db->from('discussions AS d');					
@@ -23,18 +22,8 @@ class Discussion_Controller extends Template_Controller
 				'd.id' => 'f.discussion_id'
 			), null, 'LEFT');
 		$this->db->orwhere('f.user_id', $user->id);
-		$this->db->where('f.deleted !=', TRUE);	
-		$this->db->orderby('d.updated', 'DESC');
-		$this->db->limit($discussions_per_page, ($num - 1) * $discussions_per_page);
+		$this->db->where('f.deleted !=', TRUE);
 		$discussions = $this->db->get();
-		$nbr_discussions = $this->db->count_last_query();
-		
-		$pagination = new Pagination(array(
-	  		'uri_segment' 		=> 'page', 
-	    	'total_items' 		=> $nbr_discussions, 
-	    	'items_per_page' 	=> $discussions_per_page, 
-	    	'style' 			=> 'punbb'
-		));
 	}
 	
 	// vue d'un sujet
