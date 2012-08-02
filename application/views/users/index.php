@@ -19,6 +19,14 @@
 
 <script>
 $(function(){
-	$('#users').dataTable();
+	
+	$('#users').dataTable({
+		"bLengthChange": false,
+		"iDisplayLength": 10,
+		"oLanguage": {
+			"sUrl": "js/lib/dataTables/i18n/dataTables.french.txt"
+		}
+	});
+
 });
 </script>
