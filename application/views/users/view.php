@@ -110,7 +110,7 @@ if ($user->id == $u->id)
 </table>
 <?php endif; ?>
 	
-<?php if ($section == 'chocobos'): ?>
+<?php if ($section == 'chocobos' or TRUE): ?>
 <h2>Chocobos dans l'écurie : <?php echo count($user->chocobos).'/'.$user->get_boxes() ?></h2>
 	
 <table class="table1">
