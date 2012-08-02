@@ -107,23 +107,20 @@ if ( ! $user->loaded):
 	</li>
 	
 	<?php
-	$selected = ((strrpos($url, 'users/') !== FALSE) and ($url !== 'users/' . $user->id)) ? ' class="selected"' : '';
+	$selected = ((strrpos($url, 'users') !== FALSE) and ($url !== 'users/' . $user->id)) ? ' class="selected"' : '';
 	?>
 	<li<?php echo $selected ?>>
 		<?php echo html::anchor('users', 'Jockeys'); ?>
 	</li>
 	
 	<?php
-	$selected = ((strrpos($url, 'chocobos/') !== FALSE) and ($url !== 'chocobos/' . $chocobo->id)) ? ' class="selected"' : '';
+	$selected = ((strrpos($url, 'chocobos') !== FALSE) and ($url !== 'chocobos/' . $chocobo->id)) ? ' class="selected"' : '';
 	?>
 	<li<?php echo $selected ?>>
 		<?php echo html::anchor('chocobos', 'Chocobos'); ?>
 	</li>
 	
-	<?php
-	$selected = (strrpos($url, 'user/') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
+	<li>
 		<?php echo html::anchor('shoutbox', 'Shoutbox', array('onclick' => 'javascript:openShoutbox(); return false;')); ?>
 	</li>
 		
