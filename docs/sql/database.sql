@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Ven 03 Août 2012 à 11:16
+-- Généré le : Ven 03 Août 2012 à 12:09
 -- Version du serveur: 5.5.9
 -- Version de PHP: 5.3.6
 
@@ -12,7 +12,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Base de données: `chocobo-riding`
 --
-CREATE DATABASE `chocobo-riding` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+DROP DATABASE `chocobo-riding`;
+CREATE DATABASE `chocobo-riding` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `chocobo-riding`;
 
 -- --------------------------------------------------------
@@ -74,7 +75,7 @@ CREATE TABLE `circuits` (
   `gils` int(10) unsigned NOT NULL DEFAULT '0',
   `xp` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,7 @@ CREATE TABLE `comment_notifications` (
   `user_id` int(11) unsigned NOT NULL,
   `created` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,7 @@ CREATE TABLE `comments` (
   PRIMARY KEY (`id`),
   KEY `topic_id` (`topic_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,7 @@ CREATE TABLE `comments_favorites` (
   `comment_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -131,11 +132,11 @@ CREATE TABLE `comments_favorites` (
 CREATE TABLE `deleted_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `old_id` int(10) unsigned NOT NULL,
-  `name` varchar(12) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `name` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `created` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -150,7 +151,7 @@ CREATE TABLE `designs` (
   `general` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -163,7 +164,7 @@ CREATE TABLE `discussions` (
   `created` int(10) unsigned NOT NULL,
   `updated` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -215,7 +216,7 @@ CREATE TABLE `flows` (
   PRIMARY KEY (`id`),
   KEY `topic_id` (`discussion_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -230,7 +231,7 @@ CREATE TABLE `message_notifications` (
   `user_id` int(11) unsigned NOT NULL,
   `created` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -247,7 +248,7 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`id`),
   KEY `topic_id` (`discussion_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -258,10 +259,10 @@ CREATE TABLE `messages` (
 CREATE TABLE `nut_effects` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nut_id` int(10) unsigned NOT NULL,
-  `name` varchar(10) NOT NULL,
+  `name` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `value` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -279,7 +280,7 @@ CREATE TABLE `nuts` (
   `price` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -329,7 +330,7 @@ CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -342,7 +343,7 @@ CREATE TABLE `roles_users` (
   `role_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_id`,`role_id`),
   KEY `fk_role_id` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -358,7 +359,7 @@ CREATE TABLE `sites` (
   `version_number` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `closed` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -375,7 +376,7 @@ CREATE TABLE `successes` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `title_id` (`title_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -389,7 +390,7 @@ CREATE TABLE `titles` (
   `nbr_users` int(11) NOT NULL DEFAULT '0',
   `pos` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -406,7 +407,7 @@ CREATE TABLE `topics` (
   `created` int(11) NOT NULL,
   `updated` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -416,12 +417,12 @@ CREATE TABLE `topics` (
 
 CREATE TABLE `updates` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) NOT NULL,
-  `title` varchar(200) NOT NULL,
-  `content` tinytext NOT NULL,
+  `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `content` tinytext COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -473,10 +474,10 @@ CREATE TABLE `users` (
 CREATE TABLE `vegetable_effects` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `vegetable_id` int(10) unsigned NOT NULL,
-  `name` varchar(10) NOT NULL,
+  `name` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `value` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -493,7 +494,7 @@ CREATE TABLE `vegetables` (
   `price` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -510,4 +511,4 @@ CREATE TABLE `waves` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `race_id` (`race_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
