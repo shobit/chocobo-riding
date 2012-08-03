@@ -69,7 +69,9 @@ class User_Controller extends Template_Controller {
 		$u = $this->session->get('user');
 
 		$users = ORM::factory('user')
-			->where('activated', TRUE)
+			->where('activated >', 0)
+			->where('banned', 0)
+			->where('deleted', 0)
 			->find_all();
 	}
 
