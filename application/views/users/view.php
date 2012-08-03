@@ -1,6 +1,7 @@
 <div class="nav">
 	<?php echo html::anchor('#/informations', 'Informations') ?>
 	<?php echo html::anchor('#/chocobos', 'Ecurie') ?>
+	<?php echo html::anchor('#/achievements', 'Succès') ?>
 </div>
 
 <div class="section" id="informations">
@@ -80,7 +81,7 @@ if ($user->id == $u->id)
 		</td>
 		<td>
 			<?php
-			echo html::anchor('users/' . $user->id . '/chocobos', 'Voir', array('class' => 'button green'));
+			echo html::anchor('#/chocobos', 'Voir', array('class' => 'button green'));
 			?>
 		</td>
 	</tr>
@@ -94,7 +95,7 @@ if ($user->id == $u->id)
 		</td>
 		<td>
 			<?php
-			echo html::anchor('users/' . $user->id . '/achievements', 'Voir', array('class' => 'button green'));
+			echo html::anchor('#/achievements', 'Voir', array('class' => 'button green'));
 			?>
 		</td>
 	</tr>
@@ -150,10 +151,55 @@ if ($user->id == $u->id)
 </table>
 </div>
 
+<div class="section" id="achievements">
+
+<?php
+$successes = $user->successes;
+$nb_users = User_Model::get_nbr_players();
+?>
+
+<table class="table1" id="successes">
+	<thead>
+		<tr class="first">
+			<th class="lenmax">Nom</th>
+			<th class="len100">Part</th>
+		</tr>
+	</thead>
+
+	<tbody>
+	<?php foreach ($successes as $success): ?>
+		<tr>
+			<td><?php echo Kohana::lang("success." . $success->title->name . '.name') ?></td>
+			<td><?php echo ceil(($success->title->nbr_users * 100) / $nb_users) ?></td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+
+</div>
+
 <script>
 $(function(){
 
 	init_nav('#/informations');
+
+	$('#successes').dataTable({
+		"bLengthChange": false,
+		"iDisplayLength": 10,
+		"aaSorting": [ [1,'desc'] ],
+		"aoColumnDefs": [ 
+            {
+                "fnRender": function ( oObj, sVal ) {
+                    return sVal + '%';
+                },
+                "bUseRendered": false,
+                "aTargets": [ 1 ]
+            }
+        ],
+		"oLanguage": {
+			"sUrl": baseUrl + "js/lib/dataTables/i18n/dataTables.french.txt"
+		}
+	});
 
 });
 </script>

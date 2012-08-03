@@ -117,7 +117,7 @@ function openShoutbox() {
  * Initialisation d'une page composée de sections
  */
 function init_nav(home) {
-	$('.nav a').click(function(event){
+	$('a').click(function(event){
 		var hash = $(this).attr('href');
 		change(hash);
 	});
