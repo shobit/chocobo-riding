@@ -1,5 +1,9 @@
-<?php if ($section == ''): ?>
-<h2>Informations</h2>
+<div class="nav">
+	<?php echo html::anchor('#/informations', 'Informations') ?>
+	<?php echo html::anchor('#/chocobos', 'Ecurie') ?>
+</div>
+
+<div class="section" id="informations">
 
 <?php 
 if ($user->id == $u->id)
@@ -110,10 +114,9 @@ if ($user->id == $u->id)
 	</tr>
 
 </table>
-<?php endif; ?>
+</div>
 	
-<?php if ($section == 'chocobos' or TRUE): ?>
-<h2>Chocobos dans l'écurie : <?php echo count($user->chocobos).'/'.$user->get_boxes() ?></h2>
+<div class="section" id="chocobos">
 	
 <table class="table1">
 	<tr class="first">
@@ -145,4 +148,12 @@ if ($user->id == $u->id)
 	</tr>
 	<?php endforeach; ?>
 </table>
-<?php endif; ?>
+</div>
+
+<script>
+$(function(){
+
+	init_nav('#/informations');
+
+});
+</script>

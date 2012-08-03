@@ -6,6 +6,11 @@
 .p-grey {background-color: #999;}
 </style>
 
+<div class="nav">
+	<?php echo html::anchor('#/informations', 'Informations') ?>
+	<?php echo html::anchor('#/details', 'Caractéristiques') ?>
+</div>
+
 <?php $mine = ($chocobo->user->id == $user->id) ?>
 
 <?php
@@ -14,7 +19,7 @@
 //////////////////
 ?>
 
-<h2>Informations</h2>
+<div class="section" id="informations">
 
 <table class="table1">
 
@@ -116,7 +121,9 @@
 	
 </table>
 
-<h2>Caractéristiques</h2>
+</div>
+
+<div class="section" id="details">
 
 <table class="table1">
 
@@ -236,3 +243,13 @@
 	</tr>
 	
 </table>
+
+</div>
+
+<script>
+$(function(){
+
+	init_nav('#/informations');
+
+});
+</script>

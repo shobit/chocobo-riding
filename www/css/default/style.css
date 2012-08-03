@@ -140,6 +140,14 @@ a img {border: 0px;}
 img.location {border: 1px solid #222; padding: 1px;}
 img.success_jgrowl {float: left; margin-right: 5px; width: 45px; height: 45px; border: 1px solid #000;}
 
+/* NAV & SECTION */
+.section {display: none;}
+.nav {background-color: #333; height: 30px; margin-bottom: 10px;}
+.nav a {color: #fff; display: block; float: left; margin: 5px 3px; text-transform: uppercase; padding: 0 6px 0 6px;}
+.nav a:hover {text-decoration: none;}
+.nav a.selected {background-color: #fff; color: #333;}
+.nav a.selected:hover {}
+
 /* -------------------------------------------------------------------]
 [                                                                     ]
 [ 								PARTS                                 ]

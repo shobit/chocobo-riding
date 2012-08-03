@@ -112,3 +112,35 @@ function openShoutbox() {
 		'toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width=400, height=600'
 	);
 }
+
+/**
+ * Initialisation d'une page composée de sections
+ */
+function init_nav(home) {
+	$('.nav a').click(function(event){
+		var hash = $(this).attr('href');
+		change(hash);
+	});
+
+	var hash = location.hash;
+	
+	if (hash == '') {
+		hash = home;
+		location.hash = hash;
+	}
+
+	change(hash);
+}
+
+/**
+ * Changement d'une section
+ */
+function change(hash){
+	hash = hash.substring(2);
+
+	$('.nav a').removeClass('selected');
+	$('.nav a[href$=' + hash + ']').addClass('selected');
+
+	$('.section').hide();
+	$('#' + hash).slideDown();
+}
