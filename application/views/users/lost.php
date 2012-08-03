@@ -11,7 +11,7 @@ switch($type) {
 }
 ?></div>
 
-<?= form::open('user/lost/'.$type); ?>
+<?php echo form::open('user/lost/'.$type); ?>
 
 <?php 
 $res = "";
@@ -28,15 +28,15 @@ if (!empty($res)) {
 	
 	<p><table>	
 		<tr>
-			<td><?= html::image('images/theme/compte.gif') ?></td>
-			<td class="label"><?= Kohana::lang('user.form.username') ?></td>
-			<td><?= form::input('username', $form['username']) ?></td>
+			<td><?php echo html::image('images/theme/compte.gif') ?></td>
+			<td class="label"><?php echo Kohana::lang('user.form.username') ?></td>
+			<td><?php echo form::input('username', $form['username']) ?></td>
 		</tr>
 		
 		<tr>
-			<td><?= html::image('images/menu/poste.gif'); ?></td>
-			<td class="label"><?= Kohana::lang('user.form.email') ?></td>
-			<td><?= form::input('email', $form['email']) ?></td>
+			<td><?php echo html::image('images/menu/poste.gif'); ?></td>
+			<td class="label"><?php echo Kohana::lang('user.form.email') ?></td>
+			<td><?php echo form::input('email', $form['email']) ?></td>
 		</tr>
 	</table></p>
 	
@@ -45,11 +45,11 @@ if (!empty($res)) {
 <div class="leftPart">
 
 	<center>
-			<p><?= html::image('images/theme/mog.png') ?></p><br /> 
+			<p><?php echo html::image('images/theme/mog.png') ?></p><br /> 
 			
-			<p><?= form::submit('submit', 'Valider') ?></p> 
+			<p><?php echo form::submit('submit', 'Valider') ?></p> 
 			
-			<p><?= html::anchor('home', html::image('images/buttons/back.gif')) ?></p> 
+			<p><?php echo html::anchor('home', html::image('images/buttons/back.gif')) ?></p> 
 	</center>
 
 </div>

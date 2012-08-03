@@ -15,7 +15,7 @@ echo form::hidden('chocobo', $chocobo->id);
 echo form::hidden('boxes', $boxes);
 $genders = array('', 'female', 'male');
 
-?><h2>Partenaires <?= html::image('images/icons/'.$genders[$gender].'.png'); ?></h2><?php
+?><h2>Partenaires <?php echo html::image('images/icons/'.$genders[$gender].'.png'); ?></h2><?php
 
 if (count($partners) >0) {
 	foreach ($partners as $partner) {

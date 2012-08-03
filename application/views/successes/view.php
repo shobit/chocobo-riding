@@ -2,8 +2,8 @@
 	//echo html::script('js/success.js');
 ?>
 
-<h1><?= Kohana::lang('success.title') ?></h1>
-<div id="prelude"><?= Kohana::lang('success.prelude') ?></div>
+<h1><?php echo Kohana::lang('success.title') ?></h1>
+<div id="prelude"><?php echo Kohana::lang('success.prelude') ?></div>
 
 <?php
 

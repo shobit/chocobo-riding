@@ -1,8 +1,8 @@
-<h1><?= Kohana::lang('race.view_bets.title').' '.
+<h1><?php echo Kohana::lang('race.view_bets.title').' '.
 	html::image("images/classes/".$circuit->classe.".gif") ?></h1>
-<div id="prelude"><?= Kohana::lang('location.'.$circuit->location->code.'.prelude') ?></div>
+<div id="prelude"><?php echo Kohana::lang('location.'.$circuit->location->code.'.prelude') ?></div>
 
-<?= new View("circuits/description", array('circuit' => $circuit)) ?>
+<?php echo new View("circuits/description", array('circuit' => $circuit)) ?>
 
 <div style="float:right;">
 		<?php 
@@ -21,11 +21,11 @@
 			<table class="circuitInside">
 				<?php foreach ($circuit->chocobos as $chocobo) { ?>
 					<tr>
-						<td><?= html::image('images/icons/normal_sepia.jpg') ?></td>
-						<td class="icons"><?= $chocobo->image('mini'); ?></td>
+						<td><?php echo html::image('images/icons/normal_sepia.jpg') ?></td>
+						<td class="icons"><?php echo $chocobo->image('mini'); ?></td>
 						<td>
 							<?php echo $chocobo->vignette(); ?>
-							(<?= 'Côte '.$chocobo->display_fame() ?>)
+							(<?php echo 'Côte '.$chocobo->display_fame() ?>)
 						</td>
 					</tr>
 				<?php } ?>
@@ -34,4 +34,4 @@
 </div>
 
 <div class="clearBoth"></div>
-<?= $wave ?>
+<?php echo $wave ?>

@@ -1,4 +1,4 @@
-<h2>Nombre d'objets possédés : <?php echo $nbr_items ?>/<?= $user->get_items() ?> (+<?php echo $nbr_equipped ?>)</h2>
+<h2>Nombre d'objets possédés : <?php echo $nbr_items ?>/<?php echo $user->get_items() ?> (+<?php echo $nbr_equipped ?>)</h2>
 
 <?php 
 $gils_png = html::image('images/icons/gils.png', array('class' => 'icon4'));

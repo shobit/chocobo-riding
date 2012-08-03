@@ -51,7 +51,7 @@ if ($user->id == $u->id)
 	<tr>
 		<td>Naissance</td>
 		<td>
-			<?= $user->birthday ?>
+			<?php echo $user->birthday ?>
 		</td>
 		<td></td>
 	</tr>

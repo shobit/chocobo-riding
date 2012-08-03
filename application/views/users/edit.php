@@ -1,13 +1,13 @@
 <?php echo form::open_multipart('user/edit', array('class'=>'frm_edits')); ?>
 
-<h1><?= Kohana::lang('user.edit.title') ?></h1>
-<div id="prelude"><?= Kohana::lang('user.edit.prelude') ?></div>
+<h1><?php echo Kohana::lang('user.edit.title') ?></h1>
+<div id="prelude"><?php echo Kohana::lang('user.edit.prelude') ?></div>
 
 <div class="leftPart2">
 
 <?php echo form::open_multipart('user/edit', array('class'=>'frm_edits')); ?>
 
-	<div class="label"><?= Kohana::lang('user.form.username') ?></div>
+	<div class="label"><?php echo Kohana::lang('user.form.username') ?></div>
 	<div class="value">
 		<?php echo $user->username; ?>
 	</div>
@@ -15,7 +15,7 @@
 	<div class="hr"></div>
 	
 	<div id="divNoChangePassword">
-		<div class="label"><?= Kohana::lang('user.form.password0') ?></div>
+		<div class="label"><?php echo Kohana::lang('user.form.password0') ?></div>
 		<div class="value">
 			******** <?php echo html::anchor('#changePassword', 'changer', 
 				array('id'=>'changePassword', 'class'=>'button')); ?>
@@ -23,39 +23,39 @@
 	</div>
 	
 	<div id="divChangePassword" style="display:none;">
-		<div class="label"><?= Kohana::lang('user.form.password') ?></div>
+		<div class="label"><?php echo Kohana::lang('user.form.password') ?></div>
 		<div class="value">
-			<?= form::password('password') ?>
+			<?php echo form::password('password') ?>
 		</div>
 		
-		<div class="label"><?= form::label('password_new', Kohana::lang('user.form.password_new')) ?></div>
+		<div class="label"><?php echo form::label('password_new', Kohana::lang('user.form.password_new')) ?></div>
 		<div class="value">
-			<?= form::password('password_new') ?>
+			<?php echo form::password('password_new') ?>
 		</div>
 		
-		<div class="label"><?= form::label('password_again', Kohana::lang('user.form.password_again')) ?></div>
+		<div class="label"><?php echo form::label('password_again', Kohana::lang('user.form.password_again')) ?></div>
 		<div class="value">
-			<?= form::password('password_again') ?>
+			<?php echo form::password('password_again') ?>
 		</div>
 	</div>
 	
 	<div class="hr"></div>
 	
-	<div class="label"><?= Kohana::lang('user.form.email') ?></div>
+	<div class="label"><?php echo Kohana::lang('user.form.email') ?></div>
 	<div class="value">
 		<?php echo $user->email; ?>
 	</div>
 	
 	<div class="hr"></div>
 	
-	<div class="label"><?= Kohana::lang('user.form.image') ?></div>
+	<div class="label"><?php echo Kohana::lang('user.form.image') ?></div>
 	<div class="value">
 		<?php echo form::upload('image'); ?>
 	</div>
 	
 	<div class="hr"></div>
 	
-	<div class="label"><?= form::label('gender', Kohana::lang('user.form.gender')) ?></div>
+	<div class="label"><?php echo form::label('gender', Kohana::lang('user.form.gender')) ?></div>
 	<div class="value">
 		<?php
 		$options = array(
@@ -68,14 +68,14 @@
 	
 	<div class="hr"></div>
 	
-	<div class="label"><?= Kohana::lang('user.form.birthday') ?></div>
+	<div class="label"><?php echo Kohana::lang('user.form.birthday') ?></div>
 	<div class="value">
 		<?php echo form::input('birthday', $user->birthday); ?>
 	</div>
 	
 	<div class="hr"></div>
 	
-	<div class="label"><?= form::label('locale', Kohana::lang('user.form.locale')) ?></div>
+	<div class="label"><?php echo form::label('locale', Kohana::lang('user.form.locale')) ?></div>
 	<div class="value">
 		<?php
 		$options = gen::languages();
@@ -85,7 +85,7 @@
 	
 	<div class="hr"></div>
 	
-	<div class="label"><?= form::label('notif_forum', Kohana::lang('user.form.notif_forum')) ?></div>
+	<div class="label"><?php echo form::label('notif_forum', Kohana::lang('user.form.notif_forum')) ?></div>
 	<div class="value">
 		<?php 
 		$options = array(
@@ -98,9 +98,9 @@
 	<?php if ( ! empty($user->api)): ?>
 		<div class="hr"></div>
 		
-		<div class="label"><?= Kohana::lang('user.form.api') ?></div>
+		<div class="label"><?php echo Kohana::lang('user.form.api') ?></div>
 		<div class="value">
-			<b><?= $user->api ?></b>
+			<b><?php echo $user->api ?></b>
 		</div>
 	<?php endif; ?>
 	
@@ -115,7 +115,7 @@
 		?>
 	</div>
 	
-<?= form::close() ?>
+<?php echo form::close() ?>
 	
 </div>
 
@@ -123,7 +123,7 @@
 
 	<!-- IMAGE -->
 	<center>
-		<p><?= $user->image('thumbmail') ?></p>
+		<p><?php echo $user->image('thumbmail') ?></p>
 	</center>
 
 </div>

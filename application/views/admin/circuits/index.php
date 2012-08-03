@@ -33,7 +33,7 @@
 			?>
 		</td>
 		
-		<td class="classe"><?= html::image("images/classes/".$circuit->classe.".gif") ?></td>
+		<td class="classe"><?php echo html::image("images/classes/".$circuit->classe.".gif") ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>

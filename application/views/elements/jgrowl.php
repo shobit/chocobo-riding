@@ -14,7 +14,7 @@ if (!empty($jgrowls) and
 	{
 	<?php foreach ($jgrowls as $content) { ?>
 		$.jGrowl(
-			'<?= addslashes($content) ?>',
+			'<?php echo addslashes($content) ?>',
 			{sticky: true}
 		);
 	<?php } ?>
