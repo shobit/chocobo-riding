@@ -1,1 +1,0 @@
-RENAME TABLE  `chocobo-riding`.`effects` TO  `chocobo-riding`.`equipment_effects` ;
