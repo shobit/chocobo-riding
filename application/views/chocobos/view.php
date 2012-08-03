@@ -77,7 +77,7 @@
 
 	<tr>
 		<td>Expérience</td>
-		<td><?php echo $chocobo->xp ?>/100 xp</td>
+		<td><?php echo $chocobo->xp ?> /100 xp</td>
 		<td class="p-wrapper">
 			<?php echo progress::display($chocobo->xp, 100, 100) ?>
 		</td>

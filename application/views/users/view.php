@@ -75,7 +75,7 @@ if ($user->id == $u->id)
 		<td>Chocobos</td>
 		<td>
 		<?php
-			echo count($user->chocobos) . '<small>/' . $user->get_boxes() . '</small>';
+			echo count($user->chocobos) . ' /' . $user->get_boxes();
 		?>
 		</td>
 		<td>
@@ -89,7 +89,7 @@ if ($user->id == $u->id)
 		<td>
 		<?php
 			$nbr_titles = ORM::factory('title')->count_all();
-			echo count($user->successes) . '<small>/' . $nbr_titles . '</small>';
+			echo count($user->successes) . ' /' . $nbr_titles;
 		?>
 		</td>
 		<td>
