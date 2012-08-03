@@ -24,10 +24,9 @@ class Page_Controller extends Template_Controller {
 	
 	public function shoutbox()
 	{
-		$this->authorize('logged_in');
-		$view = new View('pages/shoutbox');
-		$this->template = new View('templates/shoutbox');
-        $this->template->content = $view;
+		$this->template = View::factory('templates/shoutbox');
+		$this->template->content = View::factory('pages/shoutbox');
+		$this->profiler->disable();
 	}
 	
 	public function closed()
