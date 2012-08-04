@@ -48,14 +48,15 @@ if ( ! $user->loaded):
 
 <?php else: ?>
 
-<ul id="menu-default">
+<ul id="menu-1">
 
 	<?php
 	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px;">
-			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png')) ?>
+			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png'), 
+				array('class' => 'logout', 'original-title' => 'Se déconnecter')) ?>
 		</div>
 		<?php echo $user->link() ?>
 	</li>
@@ -65,12 +66,17 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
-			<?php echo html::anchor('', html::image('images/icons/list-off.png'), array('class' => 'toggle-stable')) ?>
+			<?php echo html::anchor('', html::image('images/icons/list-off.png'), 
+				array('class' => 'toggle-stable', 'original-title' => "Voir/cacher l'écurie")) ?>
 		</div>
 		<?php 
 		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
 		?>
 	</li>
+
+</ul>
+
+<ul id="menu-2">
 
 	<?php
 	$selected = (strrpos($url, 'races') === FALSE) ? '' : ' class="selected"';
@@ -199,29 +205,7 @@ if ( ! $user->loaded):
 	</li>
 </ul>
 
-<ul id="menu-stable" style="display: none;">
-
-	<?php
-	$selected = ($url !== 'users/' . $user->id) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?> style="position: relative;">
-		<div style="width: 16px; position: absolute; left: -25px;">
-			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png')) ?>
-		</div>
-		<?php echo $user->link() ?>
-	</li>
-
-	<?php
-	$selected = ($url !== 'chocobos/' . $chocobo->id) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?> style="position: relative;">
-		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
-			<?php echo html::anchor('', html::image('images/icons/list-on.png'), array('class' => 'toggle-stable')) ?>
-		</div>
-		<?php 
-		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
-		?>
-	</li>
+<ul id="menu-3" style="display: none;">
 
 	<?php foreach ($user->chocobos as $c): 
 	if ($chocobo->id != $c->id): ?>
@@ -258,10 +242,18 @@ if ( ! $user->loaded):
 <script>
 $(function(){
 	$('.toggle-stable').click(function(){
-		$('#menu-default').toggle();
-		$('#menu-stable').toggle();
+		if ($('#menu-2').is(':visible')) {
+			$('#menu-2').hide();
+			$('#menu-3').slideToggle();
+		} else {
+			$('#menu-3').hide();
+			$('#menu-2').slideToggle();
+		}
 		return false;
 	});
+
+	$('.logout').tipsy({gravity: 'e'});
+	$('.toggle-stable').tipsy({gravity: 'e'});
 });
 </script>
 
