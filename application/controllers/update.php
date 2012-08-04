@@ -66,6 +66,10 @@ class Update_Controller extends Template_Controller {
     		$update->date = (!empty($post->date)) ? $post->date : date('Y-m-d H:i:s');
 			
 			$update->save();
+
+            // Suppression des updates si > 10
+            $us = ORM::factory('update')->orderby('date', 'desc')->find_all(100, 10);
+            foreach ($us as $u) { $u->delete(); }
     	}
 
     	$res['success'] = $success;
