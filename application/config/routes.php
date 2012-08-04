@@ -8,7 +8,6 @@ $config['logout'] = "user/logout";
 $config['shoutbox'] = "page/shoutbox";
 $config['shoutbox_external'] = "page/shoutbox_external";
 $config['guide'] = "page/guide";
-$config['updates'] = "update/index";
 
 $config['about'] = "page/about";
 $config['tutorial'] = "page/tutorial";

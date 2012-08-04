@@ -195,12 +195,12 @@ class Controller extends Controller_Core
     	
     	if ($status == 'logged_out' and $user->loaded) 
    		{
-    		url::redirect('updates');
+    		url::redirect('about#/changelog');
     	}
     	
     	if ($status == 'admin' and ! $user->has_role('admin'))
     	{
-    		url::redirect('updates');
+    		url::redirect('about#/changelog');
     	}
     }
     

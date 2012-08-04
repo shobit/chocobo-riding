@@ -2,22 +2,6 @@
 class Update_Controller extends Template_Controller {
 
     /**
-     * Liste des mises à jour
-     */
-	public function index()
-    {
-        $this->template->content = View::factory('updates/index')
-            ->bind('user', $user)
-            ->bind('updates', $updates);
-
-        $user = $this->session->get('user');
-
-        $updates = ORM::factory('update')
-            ->orderby('date', 'desc')
-            ->find_all(15);
-    }
-
-    /**
 	 * Ajouter ou éditer un update
 	 */
 	public function edit($id)

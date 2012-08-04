@@ -32,6 +32,19 @@ class Page_Controller extends Template_Controller {
 	{
 		$this->template->content = View::factory('pages/shoutbox');
 	}
+
+	public function about()
+	{
+		$this->template->content = View::factory('pages/about')
+            ->bind('user', $user)
+            ->bind('updates', $updates);
+
+		$user = $this->session->get('user');
+
+        $updates = ORM::factory('update')
+            ->orderby('date', 'desc')
+            ->find_all();
+	}
 	
 	public function closed()
 	{

@@ -34,6 +34,7 @@ if ( ! $user->loaded):
 	'connection' 	=> 'login',
 	'register' 		=> 'register',
 	'forum' 		=> 'topics',
+	'about' 		=> 'about',
 ) ?>
 <ul>
 	<?php foreach ($menus as $menu => $path): ?>
@@ -205,10 +206,10 @@ if ( ! $user->loaded):
 	</li>
 
 	<?php
-	$selected = (strrpos($url, 'updates') === FALSE) ? '' : ' class="selected"';
+	$selected = (strrpos($url, 'about') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('updates', 'A propos'); ?>
+		<?php echo html::anchor('about', 'A propos'); ?>
 	</li>
 </ul>
 

@@ -41,7 +41,7 @@ class User_Controller extends Template_Controller {
         			cookie::set('username', $user->username, 7*24*3600);
         			cookie::set('password', $user->password, 7*24*3600);
         		}
-        		url::redirect('updates');
+        		url::redirect('about#/changelog');
         	}
         }
     }
