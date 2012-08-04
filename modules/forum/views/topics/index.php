@@ -33,10 +33,8 @@
 	?>
 		
 	<tr class="topic<?php echo $not_seen ?>" id="topic<?php echo $topic->id ?>">	
-		<td class="wrapper-type">
-			<?php if ( ! empty($topic->type)): ?>
-				<span class="type <?php echo $topic->type ?>"><?php echo $topic->type ?></span>
-			<?php endif; ?>
+		<td class="type2">
+			<?php echo $topic->type ?>
 		</td>
 			
 		<td class="title">

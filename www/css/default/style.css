@@ -111,27 +111,8 @@ th.lenmax {}
 th.len150 {width: 150px;}
 th.len100 {width: 100px;}
 
-/* FORUM types */
-.wrapper-type {text-align: right;}
-.type {
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	text-transform: uppercase;
-	background-color: #333;
-	color: #fff;
-	font-size: 10px;
-	font-weight: bold;
-	padding: 3px 6px;
-	margin-right: 10px;
-	text-shadow: 0 1px 1px rgba(50,50,50,0.5)
-}
-.new, .announce {background-color: #7C29A9; color: #fff;}
-.added, .update {background-color: #7C29A9; color: #fff;}
-.fixed, .bug {background-color: #226EC7; color: #fff;}
-.improved, .request {background-color: #97B931; color: #fff;}
-
 /* FORUM autres */
+.type2 {font-size: 10px; text-transform: uppercase; letter-spacing: 1px;}
 .nbr_comments, .nbr_messages {background-color: #eee; padding: 0 3px 1px 3px;}
 .date {font-size: 12px; color: #999; line-height: 18px;}
 .minor {font-size: 12px}
