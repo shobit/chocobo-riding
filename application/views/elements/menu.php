@@ -93,6 +93,13 @@ if ( ! $user->loaded):
 	</li>
 	
 	<?php
+	$selected = (strrpos($url, 'fusion') === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?>>
+		<?php echo html::anchor('fusion', 'Fusion'); ?>
+	</li>
+	
+	<?php
 	$selected = (strrpos($url, 'shop') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>

@@ -31,7 +31,7 @@ else {
 	?>
 	<input type="hidden" name="partner" value="0" />
 
-	<i>Aucun partenaires.</i>
+	<p><i>Aucun partenaires.</i></p>
 	<?php
 }
 ?>
@@ -44,15 +44,17 @@ if (count($nuts) > 0)
 {
 	foreach ($nuts as $nut) 
 	{
+		echo '<p>';
 		echo form::radio("nut", $nut->id);
 		echo $nut->vignette();
+		echo '</p>';
 	}
 } 
 else 
 {
 ?>
 	<input type="hidden" name="nut" value="0" />
-	<i>Aucune noix.</i>
+	<p><i>Aucune noix.</i></p>
 <?php
 }
 
