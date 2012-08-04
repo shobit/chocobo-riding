@@ -9,15 +9,19 @@ if ($user->has_role('admin'))
 ?>
 
 
-<table class="table1">
-	<tr class="first">
-		<th class="len100">Type</th>
-		<th class="lenmax">Contenu</th>
-		<th class="len100">Date</th>
-		<?php if ($user->has_role('admin')): ?><th class="len100"></th><?php endif; ?>
-	</tr>
+<table class="table1" id="updates">
+	<thead>
+		<tr class="first">
+			<th class="len100">Type</th>
+			<th class="lenmax">Contenu</th>
+			<th class="len100">Date</th>
+			<th></th>
+			<?php if ($user->has_role('admin')): ?><th class="len100"></th><?php endif; ?>
+		</tr>
+	</thead>
 
-	<?php foreach ($updates as $update): ?>
+	<tbody>
+		<?php foreach ($updates as $update): ?>
 		<tr>
 			<td class="wrapper-type">
 				<span class="type <?php echo $update->type ?>"><?php echo $update->type ?></span>
@@ -35,6 +39,9 @@ if ($user->has_role('admin'))
 				?>
 			</td>
 			<td class="date">
+				<?php echo strtotime($update->date) ?>
+			</td>
+			<td class="date">
 				<?php echo date::display(strtotime($update->date)) ?>
 			</td>
 			<?php if ($user->has_role('admin')): ?>
@@ -43,17 +50,31 @@ if ($user->has_role('admin'))
 				</td>
 			<?php endif; ?>
 		</tr>
-	<?php endforeach; ?>
+		<?php endforeach; ?>
+	</tbody>
 </table>
 
 <script>
 $(function(){
-	
-	$('.update').hover(function(){
-		$(this).find('.options').fadeIn('slow');
-	}, function(){
-		$(this).find('.options').hide();
-	});	
+
+	$('#updates').dataTable({
+		"bLengthChange": false,
+		"iDisplayLength": 10,
+		"aaSorting": [ [2,'desc'] ],
+		"aoColumnDefs": [ 
+            {
+                "fnRender": function ( oObj, sVal ) {
+                    return oObj.aData[3];
+                },
+                "bUseRendered": false,
+                "aTargets": [ 2 ]
+            },
+            { "bVisible": false,  "aTargets": [ 3 ] }
+        ],
+		"oLanguage": {
+			"sUrl": baseUrl + "js/lib/dataTables/i18n/dataTables.french.txt"
+		}
+	});
 
 })
 </script>
