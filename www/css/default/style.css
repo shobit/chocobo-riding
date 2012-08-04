@@ -133,7 +133,8 @@ th.len100 {width: 100px;}
 
 /* FORUM autres */
 .nbr_comments, .nbr_messages {background-color: #eee; padding: 0 3px 1px 3px;}
-.date {font-size: 10px; color: #999; line-height: 18px;}
+.date {font-size: 12px; color: #999; line-height: 18px;}
+.minor {font-size: 12px}
 
 /* IMAGES */
 a img {border: 0px;}
