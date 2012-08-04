@@ -1,6 +1,26 @@
 <div class="nav">
+	<?php echo html::anchor('#/github', 'Github') ?>
 	<?php echo html::anchor('#/ohloh', 'Ohloh') ?>
 	<?php echo html::anchor('#/changelog', 'Changelog') ?>
+</div>
+
+<div class="section" id="github">
+
+	Chocobo Riding est un projet open-source hébergé sur Github.
+
+	<p>
+		<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=Menencia&repo=chocobo-riding&type=watch&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="95px" height="20px"></iframe>
+	
+		<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=Menencia&repo=chocobo-riding&type=fork&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="95px" height="20px"></iframe>
+	</p>
+	
+	<p>Développeurs :</p>
+
+	<p>
+		<iframe src="http://githubbadge.appspot.com/badge/Menencia" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameBorder=0></iframe>
+	</p>
 </div>
 
 <div class="section" id="ohloh">
