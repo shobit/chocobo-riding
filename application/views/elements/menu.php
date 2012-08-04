@@ -146,8 +146,15 @@ if ( ! $user->loaded):
 		<?php echo html::anchor('chocobos', 'Chocobos'); ?>
 	</li>
 	
-	<li>
-		<?php echo html::anchor('shoutbox', 'Shoutbox', array('onclick' => 'javascript:openShoutbox(); return false;')); ?>
+	<?php
+	$selected = (strrpos($url, "shoutbox") === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?> style="position: relative;">
+		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
+			<?php echo html::anchor('', html::image('images/icons/link.png'), 
+				array('onclick' => 'javascript:openShoutbox(); return false;', 'class' => 'shoutbox', 'original-title' => 'Ouvrir en pop-up')) ?>
+		</div>
+		<?php echo html::anchor('shoutbox', 'Shoutbox'); ?>
 	</li>
 		
 	<?php
@@ -254,6 +261,7 @@ $(function(){
 
 	$('.logout').tipsy({gravity: 'e'});
 	$('.toggle-stable').tipsy({gravity: 'e'});
+	$('.shoutbox').tipsy({gravity: 'e'});
 });
 </script>
 

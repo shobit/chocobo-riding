@@ -5,6 +5,7 @@ $config['home'] = "page/home";
 $config['login'] = "user/login";
 $config['register'] = "user/register";
 $config['logout'] = "user/logout";
+$config['shoutbox'] = "page/shoutbox";
 $config['guide'] = "page/guide";
 $config['updates'] = "update/index";
 
