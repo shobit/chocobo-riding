@@ -18,8 +18,8 @@
 		<tr>
 			<td class="minor"><?php echo $chocobo->user->username ?></td>
 			<td><?php echo $chocobo->vignette() ?></td>
-			<td><?php echo $chocobo->level ?></td>
-			<td class="minor"><?php echo $chocobo->level ?> /<?php echo $chocobo->lvl_limit ?></td>
+			<td class="minor"><?php echo $chocobo->level ?></td>
+			<td><?php echo $chocobo->level ?> /<?php echo $chocobo->lvl_limit ?></td>
 			<td><?php echo html::anchor('chocobos/' . $chocobo->id, 'Voir', array('class' => 'button green')) ?></td>
 		</tr>
 		<?php endforeach; ?>
