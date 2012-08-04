@@ -31,12 +31,14 @@
 	<tr class="first">
 		<th class="lenmax">Nom</th>
 		<th class="len150">PL</th>
+		<th class="len150">Chocobos</th>
 		<th class="len100"></th>
 	</tr>
 	<?php foreach ($races as $race): ?>
 	<tr>
 		<td><?php echo $race->circuit->name() ?></td>
 		<td><?php echo $race->circuit->pl ?></td>
+		<td><?php echo count($race->chocobos) ?> /6</td>
 		<td><?php echo html::anchor('races/' . $race->id, 'Voir', array('class' => 'button green')) ?></td>
 	</tr>
 	<?php endforeach; ?>
