@@ -8,7 +8,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($chocobos as $chocobo): ?>
+		<?php 
+		foreach ($chocobos as $c): 
+			$chocobo = ORM::factory('chocobo', $c->id);
+		?>
 		<tr>
 			<td><?php echo $chocobo->name ?></td>
 			<td><?php echo html::anchor('chocobos/' . $chocobo->id, 'Voir', array('class' => 'button green')) ?></td>

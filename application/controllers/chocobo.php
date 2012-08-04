@@ -12,9 +12,19 @@ class Chocobo_Controller extends Template_Controller {
 
 		$c = $this->session->get('chocobo');
 
-		$chocobos = ORM::factory('chocobo')
+		$chocobos = $this->db
+			->select('chocobos.id')
+			->from('chocobos, users')
+			->where('chocobos.user_id = users.id')
+			->where('users.activated >', 0)
+			->where('users.banned', 0)
+			->where('users.deleted', 0)
+			->where('chocobos.name !=', '')
+			->get();
+
+		/*$chocobos = ORM::factory('chocobo')
 			->where('name !=', '')
-			->find_all();
+			->find_all();*/
 	}
 
 	// FUNC: vue de la fiche d'un chocobo
