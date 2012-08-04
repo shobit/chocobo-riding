@@ -152,7 +152,7 @@ if ( ! $user->loaded):
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
 			<?php echo html::anchor('', html::image('images/icons/link.png'), 
-				array('onclick' => 'javascript:openShoutbox(); return false;', 'class' => 'shoutbox', 'original-title' => 'Ouvrir en pop-up')) ?>
+				array('onclick' => 'openShoutbox(); return false;', 'class' => 'shoutbox', 'original-title' => 'Ouvrir en pop-up')) ?>
 		</div>
 		<?php echo html::anchor('shoutbox', 'Shoutbox'); ?>
 	</li>

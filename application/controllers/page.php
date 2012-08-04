@@ -22,6 +22,12 @@ class Page_Controller extends Template_Controller {
 		$this->template->content = new View('pages/home');
 	}
 	
+	public function shoutbox_external()
+	{
+		$this->template = View::factory('templates/shoutbox');
+		$this->profiler->disable();
+	}
+
 	public function shoutbox()
 	{
 		$this->template->content = View::factory('pages/shoutbox');

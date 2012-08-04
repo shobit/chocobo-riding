@@ -107,7 +107,7 @@ function decompte(id,tps,termine,showtitle)
  */
 function openShoutbox() {
 	window.open(
-		baseUrl + 'shoutbox', 
+		baseUrl + 'shoutbox_external', 
 		'_blank', 
 		'toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=0, copyhistory=0, menuBar=0, width=400, height=600'
 	);
