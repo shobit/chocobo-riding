@@ -1,11 +1,9 @@
-Chocobo Riding
-==============
+# Chocobo Riding
 
 > Jeu PHP multijoueur sur l'univers des courses de chocobos.
 
 
-Installation
-------------
+## Installation
 
 1. Vérifiez bien que le nom du dossier de Chocobo Riding est exactement `chocobo-riding`
 
@@ -20,7 +18,13 @@ Installation
 6. Lancez le site en allant sur `http://localhost/chocobo-riding/www/`
 
 
-Liens
------
+## Liens
 
 * [Site Officiel](http://chocobo-riding.com)
+
+* [Page de l'auteur](http://menencia.com)
+
+
+## Licence
+
+[![Licence Creative Commons](http://i.creativecommons.org/l/by/3.0/88x31.png)](http://creativecommons.org/licenses/by/3.0/deed.fr)
