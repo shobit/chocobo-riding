@@ -29,7 +29,7 @@ strong , b {
 
 	<div style="height:1px;"></div>
 
-	<?php $server = url::base() ?>
+	<?php $server = 'http://api.chocobo-riding.com/' ?>
 	
 	<p>Les appels à l’API doivent être faits sous la forme de requêtes HTTP en GET ou en POST sur le domaine :</p>
 
