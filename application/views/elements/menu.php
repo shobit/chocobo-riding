@@ -205,6 +205,13 @@ if ( ! $user->loaded):
 		<?php echo html::anchor('guide', 'Guide'); ?>
 	</li>
 
+	<?php 
+	$selected = (strrpos($url, 'developers') === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?>>
+		<?php echo html::anchor('developers', 'Développeurs'); ?>
+	</li>
+	
 	<?php
 	$selected = (strrpos($url, 'about') === FALSE) ? '' : ' class="selected"';
 	?>

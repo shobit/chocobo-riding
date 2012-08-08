@@ -11,6 +11,15 @@ class Page_Controller extends Template_Controller {
         $this->template->content = new View('pages/home');
     }
 	
+	public function developers()
+	{
+		$this->authorize('logged_in');
+		$this->template->content = View::factory('pages/developers')
+			->bind('user', $user);
+
+		$user = $this->session->get('user');
+	}
+
 	public function guide()
 	{
 		$this->template->content = new View('pages/guide');
