@@ -7,14 +7,6 @@
 <div class="section" id="github">
 
 	Chocobo Riding est un projet open-source hébergé sur Github.
-
-	<p>
-		<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=Menencia&repo=chocobo-riding&type=watch&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="95px" height="20px"></iframe>
-	
-		<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=Menencia&repo=chocobo-riding&type=fork&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="95px" height="20px"></iframe>
-	</p>
 	
 	<p>Développeurs :</p>
 
