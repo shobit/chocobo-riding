@@ -9,20 +9,24 @@
 
 2. Importer les fichiers SQL situés dans `docs/sql/`
 
-3. Copiez le fichier `docs/local/database.php` dans le dossier `application/config/`, puis éditez-le selon vos préférences.
+3. Copiez le fichier `docs/base/database.php` dans le dossier `application/config/`, puis éditez-le selon vos préférences.
 
-4. Vous devez vérifier que `mod_rewrite` de Apache est bien activé.
+4. Copiez le fichier `docs/base/htaccess.txt` dans le dossier `www/`, puis renommez-le en `.htaccess` à l'aide d'un éditeur de texte.
 
-5. Lancez le site en allant sur `http://localhost/chocobo-riding/www/`
+5. Vous devez vérifier que `mod_rewrite` de Apache est bien activé.
+
+6. Lancez le site en allant sur `http://localhost/chocobo-riding/www/`
 
 
 ## Liens
 
-* [Site Officiel](http://chocobo-riding.com)
+* Site en ligne : [http://chocobo-riding.com](http://chocobo-riding.com)
 
-* [Page de l'auteur](http://menencia.com)
+* Créé avec le framework PHP : [Kohana 3.2](http://menencia.com)
+
+* Auteur : [Menencia](http://menencia.com)
 
 
 ## Licence
 
-[![Licence Creative Commons](http://i.creativecommons.org/l/by/3.0/88x31.png)](http://creativecommons.org/licenses/by/3.0/deed.fr)
+Attribution 3.0 non transposé ([CC BY 3.0](http://creativecommons.org/licenses/by/3.0/deed.fr))
