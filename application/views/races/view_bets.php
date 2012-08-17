@@ -22,7 +22,7 @@
 				<?php foreach ($circuit->chocobos as $chocobo) { ?>
 					<tr>
 						<td><?php echo html::image('images/icons/normal_sepia.jpg') ?></td>
-						<td class="icons"><?php echo $chocobo->image('mini'); ?></td>
+						<td class="icons"></td>
 						<td>
 							<?php echo $chocobo->vignette(); ?>
 							(<?php echo 'Côte '.$chocobo->display_fame() ?>)

@@ -11,7 +11,7 @@
 	<?php echo html::anchor('#/details', 'Caractéristiques') ?>
 </div>
 
-<?php $mine = ($chocobo->user->id == $user->id) ?>
+<?php $mine = ($chocobo->user_id == $user->id) ?>
 
 <?php
 //////////////////
@@ -63,7 +63,7 @@
 		<td>Classe</td>
 		<td><?php echo $chocobo->display_classe() ?></td>
 		<td>
-			<?php echo progress::display($chocobo->classe, 5, 100) ?>
+			<?php echo Progress::display($chocobo->classe, 5, 100) ?>
 		</td>
 	</tr>
 	
@@ -71,7 +71,7 @@
 		<td>Niveau</td>
 		<td><?php echo $chocobo->level . ' /' . $chocobo->lvl_limit ?></td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->level, $chocobo->lvl_limit, 100) ?>
+			<?php echo Progress::display($chocobo->level, $chocobo->lvl_limit, 100) ?>
 		</td>
 	</tr>
 
@@ -79,7 +79,7 @@
 		<td>Expérience</td>
 		<td><?php echo $chocobo->xp ?> /100 xp</td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->xp, 100, 100) ?>
+			<?php echo Progress::display($chocobo->xp, 100, 100) ?>
 		</td>
 	</tr>
 	
@@ -87,7 +87,7 @@
 		<td>Côte</td>
 		<td><?php echo $chocobo->display_fame() ?></td>
 		<td class="p-wrapper">
-			<?php echo progress::display(1 - $chocobo->fame + 0.01, 1, 100) ?>
+			<?php echo Progress::display(1 - $chocobo->fame + 0.01, 1, 100) ?>
 		</td>
 	</tr>
 	
@@ -95,7 +95,7 @@
 		<td>Vitesse max</td>
 		<td><?php echo $chocobo->max_speed ?> km/h</td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->max_speed, 175, 100) ?>
+			<?php echo Progress::display($chocobo->max_speed, 175, 100) ?>
 		</td>
 	</tr>
 	
@@ -104,10 +104,11 @@
 		<td><?php echo $chocobo->get_price() . html::image('images/icons/gils.png', array('class' => 'icon4')) ?></td>
 		<td class="p-wrapper">
 			<?php
-			if ($chocobo->user_id == $user->id and count($chocobo->user->chocobos) > 1)
+			$nbr_chocobos = (int) $chocobo->user->chocobos->count_all();
+			if ($chocobo->user_id === $user->id AND $nbr_chocobos > 1)
 			{
 				$texte = "Confirmer ?";
-				echo html::anchor('chocobo/sale/' . $chocobo->id, 'Vendre', array('class' => 'button red', 'onclick' => "return confirm('$texte');"));
+				echo HTML::anchor('chocobo/sale/' . $chocobo->id, 'Vendre', array('class' => 'button red', 'onclick' => "return confirm('$texte');"));
 			}
 			?>
 		</td>
@@ -141,14 +142,14 @@
 			if ($mine and $chocobo->points > 0)
 			{
 				echo html::anchor(
-					'chocobo/aptitude_up/speed', 
+					'chocobos/'.$chocobo->id.'/boost/speed', 
 					html::image('images/theme/plus.jpg', array('class' => 'raise'))
 				);
 			}
 			?>
 		</td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->attr('speed'), 175, 100) ?>
+			<?php echo Progress::display($chocobo->attr('speed'), 175, 100) ?>
 		</td>
 	</div>
 	
@@ -160,14 +161,14 @@
 			if ($mine and $chocobo->points > 0)
 			{
 				echo html::anchor(
-					'chocobo/aptitude_up/endur', 
+					'chocobos/'.$chocobo->id.'/boost/endur',
 					html::image('images/theme/plus.jpg', array('class' => 'raise'))
 				);
 			}
 			?>
 		</td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->attr('endur'), 175, 100) ?>
+			<?php echo Progress::display($chocobo->attr('endur'), 175, 100) ?>
 		</td>
 	</tr>
 	
@@ -179,14 +180,14 @@
 			if ($mine and $chocobo->points > 0)
 			{
 				echo html::anchor(
-					'chocobo/aptitude_up/intel', 
+					'chocobos/'.$chocobo->id.'/boost/intel', 
 					html::image('images/theme/plus.jpg', array('class' => 'raise'))
 				);
 			}
 			?>
 		</td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->attr('intel'), 175, 100) ?>
+			<?php echo Progress::display($chocobo->attr('intel'), 175, 100) ?>
 		</td>
 	</tr>
 	
@@ -200,7 +201,7 @@
 		<td>PL</td>
 		<td><?php echo $chocobo->pl ?> /<?php echo $chocobo->attr('pl_limit') ?></td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->pl, $chocobo->attr('pl_limit'), 100) ?>
+			<?php echo Progress::display($chocobo->pl, $chocobo->attr('pl_limit'), 100) ?>
 		</td>
 	</tr>
 		
@@ -208,7 +209,7 @@
 		<td>HP</td>
 		<td><?php echo $chocobo->hp ?> /<?php echo $chocobo->attr('hp_limit') ?></td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->hp, $chocobo->attr('hp_limit'), 100) ?>
+			<?php echo Progress::display($chocobo->hp, $chocobo->attr('hp_limit'), 100) ?>
 		</td>
 	</tr>
 	
@@ -216,7 +217,7 @@
 		<td>MP</td>
 		<td><?php echo $chocobo->mp ?> /<?php echo $chocobo->attr('mp_limit') ?></td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->mp, $chocobo->attr('mp_limit'), 100) ?>
+			<?php echo Progress::display($chocobo->mp, $chocobo->attr('mp_limit'), 100) ?>
 		</td>
 	</tr>
 	
@@ -224,7 +225,7 @@
 		<td>PC</td>
 		<td><?php echo $chocobo->attr('pc_limit') ?> /<?php echo $chocobo->attr('pc_limit') ?></td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->attr('pc_limit'), $chocobo->attr('pc_limit'), 100) ?>
+			<?php echo Progress::display($chocobo->attr('pc_limit'), $chocobo->attr('pc_limit'), 100) ?>
 		</td>
 	</tr>
 	
@@ -232,7 +233,7 @@
 		<td>Rage</td>
 		<td><?php echo $chocobo->rage ?> /<?php echo $chocobo->attr('rage_limit') ?></td>
 		<td class="p-wrapper">
-			<?php echo progress::display($chocobo->rage, $chocobo->attr('rage_limit'), 100) ?>
+			<?php echo Progress::display($chocobo->rage, $chocobo->attr('rage_limit'), 100) ?>
 		</td>
 	</tr>
 	

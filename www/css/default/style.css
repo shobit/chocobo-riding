@@ -107,13 +107,15 @@ table {font-family: 'PT Sans', sans-serif;}
 .table1 td {text-align: left; border: 1px solid #eee; padding-left: 2px;}
 tr:not(.first) {height: 30px;}
 tr:not(.first):hover {background-color: #eee;}
+tr.not_seen {background-color: #fee;}
 th.lenmax {}
 th.len150 {width: 150px;}
 th.len100 {width: 100px;}
 
 /* FORUM autres */
 .type2 {font-size: 10px; text-transform: uppercase; letter-spacing: 1px;}
-.nbr_comments, .nbr_messages {background-color: #eee; padding: 0 3px 1px 3px;}
+.nbr_messages {background-color: #eee; padding: 0 2px; margin-right: 2px;}
+.nbr_notifications {color: #900; padding: 0 2px; margin-right: 2px;}
 .date {font-size: 12px; color: #999; line-height: 18px;}
 .minor {font-size: 12px}
 
@@ -252,11 +254,25 @@ a.button {
 	width: 100px;
 }
 
-a.button.green {background-color: #278827;}
-a.button.blue {background-color: #355F9C;}
-a.button.red {background-color: #A72323;}
+input.button {
+	padding: 2px;
+	font-size: 16px;
+	display: block;
+	color: #fff;
+	width: 100px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	text-align: left;
+	font-family: 'PT Sans', sans-serif;
+}
 
-a.button:hover {
+a.button.green, input.button.green {background-color: #278827;}
+a.button.blue, input.button.blue {background-color: #355F9C;}
+a.button.red, input.button.red {background-color: #A72323;}
+a.button.grey, input.button.grey {background-color: #999;}
+
+a.button:hover, input.button:hover {
 	background-color: #333;
 	text-decoration: none;
 }

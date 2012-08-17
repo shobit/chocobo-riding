@@ -29,7 +29,11 @@
 	</tr>
 
 	<?php 
-	arr::order($results, 'position', 'asc');
+	foreach ($race->results->find_all() as $result)
+	{
+		$results[] = $result->as_array();
+	}
+	Arr::order($results, 'position', 'asc');
 	foreach ($results as $result): 
 	?>
 	<tr>
@@ -70,7 +74,7 @@
 	</tr>
 
 	<?php 
-	arr::order($results, 'box', 'asc');
+	Arr::order($results, 'box', 'asc');
 	foreach ($results as $result): ?>
 	
 		<tr id="<?php echo $result['name'] ?>">

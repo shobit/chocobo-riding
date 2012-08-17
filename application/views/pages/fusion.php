@@ -1,33 +1,29 @@
 <?php
-echo form::open('fusion');
-
-$res = "";
-foreach ($errors as $error) {
-	if (!empty($error))
-		$res .= "- ".$error.'<br />';
-}
-if (!empty($res)) {
-	echo '<div class="msgAttention">'.$res."</div>";
-}
+echo Form::open('fusion');
 
 $boxes = $user->get_boxes();
-echo form::hidden('chocobo', $chocobo->id);
-echo form::hidden('boxes', $boxes);
+echo Form::hidden('chocobo', $chocobo->id);
+echo Form::hidden('boxes', $boxes);
 $genders = array('', 'female', 'male');
+?>
 
-?><h2>Partenaires <?php echo html::image('images/icons/'.$genders[$gender].'.png'); ?></h2><?php
+<h2>Partenaires <?php echo html::image('images/icons/'.$genders[$gender].'.png'); ?></h2>
 
-if (count($partners) >0) {
-	foreach ($partners as $partner) {
-		echo '<p>'.form::radio("partner", $partner->id);
-		echo $partner->image('mini').' '.$partner->name.', ';
+<?php
+if (count($partners) > 0) 
+{
+	foreach ($partners as $partner) 
+	{
+		echo '<p>'.Form::radio('partner', $partner->id);
+		echo $partner->name.', ';
 		echo 'nv'.$partner->level.'<small>/'.$partner->lvl_limit.'</small> ';
 		echo '('.$partner->display_status();
 		if ($partner->mated >time()) echo ' - '.ceil(($partner->mated - time())/3600).'h'; 
 		echo ')</p>';
 	}
 } 
-else {
+else 
+{
 	?>
 	<input type="hidden" name="partner" value="0" />
 
@@ -45,22 +41,30 @@ if (count($nuts) > 0)
 	foreach ($nuts as $nut) 
 	{
 		echo '<p>';
-		echo form::radio("nut", $nut->id);
+		echo Form::radio("nut", $nut->id);
 		echo $nut->vignette();
 		echo '</p>';
 	}
 } 
 else 
 {
-?>
+	?>
 	<input type="hidden" name="nut" value="0" />
 	<p><i>Aucune noix.</i></p>
-<?php
+	<?php
 }
 
 echo '<p><input type="submit" value="Fusion!" onClick="if (verifyFusion()) {return true;} else {return false;}" /></p>';
 
-echo form::close();
+echo Form::close();
+
+$res = "";
+foreach ($errors as $error) {
+	if (!empty($error))
+		$res .= "- ".$error[0].'<br />';
+}
+if (!empty($res)) {
+	echo '<div class="msgAttention">'.$res."</div>";
+}
 
 ?>
-

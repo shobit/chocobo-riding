@@ -1,23 +1,14 @@
-<h1><?php echo Kohana::lang('chocobo.edit.title') ?></h1>
-<div id="prelude"><?php echo Kohana::lang('chocobo.edit.prelude') ?></div>
+<?php echo Form::open() ?>
 
-<?php
-$res = "";
-foreach ($errors as $error) {
-	if (!empty($error))
-		$res .= "- ".$error.'<br />';
-}
-if (!empty($res)) {
-	echo '<div class="msgAttention">'.$res."</div>";
-}
-?>
+<p><b><?php echo __('Nom de votre chocobo :') ?></b> 
+<?php echo Form::input('name', $values['name']) ?> 
+(<?php echo HTML::image('images/icons/'.$chocobo->display_gender('code').'.png').' '.$chocobo->display_gender('zone') ?>)
+<br />
+<small><?php echo __("Vous pouvez changer le nom de votre chocobo! Il ne peut pas y avoir plusieurs chocobos portant le même nom. " 
+					."Changer le nom d'un chocobo n'est pas sans conséquences. Etant bébé chocobo, vous pouvez changer autant de fois "
+					."que vous voulez.") ?>
+</small></p>
 
-<?php echo form::open('chocobo/edit') ?>
+</p><?php echo Form::submit('submit', 'Valider') ?></p>
 
-	<p><b><?php echo Kohana::lang('chocobo.form.name') ?></b> 
-	<?php echo form::input('name', $form['name']) ?> (<?php echo html::image('images/icons/'.$chocobo->display_gender('code').'.png').' '.$chocobo->display_gender('zone') ?>)<br />
-	<small><?php echo Kohana::lang('chocobo.explanation.name') ?></small></p>
-
-	</p><?php echo form::submit('submit', 'Valider') ?></p>
-
-<?php echo form::close() ?>
+<?php echo Form::close() ?>

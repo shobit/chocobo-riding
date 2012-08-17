@@ -1,7 +1,7 @@
 <div class="nav">
-	<?php echo html::anchor('#/informations', 'Informations') ?>
-	<?php echo html::anchor('#/chocobos', 'Ecurie') ?>
-	<?php echo html::anchor('#/achievements', 'Succès') ?>
+	<?php echo HTML::anchor('#/informations', 'Informations') ?>
+	<?php echo HTML::anchor('#/chocobos', 'Ecurie') ?>
+	<?php echo HTML::anchor('#/achievements', 'Succès') ?>
 </div>
 
 <div class="section" id="informations">
@@ -9,7 +9,7 @@
 <?php 
 if ($user->id == $u->id)
 {
-	echo html::anchor('/user/edit', 'Modifier', array('class'=>'button blue fright'));
+	echo HTML::anchor('users/'.$user->id.'/edit', 'Modifier', array('class'=>'button blue fright'));
 }
 ?>
 
@@ -67,7 +67,7 @@ if ($user->id == $u->id)
 		<td>
 			<?php
 			echo $user->gils;
-			echo html::image('images/theme/gil.gif');
+			echo HTML::image('images/theme/gil.gif');
 			?>
 		</td>
 		<td></td>
@@ -81,7 +81,7 @@ if ($user->id == $u->id)
 		</td>
 		<td>
 			<?php
-			echo html::anchor('#/chocobos', 'Voir', array('class' => 'button green'));
+			echo HTML::anchor('#/chocobos', 'Voir', array('class' => 'button green'));
 			?>
 		</td>
 	</tr>
@@ -90,12 +90,12 @@ if ($user->id == $u->id)
 		<td>
 		<?php
 			$nbr_titles = ORM::factory('title')->count_all();
-			echo count($user->successes) . ' /' . $nbr_titles;
+			echo $user->successes->count_all() . ' /' . $nbr_titles;
 		?>
 		</td>
 		<td>
 			<?php
-			echo html::anchor('#/achievements', 'Voir', array('class' => 'button green'));
+			echo HTML::anchor('#/achievements', 'Voir', array('class' => 'button green'));
 			?>
 		</td>
 	</tr>
@@ -126,7 +126,7 @@ if ($user->id == $u->id)
 		<th class="len100"></th>
 	</tr>
 
-	<?php foreach($user->chocobos as $n => $chocobo): ?>
+	<?php foreach($user->chocobos->find_all() as $n => $chocobo): ?>
 	<tr>
 		<td>
 			<?php echo $chocobo->vignette() ?>
@@ -137,14 +137,14 @@ if ($user->id == $u->id)
 			<?php 
 			if ($chocobo->id != $c->id)
 			{
-				echo html::anchor('chocobo/change/' . $chocobo->id, 'Choisir', array('class' => 'button blue'));
+				echo HTML::anchor('chocobos/'.$chocobo->id.'/change', 'Choisir', array('class' => 'button blue'));
 			}
 			?>
 		</td>
 		<?php endif; ?>
 
 		<td>
-			<?php echo html::anchor('chocobos/' . $chocobo->id, 'Voir', array('class' => 'button green')) ?>
+			<?php echo HTML::anchor('chocobos/' . $chocobo->id, 'Voir', array('class' => 'button green')) ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
@@ -152,11 +152,6 @@ if ($user->id == $u->id)
 </div>
 
 <div class="section" id="achievements">
-
-<?php
-$successes = $user->successes;
-$nb_users = User_Model::get_nbr_players();
-?>
 
 <table class="table1" id="successes">
 	<thead>
@@ -167,10 +162,10 @@ $nb_users = User_Model::get_nbr_players();
 	</thead>
 
 	<tbody>
-	<?php foreach ($successes as $success): ?>
+	<?php foreach ($user->successes->find_all() as $success): ?>
 		<tr>
-			<td><?php echo Kohana::lang("success." . $success->title->name . '.name') ?></td>
-			<td><?php echo ceil(($success->title->nbr_users * 100) / $nb_users) ?></td>
+			<td><?php echo __('success.'.$success->title->name.'.name') ?></td>
+			<td><?php echo ceil(($success->title->nbr_users * 100) / count(Model_User::get_users())) ?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>

@@ -15,14 +15,14 @@
 
 <h2>Début de la prochaine course dans 
 	<span id="<?php echo $races[0]->id ?>">--:--</span> 
-	<?php echo html::image('images/icons/hour2.png') ?>
+	<?php echo HTML::image('images/icons/hour2.png') ?>
 </h2>
 
 <script>
 	decompte(
 		'<?php echo $races[0]->id  ?>', 
 		'<?php echo ($races[0]->start - time()) ?>', 
-		'<?php echo Kohana::lang('race.index.finished') ?>',
+		'<?php echo __('Terminé') ?>',
 		false
 	);
 </script>
@@ -39,14 +39,14 @@
 		<td><?php echo $race->circuit->name() ?></td>
 		<td><?php echo $race->circuit->pl ?></td>
 		<td><?php echo count($race->chocobos) ?> /6</td>
-		<td><?php echo html::anchor('races/' . $race->id, 'Voir', array('class' => 'button green')) ?></td>
+		<td><?php echo HTML::anchor('races/' . $race->id, 'Voir', array('class' => 'button green')) ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>
 
 
 <?php if (count($results) > 0): ?>
-	<h2>Historique des courses</h2>
+	<h2>Résultats de course non vus</h2>
 
 	<table class="table1">
 		<tr>
@@ -57,41 +57,19 @@
 		<?php foreach ($results as $result): 
 			$not_seen = ( ! $result->seen) ? ' not_seen': '';
 			?>
-			<tr class="result<?php echo $not_seen ?>" id="result<?php echo $result->race->id ?>">
+			<tr class="result<?php echo $not_seen ?>">
 				<td><?php echo $result->race->circuit->name() ?></td>
 				<td>
 					<?php
-						echo html::anchor('', 'Supprimer', array('class' => 'button red delete_result', 'id' => 'race' . $result->race->id));
+						echo HTML::anchor('results/'.$result->id.'/delete', 'Supprimer', array('class' => 'button red'));
 					?>
 				</td>
 				<td>
 					<?php
-						echo html::anchor('races/' . $result->race->id, 'Voir', array('class' => 'button green'));
+						echo HTML::anchor('races/'.$result->race->id, 'Voir', array('class' => 'button green'));
 					?>
 				</td>
 			</tr>
 		<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
-<script>
-
-$(function(){
-	
-	$('*[rel=tipsy]').tipsy({gravity: 's'});
-	
-	$('.delete_result')
-		.click(function(){
-			var tr = $(this).closest('tr');
-			var race_id = tr.attr('id').substring(6);
-			$(this).hide();
-			$.post(baseUrl + 'races/delete', {'id': race_id}, function(data){
-				if (data.success) {
-					tr.slideUp();
-				}
-			});
-			return false;
-		});
-});
-
-</script>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Ven 03 Août 2012 à 12:09
+-- Généré le : Mer 15 Août 2012 à 11:06
 -- Version du serveur: 5.5.9
 -- Version de PHP: 5.3.6
 
@@ -22,7 +22,7 @@ USE `chocobo-riding`;
 -- Structure de la table `chocobos`
 --
 
-CREATE TABLE `chocobos` (
+CREATE TABLE IF NOT EXISTS `chocobos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `father` int(11) DEFAULT NULL,
   `mother` int(11) DEFAULT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE `chocobos` (
 -- Structure de la table `circuits`
 --
 
-CREATE TABLE `circuits` (
+CREATE TABLE IF NOT EXISTS `circuits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE `circuits` (
 -- Structure de la table `comment_notifications`
 --
 
-CREATE TABLE `comment_notifications` (
+CREATE TABLE IF NOT EXISTS `comment_notifications` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `topic_id` int(10) unsigned NOT NULL,
   `comment_id` int(11) unsigned NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `comment_notifications` (
 -- Structure de la table `comments`
 --
 
-CREATE TABLE `comments` (
+CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `topic_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE `comments` (
 -- Structure de la table `comments_favorites`
 --
 
-CREATE TABLE `comments_favorites` (
+CREATE TABLE IF NOT EXISTS `comments_favorites` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `comment_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE `comments_favorites` (
 -- Structure de la table `deleted_users`
 --
 
-CREATE TABLE `deleted_users` (
+CREATE TABLE IF NOT EXISTS `deleted_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `old_id` int(10) unsigned NOT NULL,
   `name` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE `deleted_users` (
 -- Structure de la table `designs`
 --
 
-CREATE TABLE `designs` (
+CREATE TABLE IF NOT EXISTS `designs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) CHARACTER SET utf8 NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE `designs` (
 -- Structure de la table `discussions`
 --
 
-CREATE TABLE `discussions` (
+CREATE TABLE IF NOT EXISTS `discussions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `created` int(10) unsigned NOT NULL,
   `updated` int(10) unsigned NOT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE `discussions` (
 -- Structure de la table `equipment`
 --
 
-CREATE TABLE `equipment` (
+CREATE TABLE IF NOT EXISTS `equipment` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
   `chocobo_id` int(11) unsigned NOT NULL,
@@ -193,7 +193,7 @@ CREATE TABLE `equipment` (
 -- Structure de la table `equipment_effects`
 --
 
-CREATE TABLE `equipment_effects` (
+CREATE TABLE IF NOT EXISTS `equipment_effects` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `equipment_id` int(11) unsigned NOT NULL,
   `name` varchar(20) CHARACTER SET utf8 NOT NULL,
@@ -208,7 +208,7 @@ CREATE TABLE `equipment_effects` (
 -- Structure de la table `flows`
 --
 
-CREATE TABLE `flows` (
+CREATE TABLE IF NOT EXISTS `flows` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `discussion_id` int(11) DEFAULT NULL,
@@ -224,14 +224,14 @@ CREATE TABLE `flows` (
 -- Structure de la table `message_notifications`
 --
 
-CREATE TABLE `message_notifications` (
+CREATE TABLE IF NOT EXISTS `message_notifications` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `discussion_id` int(10) unsigned NOT NULL,
   `message_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `created` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -239,7 +239,7 @@ CREATE TABLE `message_notifications` (
 -- Structure de la table `messages`
 --
 
-CREATE TABLE `messages` (
+CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `discussion_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
@@ -256,7 +256,7 @@ CREATE TABLE `messages` (
 -- Structure de la table `nut_effects`
 --
 
-CREATE TABLE `nut_effects` (
+CREATE TABLE IF NOT EXISTS `nut_effects` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nut_id` int(10) unsigned NOT NULL,
   `name` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
@@ -270,7 +270,7 @@ CREATE TABLE `nut_effects` (
 -- Structure de la table `nuts`
 --
 
-CREATE TABLE `nuts` (
+CREATE TABLE IF NOT EXISTS `nuts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `name` int(11) NOT NULL,
@@ -288,7 +288,7 @@ CREATE TABLE `nuts` (
 -- Structure de la table `races`
 --
 
-CREATE TABLE `races` (
+CREATE TABLE IF NOT EXISTS `races` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `circuit_id` int(11) DEFAULT NULL,
   `start` int(11) NOT NULL DEFAULT '0',
@@ -303,7 +303,7 @@ CREATE TABLE `races` (
 -- Structure de la table `results`
 --
 
-CREATE TABLE `results` (
+CREATE TABLE IF NOT EXISTS `results` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `race_id` int(11) DEFAULT NULL,
   `chocobo_id` int(11) DEFAULT NULL,
@@ -326,7 +326,7 @@ CREATE TABLE `results` (
 -- Structure de la table `roles`
 --
 
-CREATE TABLE `roles` (
+CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
@@ -338,7 +338,7 @@ CREATE TABLE `roles` (
 -- Structure de la table `roles_users`
 --
 
-CREATE TABLE `roles_users` (
+CREATE TABLE IF NOT EXISTS `roles_users` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_id`,`role_id`),
@@ -351,7 +351,7 @@ CREATE TABLE `roles_users` (
 -- Structure de la table `sites`
 --
 
-CREATE TABLE `sites` (
+CREATE TABLE IF NOT EXISTS `sites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `max_connected` int(11) NOT NULL,
   `time_connected` int(11) NOT NULL,
@@ -367,7 +367,7 @@ CREATE TABLE `sites` (
 -- Structure de la table `successes`
 --
 
-CREATE TABLE `successes` (
+CREATE TABLE IF NOT EXISTS `successes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `title_id` int(11) DEFAULT NULL,
@@ -384,7 +384,7 @@ CREATE TABLE `successes` (
 -- Structure de la table `titles`
 --
 
-CREATE TABLE `titles` (
+CREATE TABLE IF NOT EXISTS `titles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `nbr_users` int(11) NOT NULL DEFAULT '0',
@@ -398,7 +398,7 @@ CREATE TABLE `titles` (
 -- Structure de la table `topics`
 --
 
-CREATE TABLE `topics` (
+CREATE TABLE IF NOT EXISTS `topics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -415,7 +415,7 @@ CREATE TABLE `topics` (
 -- Structure de la table `updates`
 --
 
-CREATE TABLE `updates` (
+CREATE TABLE IF NOT EXISTS `updates` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
@@ -427,10 +427,29 @@ CREATE TABLE `updates` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `user_tokens`
+--
+
+CREATE TABLE IF NOT EXISTS `user_tokens` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `user_agent` varchar(40) NOT NULL,
+  `token` varchar(40) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `created` int(10) unsigned NOT NULL,
+  `expires` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_token` (`token`),
+  KEY `fk_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `password` text COLLATE utf8_unicode_ci NOT NULL,
@@ -471,7 +490,7 @@ CREATE TABLE `users` (
 -- Structure de la table `vegetable_effects`
 --
 
-CREATE TABLE `vegetable_effects` (
+CREATE TABLE IF NOT EXISTS `vegetable_effects` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `vegetable_id` int(10) unsigned NOT NULL,
   `name` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
@@ -485,7 +504,7 @@ CREATE TABLE `vegetable_effects` (
 -- Structure de la table `vegetables`
 --
 
-CREATE TABLE `vegetables` (
+CREATE TABLE IF NOT EXISTS `vegetables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `name` text CHARACTER SET utf8 NOT NULL,
@@ -502,7 +521,7 @@ CREATE TABLE `vegetables` (
 -- Structure de la table `waves`
 --
 
-CREATE TABLE `waves` (
+CREATE TABLE IF NOT EXISTS `waves` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `race_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,

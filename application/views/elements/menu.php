@@ -23,26 +23,26 @@
 </style>
 
 <?php
-$url = url::current();
-$user = $this->session->get('user');
-$chocobo = $this->session->get('chocobo');
-if ( ! $user->loaded):
+$url = Request::current()->uri();
+$user = Auth::instance()->get_user();
+$chocobo = Session::instance()->get('chocobo');
+if ($user === FALSE):
 ?>
 
 <?php $menus = array(
-	'presentation' 	=> 'home',
-	'connection' 	=> 'login',
-	'register' 		=> 'register',
-	'forum' 		=> 'topics',
-	'about' 		=> 'about',
+	'Présentation' 	=> array('home', '/'),
+	'Connexion' 	=> array('login'),
+	'Inscription' 	=> array('register'),
+	'Discussions' 		=> array('discussions'),
+	'A propos' 		=> array('about'),
 ) ?>
 <ul>
 	<?php foreach ($menus as $menu => $path): ?>
-	<?php
-		$selected = (strrpos($url, $path) === FALSE) ? '' : ' class="selected"';
+		<?php
+		$selected = (in_array($url, $path)) ? ' class="selected"' : '';
 		?>
 		<li<?php echo $selected ?>>
-			<?php echo html::anchor($path, Kohana::lang("menu.$menu")) ?>
+			<?php echo HTML::anchor($path[0], __($menu)) ?>
 		</li>
 	<?php endforeach; ?>
 </ul>
@@ -56,7 +56,7 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px;">
-			<?php echo html::anchor('user/logout', html::image('images/icons/logout.png'), 
+			<?php echo HTML::anchor('logout', HTML::image('images/icons/logout.png'), 
 				array('class' => 'logout', 'original-title' => 'Se déconnecter')) ?>
 		</div>
 		<?php echo $user->link() ?>
@@ -67,11 +67,11 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
-			<?php echo html::anchor('', html::image('images/icons/list-off.png'), 
+			<?php echo HTML::anchor('', HTML::image('images/icons/list-off.png'), 
 				array('class' => 'toggle-stable', 'original-title' => "Voir/cacher l'écurie")) ?>
 		</div>
 		<?php 
-		echo html::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
+		echo HTML::anchor('chocobos/' . $chocobo->id, $chocobo->name); 
 		?>
 	</li>
 
@@ -85,17 +85,6 @@ if ( ! $user->loaded):
 	<li<?php echo $selected ?>>
 		<a href="<?php echo url::base() ?>races">
 			Courses
-			<?php
-			/*$nbr_races = ORM::factory('result')
-				->where('chocobo_id', $user->chocobo->id)
-				->where('seen', FALSE)
-				->count_all();
-			if ($nbr_races > 0):
-			?>
-			<div class="rfloat notif not_seen">
-				<?php echo $nbr_races ?>
-			</div>
-			<?php endif; */?>
 		</a>
 	</li>
 	
@@ -103,21 +92,21 @@ if ( ! $user->loaded):
 	$selected = (strrpos($url, 'fusion') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('fusion', 'Fusion'); ?>
+		<?php echo HTML::anchor('fusion', 'Fusion'); ?>
 	</li>
 	
 	<?php
 	$selected = (strrpos($url, 'shop') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('shop', 'Boutique'); ?>
+		<?php echo HTML::anchor('shop', 'Boutique'); ?>
 	</li>
 	
 	<?php
 	$selected = (strrpos($url, 'inventory') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('inventory', 'Inventaire'); ?>
+		<?php echo HTML::anchor('inventory', 'Inventaire'); ?>
 	</li>
 	
 	<?php
@@ -129,7 +118,7 @@ if ( ! $user->loaded):
 			<?php
 			$tps = time() - 5*60;
 			$nbr_connected = ORM::factory('user')
-				->where('connected>', $tps)
+				->where('connected', '>', $tps)
 				->count_all();
 			if ($nbr_connected > 1):
 			?>
@@ -144,7 +133,7 @@ if ( ! $user->loaded):
 	$selected = ((strrpos($url, 'chocobos') !== FALSE) and ($url !== 'chocobos/' . $chocobo->id)) ? ' class="selected"' : '';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('chocobos', 'Chocobos'); ?>
+		<?php echo HTML::anchor('chocobos', 'Chocobos'); ?>
 	</li>
 	
 	<?php
@@ -152,30 +141,10 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
-			<?php echo html::anchor('', html::image('images/icons/link.png'), 
+			<?php echo HTML::anchor('', HTML::image('images/icons/link.png'), 
 				array('onclick' => 'openShoutbox(); return false;', 'class' => 'shoutbox', 'original-title' => 'Ouvrir en pop-up')) ?>
 		</div>
-		<?php echo html::anchor('shoutbox', 'Shoutbox'); ?>
-	</li>
-		
-	<?php
-	$selected = (strrpos($url, "topics") === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<a href="<?php echo url::base() ?>topics">
-			Forum
-			<?php
-			$nbr_comments = ORM::factory('comment_notification')
-				->where('user_id', $user->id)
-				->count_all();
-			
-			if ($nbr_comments > 0):
-			?>
-			<div class="rfloat notif not_seen">
-				<?php echo $nbr_comments ?>
-			</div>
-			<?php endif; ?>
-		</a>
+		<?php echo HTML::anchor('shoutbox', 'Shoutbox'); ?>
 	</li>
 		
 	<?php
@@ -183,11 +152,9 @@ if ( ! $user->loaded):
 	?>
 	<li<?php echo $selected ?>>
 		<a href="<?php echo url::base() ?>discussions">
-			Messages
+			Discussions
 			<?php
-			$nbr_messages = ORM::factory('message_notification')
-				->where('user_id', $user->id)
-				->count_all();
+			$nbr_messages = $user->message_notifications->count_all();
 			
 			if ($nbr_messages > 0):
 			?>
@@ -198,41 +165,41 @@ if ( ! $user->loaded):
 		</a>
 	</li>
 
-	<?php
-	$selected = (strrpos($url, 'guide') === FALSE) ? '' : ' class="selected"';
-	?>
-	<li<?php echo $selected ?>>
-		<?php echo html::anchor('guide', 'Guide'); ?>
-	</li>
-
 	<?php 
 	$selected = (strrpos($url, 'developers') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('developers', 'Développeurs'); ?>
+		<?php echo HTML::anchor('developers', 'Développeurs'); ?>
 	</li>
 	
 	<?php
 	$selected = (strrpos($url, 'about') === FALSE) ? '' : ' class="selected"';
 	?>
 	<li<?php echo $selected ?>>
-		<?php echo html::anchor('about', 'A propos'); ?>
+		<?php echo HTML::anchor('about', 'A propos'); ?>
+	</li>
+
+	<?php
+	$selected = (strrpos($url, 'help') === FALSE) ? '' : ' class="selected"';
+	?>
+	<li<?php echo $selected ?>>
+		<?php echo HTML::anchor('help', 'Aide'); ?>
 	</li>
 </ul>
 
 <ul id="menu-3" style="display: none;">
 
-	<?php foreach ($user->chocobos as $c): 
+	<?php foreach ($user->chocobos->find_all() as $c): 
 	if ($chocobo->id != $c->id): ?>
 	<li>
-		<?php echo html::anchor('chocobo/change/' . $c->id, $c->name) ?>
+		<?php echo HTML::anchor('chocobos/'.$c->id.'/change', $c->name) ?>
 	</li>
 	<?php endif;
 	endforeach; ?>
 
 </ul>
 
-<?php if ($user->has_role('admin') and FALSE): ?>
+<?php if (FALSE): ?>
 <div class="menutitle">Administration</div>
 <p>
 <ul>

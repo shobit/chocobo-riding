@@ -7,7 +7,7 @@
 	decompte(
 		'<?php echo $race->id  ?>', 
 		'<?php echo ($race->start - time()) ?>', 
-		'<?php echo Kohana::lang('race.index.finished') ?>',
+		'<?php echo __('Terminé!') ?>',
 		false
 	);
 </script>
@@ -18,8 +18,8 @@ $display_off = ' style="display:none;"';
 
 $registered = ($chocobo->race_id === $race->id);
 
-$register = ( ! $registered and $can_register['success']);
-$unregister = ($registered and $can_unregister['success']);
+$register = ( ! $registered and $_register['success']);
+$unregister = ($registered and $_unregister['success']);
 ?>
 
 <table class="table1">
@@ -38,7 +38,7 @@ $unregister = ($registered and $can_unregister['success']);
 	</tr>
 </table>
 
-<?php if (count($race->chocobos) > 0): ?>
+<?php if ($race->chocobos->count_all() > 0): ?>
 	<h2>Chocobos inscrits : <?php echo count($race->chocobos) ?> /6</h2>
 
 	<table class="table1">
@@ -46,7 +46,7 @@ $unregister = ($registered and $can_unregister['success']);
 			<th class="lenmax">Nom</th>
 		</tr>
 
-		<?php foreach ($race->chocobos as $chocobo): ?>
+		<?php foreach ($race->chocobos->find_all() as $chocobo): ?>
 			<tr>
 				<td><?php echo $chocobo->vignette() ?></td>
 			</tr>

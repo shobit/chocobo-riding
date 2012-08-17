@@ -6,66 +6,68 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<?php 
 		// META
-		echo html::meta(array(
+		$meta_tags = array(
 			'author' => 'Menencia',
 			'description' => "L'Univers des Courses de Chocobos",
 			'keywords' => 'chocobo, chocobos, race, races, rides, riding, menencia',
 			'generator' => 'Kohana 2.3.4', 
 			'robots' => 'index, nofollow'
-		));
-		
+		);
+
+		//foreach ($meta_tags as $meta)
+		//{
+			echo '<meta'.HTML::attributes($meta_tags).' />';
+		//}
+
 		// FAVICON
-		echo html::link('images/theme/favicon.ico', 'icon', 'image/ico');
+		//echo HTML::link('images/theme/favicon.ico', 'icon', 'image/ico');
 		
 		// CSS
-		$design = $this->session->get('design');
-		echo html::stylesheet('css/' . $design . '/style.css', 'screen', FALSE);
+		//$design = $this->session->get('design');
+		echo HTML::style('css/default/style.css');
 		
 		// RSS
-		echo html::link('topic/rss_updates', 'alternate', 'application/rss+xml', false);
+		//echo HTML::link('topic/rss_updates', 'alternate', 'application/rss+xml', false);
 		
 		// JQUERY
-		echo html::script('js/lib/jquery.js');
+		echo HTML::script('js/lib/jquery.js');
 		//echo html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js');
 		
 		// FCBKcomplete
-		echo html::stylesheet('js/lib/FCBKcomplete/style.css', 'screen', false);
-		echo html::script('js/lib/FCBKcomplete/jquery.fcbkcomplete.js');
+		echo HTML::style('js/lib/FCBKcomplete/style.css');
+		echo HTML::script('js/lib/FCBKcomplete/jquery.fcbkcomplete.js');
 		
 		// JGROWL
-		echo html::script('js/lib/jGrowl/jquery.jgrowl.min.js');
-		echo html::stylesheet('js/lib/jGrowl/jquery.jgrowl', 'screen', false);
+		echo HTML::script('js/lib/jGrowl/jquery.jgrowl.min.js');
+		echo HTML::style('js/lib/jGrowl/jquery.jgrowl.css');
 		
 		// TIPSY
-		echo html::script('js/lib/tipsy/jquery.tipsy.js'); 
-		echo html::stylesheet('js/lib/tipsy/tipsy.css', 'screen', false);
+		echo HTML::script('js/lib/tipsy/jquery.tipsy.js'); 
+		echo HTML::style('js/lib/tipsy/tipsy.css');
 
 		// FANCYBOX
-		echo html::stylesheet('js/lib/fancybox/jquery.fancybox.css', 'screen', false);
-		echo html::script('js/lib/fancybox/jquery.fancybox.pack.js');
+		echo HTML::style('js/lib/fancybox/jquery.fancybox.css');
+		echo HTML::script('js/lib/fancybox/jquery.fancybox.pack.js');
 
 		// DATATABLE
-		echo html::script('js/lib/dataTables/js/jquery.dataTables.min.js'); 
-		echo html::stylesheet('js/lib/dataTables/css/jquery.dataTables.css', 'screen', false);
+		echo HTML::script('js/lib/dataTables/js/jquery.dataTables.min.js'); 
+		echo HTML::style('js/lib/dataTables/css/jquery.dataTables.css');
 		
 		// JTIP
-		echo html::script('js/lib/jtip/jtip.js'); 
-		echo html::stylesheet('js/lib/jtip/jtip.css', 'screen', false);
+		echo HTML::script('js/lib/jtip/jtip.js'); 
+		echo HTML::style('js/lib/jtip/jtip.css');
 		
 		// MYSCRIPT
-		echo html::script('js/script.js');
+		echo HTML::script('js/script.js');
 	?>
-	<!--[if IE]> 
-	<?php echo html::stylesheet('js/lib/bubbletip/bubbletip-IE.css', 'screen', false); ?>
-	<![endif]-->
 
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+	<!--link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Advent+Pro' rel='stylesheet' type='text/css'>
-	<link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css"-->
 
 	<script type="text/javascript">
 	
-		var baseUrl = "<?php echo (IN_PRODUCTION ? "http://chocobo-riding.com/" : "http://localhost:8888/chocobo-riding/www/"); ?>";
+		var baseUrl = "<?php echo ((Kohana::$environment === Kohana::PRODUCTION) ? "http://chocobo-riding.com/" : "http://localhost:8888/chocobo-riding-ko3/www/"); ?>";
 		
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-5385370-6']);
@@ -82,10 +84,6 @@
 </head>
 
 <body>
-	<!--a href="https://github.com/Menencia/chocobo-riding">
-		<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
-	</a-->
-
 	<div id="jgrowl_content"><?php echo View::factory("elements/jgrowl") ?></div>
 	
 	<div id="header"></div>
@@ -96,7 +94,7 @@
 				<span class="part1">Chocobo</span><span class="part2">-</span><span class="part3">Riding</span><span class="part4">beta</span>
 			</div>
 			<div class="search">
-				<?php echo View::factory('elements/search') ?>
+				<?php //echo View::factory('elements/search') ?>
 			</div>
 		</div>
 	</div>
@@ -112,6 +110,8 @@
 		</div>
 		
 		<div class="clearleft"></div>
+
+		<?php //echo View::factory('profiler/stats') ?>
 		
 	</div>
 

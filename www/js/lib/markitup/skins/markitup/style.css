@@ -18,14 +18,7 @@
 	font:11px Verdana, Arial, Helvetica, sans-serif;
 }
 .markItUpEditor {
-	font:12px 'Courier New', Courier, monospace;
-	padding:5px 5px 5px 35px;
-	border:1px solid #3C769D;
-	width:643px;
-	height:320px;
-	clear:both;
-	line-height:18px;
-	overflow:auto;
+	padding:3px;
 }
 .markItUpPreviewFrame	{
 	overflow:auto;
