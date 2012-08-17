@@ -1,8 +1,8 @@
+# Set environment
+SetEnv KOHANA_ENV "development"
+
 # Turn on URL rewriting
 RewriteEngine On
-
-# Installation directory
-RewriteBase /chocobo-riding/www
 
 # Protect hidden files from being viewed
 <Files .*>
