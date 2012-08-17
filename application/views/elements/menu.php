@@ -56,7 +56,7 @@ if ($user === FALSE):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px;">
-			<?php echo HTML::anchor('logout', HTML::image('media/images/icons/logout.png'), 
+			<?php echo HTML::anchor('logout', HTML::image('images/icons/logout.png'), 
 				array('class' => 'logout', 'original-title' => 'Se déconnecter')) ?>
 		</div>
 		<?php echo $user->link() ?>
@@ -67,7 +67,7 @@ if ($user === FALSE):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
-			<?php echo HTML::anchor('', HTML::image('media/images/icons/list-off.png'), 
+			<?php echo HTML::anchor('', HTML::image('images/icons/list-off.png'), 
 				array('class' => 'toggle-stable', 'original-title' => "Voir/cacher l'écurie")) ?>
 		</div>
 		<?php 
@@ -141,7 +141,7 @@ if ($user === FALSE):
 	?>
 	<li<?php echo $selected ?> style="position: relative;">
 		<div style="width: 16px; position: absolute; left: -25px; top: 1px;">
-			<?php echo HTML::anchor('', HTML::image('media/images/icons/link.png'), 
+			<?php echo HTML::anchor('', HTML::image('images/icons/link.png'), 
 				array('onclick' => 'openShoutbox(); return false;', 'class' => 'shoutbox', 'original-title' => 'Ouvrir en pop-up')) ?>
 		</div>
 		<?php echo HTML::anchor('shoutbox', 'Shoutbox'); ?>

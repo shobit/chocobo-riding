@@ -67,7 +67,7 @@ if ($user->id == $u->id)
 		<td>
 			<?php
 			echo $user->gils;
-			echo HTML::image('media/images/theme/gil.gif');
+			echo HTML::image('images/theme/gil.gif');
 			?>
 		</td>
 		<td></td>

@@ -24,41 +24,41 @@
 		
 		// CSS
 		//$design = $this->session->get('design');
-		echo HTML::style('media/css/default/style.css');
+		echo HTML::style('css/default/style.css');
 		
 		// RSS
 		//echo HTML::link('topic/rss_updates', 'alternate', 'application/rss+xml', false);
 		
 		// JQUERY
-		echo HTML::script('media/js/lib/jquery.js');
+		echo HTML::script('js/lib/jquery.js');
 		//echo html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js');
 		
 		// FCBKcomplete
-		echo HTML::style('media/js/lib/FCBKcomplete/style.css');
-		echo HTML::script('media/js/lib/FCBKcomplete/jquery.fcbkcomplete.js');
+		echo HTML::style('js/lib/FCBKcomplete/style.css');
+		echo HTML::script('js/lib/FCBKcomplete/jquery.fcbkcomplete.js');
 		
 		// JGROWL
-		echo HTML::script('media/js/lib/jGrowl/jquery.jgrowl.min.js');
-		echo HTML::style('media/js/lib/jGrowl/jquery.jgrowl.css');
+		echo HTML::script('js/lib/jGrowl/jquery.jgrowl.min.js');
+		echo HTML::style('js/lib/jGrowl/jquery.jgrowl.css');
 		
 		// TIPSY
-		echo HTML::script('media/js/lib/tipsy/jquery.tipsy.js'); 
-		echo HTML::style('media/js/lib/tipsy/tipsy.css');
+		echo HTML::script('js/lib/tipsy/jquery.tipsy.js'); 
+		echo HTML::style('js/lib/tipsy/tipsy.css');
 
 		// FANCYBOX
-		echo HTML::style('media/js/lib/fancybox/jquery.fancybox.css');
-		echo HTML::script('media/js/lib/fancybox/jquery.fancybox.pack.js');
+		echo HTML::style('js/lib/fancybox/jquery.fancybox.css');
+		echo HTML::script('js/lib/fancybox/jquery.fancybox.pack.js');
 
 		// DATATABLE
-		echo HTML::script('media/js/lib/dataTables/js/jquery.dataTables.min.js'); 
-		echo HTML::style('media/js/lib/dataTables/css/jquery.dataTables.css');
+		echo HTML::script('js/lib/dataTables/js/jquery.dataTables.min.js'); 
+		echo HTML::style('js/lib/dataTables/css/jquery.dataTables.css');
 		
 		// JTIP
-		echo HTML::script('media/js/lib/jtip/jtip.js'); 
-		echo HTML::style('media/js/lib/jtip/jtip.css');
+		echo HTML::script('js/lib/jtip/jtip.js'); 
+		echo HTML::style('js/lib/jtip/jtip.css');
 		
 		// MYSCRIPT
-		echo HTML::script('media/js/script.js');
+		echo HTML::script('js/script.js');
 	?>
 
 	<!--link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
@@ -67,7 +67,7 @@
 
 	<script type="text/javascript">
 	
-		var baseUrl = "<?php echo ((Kohana::$environment === Kohana::PRODUCTION) ? "http://chocobo-riding.com/" : "http://localhost:8888/chocobo-riding/"); ?>";
+		var baseUrl = "<?php echo ((Kohana::$environment === Kohana::PRODUCTION) ? "http://chocobo-riding.com/" : "http://localhost:8888/chocobo-riding-ko3/www/"); ?>";
 		
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-5385370-6']);

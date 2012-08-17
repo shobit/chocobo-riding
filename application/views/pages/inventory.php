@@ -1,7 +1,7 @@
 <h2>Nombre d'objets possédés : <?php echo $nbr_items ?>/<?php echo $user->get_items() ?> (+<?php echo $nbr_equipped ?>)</h2>
 
 <?php 
-$gils_png = HTML::image('media/images/icons/gils.png', array('class' => 'icon4'));
+$gils_png = HTML::image('images/icons/gils.png', array('class' => 'icon4'));
 
 if ($nbr_items >0 or $nbr_equipped >0): 
 ?>

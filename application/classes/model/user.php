@@ -156,7 +156,7 @@ class Model_User extends Model_Auth_User {
 	{
 		$image = ($this->image == "") ? "default.gif" : $this->image;
 		if ($url) return ('upload/users/' . $type . '/' . $image);
-		else return html::image('media/upload/users/' . $type . '/' . $image, $options);
+		else return html::image('upload/users/' . $type . '/' . $image, $options);
 	}
 	
 	/*
