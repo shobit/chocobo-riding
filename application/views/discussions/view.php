@@ -35,10 +35,10 @@
 </style>
 
 <?php
-echo html::style('js/lib/markitup/skins/markitup/style.css');
-echo html::style('js/lib/markitup/sets/markdown/style.css');
-echo html::script('js/lib/markitup/jquery.markitup.js');
-echo html::script('js/lib/markitup/sets/markdown/set.js');
+echo HTML::style('media/js/lib/markitup/skins/markitup/style.css');
+echo HTML::style('media/js/lib/markitup/sets/markdown/style.css');
+echo HTML::script('media/js/lib/markitup/jquery.markitup.js');
+echo HTML::script('media/js/lib/markitup/sets/markdown/set.js');
 ?>	
 
 <h1>Forum</h1>

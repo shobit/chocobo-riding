@@ -15,7 +15,7 @@
 
 <h2>Début de la prochaine course dans 
 	<span id="<?php echo $races[0]->id ?>">--:--</span> 
-	<?php echo HTML::image('images/icons/hour2.png') ?>
+	<?php echo HTML::image('media/images/icons/hour2.png') ?>
 </h2>
 
 <script>

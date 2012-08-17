@@ -17,15 +17,15 @@ if ($user)
 		<?php
 		if ($first_message AND $discussion->allow($user, 'w'))
 		{
-			echo html::anchor('discussions/' . $discussion->id . '/edit', 
-				html::image('images/icons/edit.png', array('class' => 'icon', 'title' => 'Modifier', 'rel' => 'tipsy'))) . ' | ';
-			echo html::anchor('#', 
-				html::image('images/icons/delete.png', array('class' => 'icon', 'title' => 'Supprimer', 'rel' => 'tipsy')), 
+			echo HTML::anchor('discussions/' . $discussion->id . '/edit', 
+				HTML::image('media/images/icons/edit.png', array('class' => 'icon', 'title' => 'Modifier', 'rel' => 'tipsy'))) . ' | ';
+			echo HTML::anchor('#', 
+				HTML::image('media/images/icons/delete.png', array('class' => 'icon', 'title' => 'Supprimer', 'rel' => 'tipsy')), 
 					array('class' => 'delete_discussion', 'id'=>'discussion' . $discussion->id)); 		
 		}
 		else if ( ! $first_message AND $user AND $message->user_id == $user->id)
 		{
-			echo html::anchor('#', html::image('images/icons/edit.png', array('class' => 'icon', 'title' => 'Modifier', 'rel' => 'tipsy')), array('class' => 'edit', 'id' => 'edit' . $message->id));
+			echo HTML::anchor('#', HTML::image('media/images/icons/edit.png', array('class' => 'icon', 'title' => 'Modifier', 'rel' => 'tipsy')), array('class' => 'edit', 'id' => 'edit' . $message->id));
 		}
 		?>
 	</div>
@@ -63,9 +63,9 @@ if ($user)
 		<?php if ( ! $first_message AND $user AND $message->user_id == $user->id): ?>
 			<div class="form">
 				<div class="reply2">
-				<?php echo form::open('messages/'.$message->id.'/edit') ?>
+				<?php echo Form::open('messages/'.$message->id.'/edit') ?>
 				<div class="textarea">
-					<?php echo form::textarea('content-edit', $message->content, array(
+					<?php echo Form::textarea('content-edit', $message->content, array(
 			        	'id' => 'content-edit',
 			        	'class' => 'markdown', 
 			        )) ?>
@@ -74,7 +74,7 @@ if ($user)
 					<?php echo HTML::anchor('', __('Modifier'), array('id' => 'c'.$message->id, 'class' => 'button blue edit_msg')) ?><br />
 					<?php echo HTML::anchor('', __('Annuler'), array('id' => 'c'.$message->id, 'class' => 'button grey cancel_msg')) ?>
 				</div>
-				<?php echo form::close() ?>
+				<?php echo Form::close() ?>
 				</div>
 				<div class="clearleft"></div>
 			</div>
