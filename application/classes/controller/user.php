@@ -342,31 +342,11 @@ class Controller_User extends Controller_Template {
 	{
 		$hash = $this->request->param('hash');
 
-		$this->auto_render = FALSE;
-		$this->response->body('Ressayez plus tard...');
-
-		return;
-
-		$user = ORM::factory('user')
-			->where(array('password' => $sha1, 'activated' => 0, 'banned' => 0, 'deleted' => 0))
-			->find();
+		$msg = Model_User::verify($hash);
 		
-		if ($user->id >0) {
-			$user->activated = time();
-			$user->save();
-			
-			$nut = ORM::factory('nut');
-			$nut->gender = rand(1, 2);
-			ORM::factory('chocobo')->generate($user->id, $nut);
-
-			gen::add_jgrowl(Kohana::lang('jgrowl.activate_success'));
-			url::redirect('home');
-		} 
-		else 
-		{
-			gen::add_jgrowl(Kohana::lang('jgrowl.activate_failed'));
-			url::redirect('home');
-		}
+		Jgrowl::add($msg);
+		
+		$this->request->redirect('home');
 	}
 	
 	/**

@@ -356,7 +356,6 @@ class Model_User extends Model_Auth_User {
 	{
 		$this->username 	= $post['username'];
 		$this->password 	= sha1($post['password']);
-		$this->email 		= $post['email'];
 		$this->locale 		= 'fr_FR'; 	// TODO
 		$this->design_id	= 1; 		// TODO
 		$this->version 		= TRUE;
@@ -364,8 +363,11 @@ class Model_User extends Model_Auth_User {
 		$this->updated 		= time();
 
 		// Envoi d'un email de vérification si email renseigné
-		if ( ! empty($this->email))
+		if ( ! empty($post['email']))
 		{
+			$this->email 			= $post['email'];
+			$this->email_verified 	= sha1($post['email']);
+
 			$subject 	= __('Chocobo Riding : confirmer votre adresse email');
 			$link 		= URL::site('mail/verify/'.sha1($this->email), TRUE);
 			$message 	= str_replace(
@@ -381,6 +383,34 @@ class Model_User extends Model_Auth_User {
 		}
 		
 		$this->create();
+	}
+
+	/**
+	 * Vérifie si le $hash correspond bien à un email et active l'email du compte associé.
+	 * 
+	 * @param $hash string 
+	 * @return boolean 
+	 */
+	public static function verify($hash)
+	{
+		$user = ORM::factory('user')
+			->where('email_hash', '', $hash)
+			->find();
+		
+		if ($user->loaded() === FALSE)
+		{
+			$msg = __('Adresse email non trouvée. Veuillez vérifier à nouveau votre email via votre compte.');
+		}
+
+		if ( ! isset($msg)) 
+		{
+			$user->email_verified = TRUE;
+			$user->save();
+
+			$msg = __("Merci d'avoir vérifié votre adresse.");
+		}
+
+		return $msg;
 	}
 	
 	/**
