@@ -150,8 +150,16 @@ class Controller_User extends Controller_Template {
 	public function action_edit() 
 	{
 		$this->authorize('logged_in');
+
+		$id = $this->request->param('id');
 		
-		$user = Auth::instance()->get_user();
+		$u = Auth::instance()->get_user();
+		$user = ORM::factory('user', $id);
+
+		if ($id != $u->id)
+		{
+			$this->request->redirect('users/'.$user->id);
+		}
 		
 		$errors = array();
 		$message = "";
