@@ -1,4 +1,8 @@
-<h2>Nombre de chocobos inscrits : <?php echo count($chocobos) ?></h2>
+<h2>
+	<?php echo HTML::anchor('chocobos', __('Chocobos')) ?>
+</h2>
+
+<div class="nav"></div>
 
 <table id="chocobos" class="table1">
 	<thead>

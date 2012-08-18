@@ -87,6 +87,8 @@ a:hover {text-decoration: underline;}
 #footer a:hover {text-decoration: underline; color: #525252;}
 .jGrowl a {text-decoration: none; color: #fff;}
 .jGrowl a:hover {text-decoration: underline;}
+h2 a {text-decoration: none; color: #fff;}
+h2 a:hover {text-decoration: none;}
 .jtiprel {cursor: help;}
 .jtiprel.black {color: #333;}
 .jtiprel.blue {color: #009;}
@@ -126,11 +128,11 @@ img.success_jgrowl {float: left; margin-right: 5px; width: 45px; height: 45px; b
 
 /* NAV & SECTION */
 .section {display: none;}
-.nav {background-color: #333; height: 30px; margin-bottom: 10px;}
-.nav a {color: #fff; display: block; float: left; margin: 5px 3px; text-transform: uppercase; padding: 0 6px 0 6px;}
-.nav a:hover {text-decoration: none;}
-.nav a.selected {background-color: #fff; color: #333;}
-.nav a.selected:hover {}
+.nav {height: 20px; margin-bottom: 15px;}
+.nav a {color: #333; display: block; float: left; text-transform: uppercase; padding: 0 6px 0 6px;}
+.nav a:hover {background-color: #333; color: #fff; text-decoration: none;}
+.nav a.selected {background-color: #666; color: #fff;}
+.nav a.selected:hover {background-color: #333; color: #fff; text-decoration: none;}
 
 /* CHANGELOG */
 .update {
@@ -213,7 +215,7 @@ h2 {
 	background-color: #333;
 	color: #fff;
 	margin-top: 0;
-	margin-bottom: 20px;
+	margin-bottom: 0;
 }
 
 div#prelude {

@@ -6,6 +6,11 @@
 .p-grey {background-color: #999;}
 </style>
 
+<h2>
+	<?php echo HTML::anchor('chocobos', __('Chocobos')) ?> &rarr; 
+	<?php echo $chocobo->name ?>
+</h2>
+
 <div class="nav">
 	<?php echo html::anchor('#/informations', 'Informations') ?>
 	<?php echo html::anchor('#/details', 'Caractéristiques') ?>

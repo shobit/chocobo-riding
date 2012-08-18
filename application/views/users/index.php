@@ -1,4 +1,6 @@
-<h2>Nombre de jockeys inscrits : <?php echo count($users) ?></h2>
+<h2>Jockeys</h2>
+
+<div class="nav"></div>
 
 <table id="users" class="table1">
 	<thead>

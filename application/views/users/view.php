@@ -1,19 +1,21 @@
+<h2>
+	<?php echo HTML::anchor('users', __('Jockeys')) ?> &rarr; 
+	<?php echo $user->username ?>
+</h2>
+
 <div class="nav">
 	<?php echo HTML::anchor('#/informations', 'Informations') ?>
 	<?php echo HTML::anchor('#/chocobos', 'Ecurie') ?>
 	<?php echo HTML::anchor('#/achievements', 'Succès') ?>
+	<?php 
+		if ($user->id == $u->id)
+		{
+			echo HTML::anchor('users/'.$user->id.'/edit', 'Préférences'); 
+		}
+	?>
 </div>
 
 <div class="section" id="informations">
-
-<?php 
-if ($user->id == $u->id)
-{
-	echo HTML::anchor('users/'.$user->id.'/edit', 'Modifier', array('class'=>'button blue fright'));
-}
-?>
-
-<div class="clearright"></div>
 
 <table class="table1">
 

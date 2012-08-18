@@ -143,11 +143,15 @@ class Controller_User extends Controller_Template {
 	}
 	
 	/**
-	 * Vue édition du jockey en session
+	 * Vue pour éditer du joueur en session
+	 * 
+	 * @param $id int ID du joueur
 	 */
-	public function edit() {
+	public function action_edit() 
+	{
 		$this->authorize('logged_in');
-		$user = $this->session->get('user');
+		
+		$user = Auth::instance()->get_user();
 		
 		$errors = array();
 		$message = "";
@@ -215,9 +219,8 @@ class Controller_User extends Controller_Template {
 			}  
 		}
 		
-		$edit = new View('users/edit');
-		$edit->user = $user;
-		$this->template->content = $edit;
+		$this->template->content = View::factory('users/edit')
+			->set('user', $user);
 	}
 	
 	/**
