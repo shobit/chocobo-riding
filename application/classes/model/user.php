@@ -394,12 +394,17 @@ class Model_User extends Model_Auth_User {
 	public static function verify($hash)
 	{
 		$user = ORM::factory('user')
-			->where('email_hash', '', $hash)
+			->where('email_hash', '=', $hash)
 			->find();
 		
 		if ($user->loaded() === FALSE)
 		{
-			$msg = __('Adresse email non trouvée. Veuillez vérifier à nouveau votre email via votre compte.');
+			$msg = __("Le lien de vérification de votre adresse email n'est plus valide.");
+		}
+		
+		else if ($user->email_verified === TRUE)
+		{
+			$msg = __('Votre adresse email a déjà été vérifiée.');
 		}
 
 		if ( ! isset($msg)) 
@@ -407,7 +412,7 @@ class Model_User extends Model_Auth_User {
 			$user->email_verified = TRUE;
 			$user->save();
 
-			$msg = __("Merci d'avoir vérifié votre adresse.");
+			$msg = __("Merci d'avoir vérifié votre adresse email.");
 		}
 
 		return $msg;
