@@ -334,13 +334,19 @@ class Controller_User extends Controller_Template {
 	}
 	
 	/**
-	 * ACTION: activer son compte (public)
+	 * ACTION: activer son addresse email actuelle
 	 * 
-	 * @param $sha1 string Token du compte à activer
+	 * @param $hash string 
 	 */
-	public function activate($sha1) 
+	public function action_verify() 
 	{
-		$this->authorize('logged_out');
+		$hash = $this->request->param('hash');
+
+		$this->auto_render = FALSE;
+		$this->response->body('Ressayez plus tard...');
+
+		return;
+
 		$user = ORM::factory('user')
 			->where(array('password' => $sha1, 'activated' => 0, 'banned' => 0, 'deleted' => 0))
 			->find();
@@ -355,7 +361,9 @@ class Controller_User extends Controller_Template {
 
 			gen::add_jgrowl(Kohana::lang('jgrowl.activate_success'));
 			url::redirect('home');
-		} else {
+		} 
+		else 
+		{
 			gen::add_jgrowl(Kohana::lang('jgrowl.activate_failed'));
 			url::redirect('home');
 		}

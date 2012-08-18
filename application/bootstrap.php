@@ -132,6 +132,15 @@ Route::set('users', '<action>',
 		'controller' => 'user'
 	));
 
+Route::set('mail_verify', 'mail/verify/<hash>',
+	array(
+		'hash' => '.*',
+	))
+	->defaults(array(
+		'controller' => 'user',
+		'action' => 'verify',
+	));
+
 Route::set('race_actions', 'races/<id>/<action>',
 	array(
 		'action' => '(register|unregister)',
