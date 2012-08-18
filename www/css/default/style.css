@@ -248,14 +248,20 @@ li.selected .notif.not_seen {background-color: #fff; color: #355F9C;}
 
 a.button {
 	padding: 2px;
+	margin: 2px 0;
 	font-size: 16px;
 	display: block;
 	color: #fff;
 	width: 100px;
 }
 
+a.big, input.big {
+	width: 200px;
+}
+
 input.button {
 	padding: 2px;
+	margin: 2px 0;
 	font-size: 16px;
 	display: block;
 	color: #fff;
