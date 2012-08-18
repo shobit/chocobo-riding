@@ -367,7 +367,7 @@ class Model_User extends Model_Auth_User {
 		if ( ! empty($this->email))
 		{
 			$subject 	= __('Chocobo Riding : confirmer votre adresse email');
-			$link 		= URL::site('mail/verify/'.sha1($this->mail), TRUE);
+			$link 		= URL::site('mail/verify/'.sha1($this->email), TRUE);
 			$message 	= str_replace(
 				array('%username%', '%link%'),
 				array($this->username, $link),
