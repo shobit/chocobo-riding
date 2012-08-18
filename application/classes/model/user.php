@@ -366,18 +366,17 @@ class Model_User extends Model_Auth_User {
 		// Envoi d'un email de vérification si email renseigné
 		if ( ! empty($this->email))
 		{
-			$subject 	= Kohana::message('user.register.mail_title');
-			$password 	= sha1($this->password);
-			$link 		= url::site('user/activate/'.$password);
+			$subject 	= __('Chocobo Riding : confirmer votre adresse email');
+			$link 		= URL::site('mail/verify/'.sha1($this->mail), TRUE);
 			$message 	= str_replace(
-				array('%username%', '%password%', '%link%'),
-				array($this->username, $this->password, $link),
-				Kohana::message('user.register.mail_content')
+				array('%username%', '%link%'),
+				array($this->username, $link),
+				Kohana::message('users', 'mail_content')
 			);
 
 			$email = Email::factory($subject, $message)
 				->to($this->email)
-				->from('mail@menencia.com', 'My Name')
+				->from('mail@menencia.com', 'Chocobo Riding')
 				->send();
 		}
 		
