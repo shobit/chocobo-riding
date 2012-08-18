@@ -1,6 +1,8 @@
 <h2>Jockeys</h2>
 
-<div class="nav"></div>
+<div class="nav">
+	<?php echo HTML::anchor('#/index', 'Index') ?>
+</div>
 
 <table id="users" class="table1">
 	<thead>
@@ -25,6 +27,8 @@
 
 <script>
 $(function(){
+
+	init_nav('#/index');
 	
 	$('#users').dataTable({
 		"bLengthChange": false,

@@ -2,7 +2,9 @@
 	<?php echo HTML::anchor('chocobos', __('Chocobos')) ?>
 </h2>
 
-<div class="nav"></div>
+<div class="nav">
+	<?php echo HTML::anchor('#/index', 'Index') ?>
+</div>
 
 <table id="chocobos" class="table1">
 	<thead>
@@ -32,6 +34,8 @@
 
 <script>
 $(function(){
+
+	init_nav('#/index');
 	
 	$('#chocobos').dataTable({
 		"bLengthChange": false,
