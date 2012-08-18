@@ -108,6 +108,7 @@ Kohana::modules(array(
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	 'pagination'  => MODPATH.'pagination',  // Pagination
 	 'markdown'  => MODPATH.'markdown',  // Markdown
+	 'email'  => MODPATH.'email',  // Email
 	));
 
 /**

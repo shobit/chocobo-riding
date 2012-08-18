@@ -222,11 +222,11 @@ class Model_User extends Model_Auth_User {
 	}
 
 	/**
-     * Récupère le nombre de notifications d'une discussion pour le joueur
-     * 
-     * @param $discussion_id int ID du joueur
-     * @return int 
-     */
+	 * Récupère le nombre de notifications d'une discussion pour le joueur
+	 * 
+	 * @param $discussion_id int ID du joueur
+	 * @return int 
+	 */
 	public function get_notifications($discussion_id)
 	{
 		return $this->discussion_notifications
@@ -356,6 +356,7 @@ class Model_User extends Model_Auth_User {
 	{
 		$this->username 	= $post['username'];
 		$this->password 	= sha1($post['password']);
+		$this->email 		= $post['email'];
 		$this->locale 		= 'fr_FR'; 	// TODO
 		$this->design_id	= 1; 		// TODO
 		$this->version 		= TRUE;
@@ -363,22 +364,21 @@ class Model_User extends Model_Auth_User {
 		$this->updated 		= time();
 
 		// Envoi d'un email de vérification si email renseigné
-		if ( ! empty($post['email']))
+		if ( ! empty($this->email))
 		{
-			$this->email 	= $post['email'];
-
-			$to      	= $this->email;
-			$from    	= 'mail@menencia.com';
-			$subject 	= Kohana::lang('user.register.mail_title');
+			$subject 	= Kohana::message('user.register.mail_title');
 			$password 	= sha1($this->password);
 			$link 		= url::site('user/activate/'.$password);
 			$message 	= str_replace(
 				array('%username%', '%password%', '%link%'),
 				array($this->username, $this->password, $link),
-				Kohana::lang('user.register.mail_content')
+				Kohana::message('user.register.mail_content')
 			);
 
-			email::send($to, $from, $subject, $message, TRUE);
+			$email = Email::factory($subject, $message)
+				->to($this->email)
+				->from('mail@menencia.com', 'My Name')
+				->send();
 		}
 		
 		$this->create();
