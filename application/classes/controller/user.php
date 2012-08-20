@@ -168,8 +168,8 @@ class Controller_User extends Controller_Template {
 			$file = Validation::factory( $_FILES )
 				->rule('image', 'Upload::not_empty')
 				->rule('image', 'Upload::valid')
-				->rule('image', 'Upload::type', array(array('jpg', 'png', 'gif')))
-				->rule('image', 'Upload::size', array('300K'));
+				->rule('image', 'Upload::type', array(':value', array('jpg', 'png', 'gif')))
+				->rule('image', 'Upload::size', array(':value', '300K'));
 
 			if ($file->check())
 			{
@@ -180,13 +180,20 @@ class Controller_User extends Controller_Template {
 					// Suppression des images existantes
 					if ($user->image != "") 
 					{
-						unlink('upload/users/mini/'.$user->image);
-						unlink('upload/users/thumbmail/'.$user->image);
+						if (is_link('upload/users/mini/'.$user->image))
+						{
+							unlink('upload/users/mini/'.$user->image);
+						}
+						if (is_link('upload/users/thumbmail/'.$user->image))
+						{
+							unlink('upload/users/thumbmail/'.$user->image);
+						}
 					}
 
 					// Nom du fichier
-					$name = $user->id.'.'.substr(strrchr($filename, '.'), 1);
-
+					$ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+					$name = $user->id.'.'.$ext;
+					
 					// Miniature
 					$image = Image::factory($filename)
 						->resize(30, 30, Image::WIDTH)
@@ -203,7 +210,9 @@ class Controller_User extends Controller_Template {
 					
 					$user->update_image($name);
 
-				$this->request->redirect('users/'.$user->id.'#/informations');
+					Jgrowl::add(__('Votre avatar a été mis à jour.'));
+
+					$this->request->redirect('users/'.$user->id.'#/informations');
 				}
 			}
 		}
@@ -216,6 +225,8 @@ class Controller_User extends Controller_Template {
 			if ($post->check())
 			{
 				$user->update_email($post['email']);
+
+				Jgrowl::add(__('Votre addresse email a été mise à jour.'));
 
 				$this->request->redirect('users/'.$user->id.'#/informations');
 			}
@@ -231,6 +242,8 @@ class Controller_User extends Controller_Template {
 			if ($post->check())
 			{
 				$user->update_password($post['password']);
+
+				Jgrowl::add(__('Votre mot de passe a été mise à jour.'));
 
 				$this->request->redirect('users/'.$user->id.'#/informations');
 			}
