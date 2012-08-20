@@ -161,70 +161,79 @@ class Controller_User extends Controller_Template {
 			$this->request->redirect('users/'.$user->id);
 		}
 		
-		$errors = array();
-		$message = "";
-		
-		// si on a cliqué sur "modifier le profil"
-		if ($_POST) {
-			
-			// préparation des champs
-			$post = new Validation($_POST);
-			$post->pre_filter('trim', TRUE);
-			if ( ! empty($post->password))
+		$post = Validation::factory($_POST);
+
+		if ($_POST AND $post['type'] == 'avatar')
+		{
+			$file = Validation::factory( $_FILES )
+				->rule('image', 'Upload::not_empty')
+				->rule('image', 'Upload::valid')
+				->rule('image', 'Upload::type', array(array('jpg', 'png', 'gif')))
+				->rule('image', 'Upload::size', array('300K'));
+
+			if ($file->check())
 			{
-				$post->add_rules('password_again', 'matches[password_new]');
-				$post->add_callbacks('password', array($this, '_matches_password'));
-			}
-			
-			$files = Validation::factory($_FILES)
-				->add_rules(
-					'image', 
-					'upload::valid',  
-					'upload::type[gif,jpg,png]', 
-					'upload::size[1M]');
-			
-			// enregistrement des nouvelles données
-			if ($post->validate() and $files->validate()) {
-			
-				
-				if (!empty($post->password_new)) {
-					$user->password = sha1($post->password_new);
-					$user->updated  = time();
-				}		
-					
-				$user->gender = $post->gender;
-				$user->birthday = $post->birthday;
-				$user->locale = $post->locale;
-				$user->notif_forum = $post->notif_forum;
-				
-				// traitement et sauvegarde de la nouvelle image
-				$filename = upload::save('image');
-				if (file_exists($filename)) {
-					if ($user->image != "") {
+				$filename = Upload::save($_FILES['image'], $user->id, 'upload/temp/');
+
+				if ($filename !== FALSE) 
+				{
+					// Suppression des images existantes
+					if ($user->image != "") 
+					{
 						unlink('upload/users/mini/'.$user->image);
 						unlink('upload/users/thumbmail/'.$user->image);
 					}
+
+					// Nom du fichier
 					$name = $user->id.'.'.substr(strrchr($filename, '.'), 1);
-					Image::factory($filename)
+
+					// Miniature
+					$image = Image::factory($filename)
 						->resize(30, 30, Image::WIDTH)
 						->crop(30, 30)
-						->save(DOCROOT.'upload/users/mini/'.$name);
+						->save('upload/users/mini/'.$name);
+
 					Image::factory($filename)
 						->resize(100, 100, Image::WIDTH)
 						->crop(100, 100)
-						->save(DOCROOT.'upload/users/thumbmail/'.$name);
+						->save('upload/users/thumbmail/'.$name);
+
+					// Suppression de l'image temporaire
 					unlink($filename);
-					$user->image = $name;
-					$user->listen_success("avatar_upload");
+					
+					$user->update_image($name);
+
+				$this->request->redirect('users/'.$user->id.'#/informations');
 				}
-				
-				$user->save();
-				
-				//Redirect
-				url::redirect('users/' . $user->id);
-			} else {
-				$errors = arr::overwrite($errors, $post->errors('form_error_messages'));
-			}  
+			}
+		}
+		else if ($_POST AND $post['type'] == 'email')
+		{
+			$post = $post
+				->rule('email', 'Valid::email')
+				->rule('email', array($user, 'unique'), array('email', ':value'));
+
+			if ($post->check())
+			{
+				$user->update_email($post['email']);
+
+				$this->request->redirect('users/'.$user->id.'#/informations');
+			}
+		}
+		else if ($_POST AND $post['type'] == 'password')
+		{
+			$post = $post
+				->rule('password_old', 'not_empty')
+				->rule('password_old', array(Auth::instance(), 'check_password'), array(':value'))
+				->rule('password', 'not_empty')
+				->rule('password_again', 'matches', array(':validation', ':field', 'password'));
+
+			if ($post->check())
+			{
+				$user->update_password($post['password']);
+
+				$this->request->redirect('users/'.$user->id.'#/informations');
+			}
 		}
 		
 		$this->template->content = View::factory('users/edit')

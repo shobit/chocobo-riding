@@ -12,6 +12,8 @@
 <div class="section" id="avatar">
 	<?php echo Form::open(NULL, array('enctype' => 'multipart/form-data')) ?>
 
+	<?php echo Form::hidden('type', 'avatar') ?>
+
 	<table class="table1">
 
 		<tr>
@@ -37,6 +39,8 @@
 
 <div class="section" id="email">
 	<?php echo Form::open() ?>
+
+	<?php echo Form::hidden('type', 'email') ?>
 
 	<table class="table1">
 
@@ -64,6 +68,8 @@
 <div class="section" id="password">
 	<?php echo Form::open() ?>
 
+	<?php echo Form::hidden('type', 'password') ?>
+
 	<table class="table1">
 
 		<tr>
@@ -74,7 +80,7 @@
 		<tr class="divChangePassword">
 			<td><?php echo __('Mot de passe actuel : ') ?></div>
 			<td>
-				<?php echo Form::password('password') ?>
+				<?php echo Form::password('password_old') ?>
 			</td>
 			<td></td>
 		</tr>
@@ -82,7 +88,7 @@
 		<tr class="divChangePassword">
 			<td><?php echo Form::label('password_new', __('Nouveau mot de passe : ')) ?></div>
 			<td>
-				<?php echo Form::password('password_new') ?>
+				<?php echo Form::password('password') ?>
 			</td>
 			<td></td>
 		</tr>	

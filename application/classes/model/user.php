@@ -518,6 +518,44 @@ class Model_User extends Model_Auth_User {
 	}
 	
 	/**
+	 * Met à jour l'image du joueur
+	 * 
+	 * @param $name string 
+	 * @return void 
+	 */
+	public function update_image($name)
+	{
+		$this->image = $name;
+		$this->save();
+
+		$this->listen_success("avatar_upload");
+	}
+
+	/**
+	 * Met à jour l'email du joueur
+	 * 
+	 * @param $email string 
+	 * @return void 
+	 */
+	public function update_email($email)
+	{
+		$this->email = $email;
+		$this->save();
+	}
+
+	/**
+	 * Met à jour le mot de passe du joueur
+	 * 
+	 * @param $password string 
+	 * @return void 
+	 */
+	public function update_password($password)
+	{
+		$this->password = sha1($password);
+		$this->save();
+	}
+
+	/**
 	 * marque comme supprimé le joueur
 	 * supprime les sujets favoris, les notifications commentaires & messages,
 	 * les rôles, les historiques de course, l'avatar
