@@ -268,6 +268,7 @@ class Controller_User extends Controller_Template {
 			->rule('username', array($user, 'unique'), array('username', ':value'))
 			->rule('password', 'not_empty')
 			->rule('password_again', 'matches', array(':validation', ':field', 'password'))
+			->rule('email', 'not_empty')
 			->rule('email', 'Valid::email')
 			->rule('email', array($user, 'unique'), array('email', ':value'));
 
