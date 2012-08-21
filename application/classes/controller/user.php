@@ -219,6 +219,7 @@ class Controller_User extends Controller_Template {
 		else if ($_POST AND $post['type'] == 'email')
 		{
 			$post = $post
+				->rule('email', 'Valid::not_empty')
 				->rule('email', 'Valid::email')
 				->rule('email', array($user, 'unique'), array('email', ':value'));
 

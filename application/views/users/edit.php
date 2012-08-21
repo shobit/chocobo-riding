@@ -51,7 +51,16 @@
 		
 		<tr>
 			<td><?php echo __('Email') ?></div>
-			<td><?php echo Form::input('email', $user->email) ?></td>
+			<td>
+				<?php 
+				echo Form::input('email', $user->email); 
+
+				if ($user->email_verified == FALSE)
+				{
+					echo __('Vérifiez cette adresse en la validant une nouvelle fois.');
+				}
+				?>
+			</td>
 			<td></td>
 		</tr>
 		

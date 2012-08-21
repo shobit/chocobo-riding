@@ -355,34 +355,37 @@ class Model_User extends Model_Auth_User {
 	public function register($post)
 	{
 		$this->username 	= $post['username'];
-		$this->password 	= sha1($post['password']);
 		$this->locale 		= 'fr_FR'; 	// TODO
 		$this->design_id	= 1; 		// TODO
 		$this->version 		= TRUE;
 		$this->created 		= time();
 		$this->updated 		= time();
 
-		// Envoi d'un email de vérification si email renseigné
-		if ( ! empty($post['email']))
-		{
-			$this->email 			= $post['email'];
-			$this->email_verified 	= sha1($post['email']);
+		$this->update_password($post['password'], FALSE);
+		$this->update_email($post['email'], FALSE);
 
-			$subject 	= __('Chocobo Riding : confirmer votre adresse email');
-			$link 		= URL::site('mail/verify/'.sha1($this->email), TRUE);
-			$message 	= str_replace(
-				array('%username%', '%link%'),
-				array($this->username, $link),
-				Kohana::message('users', 'mail_content')
-			);
+		$this->save();
+	}
 
-			$email = Email::factory($subject, $message)
-				->to($this->email)
-				->from('mail@menencia.com', 'Chocobo Riding')
-				->send();
-		}
-		
-		$this->create();
+	/**
+	 * Envoie un email de vérification pour l'adresse en cours
+	 *
+	 * @return void 
+	 */
+	public function send_verification()
+	{
+		$subject 	= __('Chocobo Riding : confirmer votre adresse email');
+		$link 		= URL::site('mail/verify/'.sha1($this->email), TRUE);
+		$message 	= str_replace(
+			array('%username%', '%link%'),
+			array($this->username, $link),
+			Kohana::message('users', 'mail_content')
+		);
+
+		$email = Email::factory($subject, $message)
+			->to($this->email)
+			->from('mail@menencia.com', 'Chocobo Riding')
+			->send();
 	}
 
 	/**
@@ -532,27 +535,44 @@ class Model_User extends Model_Auth_User {
 	}
 
 	/**
-	 * Met à jour l'email du joueur
+	 * Met à jour l'email du joueur, sauf si l'email donné est
+	 * la même et qu'elle a déjà été vérifiée.
 	 * 
 	 * @param $email string 
+	 * @param $save boolean Sauvegarde les infos du joueur
 	 * @return void 
 	 */
-	public function update_email($email)
+	public function update_email($email, $save=TRUE)
 	{
-		$this->email = $email;
-		$this->save();
+		if ($this->email == $email AND $this->email_verified == TRUE)
+			return;
+
+		$this->email 		= $email;
+		$this->email_hash 	= sha1($email);
+		
+		$this->send_verification();
+
+		if ($save === TRUE)
+		{
+			$this->save();
+		}	
 	}
 
 	/**
 	 * Met à jour le mot de passe du joueur
 	 * 
 	 * @param $password string 
+	 * @param $save boolean Sauvegarde les infos du joueur
 	 * @return void 
 	 */
-	public function update_password($password)
+	public function update_password($password, $save=TRUE)
 	{
 		$this->password = sha1($password);
-		$this->save();
+		
+		if ($save === TRUE)
+		{
+			$this->save();
+		}
 	}
 
 	/**
