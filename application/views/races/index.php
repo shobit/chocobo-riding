@@ -38,7 +38,7 @@
 	<tr>
 		<td><?php echo $race->circuit->name() ?></td>
 		<td><?php echo $race->circuit->pl ?></td>
-		<td><?php echo count($race->chocobos) ?> /6</td>
+		<td><?php echo $race->chocobos->count_all() ?> /6</td>
 		<td><?php echo HTML::anchor('races/' . $race->id, 'Voir', array('class' => 'button green')) ?></td>
 	</tr>
 	<?php endforeach; ?>
