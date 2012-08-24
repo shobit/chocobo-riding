@@ -87,3 +87,13 @@ INSERT INTO `titles` VALUES
 (296, 'birthdays_50', 0, 0),
 (297, 'birthdays_75', 0, 0),
 (298, 'birthdays_100', 0, 0);
+
+--
+-- Contenu de la table `circuits`
+--
+
+INSERT INTO `circuits` VALUES(1, 'kalm', '', '1.jpg', 0, 10, 600, 20, 100);
+INSERT INTO `circuits` VALUES(2, 'farm', '', '2.jpg', 1, 10, 600, 20, 100);
+INSERT INTO `circuits` VALUES(3, 'corel', '', '3.jpg', 2, 10, 600, 20, 100);
+INSERT INTO `circuits` VALUES(4, 'gongaga', '', '4.jpg', 3, 10, 600, 20, 100);
+INSERT INTO `circuits` VALUES(5, 'rocket', '', '5.jpg', 4, 10, 600, 20, 100);
