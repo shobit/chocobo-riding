@@ -32,7 +32,7 @@ body::after {
 
 	.wrapper-hmenu {width: 1000px; margin: auto; background-color: #fff; position: relative; height: 80px;}
 
-	.logo {position: absolute; width: 300px; top: 30px; left: 30px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 40px;}
+	.logo {position: absolute; width: 500px; top: 30px; left: 30px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 40px;}
 
 		.hmenu .part1 {color: rgb(10,4,5);}
 		.hmenu .part2 {color: rgb(174,174,174);}
