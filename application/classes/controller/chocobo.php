@@ -115,7 +115,7 @@ class Controller_Chocobo extends Controller_Template {
 			$values = $_POST;
 		}
 
-		if ($_POST and $post->check()) 
+		if ($_POST AND $post->check()) 
 		{
 			$chocobo->update_name($post);
 		

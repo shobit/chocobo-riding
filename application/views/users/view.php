@@ -75,17 +75,13 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td>Chocobos</td>
+		<td>Nombre de chocobos</td>
 		<td>
 		<?php
-			echo count($user->chocobos) . ' /' . $user->get_boxes();
+			echo count($user->chocobos->find_all()) . ' /' . $user->get_boxes();
 		?>
 		</td>
-		<td>
-			<?php
-			echo HTML::anchor('#/chocobos', 'Voir', array('class' => 'button green'));
-			?>
-		</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>Succès</td>
@@ -95,11 +91,7 @@
 			echo $user->successes->count_all() . ' /' . $nbr_titles;
 		?>
 		</td>
-		<td>
-			<?php
-			echo HTML::anchor('#/achievements', 'Voir', array('class' => 'button green'));
-			?>
-		</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>Inscrit</td>
