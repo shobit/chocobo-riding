@@ -11,7 +11,7 @@
 		if ($user->id == $u->id)
 		{
 			echo HTML::anchor('users/'.$user->id.'/edit', 'Préférences'); 
-		}
+	    }
 	?>
 </div>
 

@@ -6,7 +6,7 @@ class Controller_Chocobo extends Controller_Template {
 	 * Vue de tous les chocobos
 	 */
 	public function action_index()
-	{
+    {
 		$this->authorize('logged_in');
 
 		$c = Session::instance()->get('chocobo');

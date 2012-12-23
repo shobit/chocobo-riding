@@ -1,5 +1,4 @@
 <?php echo Form::open() ?>
-
 <p>
 <b><?php echo __('Nom de votre chocobo :') ?></b>
 
@@ -16,7 +15,6 @@
 <p>
 <?php echo html::anchor('', "Valider", array('id' => 'submit', 'class' => 'button blue')) ?> 
 </p>
-
 <?php echo Form::close() ?>
 
 <script>
