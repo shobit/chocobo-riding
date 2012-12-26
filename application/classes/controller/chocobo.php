@@ -1,5 +1,4 @@
 <?php
-
 class Controller_Chocobo extends Controller_Template {
 
 	/**

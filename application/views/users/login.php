@@ -16,7 +16,6 @@ echo Form::close();
 
 <script>
 $(function(){
-
 	$('a#submit').click(function(){
 		$('form').submit();
 		return false;

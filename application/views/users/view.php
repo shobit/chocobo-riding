@@ -4,12 +4,11 @@
 </h2>
 
 <div class="nav">
-	<?php echo HTML::anchor('#/informations', 'Informations') ?>
-	<?php echo HTML::anchor('#/chocobos', 'Ecurie') ?>
-	<?php echo HTML::anchor('#/achievements', 'Succès') ?>
-	<?php 
-		if ($user->id == $u->id)
-		{
+	<?php
+		echo HTML::anchor('#/informations', 'Informations');
+		echo HTML::anchor('#/chocobos', 'Ecurie');
+		echo HTML::anchor('#/achievements', 'Succès');
+		if ($user->id == $u->id) {
 			echo HTML::anchor('users/'.$user->id.'/edit', 'Préférences'); 
 	    }
 	?>

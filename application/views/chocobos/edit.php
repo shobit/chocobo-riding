@@ -19,7 +19,6 @@
 
 <script>
 $(function(){
-
 	$('a#submit').click(function(){
 		$('form').submit();
 		return false;

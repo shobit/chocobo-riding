@@ -109,7 +109,6 @@
 
 	</script>
 </head>
-
 <body>
 	<div id="jgrowl_content"><?php echo View::factory("elements/jgrowl") ?></div>
 	
